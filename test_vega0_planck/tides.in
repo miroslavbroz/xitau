@@ -1,0 +1,12 @@
+# nbod number of bodies
+# k_L [] Love number & P_rot [day] rotational period & R_body [R_S]
+# Note: R_body will be used only when running swift_bs integrator.
+# Otherwise, it is overwritten by R_star from chi2.in or simplex.in!
+
+1
+  0.30  7.147  1.78
+
+T			! use_tides [T|F]
+T			! use_oblatness [T|F]
+T			! use_ppn [T|F]
+

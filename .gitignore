@@ -1,0 +1,6 @@
+# vim temporary files
+*.swp
+
+# object files
+*.o
+

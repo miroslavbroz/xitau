@@ -1,0 +1,15 @@
+
+Example input files for the chi^2 computation and simplex fitting
+of the \xi Tauri quadruple system.
+
+Note 1: We retained ALL datasets -- including RVs and synthetic spectra;
+TTVs and light curves; astrometry (Speckle3.dat) and |V|^2 data --
+for testing purposes and a consistency check. In practice, one should
+use only one of the two and prefer directly observable data!
+
+Note 2: There is still some problem with matching LC and VIS data together,
+what causes the total chi^2 to be relatively high. If we would fit
+SKY + RV + TTV + ECL + VIS + CLO + SYN, or SKY + RV + TTV + ECL + LC + SYN
+separately, the simplex easily finds a significantly lower chi^2 value.
+The problem may be related to the radius (or luminosity) of the 3rd body.
+

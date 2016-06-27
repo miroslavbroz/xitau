@@ -1,0 +1,10 @@
+
+This is a modified Wilson-Devinney code, lc.f:
+
+- free-format input
+- only computes lightcurve (i.e. former mpage = 5)
+- unnecessary parts of the code were deleted!
+- some of the files slightly rewritten to be readable
+  (if... endif, do... enddo, goto's, formats, etc.)
+
+

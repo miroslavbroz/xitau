@@ -1,0 +1,99 @@
+c chi2_func_SED.f
+c Calculate chi^2 for spectral energy distribution.
+c Mirolav Broz (miroslav.broz@email.cz), Mar 18th 2016
+
+      subroutine chi2_func_SED(chi2, n)
+
+      implicit none
+      include '../misc/const.inc'
+      include 'simplex.inc'
+      include 'dependent.inc'
+
+c input (only in dependent.inc)
+c output
+      real*8 chi2
+      integer n
+
+c observational data
+      integer m_OBS
+      real*8 lambda_eff_OBS(SEDMAX), band_eff_OBS(SEDMAX),
+     :  mag_OBS(SEDMAX), sigma_mag_OBS(SEDMAX), calibration(SEDMAX)
+      character*80 file_filter(SEDMAX)
+
+c internal variables
+      integer i, k, i1st, iu
+      real*8 d, lambda, band, flux, mag, chi2_
+      real*8 band_filter(SEDMAX)
+      real*8 Lum_lambda(NBODMAX), Lumtot
+
+      data i1st /0/
+      data iu /15/
+
+      save i1st,
+     :  m_OBS, lambda_eff_OBS, band_eff_OBS, mag_OBS, sigma_mag_OBS,
+     :  calibration, file_filter, band_filter
+c
+c read SED observations (only 1st time!)
+c
+      if (i1st.eq.0) then
+
+        call read_SED(file_SED, m_OBS, lambda_eff_OBS, band_eff_OBS,
+     :    mag_OBS, sigma_mag_OBS, calibration, file_filter)
+
+        if (debug) then
+          write(*,*) "# m_SED = ", m_OBS
+        endif
+
+        i1st = 1
+      endif  ! i1st
+c
+c chi^2 for SED data
+c
+      if (debug) then
+        open(unit=iu,file="chi2_SED.dat",status="unknown")
+        write(iu,*) "# lambda [m] & band [m] & mag [mag]",
+     :    " & sigma [mag] & chi^2"
+      endif
+
+      d = d_pc*pc  ! [m]
+
+      chi2 = 0.d0
+      n = 0
+
+      do i = 1, m_OBS
+
+        lambda = lambda_eff_OBS(i)
+        band = band_eff_OBS(i)
+
+        if (use_filters) then
+          call luminosity_synthetic_filters(m_OBS, file_filter, i,
+     :      band_filter, Lum_lambda, Lumtot)
+
+          band = band_filter(i)
+        else
+          call luminosities(T_eff, R_star, nbod, lambda, band,
+     :      Lum_lambda, Lumtot, use_planck)
+        endif
+
+        flux = Lumtot/(4.d0*pi_*d**2)
+        mag = -2.5d0*log10(flux/(calibration(i)*band))
+
+        chi2_ = ((mag-mag_OBS(i))/sigma_mag_OBS(i))**2
+        chi2 = chi2 + chi2_
+        n = n+1
+
+        if (debug) then
+          write(iu,*) lambda, band, mag, sigma_mag_OBS(i), chi2_
+          write(iu,*) lambda, band, mag_OBS(i), sigma_mag_OBS(i), chi2_
+          write(iu,*)
+        endif
+
+      enddo
+
+      if (debug) then
+        close(iu)
+      endif
+
+      return
+      end
+

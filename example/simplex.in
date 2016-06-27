@@ -1,0 +1,131 @@
+# simplex.in
+# An example input file for simplex program:
+# 
+# nparam
+#
+# m_1  m_2  m_3  m_4                      [M_S]
+# a_1  e_1  i_1  Omega_1  omega_1  M_1    [AU,-,deg]
+# a_2  e_2  i_2  Omega_2  omega_2  M_2    [AU,-,deg]
+# a_3  e_3  i_3  Omega_3  omega_3  M_3    [AU,-,deg]
+# T_eff_1   T_eff_2   T_eff_3   T_eff_4   [K]
+# R_star_1  R_star_2  R_star_3  R_star_4  [R_S]
+# v_rot_1   v_rot_2   v_rot_3   v_rot_4   [km/s]
+# zero_MOST  zero_U  zero_B  zero_V       [mag]
+# gamma                                   [km/s] 
+# d_pc                                    [pc] ... x() vector (there might be some garbage text, as in chi2_func.tmp)
+#
+# e() vector
+#
+# variable() vector [T|F], free or fixed parameter?
+#
+# T0
+# nbod
+# Speckle1.dat
+# Speckle2.dat
+# Speckle3.dat
+# Speckle4.dat
+# RV1.dat
+# RV2.dat
+# RV3.dat
+# RV4.dat
+# Omc12.dat
+# Ecl12.dat
+# Vis.dat
+# Closure.dat
+#
+# nband
+# 7  Lc_quasiperiodic_removed_1234.dat
+# Spectra.dat
+# synthetic/1.syn
+# synthetic/2.syn
+# synthetic/3.syn
+# synthetic/4.syn
+# Sed.dat
+# absolute/1.abs
+# absolute/2.abs
+# absolute/3.abs
+# absolute/4.abs
+#
+# ...
+40
+
+   2.2387948196015408        2.0107209098166092        3.7483632991814981       0.92126595980209047       0.11763067226148990       -2.3011080366585598E-002   87.655737107187008        328.27497408176464        275.51414910786264        174.61117182475948        1.0840948285700198       0.21147306740222166        86.697957038360101        328.46593329136431        9.0490862110133996        83.812855209019759        28.426688223375635       0.57017881716861907       -22.336536574793627        116.05290009307477       0.81417036365103246        31.992297143278353        10851.088578876341        10409.902499686696        13076.624264601323        6434.4354320685761        1.5705282822877926        1.6997189238648882        2.8380031835557693        1.0720150048271795        12.996385234528390        12.221723136980962        234.84407439269702        80.390768676852389       0.99823638477623811        3.3398405848260229        3.6436322858032799        3.7319406891019540        7.1973436382883262        67.583325136356365               96         843          35           4       17391        4856        4856        2974           0          13       31068   353.39189159825094        2864.3326893194799        319.63606823490841        70.143846516382979        174167.41083175220        23498.794524810914        27279.781011994313        60383.026575862728        0.0000000000000000        5233.4374342866622        1.9384660250127937E-002   110139.52349846480     
+
+ 0.001 0.001 0.001 0.001
+ 0.001  0.01  3.0  3.0  3.0  3.0
+ 0.010  0.01  3.0  3.0  3.0  3.0
+ 0.100  0.01  3.0  3.0  3.0  3.0
+ 100 100 100 100
+ 0.1 0.1 0.1 0.1
+ 1.0 1.0 1.0 1.0
+ 0.1 0.1 0.1 0.1
+ 1.0
+ 1.0
+
+ T T T T
+ T T T T T T
+ T T T T T T
+ T T T T T T
+ T T T T
+ T T T T
+ T T T T
+ T T T T
+ T
+ T
+
+2456224.724705		! fixed (dependent) parameters: T0 [JD]
+
+4			! nbod number of bodies; a list of 2*nbod+4 files with observational data (or '-' if no data)...
+-
+-
+-
+Speckle4.dat
+-
+-
+-
+-
+-
+-
+Vis.dat
+Closure.dat
+
+4			! nband number of photometric bands; a list of bands and lightcurve files
+  7  Lc_quasiperiodic_removed_1234.dat
+  5  Lc_U.dat
+  6  Lc_B.dat
+  7  Lc_V.dat
+Spectra.dat
+1.syn
+2.syn
+3.syn
+4.syn
+Sed.dat
+1.abs
+2.abs
+3.abs
+4.abs
+
+0                       ! geometry of the system: 0 ... hierarchical ((1+2)+3)+4, 1 ... two pairs ((1+2)+(3+4))+5
+
+0.9 0.9 3.5 0.9		! m_min(nbod) [M_S] minimum masses
+3.0 3.0 3.9 2.0		! m_max(nbod) [M_S] maximum masses
+0.0 0.0 0.0 0.0		! metal(nbod) [M/H] metallicity
+
+0.005			! lightcurve_timestep [day] timestep of synthetic lightcurve; set to 0.0 if all observed points should be computed
+0.100			! approx_eclipse_duration [day] approximate eclipse duration for eclipse detection
+420.e-9 460.e-9		! lambda1 lambda2 [metres] wavelength range for synthetic spectra
+300.e-9 2700.e-9	! lambda3 lambda4 [metres] range for absolute spectra (to fit SED)
+
+F			! use_planck [T|F] use Planck approximation; otherwise use absolute synthetic spectra (*.abs files)
+T			! use_filters [T|F] use filter transmissions to compute SED; otherwise use effective wavelengths and bandpasses
+T			! use_limbdark [T|F] use linear limb-darkening coefficients for visibility |V|^2 calculation
+T			! use_pyterpol [T|F] use Pyterpol (Nemravova et al. 2016) to generate synthetic spectra on-the-fly
+
+1.0 1.0 1.0 1.0	0.1 1.0	0.0 1.0	1.0 1.0		! w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC w_SYN w_SED weights for chi^2 computation
+1.e-8			! eps_BS for Bulirsch-Stoer integrator
+1.e-6			! ftol tolerance for simplex convergence
+10000			! ITMAX number of allowed simplex iterations
+F			! debugging output?
+F			! debug integrator?
+
+

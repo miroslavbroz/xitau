@@ -1,0 +1,85 @@
+Filename: alpha_lyr_stis_002.fits
+No.    Name         Type      Cards   Dimensions   Format
+0    PRIMARY     PrimaryHDU      40   ()              
+1    SCI         BinTableHDU     39   8671R x 7C   [1E, 1E, 1E, 1E, 1E, 1E, 1E]   
+
+SIMPLE  =                    T /                                                
+BITPIX  =                   16 /                                                
+NAXIS   =                    0 /                                                
+EXTEND  =                    T /FITS extensions present?                        
+DESCRIP = 'ALPHA_LYR with STIS observations' /                                  
+TARGETID= 'ALPHA_LYR'          /                                                
+FILENAME= 'alpha_lyr_stis_002.fits' /                                           
+DBTABLE = 'CRSPECTRUM'         /                                                
+AIRMASS =              0.00000 /mean airmass of the observation                 
+SOURCE  = 'Bohlin & Gilliland 2004, AJ, 127, 3508' /                            
+COMMENT Flux on pure hyd WD scale (Bohlin 2000, AJ, 120, 437.)                  
+USEAFTER= '19900101:00000000'  /                                                
+HISTORY FILE WRITTEN BY stismrg.PRO ON 15-Jun-2004 13:18:11.00                  
+HISTORY FILE WRITTEN BY STISREDUCE.PRO ON 15-Jun-2004 13:18:07.00               
+HISTORY coadd list for G230LB:                                                  
+HISTORY  o8i105010 o8i105020 o8i105030 o8i106020 o8i106030                      
+HISTORY EPOCH: 2003.181:10:59:55-2003.235:22:41:35                              
+HISTORY SYS-ERROR is the broadband 1% INTERNAL repeatability of STIS fluxes.    
+HISTORY IN ADDITION, THERE IS A SYSTEMATIC UNCERTAINTY IN THE ABS CALIB OF ~2-4%
+HISTORY     Bohlin (2000,AJ,120,437). BOTH THE STAT-ERR AND SYS-ERR ARE 1-SIGMA.
+HISTORY G230LB Net & Flux corr. for time & CTE loss (Bohlin 2003,ISR 03-03).    
+HISTORY coadd list for G430L:                                                   
+HISTORY  o8i105060 o8i106010 o8i106040                                          
+HISTORY EPOCH: 2003.181:12:10:32-2003.235:22:48:08                              
+HISTORY G430L Net and Flux corr. for time & CTE loss (Bohlin 2003,ISR 03-03).   
+HISTORY MERGE POINT = 3065.0                                                    
+HISTORY Units: Angstroms(A) and erg/s/cm**2/A                                   
+HISTORY  All wavelengths are in vacuum.                                         
+HISTORY  Written by MAKE_STIS_CALSPEC.pro  15-Jun-2004                          
+HISTORY  Sources for this spectrum:                                             
+HISTORY ----------------   ----------------------   ----------                  
+HISTORY WAVELENGTH RANGE         SOURCE                FILE                     
+HISTORY ----------------   ----------------------   ----------                  
+HISTORY   900    1256       Model                   vegamod_r500.03kur          
+HISTORY  1256    1675       IUE                     ALPHA_LYR_004               
+HISTORY  1675    4200       STIS                    hd172167.mrg                
+HISTORY  4200    WMAX       Model                   vegamod_r500.03kur          
+HISTORY  IUE fluxes increased 1.04 by MAKE_STIS_CALSPEC.pro  15-Jun-2004        
+WMIN    =              900.452 /Minumum Wavelength                              
+WMAX    =          2.99686E+06 /Maximum Wavelength                              
+
+XTENSION= 'BINTABLE'           /Written by IDL:  Tue Jun 15 13:19:13 2004       
+BITPIX  =                    8 /                                                
+NAXIS   =                    2 /Binary table                                    
+NAXIS1  =                   28 /Number of bytes per row                         
+NAXIS2  =                 8671 /Number of rows                                  
+PCOUNT  =                    0 /Random parameter count                          
+GCOUNT  =                    1 /Group count                                     
+TFIELDS =                    7 /Number of columns                               
+EXTNAME = 'SCI     '           /                                                
+EXTVER  =                    1 /                                                
+INHERIT =                    T /                                                
+TFORM1  = '1E      '           /Real*4 (floating point)                         
+TTYPE1  = 'WAVELENGTH'         /Label for column 1                              
+TUNIT1  = 'ANGSTROMS'          /Units of column 1                               
+TDISP1  = 'G10.4   '           /Display format for column 1                     
+TFORM2  = '1E      '           /Real*4 (floating point)                         
+TTYPE2  = 'FLUX    '           /Absolutely calibrated net spectrum              
+TUNIT2  = 'FLAM    '           /Units of column 2                               
+TDISP2  = 'E12.4   '           /Display format for column 2                     
+TFORM3  = '1E      '           /Real*4 (floating point)                         
+TTYPE3  = 'STATERROR'          /Statistical flux error                          
+TUNIT3  = 'FLAM    '           /Units of column 3                               
+TDISP3  = 'E12.4   '           /Display format for column 3                     
+TFORM4  = '1E      '           /Real*4 (floating point)                         
+TTYPE4  = 'SYSERROR'           /Systematic flux error=0.01*FLAM                 
+TUNIT4  = 'FLAM    '           /Units of column 4                               
+TDISP4  = 'E12.4   '           /Display format for column 4                     
+TFORM5  = '1E      '           /Real*4 (floating point)                         
+TTYPE5  = 'FWHM    '           /FWHM spectral resolution                        
+TUNIT5  = 'ANGSTROMS'          /Units of column 5                               
+TDISP5  = 'G6.2    '           /Display format for column 5                     
+TFORM6  = '1E      '           /Real*4 (floating point)                         
+TTYPE6  = 'DATAQUAL'           /Data quality: 1=good, 0=bad                     
+TUNIT6  = 'NONE    '           /Units of column 6                               
+TDISP6  = 'I2      '           /Display format for column 6                     
+TFORM7  = '1E      '           /Real*4 (floating point)                         
+TTYPE7  = 'TOTEXP  '           /Total exposure time                             
+TUNIT7  = 'SEC     '           /Units of column 7                               
+TDISP7  = 'G10.2   '           /Display format for column 7                     

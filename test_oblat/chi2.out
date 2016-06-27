@@ -1,0 +1,133 @@
+----------------------------------------------------
+xitau_chi2_simplex version May 24th 2016
+Author: Miroslav Broz, Charles University
+        e-mail: miroslav.broz@email.cz
+        http://sirrah.troja.mff.cuni.cz/~mira/xitau/
+----------------------------------------------------
+ 
+************* SWIFT: Version 2.0 *************
+  
+ Authors:
+    Martin Duncan: Queen's University 
+    Hal Levison: Southwest Research Institute 
+  
+  Please address any comments or questions to:
+    Hal Levison 
+    Geophysical, Astrophysical, & Planetary Sciences
+    Southwest Research Institute
+    1050 Walnut St.
+    Suite 429 
+    Boulder, Co  80302 
+    (303) 546-0290 
+    Fax: (303) 546-9687 
+    (D)  swri::levison 
+    (I)  hal@gort.space.swri.edu 
+  
+ # nparam : 
+ # nparam =           16
+ # x_param() : 
+ # x_param(           1 ) =    1.2700000000000000     
+ # x_param(           2 ) =    6.7199999999999996E-004
+ # x_param(           3 ) =    5.8775298767242801E-002
+ # x_param(           4 ) =    1.0000000000000000E-003
+ # x_param(           5 ) =    1.0000000000000000E-003
+ # x_param(           6 ) =    0.0000000000000000     
+ # x_param(           7 ) =    0.0000000000000000     
+ # x_param(           8 ) =    0.0000000000000000     
+ # x_param(           9 ) =    10700.000000000000     
+ # x_param(          10 ) =    9991.0692066240081     
+ # x_param(          11 ) =    1.0000000000000000     
+ # x_param(          12 ) =   0.13286576125804100     
+ # x_param(          13 ) =    0.0000000000000000     
+ # x_param(          14 ) =    0.0000000000000000     
+ # x_param(          15 ) =    8.0929673909820412     
+ # x_param(          16 ) =    67.190203320577297     
+ # T0 : 
+ # T0 =    2456224.7247049999     
+ # nbod : 
+ # nbod =            2
+ # file_SKY(           1 ) : 
+ # file_SKY(           1 ) = -
+ # file_SKY(           2 ) : 
+ # file_SKY(           2 ) = -
+ # file_RV(           1 ) : 
+ # file_RV(           1 ) = -
+ # file_RV(           2 ) : 
+ # file_RV(           2 ) = -
+ # file_TTV : 
+ # file_TTV = -
+ # file_ECL : 
+ # file_ECL = -
+ # file_VIS : 
+ # file_VIS = -
+ # file_CLO : 
+ # file_CLO = -
+ # nband : 
+ # nband =            0
+ # file_SYN : 
+ # file_SYN = -
+ # file_synth(           1 ) : 
+ # file_synth(           1 ) = -
+ # file_synth(           2 ) : 
+ # file_synth(           2 ) = -
+ # file_SED : 
+ # file_SED = -
+ # file_absol(           1 ) : 
+ # file_absol(           1 ) = -
+ # file_absol(           2 ) : 
+ # file_absol(           2 ) = -
+ # geometry : 
+ # geometry =            0
+ # m_min() : 
+ # m_min(           1 ) =    0.0000000000000000       M_S
+ # m_min(           2 ) =    0.0000000000000000       M_S
+ # m_max() : 
+ # m_max(           1 ) =    3.0000000000000000       M_S
+ # m_max(           2 ) =    3.0000000000000000       M_S
+ # metal() : 
+ # metal(           1 ) =    0.0000000000000000     
+ # metal(           2 ) =    0.0000000000000000     
+ # lightcurve_timestep : 
+ # lightcurve_timestep =    1.0000000000000000E-003
+ # approx_eclipse_duration : 
+ # approx_eclipse_duration =   0.10000000000000001     
+ # lambda1 lambda2 : 
+ # lambda1 =    0.0000000000000000       m =    0.0000000000000000       nm
+ # lambda2 =    1.0000000000000001E-005  m =    10000.000000000000       nm
+ # lambda3 lambda4 : 
+ # lambda3 =    2.9999999999999999E-007  m =    299.99999999999994       nm
+ # lambda4 =    2.7000000000000000E-006  m =    2700.0000000000000       nm
+ # use_planck : 
+ # use_planck =  T
+ # use_filters : 
+ # use_filters =  F
+ # use_limbdark : 
+ # use_limbdark =  T
+ # use_pyterpol : 
+ # use_pyterpol =  F
+ # w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC w_SYN w_SED : 
+ # w_SKY =    1.0000000000000000     
+ # w_RV =    1.0000000000000000     
+ # w_TTV =    1.0000000000000000     
+ # w_ECL =    1.0000000000000000     
+ # w_VIS =   0.10000000000000001     
+ # w_CLO =    1.0000000000000000     
+ # w_T3 =    0.0000000000000000     
+ # w_LC =    1.0000000000000000     
+ # w_SYN =    1.0000000000000000     
+ # w_SED =    1.0000000000000000     
+ # eps_BS : 
+ # eps_BS =    9.9999999999999998E-013
+ # debug : 
+ # debug =  T
+ # debug_swift : 
+ # debug_swift =  T
+# x() array:   1.2700000000000000        6.7199999999999996E-004   5.8775298767242801E-002   1.0000000000000000E-003   1.0000000000000000E-003   0.0000000000000000        0.0000000000000000        0.0000000000000000        10700.000000000000        9991.0692066240081        1.0000000000000000       0.13286576125804100        0.0000000000000000        0.0000000000000000        8.0929673909820412        67.190203320577297     
+ # log_g(           1 ) =    4.5418713483963344     
+ # log_g(           2 ) =    3.0186107401505478     
+ # Lum(           1 ) =   0.98560519590312279     
+ # Lum(           2 ) =    1.4394804096877154E-002
+ # barycentric coordinates:
+   1.2700000000000000       -0.0000000000000000       -3.1052470182446945E-005  -0.0000000000000000        4.2341950133805238E-005  -0.0000000000000000        7.3900644162519316E-010
+   6.7199999999999996E-004  -0.0000000000000000        5.8685471922183964E-002  -0.0000000000000000       -8.0021245044542638E-002  -0.0000000000000000       -1.3966341977142787E-006
+ io_init_tides.f: Error opening file 'tides.in'.

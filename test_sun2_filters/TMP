@@ -1,0 +1,8 @@
+
+      do i = 1, m_SPE
+        lambda_SPE(i) = lambda_SPE(i)*10.d0  ! it was in nm, not A!
+        Int_SPE(i) = Int_SPE(i)*1.d9  ! W m^-2 nm^-1 -> W m^-2 m^-1
+      enddo
+
+
+            calibration(i) = calibration(i)*1.d-7/1.d-2**3  ! erg s^-1 cm^-2 cm^-1 -> J s^-1 m^-2 m^-1

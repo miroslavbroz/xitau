@@ -1,0 +1,80 @@
+This code xitau_chi2_simplex computes orbital evolution of multiple stars,
+accounting for *mutual* gravitational interactions. It includes a chi^2
+metric computation and simplex algorithm. It was designed for the solution
+of \xi Tauri problem (to be published in Nemravova et al. 2016).
+
+If you use this code, please cite the original references:
+
+  M. Bro\v z, P. Mayer, T. Pribulla, P. Zasche, D. Vokrouhlick\'y and
+  R. Uhl\'a\v r, 2010, A unified solution for the orbit and light-time effect
+  in the V505 Sgr system, Astron. J., 139, 6, 2258--2268.
+
+  J. Nemravov\'a, P. Harmanec, M. Bro\v z, D. Vokrouhlick\'y, D. Mourard,
+  C.A. Hummel, C.T. Bolton et al., \xi Tauri: A unique laboratory...
+  A&A, accepted.
+
+Observational data (speckle-interferometry, RV's, minima timings aka TTV, ...)
+have to be in suitable format, of course (cf. DATA.tar.gz archive).
+
+--
+
+Warning:
+
+Results of every numerical integration depend on discretisation of the problem.
+In our case, it is controlled by dt (and dtout) parameters in param.in and param_BACK.in files.
+It should be a small fraction (e.g. 1/20 to 1/100) of the SHORTEST orbital period (P_1).
+The size of buffers used to store the results can be set up in simplex/simplex.inc.
+
+As usually, one should check for convergence by decreasing dt -> ~0
+or eps_BS parameter. For small dtout this may be rather memory consuming
+(or even impossible) for very small P_1. In this unfortunate case, one should use
+a different code version, which stores only interesting PARTS of the integration
+(in the surroundings of observed times) -- see nyvir_chi2_simplex code.
+
+--
+
+Coordinate convention:
+
+   y (as DE, N)            
+                           
+   ^    z (v_rad)          
+   |                       
+   |  /                    
+   | /                     
+   |/                      
+  -|----------> x (-RA, W) 
+   |                       
+                           
+  internal                 
+
+  (x, y) is plane-of-sky
+  x positive towards W
+  y positive towards N
+  no reflections
+  z radial, away from observer
+
+
+                      x (DE, N) 
+                                
+                      ^         
+                      |         
+                      |         
+                      |         
+                      |         
+  (RA, E) y <---------|-        
+                     /|         
+                    /           
+                   /            
+                                
+                 z (observer)   
+                                
+  stellar-astronomy             
+
+  (x, y) is plane-of-sky
+  x positive towards N
+  y positive towards E
+  z radial, towards observer
+  PA counterclockwise from x to y
+  in an eyepiece, it may by reflected
+
+

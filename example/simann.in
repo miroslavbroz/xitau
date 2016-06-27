@@ -1,0 +1,88 @@
+# simplex.in
+# nparam number of parameters
+# x() vector
+# e() vector
+# variable() [T|F], free or fixed parameter?
+#
+# m_1  m_2  m_3  m_4 [M_S]
+# a_1 [AU]  e_1 []  i_1  Omega_1  omega_1  M_1 [deg]
+# a_2 [AU]  e_2 []  i_2  Omega_2  omega_2  M_2 [deg]
+# a_3 [AU]  e_3 []  i_3  Omega_3  omega_3  M_3 [deg]
+# T_eff_1  T_eff_2  T_eff_3  T_eff_4  [K]
+# R_star_1  R_star_2  R_star_3  R_star_4  [R_S]
+# v_rot_1  v_rot_2  v_rot_3  v_rot_4  [km/s]
+# gamma [km/s]  ... (there might be garbage text)
+36
+
+   2.2330786245525394        2.0080686790692317        3.6662196822034874       0.94209781978239937
+   0.11760313806225908       0.0                       87.527721445193023        330.67938230800365        273.88504123199016        176.20022161867803
+   1.0803806412900891       0.20204192997459572        85.152041576924177        328.62588229722820      -0.25107596552770600        84.160345321600602
+   31.571889832964796       0.61924200555722253        22.399121232605857        82.901024576270174        33.693798574089051        26.656165809764694
+   10700.000000000000        9991.0692066240081        13939.874789149519        6500
+   1.7847741866657316        1.4624987723256033        2.2778527536148574        1.2
+   12.6  14.3  229.2  80.0
+   8.0929673909820412        67.190203320577297               96         843          35           4           0           0           0        1153         978   973.28632560662368        4900.2907466079969        277.60743326990126        43.817751600193432        0.0000000000000000        0.0000000000000000        0.0000000000000000        12796.587346299220        3.4812784266909585E-004   18991.589951511778     
+
+ 0.001 0.001 0.001 0.001
+ 0.001  0.01  3.0  3.0  3.0  3.0
+ 0.010  0.01  3.0  3.0  3.0  3.0
+ 0.100  0.01  3.0  3.0  3.0  3.0
+ 100 100 100 100
+ 0.1 0.1 0.1 0.1
+ 1.0 1.0 1.0 1.0
+ 1.0 1.0
+
+ T T T T
+ T T T T T T
+ T T T T T T
+ T T T T T T
+ F T T F
+ T T T F
+ T T T F
+ T T
+
+2456224.724705		! fixed (dependent) parameters: T0 [JD]
+
+4			! nbod number of bodies; a list of 2*nbod+4 files with observational data (or '-' if no data)...
+-
+-
+Speckle3.dat
+Speckle4.dat
+RV1.dat
+RV2.dat
+RV3.dat
+-
+Omc12.dat
+Ecl12.dat
+Vis.dat
+Closure.dat
+
+1			! nband number of photometric bands; a list of bands and lightcurve files
+  7  Lc_quasiperiodic_removed_1234.dat
+Spectra.dat
+synthetic/Aa.syn
+synthetic/Ab.syn
+synthetic/B.syn
+synthetic/C.syn
+
+0.9 0.9 3.5 0.9		! m_min(nbod) [M_S] minimum masses
+3.0 3.0 3.9 2.0		! m_max(nbod) [M_S] maximum masses
+0.0 0.0 0.0 0.0		! metal(nbod) [M/H] metallicity
+
+0.001			! lightcurve_timestep [day] timestep of synthetic lightcurve; set to 0.0 if all observed points should be computed
+0.100			! approx_eclipse_duration [day] approximate eclipse duration for eclipse detection
+420.e-9 460.e-9		! lambda1 lambda2 [metres] wavelength range for synthetic spectra
+T			! use_limbdark [T|F] use linear limb-darkening coefficients for visibility |V|^2 calculation
+T			! use_pyterpol [T|F] use Pyterpol (Nemravova et al. 2016) to generate synthetic spectra
+
+1.0 1.0 1.0 1.0	0.1 1.0	0.0 1.0	1.0	! w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC w_SYN weights for chi^2 computation
+1.e-8			! eps_BS for Bulirsch-Stoer integrator
+1.e-6			! ftol tolerance for simplex convergence
+100000                  ! ITMAX number of allowed simplex iterations
+100                     ! iter_at_temp the number of iterations at given temperature
+100000.                 ! temptr initial value of temperature (T*log(ran1) to be added to x()' values)
+0.10                    ! eps_temptr a fractional change of temperature, T:=(1-eps)*T after iter_at_temp
+T			! debugging output?
+F			! debug integrator?
+
+

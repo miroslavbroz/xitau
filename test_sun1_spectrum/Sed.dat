@@ -1,0 +1,15 @@
+# wavelength data from: http://hea.iki.rssi.ru/AZT22/RUS/eaa_bessel.pdf (with a correction of K-band)
+# magnitude data for the Sun from: https://sites.google.com/site/mamajeksstarnotes/basic-astronomical-data-for-the-sun
+# calibrations from ebdoc.13july2015.pdf; Wilson, Van Hamme, & Terrell (2010);
+# H calibration from eaa_bessel.pdf
+# Ks passband from http://www.ipac.caltech.edu/2mass/releases/allsky/doc/sec6_4a.html
+# lambda_eff [m] & band_eff[m] & UBV [mag] & sigma [mag] & calibration flux F_lambda [J s^-1 m^-2 m^-1] for 0.0 mag & filter
+  367.e-9     66.e-9  -25.899  0.022  0.04306     U       
+  436.e-9     94.e-9  -26.057  0.020  0.06266     B
+  545.e-9     85.e-9  -26.71   0.02   0.036895    V
+  638.e-9    160.e-9  -27.066  0.020  0.02177     Rc
+  797.e-9    149.e-9  -27.411  0.020  0.01126     Ic
+ 1220.e-9    213.e-9  -27.908  0.020  0.003147    J
+ 1630.e-9    307.e-9  -28.194  0.022  0.00115092  H
+ 2159.e-9    262.e-9  -28.27   0.022  0.0004283   Ks
+

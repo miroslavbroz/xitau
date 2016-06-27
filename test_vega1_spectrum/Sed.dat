@@ -1,0 +1,14 @@
+# wavelength data from: http://hea.iki.rssi.ru/AZT22/RUS/eaa_bessel.pdf (with a correction of K-band)
+# magnitude data for Vega from Simbad (Ducati 2002)
+# calibrations from ebdoc.13july2015.pdf; Wilson, Van Hamme, & Terrell (2010);
+# Johnson R and I passbands from Sterken & Manfroid (1992), p. 234
+# lambda_eff [m] & band_eff[m] & UBV [mag] & sigma [mag] & calibration flux F_lambda [J s^-1 m^-2 m^-1] for 0.0 mag & filter
+  367.e-9     66.e-9   0.03   0.01   0.04306     U       
+  436.e-9     94.e-9   0.03   0.01   0.06266     B
+  545.e-9     85.e-9   0.026  0.008  0.036895    V       # Bohlin & Gilliland (2004)
+  720.e-9    220.e-9   0.07   0.01   0.017813    R
+  900.e-9    240.e-9   0.10   0.01   0.008643    I
+ 1220.e-9    213.e-9  -0.18   0.01   0.003147    J
+ 1630.e-9    307.e-9  -0.03   0.01   0.00115092  H       # calibration from eaa_bessel.pdf
+ 2190.e-9    390.e-9   0.13   0.01   0.0003961   K
+

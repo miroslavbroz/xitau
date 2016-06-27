@@ -1,0 +1,98 @@
+# chi2.in
+# An example input file for chi2 program:
+# 
+# nparam
+#
+# m_1  m_2  m_3  m_4                      [M_S]
+# a_1  e_1  i_1  Omega_1  omega_1  M_1    [AU,-,deg]
+# a_2  e_2  i_2  Omega_2  omega_2  M_2    [AU,-,deg]
+# a_3  e_3  i_3  Omega_3  omega_3  M_3    [AU,-,deg]
+# T_eff_1   T_eff_2   T_eff_3   T_eff_4   [K]
+# R_star_1  R_star_2  R_star_3  R_star_4  [R_S]
+# v_rot_1   v_rot_2   v_rot_3   v_rot_4   [km/s]
+# gamma                                   [km/s] 
+# d_pc                                    [pc] ... (there might be some garbage text, as in chi2_func.tmp)
+#
+# T0
+# nbod
+# Speckle1.dat
+# Speckle2.dat
+# Speckle3.dat
+# Speckle4.dat
+# RV1.dat
+# RV2.dat
+# RV3.dat
+# RV4.dat
+# Omc12.dat
+# Ecl12.dat
+# Vis.dat
+# Closure.dat
+#
+# nband
+# 7  Lc_quasiperiodic_removed_1234.dat
+# Spectra.dat
+# synthetic/1.syn
+# synthetic/2.syn
+# synthetic/3.syn
+# synthetic/4.syn
+# Sed.dat
+#
+# ...
+40
+
+    2.2382759228604510        2.0087798915533339        3.7575129164198282       0.89060533012609111       0.11762602581412204       -4.4882614088658269E-003   87.680426418766729        329.58871448058375        275.52307342830068        174.56843406203086        1.0845787319528797       0.21507379048888198        86.092835715858598        328.51299605109182       0.47311616698893011        87.634482709279439        28.778222502556382       0.57519474916076352       -23.997708487891764        114.57675833075618        1.0463324396684976        32.182696526985168        10762.808626409635        10306.086157714741        13071.931819243164        7162.7914339218951        1.5669262726761870        1.6885224509378616        2.8280640739763174       0.56349336608476486        17.325969749465237        24.813794856730347        234.82853486467786        80.919449970455958       0.99859029506654906        3.3411335283539909        3.6462120995958189        3.7353057476604108        10.851035045346176        67.909305060381058               34           0           0           0       17391        4856        4856        2974       78133          13      108257   470.60959592780267        0.0000000000000000        0.0000000000000000        0.0000000000000000        248212.39738895773        24304.486326953982        46933.057614907717        30333.992468371671        54210.008814983266        4054.1913169361114        5.4395558943965936        138199.96781796301     
+
+2456224.724705		! fixed (dependent) parameters: T0 [JD]
+
+4			! nbod number of bodies; a list of 2*nbod+4 files with observational data (or '-' if no data)...
+-
+-
+-
+Speckle4.dat
+-
+-
+-
+-
+-
+-
+Vis.dat
+Closure.dat
+
+4			! nband number of photometric bands; a list of bands and lightcurve files
+  7  Lc_quasiperiodic_removed_1234.dat
+  5  Lc_U.dat
+  6  Lc_B.dat
+  7  Lc_V.dat
+Spectra.dat
+1.syn
+2.syn
+3.syn
+4.syn
+Sed.dat
+1.abs
+2.abs
+3.abs
+4.abs
+
+0                       ! geometry of the system: 0 ... hierarchical ((1+2)+3)+4, 1 ... two pairs ((1+2)+(3+4))+5
+
+0.9 0.9 3.5 0.9		! m_min(nbod) [M_S] minimum masses
+3.0 3.0 3.9 2.0		! m_max(nbod) [M_S] maximum masses
+0.0 0.0 0.0 0.0		! metal(nbod) [M/H] metallicity
+
+0.005			! lightcurve_timestep [day] timestep of synthetic lightcurve; set to 0.0 if all observed points should be computed
+0.100			! approx_eclipse_duration [day] approximate eclipse duration for eclipse detection
+420.e-9 460.e-9		! lambda1 lambda2 [metres] wavelength range for rectified synthetic spectra
+300.e-9 2700.e-9	! lambda3 lambda4 [metres] range for absolute spectra (to fit SED)
+
+F			! use_planck [T|F] use Planck approximation; otherwise use absolute synthetic spectra (*.abs files)
+T			! use_filters [T|F] use filter transmissions to compute SED; otherwise use effective wavelengths and bandpasses
+T			! use_limbdark [T|F] use linear limb-darkening coefficients for visibility |V|^2 calculation
+T			! use_pyterpol [T|F] use Pyterpol (Nemravova et al. 2016) to generate synthetic spectra on-the-fly
+
+1.0 1.0 1.0 1.0	0.1 1.0	0.0 1.0	1.0 1.0		! w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC w_SYN w_SED weights for chi^2 computation
+1.e-8			! eps_BS for Bulirsch-Stoer integrator
+T			! debugging output?
+T			! debug integrator?
+
+

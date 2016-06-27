@@ -1,0 +1,62 @@
+# chi2.in
+# nparam number of parameters
+# x() vector
+#
+# m_1  m_2  m_3  m_4 [M_S]
+# a_1 [AU]  e_1 []  i_1  Omega_1  omega_1  M_1 [deg]
+# a_2 [AU]  e_2 []  i_2  Omega_2  omega_2  M_2 [deg]
+# a_3 [AU]  e_3 []  i_3  Omega_3  omega_3  M_3 [deg]
+# T_eff_1  T_eff_2  T_eff_3  T_eff_4  [K]
+# R_star_1  R_star_2  R_star_3  R_star_4  [R_S]
+# gamma [km/s]  d_pc [pc] ... (there might be garbage text)
+16
+
+   1.27                      0.000672
+   0.0587752987672428        1.e-3  1.e-3  0.0  0.0  0.0
+   10700.000000000000        9991.0692066240081
+   1.0                       0.132865761258041
+   0.0  0.0
+   8.0929673909820412
+   67.190203320577297
+
+2456224.724705		! fixed (dependent) parameters: T0 [JD]
+
+2			! nbod number of bodies; a list of 2*nbod+4 files with observational data (or '-' if no data)...
+-
+-
+-
+-
+-
+-
+-
+-
+
+0			! nband number of photometric bands; a list of bands and lightcurve files
+-
+-
+-
+-
+-
+-
+
+0                       ! geometry of the system: 0 ... hierarchical ((1+2)+3)+4, 1 ... two pairs ((1+2)+(3+4))+5
+
+0.0 0.0		! m_min(nbod) [M_S] minimum masses
+3.0 3.0		! m_max(nbod) [M_S] maximum masses
+0.0 0.0		! metal(nbod) [M/H] metallicity
+0.001			! lightcurve_timestep [day] timestep of synthetic lightcurve; set to 0.0 if all observed points should be computed
+0.100			! approx_eclipse_duration [day] approximate eclipse duration for eclipse detection
+0. 10000.e-9		! lambda1 lambda2 [metres] wavelength range for synthetic spectra
+0. 10000.e-9		! lambda3 lambda4 [metres] range for absolute spectra (to fit SED)
+
+T			! use_planck [T|F] use Planck approximation; otherwise use absolute synthetic spectra (*.abs files)
+F			! use_filters [T|F] use filter transmissions to compute SED; otherwise use effective wavelengths and bandpasses
+F			! use_limbdark [T|F] use linear limb-darkening coefficients for visibility |V|^2 calculation
+F			! use_pyterpol [T|F] use Pyterpol (Nemravova et al. 2016) to generate synthetic spectra on-the-fly
+
+1.0 1.0 1.0 1.0	0.1 1.0	0.0 1.0	1.0 1.0		! w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC w_SYN w_SED weights for chi^2 computation
+1.e-12			! eps_BS for Bulirsch-Stoer integrator
+T			! debugging output?
+T			! debug integrator?
+
+

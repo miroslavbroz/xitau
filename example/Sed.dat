@@ -1,0 +1,23 @@
+# wavelength data from: http://hea.iki.rssi.ru/AZT22/RUS/eaa_bessel.pdf (with a correction of K-band)
+# magnitude data for xi Tauri from Simbad (Ducati 2002)
+# calibrations from ebdoc.13july2015.pdf; Wilson, Van Hamme, & Terrell (2010);
+# H calibration from eaa_bessel.pdf
+# lambda_eff [m] & band_eff[m] & UBV [mag] & sigma [mag] & calibration flux F_lambda [J s^-1 m^-2 m^-1] for 0.0 mag & filter
+  367.e-9     66.e-9   3.33   0.01   0.04306     filters/johnson.U
+  436.e-9     94.e-9   3.66   0.01   0.06266     filters/johnson.B
+  545.e-9     85.e-9   3.75   0.01   0.036895    filters/johnson.V
+  720.e-9    220.e-9   3.76   0.01   0.017813    filters/johnson.R
+  900.e-9    240.e-9   3.85   0.01   0.008643    filters/johnson.I
+ 1220.e-9    213.e-9   3.84   0.01   0.003147    filters/johnson.J
+ 1630.e-9    307.e-9   3.738  0.178  0.00115092  filters/johnson.H
+ 2190.e-9    390.e-9   3.87   0.01   0.0003961   filters/johnson.K
+
+# Nemravova et al. (2016), Table 12:
+# 10001.e-9 20000.e-9  -1.40   0.01   1.0        filters/bolometric
+  367.e-9     66.e-9   3.315  0.01   0.04306     filters/johnson.U
+  436.e-9     94.e-9   3.643  0.01   0.06266     filters/johnson.B
+  545.e-9     85.e-9   3.734  0.01   0.036895    filters/johnson.V
+
+  436.e-9     94.e-9   3.668  0.01   0.06266     filters/johnson.B
+  545.e-9     85.e-9   3.752  0.01   0.036895    filters/johnson.V
+

@@ -1,0 +1,547 @@
+
+      if (debug) then
+        hjd = 0.d0
+        write(6,*) hjd,phas,htt,cool,total,tot,d,smagg
+      endif
+
+c
+c write input parameters
+c
+      if (debug) then
+        write(*,*) '# mpage  = ', mpage
+        write(*,*) '# nref   = ', nref
+        write(*,*) '# mref   = ', mref
+        write(*,*) '# ifsmv1 = ', ifsmv1
+        write(*,*) '# ifsmv2 = ', ifsmv2
+        write(*,*) '# icor1  = ', icor1
+        write(*,*) '# icor2  = ', icor2
+        write(*,*) '# ld     = ', ld
+        write(*,*)
+        write(*,*) '# jdphs  = ', jdphs
+        write(*,*) '# hjd0   = ', hjd0, ' day'
+        write(*,*) '# period = ', period, ' day'
+        write(*,*) '# dpdt   = ', dpdt
+        write(*,*) '# pshift = ', pshift
+        write(*,*) '# stdev  = ', stdev, ' mag'
+        write(*,*) '# noise  = ', noise
+        write(*,*) '# seed   = ', seed
+        write(*,*)
+        write(*,*) '# hjdst  = ', hjdst, ' day'
+        write(*,*) '# hjdsp  = ', hjdsp, ' day'
+        write(*,*) '# hjdin  = ', hjdin, ' day'
+        write(*,*) '# phstrt = ', phstrt
+        write(*,*) '# phstop = ', phstop
+        write(*,*) '# phin   = ', phin
+        write(*,*) '# phn    = ', phn
+        write(*,*)
+        write(*,*) '# mode   = ', mode
+        write(*,*) '# ipb    = ', ipb
+        write(*,*) '# ifat1  = ', ifat1
+        write(*,*) '# ifat2  = ', ifat2
+        write(*,*) '# n1     = ', n1
+        write(*,*) '# n2     = ', n2
+        write(*,*) '# perr0  = ', perr0, ' rad'
+        write(*,*) '# dperdt = ', dperdt, ' rad/day'
+        write(*,*) '# the    = ', the
+        write(*,*) '# vunit  = ', vunit
+        write(*,*)
+        write(*,*) '# e      = ', e
+        write(*,*) '# a      = ', a, ' r_s'
+        write(*,*) '# f1     = ', f1
+        write(*,*) '# f2     = ', f2
+        write(*,*) '# vga    = ', vga, ' km/s'
+        write(*,*) '# xincl  = ', xincl, ' deg'
+        write(*,*) '# gr1    = ', gr1
+        write(*,*) '# gr2    = ', gr2
+        write(*,*) '# abunin = ', abunin, ' [m/h]'
+        write(*,*)
+        write(*,*) '# tavh = ', tavh, ' 10^4 k'
+        write(*,*) '# tavc = ', tavc, ' 10^4 k'
+        write(*,*) '# alb1 = ', alb1
+        write(*,*) '# alb2 = ', alb2
+        write(*,*) '# poth = ', poth
+        write(*,*) '# potc = ', potc
+        write(*,*) '# rm    = ', rm
+        write(*,*) '# xbol1 = ', xbol1
+        write(*,*) '# xbol2 = ', xbol2
+        write(*,*) '# ybol1 = ', ybol1
+        write(*,*) '# ybol2 = ', ybol2
+        write(*,*)
+        write(*,*) '# iband  = ', iband
+        write(*,*) '# hlum   = ', hlum
+        write(*,*) '# clum   = ', clum
+        write(*,*) '# xh     = ', xh
+        write(*,*) '# xc     = ', xc
+        write(*,*) '# yh     = ', yh
+        write(*,*) '# yc     = ', yc
+        write(*,*) '# el3    = ', el3, ' (flux)'
+        write(*,*) '# opsf   = ', opsf
+        write(*,*) '# zero   = ', zero, ' mag'
+        write(*,*) '# factor = ', factor
+        write(*,*) '# wl     = ', wl, ' mu'
+        write(*,*)
+        write(*,*) '# debug = ', debug
+        write(*,*)
+      endif
+      write(*,*) 'HOT = ', HOT
+      write(*,*) 'COOL = ', COOL
+      write(*,*) 'EL3 = ', EL3
+      write(*,*) 'ALL = ', ALL
+      write(*,*) 'EL3/ALL = ', EL3/ALL
+c
+c formatting
+c
+c      include 'formats.inc'
+
+C
+C     TO PRINT VELOCITIES IN KM/SEC, SET VUNIT=1.
+C     TO PRINT NORMALIZED VELOCITIES IN SAME COLUMNS, SET VUNIT EQUAL TO
+C     DESIRED VELOCITY UNIT IN KM/SEC.
+C
+C     PARAMETER PSHIFT IS DEFINED AS THE PHASE AT WHICH PRIMARY
+C     CONJUNCTION (STAR 1 AWAY FROM OBSERVER) WOULD OCCUR IF THE
+C     ARGUMENT OF PERIASTRON WERE 90 DEGREES. SINCE THE NOMINAL VALUE
+C     OF THIS QUANTITY IS ZERO, PSHIFT MAY BE USED TO INTRODUCE AN
+C     ARBITRARY PHASE SHIFT.
+C
+
+c     open(unit=5,file='lcin.active',status='old')
+c     open(unit=6,file='lcout.active')
+      close(5)
+      close(6)
+
+c
+c write input parameters
+c
+      write(6,148)
+      write(6,149) mpage,nref,mref,ifsmv1,ifsmv2,icor1,icor2,ld
+      write(6,*)
+      write(6,171)
+      write(6,170) jdphs,hjd0,period,dpdt,pshift,stdev,noise,seed
+      write(6,*)
+      write(6,219)
+      write(6,218) hjdst,hjdsp,hjdin,phstrt,phstop,phin,phn
+      write(6,*)
+      WRITE(6,10)
+      WRITE(6,33) MODE,IPB,IFAT1,IFAT2,N1,N2,perr0,dperdt,the,VUNIT,vfac
+      WRITE(6,*)
+      WRITE(6,48)
+      WRITE(6,5) E,A,F1,F2,VGA,XINCL,GR1,GR2,NSP1,NSP2,abunin
+      WRITE(6,*)
+      WRITE(6,54)
+      WRITE(6,8) TAVH,TAVC,ALB1,ALB2,PHSV,PCSV,rm,XBOL1,xbol2,ybol1,
+     $  ybol2
+      WRITE(6,*)
+      WRITE(6,47)
+      WRITE(6,34) iband,HLUM,CLUM,XH,XC,yh,yc,el3,opsf,ZERO,FACTOR,wl
+
+      ns1=1
+      ns2=2
+      if(mpage.ne.3) goto 174
+      write(6,*)
+      write(6,142)
+      write(6,2049) ns1,binwm1,sc1,sl1,nf1
+      write(6,2049) ns2,binwm2,sc2,sl2,nf2
+      write(6,*)
+      write(6,157) ns1
+
+      do 155 iln=1,nl1
+  155 write(6,152) wll1(iln),ewid1(iln),depth1(iln),kks(1,iln)
+
+      write(6,*)
+      write(6,157) ns2
+      do 151 iln=1,nl2
+  151 write(6,152) wll2(iln),ewid2(iln),depth2(iln),kks(2,iln)
+
+  174 continue
+      write(6,*)
+      WRITE(6,*)
+      IF(NSTOT.GT.0) WRITE(6,83)
+      DO 188 KP=1,2
+      IF((NSP1+KP-1).EQ.0) GOTO 188
+      IF((NSP2+(KP-2)**2).EQ.0) GOTO 188
+      NSPOT=NSP1
+      IF(KP.EQ.2) NSPOT=NSP2
+      DO 187 I=1,NSPOT
+  187 WRITE(6,84)KP,XLAT(KP,I),XLONG(KP,I),RADSP(KP,I),TEMSP(KP,I)
+  188 WRITE(6,*)
+
+      if(ncl.eq.0) goto 67
+      write(6,69)
+      do 68 i=1,ncl
+   68 write(6,64) xcl(i),ycl(i),zcl(i),rcl(i),op1(i),fcl(i),edens(i),
+     $  xmue(i),encl(i),dens(i)
+      write(6,*)
+   67 continue
+
+
+
+
+      write(6,*)
+      write(6,43)
+      write(6,44)
+      WRITE(6,46)
+      WRITE(6,94) MMSAVE(NP1),MMSAVE(NP2),SBRH,SBRC,SM1,SM2,PHPERI,
+     $  pconsc,pconic
+      WRITE(6,*)
+      if(stdev.eq.0.d0.or.mpage.ne.1) goto 246
+      write(6,244)
+      write(6,245) stdev
+  246 continue
+
+      WRITE(6,*)
+
+  205 format('**********************************************************
+     $************')
+  204 format('*************  Next block of output   ********************
+     $************')
+   96 FORMAT(6x,'JD',13x,'Phase',5x,'r1pol',6x,'r1pt',5x,'r1sid',5x,'r1b
+     $ak',5x,'r2pol',5x,'r2pt',6x,'r2sid',5x,'r2bak')
+  296 format(f14.6,f13.5,8f10.5)
+   45 FORMAT(6x,'JD',14x,'Phase     V Rad 1     V Rad 2      del V1
+     $ del V2   V1 km/s      V2 km/s')
+   93 format(f14.6,f13.5,4f12.6,2d13.4)
+   47 FORMAT(2x,'band',7x,'L1',9x,'L2',7x,'x1',6x,'x2',6x,'y1',6x,
+     $'y2',6x,'el3     opsf      m zero   factor',2x,'wv lth')
+   48 FORMAT('  ecc',5x,'s-m axis',7x,'F1',9x,'F2',7x,'Vgam',7x,
+     $'Incl',6x,'g1',6x,'g2  Nspot1 Nspot 2',4x,'[M/H]')
+   54 FORMAT(2x,'T1',6x,'T2',5x,'Alb 1  Alb 2',4x,'Pot 1',8x,'Pot 2',
+     $11x,'M2/M1',2x,'x1(bolo) x2(bolo) y1(bolo) y2(bolo)')
+   33 FORMAT(I4,I5,I6,I6,I6,I4,f13.6,d14.5,f9.5,f10.2,d16.4)
+   74 FORMAT(' DIMENSIONLESS RADIAL VELOCITIES CONTAIN FACTOR P/(2PI*A)'
+     $)
+   43 format(91x,'superior',5x,'inferior')
+   44 format(76x,'periastron',2x,'conjunction',2x,'conjunction')
+   46 FORMAT('grid1/4    grid2/4',2X,'polar sbr 1',3X,'polar sbr 2'
+     $,3X,'surf. area 1',2X,'surf. area 2',7X,'phase',8X,
+     $'phase',8x,'phase')
+    2 FORMAT(F6.5,d13.6,2F10.4,F10.4,f9.3,2f7.3,f7.2)
+    5 FORMAT(F6.5,d13.6,2F11.4,F11.4,F10.3,2f8.3,i5,i7,f10.2)
+    6 FORMAT(2(F7.4,1X),2f7.3,3d13.6,4F7.3)
+    8 FORMAT(f7.4,f8.4,2F7.3,3d13.6,f8.3,f9.3,f9.3,f9.3)
+    1 FORMAT(4I2,2I3,f13.6,d12.5,f7.5,F8.2)
+    4 FORMAT(i3,2F10.5,4F7.3,F8.4,d10.4,F8.3,F8.4,f9.6)
+   34 FORMAT(i5,1X,2F11.5,4f8.3,F9.4,d11.4,F9.3,F9.4,f9.6)
+   49 FORMAT(' PROGRAM SHOULD NOT BE USED IN MODE 1 OR 3 WITH NON-ZERO E
+     $CCENTRICITY')
+   10 FORMAT('MODE   IPB  IFAT1 IFAT2  N1  N2',4x,'Arg. Per',7x,'dPerdt
+     $',4x,'Th e',4x,'V UNIT(km/s)    V FAC')
+  148 format('   mpage  nref   mref   ifsmv1   ifsmv2   icor1   icor2
+     $ld')
+  171 format('JDPHS',5x,'J.D. zero',7x,'Period',11x,'dPdt',
+     $6x,'Ph. shift',3x,'fract. sd.',2x,'noise',5x,'seed')
+  244 format('Note: The light curve output contains simulated observa',
+     $'tional scatter, as requested,')
+  245 format('with standard deviation',f9.5,' of light at the reference'
+     $,' phase.')
+  149 format(i6,2i7,i8,i9,i9,i8,i6)
+  170 format(i3,f17.6,d18.10,d14.6,f10.4,d13.4,i5,f13.0)
+   94 FORMAT(i6,i11,4F14.6,F13.6,f13.6,f13.6)
+   84 FORMAT(1X,I4,4F12.5)
+   85 FORMAT(4f9.5)
+   83 FORMAT(1X,'STAR  CO-LATITUDE  LONGITUDE  SPOT RADIUS  TEMP. FACTOR
+     $')
+  350 format(' Primary star exceeds outer contact surface')
+  351 format(' Secondary star exceeds outer contact surface')
+   22 format(8(i1,1x))
+  649 format(i1,f15.6,d15.10,d13.6,f10.4,d10.4,i2,f11.0)
+   63 format(3f9.4,f7.4,d11.4,f9.4,d11.3,f9.4,f7.3)
+   64 format(3f10.4,f9.4,d12.4,f10.4,d12.4,f9.4,f9.3,d12.4)
+   69 format('      xcl       ycl       zcl      rcl       op1         f
+     $cl        ne       mu e      encl     dens')
+ 2048 format(d11.5,f9.4,f9.2,i3)
+ 2049 format(i3,d14.5,f18.2,f20.2,i14)
+  907 format(6x,'del v',6x,'del wl (mic.)',7x,'wl',9x,'profile',6x,'res
+     $flux')
+  903 format(6f14.7)
+   92 format('Phase =',f14.6)
+  142 format('star',4x,'bin width (microns)',3x,'continuum scale',4x,'co
+     $ntinuum slope',2x,'nfine')
+  167 format(30x,'star',i2)
+  138 format(f9.6,d12.5,f10.5,i5)
+  152 format(f20.6,d23.5,17x,f13.5,i6)
+  157 format('star ',i1,'   line wavelength',4x,'equivalent width (micro
+     $ns)',5x,'rect. line depth',2x,'kks')
+  217 format(f14.6,f15.6,f13.6,4f12.6)
+  218 format(f14.6,f16.6,f14.6,4f12.6)
+  219 format(5x,'JD start',9x,'JD stop',6x,'JD incr',6x,
+     $'Ph start',4x,'Ph. stop',5x,'Ph incr',5x,'Ph norm')
+
+  128 format('HJD = ',f14.5,'    Phase = ',f14.5)
+  131 format(3x,'Y Sky Coordinate',4x,'Z Sky Coordinate')
+  130 format(f16.6,f20.6)
+
+c
+c print absolute dimensions (mass, luminosity, radius, log g)
+c
+      write(6,150)
+150   format(' Star',9x,'M/Msun   (Mean Radius)/Rsun',5x,'M Bol',4x,
+     $  'Log g (cgs)')
+      write(6,250) ns1,sms1,sr1,bolm1,xlg1
+      write(6,250) ns2,sms2,sr2,bolm2,xlg2
+250   format(4x,I1,4x,f12.3,11x,f7.2,6x,f6.2,8x,f5.2)
+
+c
+c check ramps
+c
+      do komp=1,2
+        write(6,*)
+        if(message(komp,1).eq.1) then
+          write(6,283) komp
+283       format('log g below ramp range for at least one point',
+     $      ' on star',i2,', black body applied locally.')
+        endif
+        if(message(komp,2).eq.1) then
+          write(6,284) komp
+284       format('log g above ramp range for at least one point',
+     $      ' on star',i2,', black body applied locally.')
+        endif
+        if(message(komp,3).eq.1) then
+          write(6,285) komp
+285       format('T above ramp range for at least one',
+     $      ' point on star',i2,', black body applied locally.')
+        endif
+        if(message(komp,4).eq.1) then
+          write(6,286) komp
+286       format('T below ramp range for at least one point',
+     $      ' on star',i2,', black body applied locally.')
+        endif
+      enddo
+c
+c write stellar radii
+c
+      WRITE(6,41)
+   41 FORMAT('star',4X,'r pole',5X,'deriv',5X,'r point',5X,'deriv',
+     $  6X,'r side',6X,'deriv',5X,'r back',6X,'deriv')
+
+      do ii=1,2
+        gt1=dfloat(2-ii)
+        gt2=dfloat(ii-1)
+        f=f1*gt1+f2*gt2
+        do i=1,4
+          call romq(po(ii),rm,f,dp,e,xtha(i),xfia(i),rad(i),drdo(i),
+     $      drdq,dodq,ii,mode)
+        enddo
+        write(6,40) ii,rad(1),drdo(1),rad(2),drdo(2),rad(3),drdo(3),
+     $    rad(4),drdo(4)
+   40   FORMAT(I3,8E14.5)
+      enddo
+
+      if (.false.) then
+      write(*,*) '# RV     = ', RV(1)
+      write(*,*) '# GRX    = ', GRX(1)
+      write(*,*) '# GRY    = ', GRY(1)
+      write(*,*) '# GRZ    = ', GRZ(1)
+      write(*,*) '# RVQ    = ', RVQ(1)
+      write(*,*) '# GRXQ   = ', GRXQ(1)
+      write(*,*) '# GRYQ   = ', GRYQ(1)
+      write(*,*) '# GRZQ   = ', GRZQ(1)
+      write(*,*) '# MMSAVE = ', MMSAVE(1)
+      write(*,*) '# FR1    = ', FR1(1)
+      write(*,*) '# HLD    = ', HLD(1)
+      write(*,*) '# rm     = ', rm
+      write(*,*) '# poth   = ', poth
+      write(*,*) '# potc   = ', potc
+      write(*,*) '# gr1    = ', gr1
+      write(*,*) '# gr2    = ', gr2
+      write(*,*) '# alb1   = ', alb1
+      write(*,*) '# alb2   = ', alb2
+      write(*,*) '# n1     = ', n1
+      write(*,*) '# n2     = ', n2
+      write(*,*) '# f1     = ', f1
+      write(*,*) '# f2     = ', f2
+      write(*,*) '# mod    = ', mod
+      write(*,*) '# xincl  = ', xincl
+      write(*,*) '# the    = ', the
+      write(*,*) '# mode   = ', mode
+      write(*,*) '# snth   = ', snth(1)
+      write(*,*) '# csth   = ', csth(1)
+      write(*,*) '# snfi   = ', snfi(1)
+      write(*,*) '# csfi   = ', csfi(1)
+      write(*,*) '# grv1   = ', grv1(1)
+      write(*,*) '# grv2   = ', grv2(1)
+      write(*,*) '# xx1    = ', xx1(1)
+      write(*,*) '# yy1    = ', yy1(1)
+      write(*,*) '# zz1    = ', zz1(1)
+      write(*,*) '# xx2    = ', xx2(1)
+      write(*,*) '# yy2    = ', yy2(1)
+      write(*,*) '# zz2    = ', zz2(1)
+      write(*,*) '# glump1 = ', glump1(1)
+      write(*,*) '# glump2 = ', glump2(1)
+      write(*,*) '# csbt1  = ', csbt1(1)
+      write(*,*) '# csbt2  = ', csbt2(1)
+      write(*,*) '# gmag1  = ', gmag1(1)
+      write(*,*) '# gmag2  = ', gmag2(1)
+      write(*,*) '# glog1  = ', glog1(1)
+      write(*,*) '# glog2  = ', glog2(1)
+      endif
+
+c well, we have to always assume e > 0
+c        IF(E.EQ.0.d0) then
+c          IRVOL1=1
+c          IRVOL2=1
+c          IRTE=1
+c        endif
+       
+      if (.false.) then
+        write(*,*) '#'
+        write(*,*) '# gpha = ',  gpha 
+        write(*,*) '# xincl = ', xincl
+        write(*,*) '# xh = ',    xh 
+        write(*,*) '# xc = ',    xc 
+        write(*,*) '# yh = ',    yh 
+        write(*,*) '# yc = ',    yc 
+        write(*,*) '# n1 = ',    n1 
+        write(*,*) '# n2 = ',    n2 
+        write(*,*) '# hot = ',   hot
+        write(*,*) '# cool = ',  cool 
+        write(*,*) '# rv = ',    rv(1)
+        write(*,*) '# grx = ',   grx(1)
+        write(*,*) '# gry = ',   gry(1)
+        write(*,*) '# grz = ',   grz(1)
+        write(*,*) '# rvq = ',   rvq(1)
+        write(*,*) '# grxq = ',  grxq(1) 
+        write(*,*) '# gryq = ',  gryq(1) 
+        write(*,*) '# grzq = ',  grzq(1) 
+        write(*,*) '# mmsave = ',mmsave(1)
+        write(*,*) '# theta = ', theta(1)
+        write(*,*) '# rho = ',   rho(1)
+        write(*,*) '# aa = ',    aa(1) 
+        write(*,*) '# bb = ',    bb(1)
+        write(*,*) '# slump1 = ',slump1(1)
+        write(*,*) '# slump2 = ',slump2(1)
+        write(*,*) '# somhot = ',somhot
+        write(*,*) '# somkul = ',somkul
+        write(*,*) '# d = ',     d
+        write(*,*) '# wl = ',    wl
+        write(*,*) '# snth = ',  snth(1) 
+        write(*,*) '# csth = ',  csth(1) 
+        write(*,*) '# snfi = ',  snfi(1) 
+        write(*,*) '# csfi = ',  csfi(1) 
+        write(*,*) '# tld = ',   tld(1)
+        write(*,*) '# gmag1 = ', gmag1(1)
+        write(*,*) '# gmag2 = ', gmag2(1)
+        write(*,*) '# glog1 = ', glog1(1)
+        write(*,*) '# glog2 = ', glog2(1)
+        write(*,*) '# fbin1 = ', fbin1(1)
+        write(*,*) '# fbin2 = ', fbin2(1)
+        write(*,*) '# delv1 = ', delv1(1)
+        write(*,*) '# delv2 = ', delv2(1)
+        write(*,*) '# count1 = ',count1(1)
+        write(*,*) '# count2 = ',count2(1)
+        write(*,*) '# delwl1 = ',delwl1(1)
+        write(*,*) '# delwl2 = ',delwl2(1)
+        write(*,*) '# resf1 = ', resf1(1)
+        write(*,*) '# resf2 = ', resf2(1)
+        write(*,*) '# wl1 = ',   wl1(1)
+        write(*,*) '# wl2 = ',   wl2(1)
+        write(*,*) '# dvks1 = ', dvks1(1)
+        write(*,*) '# dvks2 = ', dvks2(1)
+        write(*,*) '# tau1 = ',  tau1(1) 
+        write(*,*) '# tau2 = ',  tau2(1) 
+        write(*,*) '# emm1 = ',  emm1(1) 
+        write(*,*) '# emm2 = ',  emm2(1) 
+        write(*,*) '# hbarw1 = ',hbarw1(1)
+        write(*,*) '# hbarw2 = ',hbarw2(1)
+        write(*,*) '# xcl = ',   xcl(1)
+        write(*,*) '# ycl = ',   ycl(1)
+        write(*,*) '# zcl = ',   zcl(1)
+        write(*,*) '# rcl = ',   rcl(1)
+        write(*,*) '# op1 = ',   op1(1)
+        write(*,*) '# fcl = ',   fcl(1)
+        write(*,*) '# edens = ', edens(1)
+        write(*,*) '# encl = ',  encl(1) 
+        write(*,*) '# dens = ',  dens(1) 
+        write(*,*) '# taug = ',  taug(1) 
+        write(*,*) '# emmg = ',  emmg(1) 
+        write(*,*) '# yskp = ',  yskp(1) 
+        write(*,*) '# zskp = ',  zskp(1) 
+        write(*,*) '# iband = ', iband
+        write(*,*) '# ifat1 = ', ifat1
+        write(*,*) '# ifat2 = ', ifat2
+        write(*,*) '# ifphn = ', ifphn
+        write(*,*) '#'
+      endif
+
+
+c rm    ... M2/M1 mass ratio (input parameter)
+c qfac1 ... 1/(1+M2/M1) = M1/(M1+M2)
+c qfac  ... M2/(M1+M2)
+
+      pi=3.141592653589793d0
+      twopi=pi+pi
+      ff1=f1
+      ff2=f2
+      qfac1=1.d0/(1.d0+rm)
+      qfac=rm*qfac1
+
+      IF(MODE.EQ.1) XC=XH
+      if(mode.eq.1) yc=yh
+      PSFT=PHAS-PHPERI
+      do while (PSFT.GT.1.d0)
+        PSFT=PSFT-1.d0
+      enddo
+      do while (PSFT.LT.0.d0)
+        PSFT=PSFT+1.d0
+      enddo
+      XMEAN=PSFT*twopi
+      TR=XMEAN
+
+c PHAS   ... phase (input parameter)
+c PHPERI ... phase of superior conjunction
+c XMEAN  ... M mean anomaly
+c TR     ... f true anomaly
+c E      ... e eccentricity
+
+      do kp=1,2
+        nsp=nsp1*(2-kp)+nsp2*(kp-1)
+        ff=f1*dfloat(2-kp)+f2*dfloat(kp-1)
+        ifsmv=ifsmv1*(2-kp)+ifsmv2*(kp-1)
+        if(ifsmv.ne.0) then
+          do i=1,nsp
+            xlg=xlng(kp,i)+twopi*ff*(phas-pconsc)-(tr-trc)
+            snlng(kp,i)=dsin(xlg)
+            cslng(kp,i)=dcos(xlg)
+          enddo
+        endif
+      enddo
+
+c DUM    ... E eccentric anomaly (not needed here)
+c U      ... phi true longitude (f+omega) [rad]
+c GPHA   ... phi/(2pi)-0.25 true phase wrt. this orientation: O--o
+c EF     ... a(1-e^2), a = 1
+c D      ... r distance, a = 1 units
+c qfacd  ... M2/(M1+M2) r
+
+      if(e.ne.0.d0) then
+        call KEPLER(XMEAN,E,DUM,TR)
+      endif
+      U=TR+PERR
+      COSU=dcos(U)
+      GPHA=U*.1591549d0-.25d0
+      do while (GPHA.lt.0.d0)
+        GPHA=GPHA+1.d0
+      enddo
+      do while (GPHA.GE.1.d0)
+        GPHA=GPHA-1.d0
+      enddo
+      D=EF/(1.d0+E*dcos(TR))
+      qfacd=qfac*d
+
+c e = 0 => IRTE = 1
+c non-zero eccentricity case
+
+      IF(IRTE.NE.1) then
+
+      endif
+
+c qfac  ... M2/(M1+M2)
+c qfac1 ... 1/(1+M2/M1) = M1/(M1+M2)
+c SINI  ... sin(i) wrt. observer
+c ECOS  ... e cos(omega)
+c COSU  ... cos(phi)
+c EFC   ... sqrt(1-e^2)
+c VGAM  ... gamma velocity
+
+      VO1=qfac*SINI*(ECOS+COSU)/EFC+VGAM
+      VO2=-qfac1*SINI*(ECOS+COSU)/EFC+VGAM
