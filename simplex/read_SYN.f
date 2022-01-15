@@ -14,7 +14,7 @@ c Miroslav Broz (miroslav.broz@email.cz), May 23rd 2016
      :  sigma_Int(OBSMAX)
       integer dataset(OBSMAX)
       integer i,length,ierr
-      character*80 str
+      character*255 str
 
       if (filename(1:1).eq.'-') then
         N = 0

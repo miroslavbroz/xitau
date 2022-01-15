@@ -1,0 +1,70 @@
+
+  if (abs(phi-90.d0*deg).lt.1.d-3) then
+    write(*,*) 'phi = ', phi/deg, ' deg'
+    write(*,*) 'minl = ', sqrt(u*u+v*v)
+    write(*,*) 'minf_ = ', minf_
+    write(*,*) 'u = ', u
+    write(*,*) 'v = ', v
+    do l = 1, maxl
+      write(*,*) 'f(', l, ') = ', f(l)
+    enddo
+    do l = 1, maxl-1
+      write(*,*) 'f_(', l, ') = ', f_(l)
+    enddo
+  endif
+
+  ! find the most negative derivative
+  do l = 1, maxl-1
+    f_(l) = f(l+1)-f(l)
+  enddo
+  minf_ = 0.d0
+  do l = 1, maxl-1
+    if (f_(l).lt.minf_) then
+      minf_ = f_(l)
+!      u = l*cos(phi)
+!      v = l*sin(phi)
+    endif
+  enddo
+
+if (x0.lt.x(1).or.(x0.lt.x(n))) then
+  write(*,*) 'silhouette.f90: Error: Extrapolation is not allowed!'
+  write(*,*) 'x(', 1, ') = ', x(1)
+  write(*,*) 'x(', n, ') = ', x(n)
+  write(*,*) 'y(', 1, ') = ', y(1)
+  write(*,*) 'y(', n, ') = ', y(n)
+  write(*,*) 'x0 = ', x0
+  stop
+endif
+
+do while (((i.lt.h).or.(j.lt.w)).and.(ierr.eq.0))
+
+  read(10,'(a)',iostat=ierr) line
+
+  l = 0
+  maxl = len(trim(line))
+  do while ((l.lt.maxl))
+    do while ((l.lt.maxl).and.(line(l:l).eq.' '))
+      l = l+1
+    enddo
+    if (l.eq.maxl) cycle
+
+!    write(*,*) 'l = ', l
+!    write(*,*) line(l:maxl)
+    read(line(l:maxl),*) val
+
+    if (j.gt.w) then
+      i = i+1
+      j = 1
+    endif
+    pnm(i, j) = val
+    write(*,*) i, j, val
+    j = j+1
+
+    l = l+1
+    do while ((l.lt.maxl).and.(line(l:l).ne.' '))
+      l = l+1
+    enddo
+  enddo
+!  write(*,*) 'NEXTLINE'
+!  write(*,*) 'ierr = ', ierr
+enddo

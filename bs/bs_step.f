@@ -132,6 +132,7 @@ c...  copy to the big array
          endif
       enddo
 
+      time_from_bs_step = time
       tfake = 0.0d0
       dttmp = dt
 

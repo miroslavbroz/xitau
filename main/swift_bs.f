@@ -6,6 +6,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Mar 16th 2016
       program swift_bs
 
       include "../swift.inc"
+      include '../tides/spin.inc'
 
       character*80 inparfile,inplfile,intpfile,intidesfile
       real*8 eps_BS
@@ -18,11 +19,12 @@ c Miroslav Broz (miroslav.broz@email.cz), Mar 16th 2016
       real*8 vxbt(NTPMAX),vybt(NTPMAX),vzbt(NTPMAX)
 
       integer istat(NTPMAX,NSTAT)
-      integer i,ntp,iflgchk,i1st,iue
+      integer i,ntp,iflgchk,i1st,iue,iuf
       real*8 rstat(NTPMAX,NSTATR)
       real*8 j2rp2,j4rp4
       real*8 t0,tstop,dt,dtout,dtdump,eps
       real*8 t,tout_,tdump_,eoff
+      real*8 tspin,tspinout
       real*8 rmin,rmax,rmaxu,qmin,rplsq(NPLMAX)
       logical lclose 
       character*80 fopenstat,outfile
@@ -43,13 +45,11 @@ c read input parameters (and write input to terminal)
       read(*,*,err=990,end=990) intpfile
       write(*,*) "# intpfile = ", trim(intpfile)
 
-      write(*,*) "# intidesfile : "
-      read(*,*,err=990,end=990) intidesfile
-      write(*,*) "# intidesfile = ", trim(intidesfile)
-
       write(*,*) "# eps_BS : "
       read(*,*,err=990,end=990) eps_BS
       write(*,*) "# eps_BS = ", eps_BS
+
+      call read_dependent()
 
 c read integration parameters from files
       call io_init_param(inparfile,t0,tstop,dt,dtout,dtdump,
@@ -58,15 +58,20 @@ c read integration parameters from files
       call io_init_pl(inplfile,lclose,iflgchk,NBOD,m,xb,yb,zb,
      :  vxb,vyb,vzb,rplsq,j2rp2,j4rp4)
 
-      call io_init_tides(intidesfile,NBOD)
+      call io_init_spin("spin.in", nbod)
+      call io_init_tides("tides.in", nbod)
+      call io_init_tides2("tides2.in", nbod)
 
       t = t0
       tout_ = t0 + dtout
       tdump_ = t0 + dtdump
+      tspin = t0 + dtspin
+      tspinout = t0 + dtspinout
       eps = 1.d-8
       ntp = 0
       i1st = 0
       iue = 30
+      iuf = 40
 
 c initial dump
       call io_dump_param("dump_param.dat",t,tstop,dt,dtout,dtdump,
@@ -74,6 +79,8 @@ c initial dump
 
       call io_dump_pl("dump_pl.dat",NBOD,m,xb,yb,zb,
      :  vxb,vyb,vzb,lclose,iflgchk,rplsq,j2rp2,j4rp4)
+
+      call io_dump_spin("dump_spin.dat",NBOD)
 
       call io_write_pl(outfile,t,NBOD,m,xb,yb,zb,vxb,vyb,vzb)
 
@@ -105,6 +112,8 @@ c if it is time, output and dump coordinates and velocities
           call io_dump_pl("dump_pl.dat",NBOD,m,xb,yb,zb,
      :      vxb,vyb,vzb,lclose,iflgchk,rplsq,j2rp2,j4rp4)
 
+          call io_dump_spin("dump_spin.dat",NBOD)
+
           if (btest(iflgchk,2)) then    ! bit 2 is set
              eoff = 0.0d0
              call anal_energy_write(t,nbod,m,j2rp2,j4rp4,xb,yb,zb,
@@ -115,6 +124,18 @@ c if it is time, output and dump coordinates and velocities
 
           tdump_ = tdump_ + dtdump
         endif
+
+c evolve spin axes due to tides
+        if (t.ge.tspin-eps) then
+          call spin_evolve(t,nbod,dtspin)
+          tspin = tspin + dtspin
+        endif
+
+        if (t.ge.tspinout-eps) then
+          call io_write_spin(t,nbod,outspinfile,iuf,"append")
+          tspinout = tspinout + dtspinout
+        endif
+
       enddo
 
       stop

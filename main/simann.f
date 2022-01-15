@@ -1,6 +1,6 @@
 c simann.f
 c Simmulated annealing for the xi Tau problem.
-c Miroslav Broz (miroslav.broz@email.cz), Sep 1st 2015
+c Miroslav Broz (miroslav.broz@email.cz), May 24th 2017
 
       program simann
 
@@ -132,6 +132,18 @@ c
         write(*,*) "# file_absol(", i, ") = ", trim(file_absol(i))
       enddo
 
+      write(*,*) "# file_AO : "
+      read(*,10,err=990,end=990) file_AO
+      write(*,*) "# file_AO = ", trim(file_AO)
+
+      write(*,*) "# file_SKY2 : "
+      read(*,10,err=990,end=990) file_SKY2
+      write(*,*) "# file_SKY2 = ", trim(file_SKY2)
+
+      write(*,*) "# file_SKY3 : "
+      read(*,10,err=990,end=990) file_SKY3
+      write(*,*) "# file_SKY3 = ", trim(file_SKY3)
+
       write(*,*) "# geometry : "
       read(*,*,err=990,end=990) geometry
       write(*,*) "# geometry = ", geometry
@@ -148,10 +160,10 @@ c
         write(*,*) "# m_max(", i, ") = ", m_max(i), " M_S"
       enddo
 
-      write(*,*) "# metal() : "
-      read(*,*,err=990,end=990) (metal(i), i = 1,nbod)
+      write(*,*) "# use_hec88() : "
+      read(*,*,err=990,end=990) (use_hec88(i), i = 1,nbod)
       do i = 1, nbod
-        write(*,*) "# metal(", i, ") = ", metal(i)
+        write(*,*) "# use_hec88(", i, ") = ", use_hec88(i)
       enddo
 
       write(*,*) "# lightcurve_timestep : "
@@ -172,6 +184,16 @@ c
       write(*,*) "# lambda3 = ", lambda3, " m = ", lambda3/1.d-9," nm"
       write(*,*) "# lambda4 = ", lambda4, " m = ", lambda4/1.d-9," nm"
 
+      write(*,*) "# pyterpol_Delta(4) : "
+      read(*,*,err=990,end=990) (pyterpol_Delta(i), i = 1,4)
+      do i = 1, 4
+        write(*,*) "# pyterpol_Delta(", i, ") = ", pyterpol_Delta(i)
+      enddo
+
+      write(*,*) "# silh_factor : "
+      read(*,*,err=990,end=990) silh_factor
+      write(*,*) "# silh_factor = ", silh_factor
+
       write(*,*) "# use_planck : "
       read(*,*,err=990,end=990) use_planck
       write(*,*) "# use_planck = ", use_planck
@@ -188,10 +210,26 @@ c
       read(*,*,err=990,end=990) use_pyterpol
       write(*,*) "# use_pyterpol = ", use_pyterpol
 
+      write(*,*) "# use_vardist : "
+      read(*,*,err=990,end=990) use_vardist
+      write(*,*) "# use_vardist = ", use_vardist
+
+      write(*,*) "# use_varpole : "
+      read(*,*,err=990,end=990) use_varpole
+      write(*,*) "# use_varpole = ", use_varpole
+
+      write(*,*) "# use_multipole : "
+      read(*,*,err=990,end=990) use_multipole
+      write(*,*) "# use_multipole = ", use_multipole
+
+      write(*,*) "# use_bruteforce : "
+      read(*,*,err=990,end=990) use_bruteforce
+      write(*,*) "# use_bruteforce = ", use_bruteforce
+
       write(*,*) "# w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC ",
-     :  "w_SYN w_SED : "
+     :  "w_SYN w_SED w_AO w_SKY2 w_SKY3 : "
       read(*,*,err=990,end=990) w_SKY, w_RV, w_TTV, w_ECL, w_VIS, w_CLO,
-     :  w_T3, w_LC, w_SYN, w_SED
+     :  w_T3, w_LC, w_SYN, w_SED, w_AO, w_SKY2, w_SKY3
       write(*,*) "# w_SKY = ", w_SKY
       write(*,*) "# w_RV = ", w_RV
       write(*,*) "# w_TTV = ", w_TTV
@@ -202,6 +240,9 @@ c
       write(*,*) "# w_LC = ", w_LC
       write(*,*) "# w_SYN = ", w_SYN
       write(*,*) "# w_SED = ", w_SED
+      write(*,*) "# w_AO = ", w_AO
+      write(*,*) "# w_SKY2 = ", w_SKY2
+      write(*,*) "# w_SKY3 = ", w_SKY3
 
       write(*,*) "# eps_BS : "
       read(*,*,err=990,end=990) eps_BS
@@ -311,11 +352,9 @@ c  run it!
         temptr = (1.d0-eps_temptr)*temptr  ! annealing schedule
         itertot = itertot - iter
 
-        if (debug) then
-          write(*,*) "# iter = ", iter
-          write(*,*) "# itertot = ", itertot
-          write(*,*) "# temptr = ", temptr
-        endif
+        write(*,*) "# iter = ", iter
+        write(*,*) "# itertot = ", itertot
+        write(*,*) "# temptr = ", temptr
       enddo
 
 c  sort the output according to chi^2

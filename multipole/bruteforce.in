@@ -1,0 +1,10 @@
+output.ele
+output.face
+output.node
+4.64e18				! M [kg]
+1.d3				! unit [m]
+0.224386764166667		! P [day]
+2444502.76914			! Tmin [JD]
+73.4308				! pole_l [deg]
+20.8808				! pole_b [deg]
+

@@ -20,13 +20,17 @@ c Authors:  Martin Duncan
 c Date:    3/8/93
 c Last revision: 4/5/95
 
-      subroutine tu4_getaccb(nbod,mass,j2rp2,j4rp4,xb,yb,zb,vxb,vyb,vzb,
-     :  axb,ayb,azb)
+      subroutine tu4_getaccb(time,nbod,mass,j2rp2,j4rp4,xb,yb,zb,
+     :  vxb,vyb,vzb,axb,ayb,azb)
+
+      use getacc_bf2_module
+      use getacc_mp2_module
 
       include '../swift.inc'
 
 c...  Inputs Only: 
       integer nbod
+      real*8 time
       real*8 mass(nbod),j2rp2,j4rp4
       real*8 xb(nbod),yb(nbod),zb(nbod)
       real*8 vxb(nbod),vyb(nbod),vzb(nbod)
@@ -40,6 +44,7 @@ c...  Internals
       real*8 xh(NPLMAX),yh(NPLMAX),zh(NPLMAX),irh(NPLMAX)
       real*8 aoblx(NPLMAX),aobly(NPLMAX),aoblz(NPLMAX)
       integer i,j
+      real*8 time_
 
 c inverse distances for getacc_tides, getacc_oblat and getacc_ppn
       real*8 fac5,fac8
@@ -144,11 +149,13 @@ c..      save for the J2 and J4 calculations
          enddo
       endif
 
-      call getacc_tides(nbod,mass,xb,yb,zb,irij8,axb,ayb,azb)
-      call getacc_oblat(nbod,mass,xb,yb,zb,irij5,axb,ayb,azb)
+      call getaccb_tides(nbod,mass,xb,yb,zb,vxb,vyb,vzb,axb,ayb,azb)
+      call getacc_tides2(time,nbod,mass,xb,yb,zb,axb,ayb,azb)
       call getacc_ppn(nbod,mass,xb,yb,zb,vxb,vyb,vzb,irij,irij2,
      :  axb,ayb,azb)
+      call getacc_bf2(time,nbod,mass,xb,yb,zb,axb,ayb,azb)
+      call getacc_mp2(time,nbod,mass,xb,yb,zb,axb,ayb,azb)
 
-      return	
+      return
       end                       !  tu4_getaccb
 c____________________________________________________________________________

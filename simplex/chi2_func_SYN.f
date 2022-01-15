@@ -33,6 +33,7 @@ c internal variables
       real*8 chi2_
       real*8 vzb_interp, lambda_interp, Int_interp, Int_Sum(OBSMAX)
       real*8 Lum_, Lumtot(OBSMAX)
+      real*8 Lum__(OBSMAX,NBODMAX), Int__(OBSMAX,NBODMAX)
       character*80 str
 
 c external functions
@@ -88,7 +89,7 @@ c
       if (use_pyterpol.and.(m_OBS.gt.0)) then
 
         call pyterpol_(nbod, T_eff, log_g, v_rot, metal,
-     :    lambda1, lambda2, .false., nbod2)
+     :    pyterpol_Delta, lambda1, lambda2, .false., nbod2)
 
 c read them back
         if (nbod2.gt.0) then
@@ -153,11 +154,18 @@ c interpolate intensities to observed lambda using Hermite cubic spline
               enddo
 
               call hermite(lambda_interp, Int_interp,
-     :          lambda_synth(l-2,k), Int_synth(l-2,k), n_synth(k)-l+3,
+     :          lambda_synth(l-2,k), Int_synth(l-2,k), n_synth(k)-l+2,
      :          ier)
            
               if (ier.eq.2) then
                 write(*,*) "# Warning: IER.eq.2 in hermite()"
+                write(*,*) "# lambda_OBS(", i, ") = ", lambda_OBS(i),
+     :            " m"
+                write(*,*) "# lambda_interp = ", lambda_interp, " m"
+                write(*,*) "# lambda_synth(", l-2, ",", k, ") = ",
+     :            lambda_synth(l-2,k), " m"
+                write(*,*) "# lambda_synth(", l-2+n_synth(k)-l+2, ",",
+     :            k, ") = ", lambda_synth(l-2+n_synth(k)-l+2,k), " m"
               endif
 
 c compute monochromatic "luminosity" at given lambda
@@ -168,11 +176,44 @@ c compute monochromatic "luminosity" at given lambda
  
               Int_sum(i) = Int_sum(i) + Lum_*Int_interp
 
+              Int__(i,k) = Int_interp
+              Lum__(i,k) = Lum_
+
             endif  ! lambda
           enddo  ! m_OBS
 
         endif  ! n_synth
       enddo  ! nbod
+
+c a very detailed output of all intensities and luminosities...
+
+      if (debug_swift) then
+        open(unit=iub,file="synthetic2.dat",status="unknown")
+        write(iub,*) "# t & lambda [m] & Int_lambda []",
+     :    " & Lum_lambda [W m^-1] & Lum_tot [W m^-1] & ibod & dataset"
+
+        do i = 1, m_OBS
+          if ((lambda_OBS(i).gt.lambda1).and.
+     :      (lambda_OBS(i).lt.lambda2)) then
+
+            if ((i.gt.1).and.(dataset_OBS(i).ne.dataset_OBS(i-1))) then
+              write(iub,*)
+              write(iub,*)
+            endif
+
+            do k = 1, nbod
+              if (n_synth(k).ge.2) then
+
+                write(iub,*) t_OBS(i), lambda_OBS(i), Int__(i,k),
+     :            Lum__(i,k), Lumtot(i), k, dataset_OBS(i)
+
+              endif
+            enddo
+          endif
+        enddo
+    
+        close(iub)
+      endif
 
 c-----------------------------------------------------------------------
 c
@@ -189,7 +230,7 @@ c
      :    " & dataset & chi^2"
       endif
 
-      if (debug_swift) then
+      if (debug) then
         open(unit=iub,file="synthetic.dat",status="unknown")
         write(iub,*) "# t & lambda [m] & Int [] & dataset"
       endif
@@ -212,7 +253,7 @@ c add to chi^2
           write(iua,*)
         endif
 
-        if (debug_swift) then
+        if (debug) then
           if ((i.gt.1).and.(dataset_OBS(i).ne.dataset_OBS(i-1))) then
             write(iub,*)
             write(iub,*)

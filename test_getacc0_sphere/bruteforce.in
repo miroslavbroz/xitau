@@ -1,0 +1,10 @@
+output.ele
+output.face
+output.node
+5223.6025718815536		! rho [kg m^-3]; to get Descamp's mass 4.64e18 kg 
+1.d3				! unit [m]
+  0.22438676416666703        ! P [day]
+   2444502.7691400000        ! Tmin [JD]
+   73.430800000000005        ! pole_l [deg]
+   20.880800000000001        ! pole_b [deg]
+

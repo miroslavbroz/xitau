@@ -9,8 +9,7 @@ shift = 0.0
 set xl "lambda [nm]"
 set yl "F_lambda [erg s^-1 cm^-2 A^-1]"
 
-set xr [200:3000]
-set logscale xy
+set logscale y
 
 p "1.abs" u ($1*ang/nm):($2+0*shift) t "1" w l,\
   "2.abs" u ($1*ang/nm):($2+1*shift) t "2" w l,\

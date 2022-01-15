@@ -1,6 +1,6 @@
 c chi2.f
 c Calculate chi^2 for given orbit of xi Tau.
-c Miroslav Broz (miroslav.broz@email.cz), Jul 20th 2015
+c Miroslav Broz (miroslav.broz@email.cz), May 24th 2017
 
       program chi2_
 
@@ -115,6 +115,18 @@ c
         write(*,*) "# file_absol(", i, ") = ", trim(file_absol(i))
       enddo
 
+      write(*,*) "# file_AO : "
+      read(*,10,err=990,end=990) file_AO
+      write(*,*) "# file_AO = ", trim(file_AO)
+
+      write(*,*) "# file_SKY2 : "
+      read(*,10,err=990,end=990) file_SKY2
+      write(*,*) "# file_SKY2 = ", trim(file_SKY2)
+
+      write(*,*) "# file_SKY3 : "
+      read(*,10,err=990,end=990) file_SKY3
+      write(*,*) "# file_SKY3 = ", trim(file_SKY3)
+
       write(*,*) "# geometry : "
       read(*,*,err=990,end=990) geometry
       write(*,*) "# geometry = ", geometry
@@ -131,10 +143,10 @@ c
         write(*,*) "# m_max(", i, ") = ", m_max(i), " M_S"
       enddo
 
-      write(*,*) "# metal() : "
-      read(*,*,err=990,end=990) (metal(i), i = 1,nbod)
+      write(*,*) "# use_hec88() : "
+      read(*,*,err=990,end=990) (use_hec88(i), i = 1,nbod)
       do i = 1, nbod
-        write(*,*) "# metal(", i, ") = ", metal(i)
+        write(*,*) "# use_hec88(", i, ") = ", use_hec88(i)
       enddo
 
       write(*,*) "# lightcurve_timestep : "
@@ -155,6 +167,15 @@ c
       write(*,*) "# lambda3 = ", lambda3, " m = ", lambda3/1.d-9," nm"
       write(*,*) "# lambda4 = ", lambda4, " m = ", lambda4/1.d-9," nm"
 
+      pyterpol_Delta(1) = 0.d0
+      pyterpol_Delta(2) = 0.d0
+      pyterpol_Delta(3) = 0.d0
+      pyterpol_Delta(4) = 0.d0
+
+      write(*,*) "# silh_factor : "
+      read(*,*,err=990,end=990) silh_factor
+      write(*,*) "# silh_factor = ", silh_factor
+
       write(*,*) "# use_planck : "
       read(*,*,err=990,end=990) use_planck
       write(*,*) "# use_planck = ", use_planck
@@ -171,10 +192,32 @@ c
       read(*,*,err=990,end=990) use_pyterpol
       write(*,*) "# use_pyterpol = ", use_pyterpol
 
+      write(*,*) "# use_vardist : "
+      read(*,*,err=990,end=990) use_vardist
+      write(*,*) "# use_vardist = ", use_vardist
+
+      write(*,*) "# use_varpole : "
+      read(*,*,err=990,end=990) use_varpole
+      write(*,*) "# use_varpole = ", use_varpole
+
+      write(*,*) "# use_multipole : "
+      read(*,*,err=990,end=990) use_multipole
+      write(*,*) "# use_multipole = ", use_multipole
+
+      write(*,*) "# use_bruteforce : "
+      read(*,*,err=990,end=990) use_bruteforce
+      write(*,*) "# use_bruteforce = ", use_bruteforce
+
+      if ((use_multipole).and.(use_bruteforce)) then
+        write(*,*) "Error: use_multipole = ", use_multipole,
+     :    " and use_bruteforce = ", use_bruteforce
+        stop
+      endif
+
       write(*,*) "# w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC ",
-     :  "w_SYN w_SED : "
+     :  "w_SYN w_SED w_AO w_SKY2 w_SKY3 : "
       read(*,*,err=990,end=990) w_SKY, w_RV, w_TTV, w_ECL, w_VIS, w_CLO,
-     :  w_T3, w_LC, w_SYN, w_SED
+     :  w_T3, w_LC, w_SYN, w_SED, w_AO, w_SKY2, w_SKY3
       write(*,*) "# w_SKY = ", w_SKY
       write(*,*) "# w_RV = ", w_RV
       write(*,*) "# w_TTV = ", w_TTV
@@ -185,6 +228,9 @@ c
       write(*,*) "# w_LC = ", w_LC
       write(*,*) "# w_SYN = ", w_SYN
       write(*,*) "# w_SED = ", w_SED
+      write(*,*) "# w_AO = ", w_AO
+      write(*,*) "# w_SKY2 = ", w_SKY2
+      write(*,*) "# w_SKY3 = ", w_SKY3
 
       write(*,*) "# eps_BS : "
       read(*,*,err=990,end=990) eps_BS
@@ -202,6 +248,10 @@ c gnuplot
       if (debug) then
         open(unit=10,file="T0.plt",status="unknown")
         write(10,*) "T0 = ", T0
+        do i = 1, nparam
+          write(str,*) i
+          write(10,*) "x_param", adjustl(trim(str)) ," = ", x_param(i)
+        enddo
         close(10)
       endif
 
@@ -218,15 +268,26 @@ c  calculate chi^2 and the corresponding probability
       probq = gammq(nu/2.d0,chi2/2.d0)
 
 c  write output
-      write(*,*) '# chi2 & probp & probq & ',
-     :  'n_SKY & n_RV & n_TTV & n_ECL & n_VIS & n_CLO & n_T3 & n_LC & ',
-     :  'n_SYN & n_SED & chi2_SKY & chi2_RV & chi2_TTV & chi2_ECL & ',
-     :  'chi2_VIS & chi2_CLO & chi2_T3 & chi2_LC & chi2_SYN & ',
-     :  'chi2_SED & chi2_MASS'
-      write(*,*) chi2, probp, probq,
-     :  n_SKY, n_RV, n_TTV, n_ECL, n_VIS, n_CLO, n_T3, n_LC, n_SYN,
-     :  n_SED, chi2_SKY, chi2_RV, chi2_TTV, chi2_ECL, chi2_VIS,
-     :  chi2_CLO, chi2_T3, chi2_LC, chi2_SYN, chi2_SED, chi2_MASS
+      write(*,*) '# chi2_SKY  = ', chi2_SKY
+      write(*,*) '# chi2_RV   = ', chi2_RV
+      write(*,*) '# chi2_TTV  = ', chi2_TTV
+      write(*,*) '# chi2_ECL  = ', chi2_ECL
+      write(*,*) '# chi2_VIS  = ', chi2_VIS
+      write(*,*) '# chi2_CLO  = ', chi2_CLO
+      write(*,*) '# chi2_T3   = ', chi2_T3
+      write(*,*) '# chi2_LC   = ', chi2_LC
+      write(*,*) '# chi2_SYN  = ', chi2_SYN
+      write(*,*) '# chi2_SED  = ', chi2_SED
+      write(*,*) '# chi2_AO   = ', chi2_AO
+      write(*,*) '# chi2_SKY2 = ', chi2_SKY2
+      write(*,*) '# chi2_SKY3 = ', chi2_SKY3
+      write(*,*) '# chi2_MASS = ', chi2_MASS
+      write(*,*) '# chi2 = ', chi2
+      write(*,*) '# n_fit = ', n_fit
+      write(*,*) '# nparam = ', nparam
+      write(*,*) '# nu = ', int(nu)
+      write(*,*) '# probp = ', probp
+      write(*,*) '# probq = ', probq
 
       stop
 

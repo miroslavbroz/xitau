@@ -25,6 +25,7 @@ c internal
       real*8 T_eff(NBODMAX), R_star(NBODMAX), v_rot(NBODMAX)
       real*8 zero_(BANDMAX)
       real*8 gamma, T0
+      real*8 msum, P, n, a
       character*255 str
       character*80 file_SKY(NBODMAX), file_RV(NBODMAX), file_TTV,
      :  file_ECL, file_VIS, file_CLO
@@ -84,7 +85,14 @@ c        m(i) = x_param(j)*GM_S
         m(i) = x_param(j)
       enddo
 
+c      msum = m(1)
       do i = 2, nbod
+c        j = j+1
+c        msum = msum + m(i)
+c        P = elmts(i,1)
+c        n = 2.d0*pi_/P
+c        a = (msum / n**2)**(1.d0/3.d0)
+c        elmts(i,1) = a
         do k = 1, 6
           j = j+1
           elmts(i,k) = x_param(j)

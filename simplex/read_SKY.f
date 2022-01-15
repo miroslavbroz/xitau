@@ -2,7 +2,8 @@ c read_SKY.f
 c Read speckle-interferometry data.
 c Miroslav Broz (miroslav.broz@email.cz), Mar 1st 2016
 
-      subroutine read_SKY(filename,N,t,xh,yh,major,minor,PA_ellipse)
+      subroutine read_SKY(filename,N,t,xh,yh,major,minor,PA_ellipse,
+     :  vardist,l,b)
 
       implicit none
       include '../misc/const.inc'
@@ -12,10 +13,11 @@ c Miroslav Broz (miroslav.broz@email.cz), Mar 1st 2016
       integer N
       real*8 t(OBSMAX),xh(OBSMAX),yh(OBSMAX)
       real*8 major(OBSMAX),minor(OBSMAX),PA_ellipse(OBSMAX)
+      real*8 vardist(OBSMAX),l(OBSMAX),b(OBSMAX)
 
       real*8 rho,theta
       integer i,length,ierr
-      character*80 str
+      character*255 str
 
       if (filename(1:1).eq.'-') then
         N = 0
@@ -38,7 +40,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Mar 1st 2016
           i = i+1
           if (i.le.OBSMAX) then
             read(str,*,err=20,end=20) t(i),rho,theta,
-     :        major(i),minor(i),PA_ellipse(i)
+     :        major(i),minor(i),PA_ellipse(i),vardist(i),l(i),b(i)
           else
             write(*,*) "read_SKY.f: Error number of observations .gt. ",
      :        "OBSMAX = ", OBSMAX
@@ -49,6 +51,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Mar 1st 2016
           PA_ellipse(i) = PA_ellipse(i)*deg
           xh(i) = -rho*sin(theta)
           yh(i) = rho*cos(theta)
+          l(i) = l(i)*deg
+          b(i) = b(i)*deg
         endif
       goto 5
 20    continue

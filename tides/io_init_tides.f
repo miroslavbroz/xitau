@@ -1,82 +1,74 @@
 c io_init_tides.f
-c Read tides.in input file.
-c Miroslav Broz (miroslav.broz@email.cz), May 25th 2016
+c Read tides parameters file.
+c Miroslav Broz (miroslav.broz@email.cz), Nov 7th 2013
 
-      subroutine io_init_tides(filename, nbod)
+      subroutine io_init_tides(infile,nbod)
 
-      include "../swift.inc"
-      include "../misc/const.inc"
-      include "tides.inc"
+      include '../swift.inc'
+      include '../misc/const.inc'
+      include 'tides.inc'
+      include 'spin.inc'
 
 c input
-      character*(*) filename
+      character*(*) infile
       integer nbod
 
-c output is in /tides/ common block
+c output in /spin/ common block
 
-c internal
-      integer i, iu, ierr, nbod2
-      real*8 P
-      character*80 str
-      data iu /10/
+c temporary
+      integer i,j
+      integer npl,ierr
 
-c functions
-      integer length
-
-      open(unit=iu, file=filename, status="old", iostat=ierr)
+c  read input parameters
+      write(*,*) '# Tides parameters file called ',trim(infile)
+      call io_open(7,infile,'old','formatted',ierr)
       if (ierr.ne.0) then
-        write(*,*) "io_init_tides.f: Error opening file '",
-     :    trim(filename), "'."
-        stop
+        write(*,*) 'io_init_tides: Error opening file ',infile,'.'
+        call util_exit(1)
       endif
 
-5     continue
-        read(iu,10,err=990,end=990) str
-10      format(a)
-      if ((str(1:1).eq.'#').or.(length(str).eq.0)) goto 5
+      read(7,*) npl
 
-      read(str,*,err=990,end=990) nbod2
-      if (nbod2.ne.nbod) then
-        write(*,*) "io_init_tides.f: Error number of bodies nbod = ",
-     :    nbod2, " .ne. ", nbod, "."
-        stop
+      if (npl.ne.nbod) then
+        write(*,*) 'io_init_tides: Error number of planets npl = ',
+     :    npl, ' .ne. nbod = ', nbod,'.'
+        call util_exit(1)
       endif
 
-      do i = 1, nbod
-        read(iu,*,err=990,end=990) k_L(i), P, R_body(i)
+      if (npl.gt.NPLMAX) then
+        write(*,*) 'io_init_tides: Error number of planets npl = ',
+     :     npl, ' .gt. NPLMAX = ', NPLMAX,'.'
+        call util_exit(1)
+      endif
 
-        Omega_rot(i) = 2.d0*pi/P  ! day -> rad/day
-        R_body(i) = R_body(i)*R_S/AU  ! R_S -> AU
-
-        write(*,*) "# k_L(", i, ") = ", k_L(i)
-        write(*,*) "# Omega_rot(", i, ") = ", Omega_rot(i), " rad/day"
-        write(*,*) "# R_body(", i, ") = ", R_body(i), " AU = ",
-     :    R_body(i)*AU/R_S, " R_S"
-
-c optimisation
-        koef1(i) = 3.0d0*k_L(i)
-        koef2(i) = 0.5d0*k_L(i)*Omega_rot(i)**2
-        R_body5(i) = R_body(i)**5
+      do i = 1, npl
+        read(7,*) capR(i), k_2(i), Delta_t(i), MoI(i)
       enddo
 
-      read(iu,*,err=990,end=990) use_tides
-      write(*,*) "# use_tides = ", use_tides
+      read(7,*) dtspin
+      read(7,*) dtspinout
+      read(7,10) outspinfile
+10    format(a)
+      read(7,*) debug_spin
+      
+      close(unit = 7)
+      write(*,*) ' '
 
-      read(iu,*,err=990,end=990) use_oblatness
-      write(*,*) "# use_oblatness = ", use_oblatness
+c unit conversion
+      do i = 1, npl
+        capR(i) = capR(i) * 1.d3/AU  ! km -> AU
+        Delta_t(i) = Delta_t(i)/day  ! sec -> day
+        MoI(i) = MoI(i) * day**2/(AU**5)  ! kg m^2 -> AU^3/day^2 AU^2
+      enddo
 
-      read(iu,*,err=990,end=990) use_ppn
-      write(*,*) "# use_ppn = ", use_ppn
-
-      close(iu)
+c compute angular momentum (assuming a PCA rotation)
+      do i = 1, npl
+        do j = 1, 3
+          L_spin(j,i) = s(j,i) * MoI(i) * omega(i)
+        enddo
+      enddo
 
       return
-
-990   continue
-      write(*,*) "io_init_tides.f: Error reading file '",
-     :  trim(filename), "'."
-      stop
-
       end
 
 

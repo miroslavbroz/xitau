@@ -61,19 +61,21 @@ c chi^2 for closure phase data
       if (debug) then
         open(unit=iua,file="chi2_CLO.dat",status="unknown")
         write(iua,*) "# t_OBS & u1 [m] & v1 [m] & u2 [m] & v2 [m]",
-     :    " & lambda [m] & t3amp_interp [] & sigma_t3amp_OBS [rad]",
-     :    " & t3phi_interp [rad] & sigma_t3phi_OBS [rad] & dataset",
+     :    " & lambda [m] & band [m]",
+     :    " & t3amp_interp [] & sigma_t3amp_OBS []",
+     :    " & t3phi_interp [deg] & sigma_t3phi_OBS [deg] & dataset",
      :    " & chi^2"
         write(iua,*) "# t_OBS & u1 [m] & v1 [m] & u2 [m] & v2 [m]",
-     :    " & lambda [m] & t3amp_OBS    [] & sigma_t3amp_OBS [rad]",
-     :    " & t3phi_OBS    [rad] & sigma_t3phi_OBS [rad] & dataset",
+     :    " & lambda [m] & band [m]",
+     :    " & t3amp_OBS    [] & sigma_t3amp_OBS []",
+     :    " & t3phi_OBS    [deg] & sigma_t3phi_OBS [deg] & dataset",
      :    " & chi^2"
       endif
 
       if (debug_swift) then
         open(unit=iub,file="closurephase.dat",status="unknown")
         write(iub,*) "# t & u1 [m] & v1 [m] & u2 [m] & v2 [m]",
-     :    " & lambda [m] & t3amp & t3phi [rad] & dataset"
+     :    " & lambda [m] & t3amp & t3phi [deg] & dataset"
       endif
 
       d = d_pc*pc  ! [m]
@@ -170,17 +172,19 @@ c limb-darkened complex visibility (Hanbury-Brown et al. 1974)
 
         if (debug) then
           write(iua,*) t_OBS(i), u1_OBS(i), v1_OBS(i), u2_OBS(i),
-     :      v2_OBS(i), lambda, t3amp(i), sigma_t3amp_OBS(i),
-     :      t3phi(i), sigma_t3phi_OBS(i), dataset_OBS(i), chi2_
+     :      v2_OBS(i), lambda, band, t3amp(i), sigma_t3amp_OBS(i),
+     :      t3phi(i)*rad, sigma_t3phi_OBS(i)*rad, dataset_OBS(i),
+     :      chi2_
           write(iua,*) t_OBS(i), u1_OBS(i), v1_OBS(i), u2_OBS(i),
-     :      v2_OBS(i), lambda, t3amp_OBS(i), sigma_t3amp_OBS(i),
-     :      t3phi_OBS(i), sigma_t3phi_OBS(i), dataset_OBS(i), chi2_
+     :      v2_OBS(i), lambda, band, t3amp_OBS(i), sigma_t3amp_OBS(i),
+     :      t3phi_OBS(i)*rad, sigma_t3phi_OBS(i)*rad, dataset_OBS(i),
+     :      chi2_
           write(iua,*)
         endif
 
         if (debug_swift) then
           write(iub,*) t_OBS(i), u1_OBS(i), v1_OBS(i), u2_OBS(i),
-     :      v2_OBS(i), lambda, t3amp(i), t3phi(i), dataset_OBS(i)
+     :      v2_OBS(i), lambda, t3amp(i), t3phi(i)*rad, dataset_OBS(i)
         endif
 
       enddo

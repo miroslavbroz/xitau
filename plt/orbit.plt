@@ -1,7 +1,13 @@
 #!/usr/bin/gnuplot
 
-set term post eps enh color solid
-set out "orbit1.eps"
+f(x) = x>720. ? x-720. : x>360. ? x-360. : x
+au = 1.49597870700e11
+km = 1.e3
+
+set colors classic
+
+set term png small
+set out "orbit1.png"
 
 set origin 0,0
 set size 1,1
@@ -9,83 +15,31 @@ set multiplot
 set size 1.0,0.33
 set origin 0,0
 
-set xl "JD - 2400000"
-set yl "a [AU]"
+load "T0.plt"
+set arrow from (T0-2400000),graph 0 rto 0,graph 1 nohead lt 0 front
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):3 not w l lt 1
+set xl "JD - 2400000"
+set yl "a [km]"
+#set xr [T0-2400000:T0-2400000+20.]
+
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):($3*au/km) not w l lt 2
 
 set origin 0,0.33
 set yl "e []"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):4 not w l lt 1
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):4 not w l lt 2
 
 set origin 0,0.66
 set yl "i [deg]"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):5 not w l lt 1
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):5 not w l lt 2
 
 unset multiplot
 clear
 
 ########################################################################
 
-set out "orbit2.eps"
-
-set origin 0,0
-set size 1,1
-set multiplot
-set size 1.0,0.33
-set origin 0,0
-
-set xl "JD - 2400000"
-set yl "a [AU]"
-
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):3 not w l lt 2
-
-set origin 0,0.33
-set yl "e []"
-
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):4 not w l lt 2
-
-set origin 0,0.66
-set yl "i [deg]"
-
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):5 not w l lt 2
-
-unset multiplot
-clear
-
-########################################################################
-
-set out "orbit3.eps"
-
-set origin 0,0
-set size 1,1
-set multiplot
-set size 1.0,0.33
-set origin 0,0
-
-set xl "JD - 2400000"
-set yl "a [AU]"
-
-p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):3 not w l lt 3
-
-set origin 0,0.33
-set yl "e []"
-
-p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):4 not w l lt 3
-
-set origin 0,0.66
-set yl "i [deg]"
-
-p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):5 not w l lt 3
-
-unset multiplot
-clear
-
-########################################################################
-
-set out "orbit4.eps"
+set out "orbit4.png"
 
 set origin 0,0
 set size 1,1
@@ -96,24 +50,52 @@ set origin 0,0
 set xl "JD - 2400000"
 set yl "Omega [deg]"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):6 not w d lt 1
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):6 not w d lt 2
 
 set origin 0,0.33
-set yl "omega [deg]"
+set yl "varpi [deg]"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):7 not w d lt 1
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):(f($6+$7)) not w d lt 2
 
 set origin 0,0.66
-set yl "M [deg]"
+set yl "lambda [deg]"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):8 not w d lt 1
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):(f($6+$7+$8)) not w d lt 2
 
 unset multiplot
 clear
 
 ########################################################################
 
-set out "orbit5.eps"
+set out "orbit2.png"
+
+set origin 0,0
+set size 1,1
+set multiplot
+set size 1.0,0.33
+set origin 0,0
+
+set xl "JD - 2400000"
+set yl "a [km]"
+
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):($3*au/km) not w l lt 3
+
+set origin 0,0.33
+set yl "e []"
+
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):4 not w l lt 3
+
+set origin 0,0.66
+set yl "i [deg]"
+
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):5 not w l lt 3
+
+unset multiplot
+clear
+
+########################################################################
+
+set out "orbit5.png"
 
 set origin 0,0
 set size 1,1
@@ -124,24 +106,54 @@ set origin 0,0
 set xl "JD - 2400000"
 set yl "Omega [deg]"
 
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):6 not w d lt 2
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):6 not w d lt 3
 
 set origin 0,0.33
-set yl "omega [deg]"
+set yl "varpi [deg]"
 
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):7 not w d lt 2
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):(f($6+$7)) not w d lt 3
 
 set origin 0,0.66
-set yl "M [deg]"
+set yl "lambda [deg]"
 
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):8 not w d lt 2
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):(f($6+$7+$8)) not w d lt 3
+
+unset multiplot
+clear
+
+q
+
+########################################################################
+
+set out "orbit3.png"
+
+set origin 0,0
+set size 1,1
+set multiplot
+set size 1.0,0.33
+set origin 0,0
+
+set xl "JD - 2400000"
+set yl "a [AU]"
+
+p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):3 not w l lt 4
+
+set origin 0,0.33
+set yl "e []"
+
+p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):4 not w l lt 4
+
+set origin 0,0.66
+set yl "i [deg]"
+
+p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):5 not w l lt 4
 
 unset multiplot
 clear
 
 ########################################################################
 
-set out "orbit6.eps"
+set out "orbit6.png"
 
 set origin 0,0
 set size 1,1
@@ -152,17 +164,17 @@ set origin 0,0
 set xl "JD - 2400000"
 set yl "Omega [deg]"
 
-p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):6 not w d lt 3
+p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):6 not w d lt 4
 
 set origin 0,0.33
-set yl "omega [deg]"
+set yl "lambda [deg]"
 
-p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):7 not w d lt 3
+p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):(f($6+$7)) not w d lt 4
 
 set origin 0,0.66
-set yl "M [deg]"
+set yl "lambda [deg]"
 
-p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):8 not w d lt 3
+p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):(f($6+$7+$8)) not w d lt 4
 
 unset multiplot
 clear

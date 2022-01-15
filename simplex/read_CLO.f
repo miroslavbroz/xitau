@@ -17,7 +17,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Apr 2nd 2016
       integer dataset(OBSMAX)
 
       integer i, length, ierr
-      character*255 str
+      character*512 str
 
       if (filename(1:1).eq.'-') then
         N = 0

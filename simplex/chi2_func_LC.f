@@ -294,9 +294,9 @@ c
           chi2 = chi2 + chi2_
          
           if (debug) then
-            write(iu,*) t_OBS(i,k), mag_OBS(i,k), sigma_mag_OBS(i,k),
-     :        iband_LC(k), chi2_
             write(iu,*) t_OBS(i,k), mag_interp, sigma_mag_OBS(i,k),
+     :        iband_LC(k), chi2_
+            write(iu,*) t_OBS(i,k), mag_OBS(i,k), sigma_mag_OBS(i,k),
      :        iband_LC(k), chi2_
             write(iu,*)
           endif

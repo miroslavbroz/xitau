@@ -38,7 +38,12 @@ c a common block due to integration by NR routines
         endif
 
         Lumtot = Lumtot + Lum(k)
+
+c        write(*,*) "# Lum(", k, ") = ", Lum(k)  ! dbg
+
       enddo
+
+c      write(*,*) "# Lumtot = ", Lumtot  ! dbg
 
       return
       end

@@ -1,10 +1,10 @@
 c filters.inc
 c Effective wavelengths and bandpasses for photometric filters.
-c Miroslav Broz (miroslav.broz@email.cz), Jun 24th 2016
+c Miroslav Broz (miroslav.broz@email.cz), Oct 13th 2016
 
 c photometric bands
       integer WDBANDS
-      parameter (WDBANDS=16)
+      parameter (WDBANDS=17)
       character*8 filters(WDBANDS)
       real*8 lambda_eff(WDBANDS), band_eff(WDBANDS), calib(WDBANDS)
 
@@ -13,8 +13,8 @@ c Johnson R and I passbands from Sterken & Manfroid (1992), p. 234
 
       data filters /
      :  'u',
-     :  'b',
      :  'v',
+     :  'b',
      :  'y',
      :  'U',
      :  'B',
@@ -22,6 +22,7 @@ c Johnson R and I passbands from Sterken & Manfroid (1992), p. 234
      :  'R',
      :  'I',
      :  'J',
+     :  'H',
      :  'K',
      :  'L',
      :  'M',
@@ -44,6 +45,7 @@ c Johnson R and I passbands from Sterken & Manfroid (1992), p. 234
      :  2190.d-9,
      :  3450.d-9,
      :  4750.d-9,
+     : 10500.d-9,
      :   638.d-9,
      :   797.d-9/
 
@@ -62,6 +64,7 @@ c Johnson R and I passbands from Sterken & Manfroid (1992), p. 234
      :   390.d-9,
      :   472.d-9,
      :   460.d-9,
+     :  2500.d-9,
      :   160.d-9,
      :   149.d-9/
 
@@ -80,6 +83,7 @@ c converted from erg s^-1 cm^-2 cm^-1 (i.e. divided by 10);
      : 0.017813d0,
      : 0.008643d0,
      : 0.003147d0,
+     : 0.001133d0,
      : 0.0003961d0,
      : 0.0000708d0,
      : 0.000022d0,

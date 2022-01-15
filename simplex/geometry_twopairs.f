@@ -10,7 +10,9 @@ c                                 /
 
       subroutine geometry_twopairs(nbod, m, elmts, r, v)
 
+      implicit none
       include 'simplex.inc'
+      include '../misc/const.inc'
 c input
       integer nbod
       real*8 m(NBODMAX)
@@ -18,19 +20,26 @@ c input
 c output
       real*8 r(NBODMAX,3), v(NBODMAX,3)
 c internal
-      integer i, ialpha
+      integer i, k, ialpha
       real*8 rj(NBODMAX,3), vj(NBODMAX,3)
       real*8 rh(NBODMAX,3), vh(NBODMAX,3)
       real*8 r2_1(3), v2_1(3), r12_1(3), v12_1(3)
       real*8 r4_3(3), v4_3(3), r34_3(3), v34_3(3)
       real*8 r34_12(3), v34_12(3)
-      real*8 msum
+      real*8 msum, tmp
 
       if (nbod.lt.4) then
         write(*,*) "geometry_twopairs.f: Error number of bodies ",
      :    "nbod = ", nbod, " .lt. 4."
         stop
       endif
+
+c convert to radians
+      do i = 2, nbod
+        do k = 3, 6
+          elmts(i,k) = elmts(i,k)*deg
+        enddo
+      enddo
 
 c (1+2) pair, 1-centric coordinates
       msum = m(1)+m(2)

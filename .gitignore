@@ -1,6 +1,31 @@
 # vim temporary files
 *.swp
+*.f_ORIG*
+*.f90_ORIG*
 
 # object files
 *.o
+*.mod
+
+# binary files
+chi2
+simplex
+simann
+swift_bs
+
+# debugging data files
+out_JDATE_*.dat
+chi2_*.dat
+chi2_*.srt
+chi2_func.tmp
+arcsec_AU.dat
+closurephase.dat
+duration.dat
+lightcurve.dat
+limbdark.dat
+minima.dat
+star1.dat
+star2.dat
+times.dat
+visibility.dat
 

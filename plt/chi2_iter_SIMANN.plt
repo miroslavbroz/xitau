@@ -11,7 +11,7 @@ set yr [1e0:1e8]
 set ytics 10
 set mytics 10
 
-p "<awk '/# chi/{ i++; print i, $NF; }' simann.out"     u 1:2 t "chi^2" w l,\
+p "<awk '/# chi/{ i++; print i, $NF; }' simann.out"     u 1:2 t "chi^2" w lp ps 0.5,\
   "<awk '/# chi/{ i++; print i, $(NF-11); }' simann.out" u 1:2 t "SKY"   w l,\
   "<awk '/# chi/{ i++; print i, $(NF-10); }' simann.out" u 1:2 t "TTV"   w l,\
   "<awk '/# chi/{ i++; print i, $(NF -9); }' simann.out" u 1:2 t "RV"    w l,\

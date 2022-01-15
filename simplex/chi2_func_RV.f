@@ -29,7 +29,7 @@ c internal variables
       real*8 vzb_interp,dvz
 
 c functions
-      real*8 interp,kms_auday
+      real*8 interp,kms_auday,auday_kms
 
       data i1st /0/
       data m_RV /NBODMAX*0/
@@ -73,9 +73,9 @@ c
 
       if (debug) then
         open(unit=iu,file="chi2_RV.dat",status="unknown")
-        write(iu,*) "# t_RV & vzb_interp [AU/day] & sigmavz_RV & ",
+        write(iu,*) "# t_RV & vzb_interp [km/s] & sigmavz_RV & ",
      :    "ibod & chi^2"
-        write(iu,*) "# t_RV & vzb_RV              & sigmavz_RV & ",
+        write(iu,*) "# t_RV & vzb_RV            & sigmavz_RV & ",
      :    "ibod & chi^2"
       endif
 
@@ -98,9 +98,10 @@ c linear interpolation of integrated data to a given position in time
           n = n + 1
 
           if (debug) then
-            write(iu,*) t_RV(i,k), vzb_interp, sigmavz_RV(i,k), k, chi2_
-            write(iu,*) t_RV(i,k), vzb_RV(i,k), sigmavz_RV(i,k), k,
-     :        chi2_
+            write(iu,*) t_RV(i,k), auday_kms(vzb_interp),
+     :        auday_kms(sigmavz_RV(i,k)), k, chi2_
+            write(iu,*) t_RV(i,k), auday_kms(vzb_RV(i,k)),
+     :        auday_kms(sigmavz_RV(i,k)), k, chi2_
             write(iu,*)
           endif
 

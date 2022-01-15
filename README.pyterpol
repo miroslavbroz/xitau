@@ -7,7 +7,7 @@ In order to get Pyterpol running, I had to install the following:
   apt-get install python-astropy
   apt-get install python-nlopt
   apt-get install python-pip
-  pip install emcce
+  pip install emcee
   pip install corner
 
 Additionally, one needs the grid to interpolate in, of course.

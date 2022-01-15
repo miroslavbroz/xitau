@@ -16,7 +16,7 @@ c output
 
 c internal variables
       integer i, iu
-      real*8 lambda, chi2_
+      real*8 lambda, band, chi2_
 
       data iu /10/
 
@@ -27,11 +27,13 @@ c chi^2 for |T_3| data
       if (debug) then
         open(unit=iu,file="chi2_T3.dat",status="unknown")
         write(iu,*) "# t_OBS & u1 [m] & v1 [m] & u2 [m] & v2 [m]",
-     :    " & lambda [m] & t3amp_interp [] & sigma_t3amp_OBS [rad]",
+     :    " & lambda [m] & band [m]",
+     :    " & t3amp_interp [] & sigma_t3amp_OBS [rad]",
      :    " & t3phi_interp [rad] & sigma_t3phi_OBS [rad] & dataset",
      :    " & chi^2"
         write(iu,*) "# t_OBS & u1 [m] & v1 [m] & u2 [m] & v2 [m]",
-     :    " & lambda [m] & t3amp_OBS    [] & sigma_t3amp_OBS [rad]",
+     :    " & lambda [m] & band [m]",
+     :    " & t3amp_OBS    [] & sigma_t3amp_OBS [rad]",
      :    " & t3phi_OBS    [rad] & sigma_t3phi_OBS [rad] & dataset",
      :    " & chi^2"
       endif
@@ -42,16 +44,17 @@ c chi^2 for |T_3| data
       do i = 1, m_OBS
 
         lambda = lambda_eff_OBS(i)
+        band = band_eff_OBS(i)
         chi2_ = ((t3amp(i)-t3amp_OBS(i))/sigma_t3amp_OBS(i))**2
         n = n + 1
         chi2 = chi2 + chi2_
 
         if (debug) then
           write(iu,*) t_OBS(i), u1_OBS(i), v1_OBS(i), u2_OBS(i),
-     :      v2_OBS(i), lambda, t3amp(i), sigma_t3amp_OBS(i),
+     :      v2_OBS(i), lambda, band, t3amp(i), sigma_t3amp_OBS(i),
      :      t3phi(i), sigma_t3phi_OBS(i), dataset_OBS(i), chi2_
           write(iu,*) t_OBS(i), u1_OBS(i), v1_OBS(i), u2_OBS(i),
-     :      v2_OBS(i), lambda, t3amp_OBS(i), sigma_t3amp_OBS(i),
+     :      v2_OBS(i), lambda, band, t3amp_OBS(i), sigma_t3amp_OBS(i),
      :      t3phi_OBS(i), sigma_t3phi_OBS(i), dataset_OBS(i), chi2_
           write(iu,*)
         endif

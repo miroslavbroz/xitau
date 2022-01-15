@@ -13,3 +13,6 @@ SKY + RV + TTV + ECL + VIS + CLO + SYN, or SKY + RV + TTV + ECL + LC + SYN
 separately, the simplex easily finds a significantly lower chi^2 value.
 The problem may be related to the radius (or luminosity) of the 3rd body.
 
+Note 3: These input files are for a bit older version of the code!!!
+
+

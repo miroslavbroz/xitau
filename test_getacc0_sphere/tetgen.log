@@ -1,0 +1,189 @@
+Opening sphere-a.smesh.
+Constructing Delaunay tetrahedralization.
+  Creating initial tetrahedralization.
+  Incrementally inserting points.
+Warning:  Point 1367 is unified to point 1319.
+Warning:  Point 152 is unified to point 6.
+Warning:  Point 1382 is unified to point 1319.
+Warning:  Point 1388 is unified to point 1319.
+Warning:  Point 1240 is unified to point 1387.
+Warning:  Point 71 is unified to point 4.
+Warning:  Point 862 is unified to point 1178.
+Warning:  Point 13 is unified to point 4.
+Warning:  Point 1281 is unified to point 1319.
+Warning:  Point 141 is unified to point 449.
+Warning:  Point 1383 is unified to point 1238.
+Warning:  Point 296 is unified to point 641.
+Warning:  Point 108 is unified to point 4.
+Warning:  Point 1073 is unified to point 734.
+Warning:  Point 1093 is unified to point 1339.
+Warning:  Point 579 is unified to point 243.
+Warning:  Point 45 is unified to point 4.
+Warning:  Point 8 is unified to point 4.
+Warning:  Point 60 is unified to point 361.
+Warning:  Point 670 is unified to point 1017.
+Warning:  Point 707 is unified to point 354.
+Warning:  Point 193 is unified to point 511.
+Warning:  Point 1037 is unified to point 1309.
+Warning:  Point 17 is unified to point 251.
+Warning:  Point 202 is unified to point 7.
+Warning:  Point 1347 is unified to point 1319.
+Warning:  Point 1370 is unified to point 1192.
+Warning:  Point 1225 is unified to point 922.
+Warning:  Point 1376 is unified to point 1319.
+Warning:  Point 835 is unified to point 474.
+Warning:  Point 25 is unified to point 4.
+Warning:  Point 97 is unified to point 390.
+Warning:  Point 1378 is unified to point 1239.
+Warning:  Point 303 is unified to point 33.
+Warning:  Point 1386 is unified to point 1319.
+Warning:  Point 1 is unified to point 4.
+Warning:  Point 1358 is unified to point 1144.
+Warning:  Point 798 is unified to point 1129.
+Warning:  Point 899 is unified to point 539.
+Warning:  Point 200 is unified to point 5.
+Warning:  Point 959 is unified to point 604.
+Warning:  Point 771 is unified to point 414.
+Warning:  Point 1271 is unified to point 981.
+Warning:  Point 150 is unified to point 2.
+  11303 Flips (T23 4927, T32 6376, T22 0, T44 0)
+Delaunay seconds:  0.052926
+Creating surface mesh.
+  Constructing mapping from indices to points.
+  Constructing mapping from points to tetrahedra.
+Warning:  Polygon 1 has two identical verts in facet 49.
+Warning:  Polygon 1 has two identical verts in facet 209.
+Warning:  Polygon 1 has two identical verts in facet 727.
+Warning:  Polygon 1 has two identical verts in facet 741.
+Warning:  Polygon 1 has two identical verts in facet 776.
+Warning:  Polygon 1 has two identical verts in facet 788.
+Warning:  Polygon 1 has two identical verts in facet 791.
+Warning:  Polygon 1 has two identical verts in facet 838.
+Warning:  Polygon 1 has two identical verts in facet 1193.
+Warning:  Polygon 1 has two identical verts in facet 1407.
+Warning:  Polygon 1 has two identical verts in facet 1797.
+Warning:  Polygon 1 has two identical verts in facet 2502.
+Warning:  Polygon 1 has two identical verts in facet 2510.
+Warning:  Polygon 1 has two identical verts in facet 2511.
+  Unifying segments.
+  Constructing mapping from points to subfaces.
+  Merging coplanar facets.
+  Marking acute vertices.
+  Constructing mapping from points to segments.
+  1344 acute vertices.
+Perturbing vertices.
+  0 break points.
+Delaunizing segments.
+  Constructing mapping from points to tetrahedra.
+  Queuing missing segments.
+  231 protect points.
+  R1: 229,  R2: 1,  R3: 1.
+Constraining facets.
+  Constructing mapping from points to tetrahedra.
+  The biggest cavity: 6 faces, 5 vertices
+  Enlarged 0 times
+Segment and facet seconds:  0.097093
+Removing unwanted tetrahedra.
+  Marking concavities for elimination.
+  Marking neighbors of marked tetrahedra.
+  Deleting marked tetrahedra.
+Hole seconds:  0.000686
+Repairing mesh.
+Repair seconds:  0.000821
+Adding Steiner points to enforce quality.
+  Marking sharp segments.
+  7748 sharp segments.
+  Deciding feature-point sizes.
+  Constructing mapping from points to segments.
+  229 Steiner points correction.
+  1344 feature points.
+  231 Steiner feature points.
+  Splitting encroached subsegments.
+  97 split points.
+  Splitting encroached subfaces.
+  2 split points.
+  Splitting bad tetrahedra.
+  1545 refinement points.
+  Totally added 1644 points.
+Quality seconds:  0.25976
+Optimizing mesh.
+  level = 3.
+  315 edges are flipped.
+  1 passes.
+Optimize seconds:  0.018158
+Jettisoning redundants points.
+  44 duplicated vertices have been removed.
+  0 unused vertices have been removed.
+
+Writing sphere-a.1.node.
+Writing sphere-a.1.ele.
+Writing sphere-a.1.face.
+Writing sphere-a.1.mesh.
+Writing sphere-a.1.neigh.
+
+Output seconds:  0.059934
+Total running seconds:  0.489748
+
+Statistics:
+
+  Input points: 1388
+  Input facets: 2698
+  Input segments: 4026
+  Input holes: 0
+  Input regions: 0
+
+  Mesh points: 3219
+  Mesh tetrahedra: 14868
+  Mesh triangles: 31410
+  Mesh subfaces: 3348
+  Mesh subsegments: 4358
+
+Mesh quality statistics:
+
+  Smallest volume:       2.9065e-06   |  Largest volume:       0.00099928
+  Shortest edge:           0.021528   |  Longest edge:            0.33076
+  Smallest facangle:         3.0017   |  Largest facangle:       173.9269
+  Smallest dihedral:         3.0213   |  Largest dihedral:       173.4943
+
+  Aspect ratio histogram:
+         < 1.5       :       380      |      6 - 10         :       254
+     1.5 - 2         :      4627      |     10 - 15         :        34
+       2 - 2.5       :      4804      |     15 - 25         :         2
+     2.5 - 3         :      2548      |     25 - 50         :         1
+       3 - 4         :      1537      |     50 - 100        :         0
+       4 - 6         :       681      |    100 -            :         0
+  (A tetrahedron's aspect ratio is its longest edge length divided by its
+    smallest side height)
+
+  Face angle histogram:
+      0 -  10 degrees:         7      |     90 - 100 degrees:      3643
+     10 -  20 degrees:       138      |    100 - 110 degrees:      1704
+     20 -  30 degrees:      1578      |    110 - 120 degrees:       506
+     30 -  40 degrees:      8838      |    120 - 130 degrees:        96
+     40 -  50 degrees:     13810      |    130 - 140 degrees:        23
+     50 -  60 degrees:      7039      |    140 - 150 degrees:         4
+     60 -  70 degrees:      6831      |    150 - 160 degrees:         1
+     70 -  80 degrees:     11236      |    160 - 170 degrees:         0
+     80 -  90 degrees:      7365      |    170 - 180 degrees:         1
+  Minimum input face angle is 14.4982 (degree).
+
+  Dihedral angle histogram:
+       0 -  5 degrees:         2      |     80 - 110 degrees:      9329
+       5 - 10 degrees:        54      |    110 - 120 degrees:      2198
+      10 - 20 degrees:       658      |    120 - 130 degrees:      1286
+      20 - 30 degrees:      1544      |    130 - 140 degrees:       789
+      30 - 40 degrees:      3248      |    140 - 150 degrees:       516
+      40 - 50 degrees:      5061      |    150 - 160 degrees:       337
+      50 - 60 degrees:      3719      |    160 - 170 degrees:       105
+      60 - 70 degrees:       582      |    170 - 175 degrees:         2
+      70 - 80 degrees:       306      |    175 - 180 degrees:         0
+  Minimum input facet dihedral angle is 164.291 (degree).
+
+Memory allocation statistics:
+
+  Maximum number of vertices: 3264
+  Maximum number of tetrahedra: 15168
+  Maximum number of subfaces: 3348
+  Maximum number of segments: 8066
+  Approximate heap memory used by the mesh (K bytes): 1750.7
+

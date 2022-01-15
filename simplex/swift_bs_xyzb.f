@@ -1,15 +1,19 @@
 c swift_bs_xyzb.f
 c Call swift_bs_xyzb integrator.
-c Miroslav Broz (miroslav.broz@email.cz), Mar 20th 2016
+c Miroslav Broz (miroslav.broz@email.cz), Apr 3rd 2021
 
-      subroutine swift_bs_xyzb(NBOD,m,r,v,NOUT,NMAX,tout,rout,vout,
-     :  inparfile,eps_BS,debug,n_of_interest,t_of_interest)
+      subroutine swift_bs_xyzb(NBOD,m,r,v,omega0,s0,
+     :  NOUT,NMAX,tout,rout,vout,inparfile,eps_BS,debug,
+     :  n_of_interest,t_of_interest)
 
       include '../swift.inc'
+      include '../tides/spin.inc'
+      include '../tides/tides.inc'
       include 'simplex.inc'
 
       integer NBOD
-      real*8 m(NBODMAX), r(NBODMAX,3),v(NBODMAX,3)
+      real*8 m(NBODMAX),r(NBODMAX,3),v(NBODMAX,3)
+      real*8 omega0(NBODMAX),s0(NBODMAX,3)
       integer NOUT,NMAX
       real*8 tout(NMAX)
       real*8 rout(NMAX,NBODMAX,3),vout(NMAX,NBODMAX,3)
@@ -25,11 +29,12 @@ c Miroslav Broz (miroslav.broz@email.cz), Mar 20th 2016
       real*8 vxbt(NTPMAX),vybt(NTPMAX),vzbt(NTPMAX)
 
       integer istat(NTPMAX,NSTAT)
-      integer i,j,ntp,iflgchk,i1st
+      integer i,j,ntp,iflgchk,i1st,iu
       real*8 rstat(NTPMAX,NSTATR)
       real*8 j2rp2,j4rp4
       real*8 t0,tstop,dt,dtout,dtdump,eps
       real*8 t,tout_,dttmp,dtnext
+      real*8 tspin,tspinout
       real*8 rmin,rmax,rmaxu,qmin,rplsq(NPLMAX)
       logical lclose 
       character*80 fopenstat,outfile
@@ -75,9 +80,24 @@ c initial dump
       i1st = 0
       j2rp2 = 0.d0
       j4rp4 = 0.d0
-      j = 1
+
+c initial conditions for spins
+      iu = 20
+      tspin = t0 + dtspin
+      tspinout = t0 + dtspinout
+      do i = 1, NBODMAX
+        omega(i) = omega0(i)
+        do j = 1, 3
+          s(j,i) = s0(i,j)  ! i<->j convention :-(
+          L_spin(j,i) = s(j,i) * MoI(i) * omega(i)
+        enddo
+      enddo
+      if (debug_spin) then
+        call io_write_spin(t,nbod,outspinfile,iu,fopenstat)
+      endif
 
 c integration loop
+      j = 1
       do while (t.le.tstop-eps)
 
         do while ((t_of_interest(j).le.t).and.(j.lt.n_of_interest))
@@ -100,7 +120,7 @@ c integration loop
 
         t = t + dttmp
 
-c if it is time, output orbital elements,
+c if it is time, output orbital elements
         if ((t.ge.tout_-eps).or.(interesting)) then 
           NOUT = NOUT+1
           if (NOUT.gt.NMAX) then
@@ -119,8 +139,21 @@ c if it is time, output orbital elements,
           enddo
         endif
 
-        if (t.ge.tout_-eps) then 
+        if (t.ge.tout_-eps) then
           tout_ = tout_ + dtout
+        endif
+
+c evolve spin axes due to tides
+        if (t.ge.tspin-eps) then
+          call spin_evolve(t,nbod,dtspin)
+          tspin = tspin + dtspin
+        endif
+
+        if (debug_spin) then
+          if (t.ge.tspinout-eps) then
+            call io_write_spin(t,nbod,outspinfile,iu,"append")
+            tspinout = tspinout + dtspinout
+          endif
         endif
 
       enddo

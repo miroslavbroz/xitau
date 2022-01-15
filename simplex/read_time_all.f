@@ -27,6 +27,7 @@ c internal
         call read_time(file_VIS, n, t)
         call read_time(file_CLO, n, t)
         call read_time(file_SYN, n, t)
+        call read_time(file_AO, n, t)
 
 c for TTV's use three times
 
@@ -91,7 +92,7 @@ c for lightcurve, perform binning of the data (the same as in chi2_func_LC.f)
  
         if (debug_swift) then
           open(unit=iu, file="times.dat", status="unknown")
-          write(iu,*) "# t_of_interest [JD]"
+          write(iu,*) "# t_of_interest [JD] & t-T0 [d] & i []"
           do i = 1, n
             write(iu,*) t(i), t(i)-T0, i
           enddo

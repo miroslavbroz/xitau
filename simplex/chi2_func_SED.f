@@ -26,6 +26,9 @@ c internal variables
       real*8 band_filter(SEDMAX)
       real*8 Lum_lambda(NBODMAX), Lumtot
 
+c functions
+      integer length
+
       data i1st /0/
       data iu /15/
 
@@ -51,8 +54,9 @@ c chi^2 for SED data
 c
       if (debug) then
         open(unit=iu,file="chi2_SED.dat",status="unknown")
-        write(iu,*) "# lambda [m] & band [m] & mag [mag]",
-     :    " & sigma [mag] & chi^2"
+        write(iu,*) "# lambda [m] & band [m] & mag [mag] & sigma [mag]",
+     :    " & calibration flux F_lambda [J s^-1 m^-2 m^-1] & filter",
+     :    " & chi^2"
       endif
 
       d = d_pc*pc  ! [m]
@@ -64,15 +68,29 @@ c
 
         lambda = lambda_eff_OBS(i)
         band = band_eff_OBS(i)
+c
+c decide how to compute the luminosity
+c
+        if ((use_planck).and.(.not.use_filters)) then
+          call luminosity_planck_bandpass(T_eff, R_star, nbod,
+     :      lambda, band, Lum, Lumtot)
 
-        if (use_filters) then
+        else if ((use_planck).and.(use_filters)) then
+          write(*,*) "chi2_func_SED.f: Error: A combination of ",
+     :      "use_planck = ", use_planck, " and use_filters = ",
+     :      use_filters, " is NOT yet supported."
+          stop
+
+        else if ((.not.use_planck).and.((.not.use_filters)
+     :    .or.(file_filter(i)(1:1).eq.'-'))) then
+          call luminosity_synthetic_bandpass(T_eff, R_star, nbod,
+     :      lambda, band, Lum, Lumtot)
+
+        else if ((.not.use_planck).and.(use_filters)) then
           call luminosity_synthetic_filters(m_OBS, file_filter, i,
      :      band_filter, Lum_lambda, Lumtot)
 
           band = band_filter(i)
-        else
-          call luminosities(T_eff, R_star, nbod, lambda, band,
-     :      Lum_lambda, Lumtot, use_planck)
         endif
 
         flux = Lumtot/(4.d0*pi_*d**2)
@@ -83,8 +101,10 @@ c
         n = n+1
 
         if (debug) then
-          write(iu,*) lambda, band, mag, sigma_mag_OBS(i), chi2_
-          write(iu,*) lambda, band, mag_OBS(i), sigma_mag_OBS(i), chi2_
+          write(iu,*) lambda, band, mag, sigma_mag_OBS(i),
+     :      calibration(i), trim(file_filter(i)), chi2_
+          write(iu,*) lambda, band, mag_OBS(i), sigma_mag_OBS(i),
+     :      calibration(i), trim(file_filter(i)), chi2_
           write(iu,*)
         endif
 
@@ -96,4 +116,5 @@ c
 
       return
       end
+
 

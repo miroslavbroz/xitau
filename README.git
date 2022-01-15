@@ -5,7 +5,10 @@ A few examples regarding the usage of git:
   git add .
   git remote add origin https://miroslavbroz@github.com/miroslavbroz/xitau.git
   git push -u origin master
+  git push origin master
   git diff
+  git commit .
   git log
+  git ls-files
 
 

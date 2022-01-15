@@ -1,0 +1,11 @@
+
+default(none) shared(sum)
+
+T1=`$DATE`
+T2=`$DATE`
+awk -vT1=$T1 -vT2=$T2 'BEGIN{ print T2-T1; }' /dev/null >> test_omp.out
+
+T1=`$DATE`
+T2=`$DATE`
+awk -vT1=$T1 -vT2=$T2 'BEGIN{ print T2-T1; }' /dev/null >> test_omp.out
+

@@ -1,17 +1,16 @@
 This code xitau_chi2_simplex computes orbital evolution of multiple stars,
 accounting for *mutual* gravitational interactions. It includes a chi^2
-metric computation and simplex algorithm. It was designed for the solution
-of \xi Tauri problem (to be published in Nemravova et al. 2016).
+metric computation and simplex algorithm. It was originally designed for
+the solution of \xi Tauri problem (published in Nemravova et al. 2016).
 
 If you use this code, please cite the original references:
 
-  M. Bro\v z, P. Mayer, T. Pribulla, P. Zasche, D. Vokrouhlick\'y and
-  R. Uhl\'a\v r, 2010, A unified solution for the orbit and light-time effect
-  in the V505 Sgr system, Astron. J., 139, 6, 2258--2268.
+  M. Bro\v z, 2017, An advanced N-body model for interacting multiple stellar systems,
+  Astrophys. J. Suppl. S., 230, 19, 10pp.
 
   J. Nemravov\'a, P. Harmanec, M. Bro\v z, D. Vokrouhlick\'y, D. Mourard,
   C.A. Hummel, C.T. Bolton et al., \xi Tauri: A unique laboratory...
-  A&A, accepted.
+  A&A, 594, A55, 47pp.
 
 Observational data (speckle-interferometry, RV's, minima timings aka TTV, ...)
 have to be in suitable format, of course (cf. DATA.tar.gz archive).

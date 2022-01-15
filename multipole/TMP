@@ -1,0 +1,260 @@
+
+write(*,*) "T0 = ", T0
+write(*,*) "pole_l = ", pole_l/deg, " deg"
+write(*,*) "pole_b = ", pole_b/deg, " deg"
+stop
+
+double precision, dimension(2) :: maxa, maxb, maxc, maxd, maxe
+
+          maxa = a
+          maxb = b
+          maxc = c
+          maxd = d
+
+  write(*,*) phi/deg, maxa, maxb, maxc, maxd, maxe
+
+write(*,*) 'mass(1) = ', mass(1)
+write(*,*) 'mass(2) = ', mass(2)
+write(*,*) 'mass(3) = ', mass(3)
+stop
+
+include '../simplex/simplex.inc'
+include '../simplex/dependent.inc'
+
+!  monopole = rot_z(monopole, cos(-phi1), sin(-phi1))
+!  monopole = rot_x(monopole, cos(-phi2), sin(-phi2))
+!  monopole = rot_z(monopole, cos(-phi3), sin(-phi3))
+!  write(*,*) 'monopole = ', monopole, ' au day^-2'
+!  write(*,*) 'a_g_mp = ', a, ' au day^-2'
+!  a = a - monopole
+
+!  monopole = rot_z(monopole, cos(-phi1), sin(-phi1))
+!  monopole = rot_x(monopole, cos(-phi2), sin(-phi2))
+!  monopole = rot_z(monopole, cos(-phi3), sin(-phi3))
+
+!  write(*,*) 'monopole = ', monopole, ' au day^-2'
+!  write(*,*) 'a_g_mp = ', a, ' au day^-2'
+
+!  a = a - monopole
+write(*,*) '--'
+write(*,*) 'r = ', r
+write(*,*) 'coms = ', coms(1,:)
+r_ = r - coms(1,:)
+write(*,*) 'r_ = ', r_
+write(*,*) 'dot_product = ', dot_product(r_,r_)
+write(*,*) '--'
+
+  absr = sqrt(dot_product(r, r))
+  theta = asin(r(3)/absr)
+  phi = atan2(r(2), r(1))
+  write(*,*) 'r = ', r*au
+  write(*,*) 'theta = ', theta/deg, ' deg'
+  write(*,*) 'phi = ', phi/deg, ' deg'
+
+!  r = rot_z(r, cos(-phi1), sin(-phi1))
+!  r = rot_x(r, cos(-phi2), sin(-phi2))
+!  r = rot_z(r, cos(-phi3), sin(-phi3))
+
+!  monopole = rot_z(monopole, cos(-phi1), sin(-phi1))
+!  monopole = rot_x(monopole, cos(-phi2), sin(-phi2))
+!  monopole = rot_z(monopole, cos(-phi3), sin(-phi3))
+!  write(*,*) 'monopole = ', monopole, ' au day^-2'
+
+
+  coms_ = coms
+  call rot_x_nodes(coms_, pole_b)
+  call rot_z_nodes(coms_, pole_l)
+  r_ = r
+  r_ = rot_x(r_, cos(pole_b), sin(pole_b))
+  r_ = rot_z(r_, cos(pole_l), sin(pole_l))
+
+  if (debug) then
+    open(unit=20, file="coms2.out", status="unknown")
+    do l = 1, size(coms,1)
+      write(20,*) coms(l,:)
+    enddo
+    close(20)
+  
+    open(unit=20, file="r2.out", status="unknown")
+    write(20,*) 0.d0, 0.d0, 0.d0
+    write(20,*) r*au
+    write(20,*)
+    close(20)
+
+    open(unit=20, file="coms2_.out", status="unknown")
+    do l = 1, size(coms_,1)
+      write(20,*) coms_(l,:)
+    enddo
+    close(20)
+
+    open(unit=20, file="r2_.out", status="unknown")
+    write(20,*) 0.d0, 0.d0, 0.d0
+    write(20,*) r_*au
+    write(20,*)
+    close(20)
+  endif
+
+
+if (debug) then
+  call cpu_time(t2)
+!  write(*,*) '# cpu_time = ', t2-t1, ' s'
+endif
+
+logical :: debug
+
+debug = .true.
+  rho_ = 4.64d18/V
+  capr_ = (4.64d18/rho/(4.d0/3.d0*pi))**(1.d0/3.d0)
+
+  write(*,*) '# M = ', 4.64d18, ' kg (Descamps etal. 2011)'
+  write(*,*) '# rho_ = ', rho_, ' kg m^-3'
+  write(*,*) '# R_ = ', capr_, ' m = ', capr_/capr, " R"
+
+  if (debug) then
+    l = 0
+    open(unit=20, file="coms.out", status="unknown")
+    do i = 1, size(coms,1)
+      write(20,*) coms(i,:)
+    enddo
+    write(*,*)
+    close(20)
+
+    open(unit=20, file="coms_.out", status="new")
+    close(20)
+  endif
+
+if (debug) then
+  l = l+1
+  open(unit=20, file="coms_.out", access="append")
+  do i = 1, size(coms_,1)
+    write(20,*) coms_(i,:),l
+  enddo
+  write(*,*)
+  close(20)
+endif
+
+  r = r*au
+  tmp = dot_product(r, r)
+  a = -G*capm/(tmp*sqrt(tmp))*r
+  a = a/(au/day**2)
+  write(*,*) 'a = ', a, ' au day^-2 (monopole)'
+
+!  write(*,*) 'a_g_bf = ', a, ' au day^-2'
+!  write(*,*) 'a = ', a, ' au day^-2 (monopole)'
+
+!  capm_ = capm/M_S*GM_S*(au**3/day**2)/G  ! i.e. exact formula (wrt. mass(1))
+
+!  rho_ = rho/M_S*GM_S*(au**3/day**2)/G
+!  write(*,*) 'rho_ = ', rho_, ' kg m^-3'
+
+!G = 1.d0
+!capm = mass(1)
+!capr = 
+!P = 
+!ecl = 
+!ecb = 
+!l = npole
+!E = (t + T0 - epoch)/P
+!phase = frac(E)
+
+
+
+factorial_test: factorial_test.f90 $(obj)
+	$(f90) $(obj) $(opt) -o $@ $<
+
+omp_test: omp_test.f90
+	$(f90) $(opt) -o $@ $<
+
+! eigenvalues & eigenvectors (again)
+I_(1,:) = [I(1),I(6),I(5)]
+I_(2,:) = [I(6),I(2),I(4)]
+I_(3,:) = [I(5),I(4),I(3)]
+
+call jacobi(I_, elambda, evector, nrot)
+
+write(*,*) 'elambda = ', elambda
+write(*,*) 'evector(1) = ', evector(1,:)
+write(*,*) 'evector(2) = ', evector(2,:)
+write(*,*) 'evector(3) = ', evector(3,:)
+write(*,*) 'nrot = ', nrot
+
+call rotate_diagonal(nodes, evector)
+write(*,*) 'rotated m.o.i.'
+write(*,*)
+
+call centre(elems, nodes, coms)
+I = inertia(vols, coms) * rho
+
+! eigenvalues & eigenvectors (again)
+I_(1,:) = [I(1),I(6),I(5)]
+I_(2,:) = [I(6),I(2),I(4)]
+I_(3,:) = [I(5),I(4),I(3)]
+
+call jacobi(I_, elambda, evector, nrot)
+
+write(*,*) 'elambda = ', elambda
+write(*,*) 'evector(1) = ', evector(1,:)
+write(*,*) 'evector(2) = ', evector(2,:)
+write(*,*) 'evector(3) = ', evector(3,:)
+write(*,*) 'nrot = ', nrot
+
+
+call cpu_time(t1)
+do j = 1, neval
+  call rot_x_nodes(nodes, 0.000020d0)
+  call rot_y_nodes(nodes, 0.000010d0)
+enddo
+call cpu_time(t2)
+write(*,*) 'rotated; cpu_time = ', t2-t1, ' s'
+
+  if (i.eq.1) then
+    write(*,*) 'omp_get_num_threads = ', omp_get_num_threads()
+  endif
+
+write(*,*) 'costheta = ', costheta
+write(*,*) 'phi = ', phi
+write(*,*) 'capm = ', capm
+write(*,*) 'capr = ', capr
+write(*,*) 'absr = ', absr
+
+double precision function sgn(x)
+
+double precision :: x
+
+if (x.gt.0.d0) then
+  sgn = 1.d0
+else if (x.lt.0.d0) then
+  sgn = -1.d0
+else
+  sgn = 0.d0
+endif
+
+return
+
+end function sgn
+
+
+write(*,*) 'M = ', 4.d0/3.d0*pi*capr**3*rho, ' kg (sphere)'
+
+! Bertotti etal. (2003)
+!C20 = 1.d0/(2.d0*sqrt(5.d0))*(A+B-2.d0*C)*tmp
+!C22 = 1.d0/2.d0*sqrt(3.d0/5.d0)*(B-A)*tmp
+
+
+double precision, dimension(3) :: dipole
+dipole = 0.d0
+  dipole = dipole + r*dV
+
+!write(*,*) 'C10 = ', dipole(3)*rho/(capm*capr)
+!write(*,*) 'Clm(1,0)', Clm(1,0)
+!write(*,*) 'C11 = ', dipole(1)*rho/(capm*capr)
+!write(*,*) 'Clm(1,1)', Clm(1,1)
+!stop
+
+!        if (l.eq.1) then
+!          write(*,*) 'tmp = ', tmp
+!          tmp = 1.d0/(capm*capr) * rho * r(3) * dV
+!          write(*,*) 'tmp = ', tmp
+!          write(*,*)
+!        endif
+

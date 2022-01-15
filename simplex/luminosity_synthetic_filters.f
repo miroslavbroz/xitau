@@ -10,6 +10,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 23rd 2016
       include 'simplex.inc'
       include 'dependent.inc'
       include '../misc/const.inc'
+      include 'cb_absol.inc'
 c input
 c a number of other quantities are passed in /dependent/ common block!
       integer m_filter
@@ -20,10 +21,7 @@ c output
       real*8 Lum_(nbod), Lumtot
 c filter transmissions
       integer n_filter(SEDMAX)
-      real*8 lambda_filter(OBSMAX,SEDMAX), transmit(OBSMAX,SEDMAX)
-c synthetic spectra
-      integer n_absol(NBODMAX)
-      real*8 lambda_absol(OBSMAX,NBODMAX), flux_absol(OBSMAX,NBODMAX)
+      real*8 lambda_filter(FLTMAX,SEDMAX), transmit(FLTMAX,SEDMAX)
 c internal
       integer j, i1st, nbod2, n_
       real*8 R, T, flux
@@ -35,15 +33,15 @@ c functions
       data i1st /0/
 
       save i1st,
-     :  n_filter, lambda_filter, transmit,
-     :  n_absol, lambda_absol, flux_absol
+     :  n_filter, lambda_filter, transmit
 c
 c read ALL filter transmissions (only 1st time!)
 c
       if (i1st.eq.0) then
+
         do j = 1, m_filter
 
-          call read_synth(file_filter(j), n_filter(j),
+          call read_filter(file_filter(j), n_filter(j),
      :      lambda_filter(1,j), transmit(1,j))
 
 c compute bandpass
@@ -52,12 +50,13 @@ c compute bandpass
      :      lambda_filter(n_filter(j),j))
 
           if (debug) then
+            write(*,*) "# file_filter(", j, ") = ", trim(file_filter(j))
             write(*,*) "# n_filter(", j, ") = ", n_filter(j)
             write(*,*) "# band_filter(", j, ") = ", band_filter(j), " m"
           endif
         enddo
 c
-c read synthetic spectra, or
+c read synthetic spectra, or...
 c
         if (.not.use_pyterpol) then
           do j = 1, nbod
@@ -80,7 +79,7 @@ c
       if (use_pyterpol) then
 
         call pyterpol_(nbod, T_eff, log_g, v_rot, metal,
-     :    lambda3, lambda4, .true., nbod2)
+     :    pyterpol_Delta, lambda3, lambda4, .true., nbod2)
 
 c read them back
         if ((nbod2.gt.0).or.(n_absol(1).eq.0)) then
@@ -123,7 +122,12 @@ c
         endif
 
         Lumtot = Lumtot + Lum_(j)
+
+c        write(*,*) "# Lum_(", j, ") = ", Lum_(j)  ! dbg
+
       enddo
+
+c      write(*,*) "# Lumtot = ", Lumtot  ! dbg
 
       return
       end

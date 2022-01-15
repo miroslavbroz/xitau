@@ -60,7 +60,9 @@ c
           write(*,*) "# m_VIS = ", m_VIS
         endif
 
-        call limcof_read("limcof.dat")
+        if ((use_limbdark).and.(m_VIS.gt.0)) then
+          call limcof_read("limcof.dat")
+        endif
 
         if (debug) then
           write(*,*) "# n_limb = ", n_limb
@@ -72,7 +74,7 @@ c
 c
 c get linear limb-darkening coefficients u(lambda) vs wavelength
 c
-      if (use_limbdark) then
+      if ((use_limbdark).and.(m_VIS.gt.0)) then
 
         do i = 1, nbod
           call limcof_interp(T_eff(i), log_g(i), metal(i),
@@ -85,9 +87,9 @@ c chi^2 for visibility data
 c
       if (debug) then
         open(unit=iua,file="chi2_VIS.dat",status="unknown")
-        write(iua,*) "# t_VIS & u [m] & v [m] & lambda [m]",
+        write(iua,*) "# t_VIS & u [m] & v [m] & lambda [m] & band [m]",
      :    " & Vsq_interp [] & sigma_Vsq_VIS [] & dataset & chi^2"
-        write(iua,*) "# t_VIS & u [m] & v [m] & lambda [m]",
+        write(iua,*) "# t_VIS & u [m] & v [m] & lambda [m] & band [m]",
      :    " & Vsq_VIS    [] & sigma_Vsq_VIS [] & dataset & chi^2"
       endif
 
@@ -176,9 +178,9 @@ c limb-darkened complex visibility (Hanbury-Brown et al. 1974)
         n = n+1
 
         if (debug) then
-          write(iua,*) t_VIS(i), u_VIS(i), v_VIS(i), lambda,
+          write(iua,*) t_VIS(i), u_VIS(i), v_VIS(i), lambda, band,
      :      Vsq, sigma_Vsq_VIS(i), dataset_VIS(i), chi2_
-          write(iua,*) t_VIS(i), u_VIS(i), v_VIS(i), lambda,
+          write(iua,*) t_VIS(i), u_VIS(i), v_VIS(i), lambda, band,
      :      Vsq_VIS(i), sigma_Vsq_VIS(i), dataset_VIS(i), chi2_
           write(iua,*)
         endif

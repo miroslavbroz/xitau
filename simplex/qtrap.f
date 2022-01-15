@@ -10,15 +10,23 @@ c          to the desired fractional accuracy and JMAX so that 2 to the power JM
 c          allowed number of steps. Integration is performed by the trapezoidal rule.
       INTEGER j
       REAL*8 olds
-      olds=-1.d30                        ! Any number that is unlikely to be the average of the function
-      do 11 j=1,JMAX                     ! at its endpoints will do here.
-           call trapzd(func,a,b,s,j)
-           if (j.gt.5) then              ! Avoid spurious early convergence.
-               if (abs(s-olds).lt.eps*abs(olds).or.
-     :                (s.eq.0.d0.and.olds.eq.0.d0)) return
-           endif
-           olds=s
-11    enddo
-      pause "too many steps in qtrap"
+      olds=-1.d30  ! Any number that is unlikely to be the average of the function
+
+      do j=1,JMAX                  ! at its endpoints will do here.
+        call trapzd(func,a,b,s,j)
+        if (j.gt.5) then           ! Avoid spurious early convergence.
+          if (abs(s-olds).lt.eps*abs(olds).or.
+     :      (s.eq.0.d0.and.olds.eq.0.d0)) return
+          endif
+        olds=s
+      enddo
+
+      write(*,*) "qtrap: s = ", s
+      write(*,*) "qtrap: olds = ", olds
+      write(*,*) "qtrap: eps = ", eps
+      write(*,*) "qtrap: abs(s-olds) = ", abs(s-olds)
+      write(*,*) "qtrap: eps*abs(olds) = ", eps*abs(olds)
+      write(*,*) "Error: Too many steps in qtrap!"
+      stop
       END
 

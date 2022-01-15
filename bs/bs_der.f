@@ -13,6 +13,7 @@ c             istat  ==>  status of the test paricles
 c                           (2d integer array)
 c                            istat(i,1) = 0 ==> active:  = 1 not
 c                            istat(i,2) = -1 ==> Danby did not work
+c               x    ==> value of independent variable (real scalar)
 c 	        ybs  ==> values dependent variables  (real array)
 c
 c             Output:
@@ -23,7 +24,7 @@ c Authors:  Hal Levison
 c Date:    5/17/93
 c Last revision: 2/24/94
 
-      subroutine bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,ybs,dy)
+      subroutine bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,x,ybs,dy)
 
       include '../swift.inc'
       include 'bs.inc'
@@ -31,6 +32,7 @@ c Last revision: 2/24/94
 c...  Inputs Only: 
       integer nbod,ntp
       real*8 mass(nbod),j2rp2,j4rp4
+      real*8 x
       real*8 ybs(6,(NTPMAX+NPLMAX))
 
 c...  Input and Outputs
@@ -41,6 +43,7 @@ c...  Output
 
 c...  Internals
       integer i,j
+      real*8 time
       real*8 xb(NPLMAX),yb(NPLMAX),zb(NPLMAX)
       real*8 vxb(NPLMAX),vyb(NPLMAX),vzb(NPLMAX)
       real*8 axb(NPLMAX),ayb(NPLMAX),azb(NPLMAX)
@@ -50,6 +53,9 @@ c...  Internals
 
 c----
 c...  Executable code 
+
+      time = time_from_bs_step+x
+!      write(*,*) 'time = ', time  ! dbg
 
 c...  move things so that I can deal with it
       do i=1,nbod
@@ -71,8 +77,8 @@ c...  move things so that I can deal with it
          vzbt(i) = ybs(6,j)
       enddo
 
-      call tu4_getaccb(nbod,mass,j2rp2,j4rp4,xb,yb,zb,vxb,vyb,vzb,
-     &  axb,ayb,azb)
+      call tu4_getaccb(time,nbod,mass,j2rp2,j4rp4,xb,yb,zb,
+     &  vxb,vyb,vzb,axb,ayb,azb)
       call tu4_getaccb_tp(nbod,mass,j2rp2,j4rp4,xb,yb,zb,
      &     ntp,xbt,ybt,zbt,istat,axbt,aybt,azbt)
 

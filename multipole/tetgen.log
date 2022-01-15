@@ -1,0 +1,132 @@
+Opening tri_file_octdec_3.smesh.
+Constructing Delaunay tetrahedralization.
+  Creating initial tetrahedralization.
+  Incrementally inserting points.
+  15255 Flips (T23 8946, T32 6194, T22 0, T44 115)
+Delaunay seconds:  0.049278
+Creating surface mesh.
+  Constructing mapping from indices to points.
+  Constructing mapping from points to tetrahedra.
+  Unifying segments.
+  Constructing mapping from points to subfaces.
+  Merging coplanar facets.
+  Marking acute vertices.
+  Constructing mapping from points to segments.
+  1026 acute vertices.
+Perturbing vertices.
+  0 break points.
+Delaunizing segments.
+  Constructing mapping from points to tetrahedra.
+  Queuing missing segments.
+  904 protect points.
+  R1: 583,  R2: 236,  R3: 85.
+Constraining facets.
+  Constructing mapping from points to tetrahedra.
+  The biggest cavity: 8 faces, 6 vertices
+  Enlarged 0 times
+Segment and facet seconds:  0.10958
+Removing unwanted tetrahedra.
+  Marking concavities for elimination.
+  Marking neighbors of marked tetrahedra.
+  Deleting marked tetrahedra.
+Hole seconds:  0.0028
+Repairing mesh.
+Repair seconds:  0.001301
+Adding Steiner points to enforce quality.
+  Marking sharp segments.
+  5358 sharp segments.
+  Deciding feature-point sizes.
+  Constructing mapping from points to segments.
+  583 Steiner points correction.
+  1026 feature points.
+  904 Steiner feature points.
+  Splitting encroached subsegments.
+  1603 split points.
+  Splitting encroached subfaces.
+  27 split points.
+  Splitting bad tetrahedra.
+  2062 refinement points.
+  Totally added 3692 points.
+Quality seconds:  0.605549
+Optimizing mesh.
+  level = 3.
+  9 faces are flipped.
+  857 edges are flipped.
+  3 passes.
+  28 points are inserted (15 on segment).
+  2 faces are flipped.
+  6 edges are flipped.
+Optimize seconds:  0.194221
+
+Writing tri_file_octdec_3.1.node.
+Writing tri_file_octdec_3.1.ele.
+Writing tri_file_octdec_3.1.face.
+Writing tri_file_octdec_3.1.mesh.
+Writing tri_file_octdec_3.1.neigh.
+
+Output seconds:  0.111307
+Total running seconds:  1.07422
+
+Statistics:
+
+  Input points: 1026
+  Input facets: 2048
+  Input segments: 3072
+  Input holes: 0
+  Input regions: 0
+
+  Mesh points: 5650
+  Mesh tetrahedra: 24099
+  Mesh triangles: 51785
+  Mesh subfaces: 7174
+  Mesh subsegments: 5635
+
+Mesh quality statistics:
+
+  Smallest volume:        0.0014792   |  Largest volume:           354.88
+  Shortest edge:            0.25459   |  Longest edge:             21.801
+  Smallest facangle:        0.87916   |  Largest facangle:       174.4897
+  Smallest dihedral:        0.45683   |  Largest dihedral:       178.5292
+
+  Aspect ratio histogram:
+         < 1.5       :       469      |      6 - 10         :      1674
+     1.5 - 2         :      5085      |     10 - 15         :       354
+       2 - 2.5       :      5556      |     15 - 25         :       164
+     2.5 - 3         :      3731      |     25 - 50         :        39
+       3 - 4         :      4127      |     50 - 100        :        11
+       4 - 6         :      2887      |    100 -            :         2
+  (A tetrahedron's aspect ratio is its longest edge length divided by its
+    smallest side height)
+
+  Face angle histogram:
+      0 -  10 degrees:       862      |     90 - 100 degrees:      7325
+     10 -  20 degrees:      3704      |    100 - 110 degrees:      3392
+     20 -  30 degrees:      6473      |    110 - 120 degrees:      1484
+     30 -  40 degrees:     13044      |    120 - 130 degrees:       566
+     40 -  50 degrees:     17644      |    130 - 140 degrees:       169
+     50 -  60 degrees:     10058      |    140 - 150 degrees:       104
+     60 -  70 degrees:      9648      |    150 - 160 degrees:        66
+     70 -  80 degrees:     15893      |    160 - 170 degrees:        38
+     80 -  90 degrees:     13096      |    170 - 180 degrees:         4
+  Minimum input face angle is 5.71779 (degree).
+
+  Dihedral angle histogram:
+       0 -  5 degrees:       120      |     80 - 110 degrees:     14468
+       5 - 10 degrees:       733      |    110 - 120 degrees:      3500
+      10 - 20 degrees:      3259      |    120 - 130 degrees:      2325
+      20 - 30 degrees:      4161      |    130 - 140 degrees:      1344
+      30 - 40 degrees:      5327      |    140 - 150 degrees:       994
+      40 - 50 degrees:      6108      |    150 - 160 degrees:       735
+      50 - 60 degrees:      3840      |    160 - 170 degrees:       427
+      60 - 70 degrees:       551      |    170 - 175 degrees:        15
+      70 - 80 degrees:       289      |    175 - 180 degrees:         2
+  Minimum input facet dihedral angle is 136.762 (degree).
+
+Memory allocation statistics:
+
+  Maximum number of vertices: 5650
+  Maximum number of tetrahedra: 24738
+  Maximum number of subfaces: 7174
+  Maximum number of segments: 6144
+  Approximate heap memory used by the mesh (K bytes): 2583.44
+

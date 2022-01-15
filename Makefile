@@ -3,6 +3,7 @@
 # Miroslav Broz (miroslav.broz@email.cz), Sep 6th 2015
 
 f77 = gfortran
+f90 = gfortran
 cc = gcc
 
 opt = -O3 -pg
@@ -15,6 +16,7 @@ obj = \
   bs/bs_der.o \
   bs/bs_int.o \
   bs/bs_step.o \
+  coord/coord_h2b.o \
   coord/coord_h2j.o \
   coord/coord_j2b.o \
   io/io_dump_param.o \
@@ -26,13 +28,17 @@ obj = \
   io/io_write_pl.o \
   limcof/limcof_read.o \
   limcof/limcof_interp.o \
+  main/read_dependent.o \
   misc/arcsec_au.o \
+  misc/au_arcsec.o \
   misc/au_day.o \
+  misc/auday_kms.o \
   misc/dotprod.o \
   misc/kms_auday.o \
   misc/length.o \
   misc/normalize.o \
   misc/quicksort.o \
+  misc/split.o \
   misc/vproduct.o \
   mvs/drift/drift_dan.o \
   mvs/drift/drift_kepmd.o \
@@ -67,12 +73,15 @@ obj = \
   simplex/bessj1.o \
   simplex/bessj32.o \
   simplex/chi2_func.o \
+  simplex/chi2_func_AO.o \
   simplex/chi2_func_CLO.o \
   simplex/chi2_func_ECL.o \
   simplex/chi2_func_LC.o \
   simplex/chi2_func_RV.o \
   simplex/chi2_func_SED.o \
   simplex/chi2_func_SKY.o \
+  simplex/chi2_func_SKY2.o \
+  simplex/chi2_func_SKY3.o \
   simplex/chi2_func_SYN.o \
   simplex/chi2_func_T3.o \
   simplex/chi2_func_TTV.o \
@@ -84,9 +93,14 @@ obj = \
   simplex/gammq.o \
   simplex/gcf.o \
   simplex/geometries.o \
+  simplex/geometry_1centric.o \
+  simplex/geometry_ecliptic.o \
   simplex/geometry_hierarch.o \
+  simplex/geometry_hierarch2.o \
   simplex/geometry_twopairs.o \
+  simplex/geometry_twopairs2.o \
   simplex/gser.o \
+  simplex/hec88.o \
   simplex/hermite.o \
   simplex/interp.o \
   simplex/integrate.o \
@@ -102,25 +116,41 @@ obj = \
   simplex/planck.o \
   simplex/qtrap.o \
   simplex/ran1.o \
+  simplex/read_AO.o \
   simplex/read_CLO.o \
   simplex/read_ECL.o \
   simplex/read_LC.o \
   simplex/read_RV.o \
   simplex/read_SED.o \
   simplex/read_SKY.o \
+  simplex/read_SKY2.o \
   simplex/read_SYN.o \
   simplex/read_TTV.o \
   simplex/read_VIS.o \
+  simplex/read_ephemeris.o \
+  simplex/read_filter.o \
   simplex/read_synth.o \
   simplex/read_time.o \
   simplex/read_time_all.o \
   simplex/srtidx.o \
   simplex/swift_bs_xyzb.o \
   simplex/trapzd.o \
+  simplex/uvw.o \
+  simplex/uvw1.o \
+  simplex/uvw2.o \
+  simplex/write_uvw.o \
+  tides/dissipation_factor.o \
+  tides/getaccb_tides.o \
+  tides/io_dump_spin.o \
+  tides/io_init_spin.o \
   tides/io_init_tides.o \
-  tides/getacc_oblat.o \
-  tides/getacc_ppn.o \
-  tides/getacc_tides.o \
+  tides/io_write_spin.o \
+  tides/mignard.o \
+  tides/mignard_torque.o \
+  tides/spin_evolve.o \
+  tides2/io_init_tides2.o \
+  tides2/getacc_ppn.o \
+  tides2/getacc_tides2.o \
   tu4/tu4_getaccb.o \
   tu4/tu4_getaccb_tp.o \
   util/util_exit.o \
@@ -157,6 +187,47 @@ obj = \
   wd/spot.o \
   wd/surfas.o \
   wd/volume.o \
+  xvpl2el/nula2pi.o \
+
+obj90 = \
+  ao/read_pnm.o \
+  ao/write_pnm.o \
+  ao/write_silh.o \
+  ao/shadowing.o \
+  ao/silhouette.o \
+  multipole/read_elem.o \
+  multipole/read_face.o \
+  multipole/read_node.o \
+  multipole/read_bruteforce.o \
+  multipole/read_multipole.o \
+  multipole/vector_product.o \
+  multipole/volume.o \
+  multipole/centre.o \
+  multipole/inertia.o \
+  multipole/spherical_cartesian.o \
+  multipole/legendre.o \
+  multipole/legendre2.o \
+  multipole/dipole.o \
+  multipole/factorial.o \
+  multipole/multipole.o \
+  multipole/multipole2.o \
+  multipole/const.o \
+  multipole/bruteforce.o \
+  multipole/rotate.o \
+  multipole/nrtype.o \
+  multipole/nrutil.o \
+  multipole/jacobi.o \
+  multipole/normalize.o \
+  multipole/normal.o \
+  multipole/write_elem.o \
+  multipole/write_face.o \
+  multipole/write_node.o \
+  multipole/write_multipole.o \
+  multipole/getacc_bf.o \
+  multipole/getacc_bf2.o \
+  multipole/getacc_mp.o \
+  multipole/getacc_mp2.o \
+  simplex/uvw_nodes.o \
 
 objc = \
 
@@ -168,33 +239,38 @@ inc = \
   simplex/dependent.inc \
   simplex/filters.inc \
   simplex/simplex.inc \
+  simplex/cb_absol.inc \
   simplex/cb_itmax.inc \
+  simplex/cb_limb.inc \
   simplex/cb_t3amp.inc \
   tides/tides.inc \
   wd/lc.inc \
 
 all: main/chi2 main/simplex main/simann main/swift_bs
 
-main/chi2: main/chi2.f $(obj) $(objc) $(inc)
-	$(f77) $(opt) $(obj) $(objc) -o $@ $< $(lib)
+main/chi2: main/chi2.f $(obj90) $(obj) $(objc) $(inc)
+	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
-main/simplex: main/simplex.f $(obj) $(objc) $(inc)
-	$(f77) $(opt) $(obj) $(objc) -o $@ $< $(lib)
+main/simplex: main/simplex.f $(obj90) $(obj) $(objc) $(inc)
+	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
-main/simann: main/simann.f $(obj) $(objc) $(inc)
-	$(f77) $(opt) $(obj) $(objc) -o $@ $< $(lib)
+main/simann: main/simann.f $(obj) $(obj90) $(objc) $(inc)
+	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
-main/swift_bs: main/swift_bs.f $(obj) $(objc) $(inc)
-	$(f77) $(opt) $(obj) $(objc) -o $@ $< $(lib)
+main/swift_bs: main/swift_bs.f $(obj) $(obj90) $(objc) $(inc)
+	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 $(obj) : %.o:%.f $(inc)
 	$(f77) $(opt) -c -o $@ $<
 
-$(objc) : %.o:%.c
+$(obj90) : %.o:%.f90 $(inc)
+	$(f90) $(opt) -c -o $@ $<
+
+$(objc) : %.o:%.c $(inc)
 	$(cc) $(opt) -c -o $@ $<
 
 clean : FORCE
-	rm -f $(obj) $(objc)
+	rm -f $(obj) $(obj90) $(objc)
 
 FORCE :
 

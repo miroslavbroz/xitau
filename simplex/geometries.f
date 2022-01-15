@@ -1,9 +1,10 @@
 c geometries.f
 c An interface for various geometries.
-c Miroslav Broz (miroslav.broz@email.cz), Jun 14th 2016
+c Miroslav Broz (miroslav.broz@email.cz), Dec 10th 2021
 
       subroutine geometries(nbod, m, elmts, r, v, geometry)
 
+      implicit none
       include 'simplex.inc'
 c input
       integer nbod
@@ -20,6 +21,22 @@ c output
       else if (geometry.eq.1) then
 
         call geometry_twopairs(nbod, m, elmts, r, v)
+
+      else if (geometry.eq.2) then
+
+        call geometry_1centric(nbod, m, elmts, r, v)
+
+      else if (geometry.eq.3) then
+
+        call geometry_ecliptic(nbod, m, elmts, r, v)
+
+      else if (geometry.eq.4) then
+
+        call geometry_hierarch2(nbod, m, elmts, r, v)
+
+      else if (geometry.eq.5) then
+
+        call geometry_twopairs2(nbod, m, elmts, r, v)
 
       else
         write(*,*) "geometries.f: Error unknown geometry = ",

@@ -1,0 +1,12 @@
+Kleopatra_LP_ESO_MPCD_v1-pai.1.ele
+Kleopatra_LP_ESO_MPCD_v1-pai.1.face
+Kleopatra_LP_ESO_MPCD_v1-pai.1.node
+3300.				! rho [kg m^-3]; i.e. critical equipotential
+500. 0. 0.			! \vec r = (x, y, z) [unit]
+1.d3				! unit [m]
+0.224386764166667		! P [day]
+2444502.76914			! Tmin [JD]
+73.4308				! pole_l [deg]
+20.8808				! pole_b [deg]
+
+

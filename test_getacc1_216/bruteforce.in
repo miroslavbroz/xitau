@@ -1,0 +1,11 @@
+tri_file_octdec_3.1.ele
+tri_file_octdec_3.1.face
+tri_file_octdec_3.1.node
+5223.6025718815536		! rho [kg m^-3]; to get Descamp's mass 4.64e18 kg 
+1.d3				! unit [m]
+5.38528243			! P [day]
+2458462.613254			! Tmin [JD]
+76				! pole_l [deg]
+16				! pole_b [deg]
+
+

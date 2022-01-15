@@ -14,6 +14,11 @@ c internal
 c functions
       real*8 interp
 
+      if (n.eq.0) then
+        integrate = 0.d0
+        return
+      endif
+
       if ((x1.lt.x(1)).or.(x2.gt.x(n))) then
         write(*,*) "integrate.f: Error: Extrapolation is not allowed!"
         write(*,*) "x(1) = ", x(1)

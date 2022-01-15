@@ -10,6 +10,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 23rd 2016
       include 'simplex.inc'
       include 'dependent.inc'
       include '../misc/const.inc'
+      include 'cb_absol.inc'
 c input
 c a number of other quantities are passed in /dependent/ common block!
 c note these variables are dashed_, because they are also in the c.b.
@@ -17,9 +18,6 @@ c note these variables are dashed_, because they are also in the c.b.
       real*8 T_eff_(nbod), R_star_(nbod), lambda, band
 c output
       real*8 Lum_(nbod), Lumtot
-c synthetic spectra
-      integer n_absol(NBODMAX)
-      real*8 lambda_absol(OBSMAX,NBODMAX), flux_absol(OBSMAX,NBODMAX)
 c internal
       integer j, i1st, nbod2
       real*8 R, T, flux
@@ -30,8 +28,7 @@ c functions
       data i1st /0/
       data n_absol /NBODMAX*0/
 
-      save i1st,
-     :  n_absol, lambda_absol, flux_absol
+      save i1st
 c
 c read synthetic spectra (only 1st time!)
 c
@@ -58,7 +55,7 @@ c
       if (use_pyterpol) then
 
         call pyterpol_(nbod, T_eff, log_g, v_rot, metal,
-     :    lambda3, lambda4, .true., nbod2)
+     :    pyterpol_Delta, lambda3, lambda4, .true., nbod2)
 
 c read them back
         if ((nbod2.gt.0).or.(n_absol(1).eq.0)) then
@@ -97,7 +94,12 @@ c
         endif
 
         Lumtot = Lumtot + Lum_(j)
+
+c        write(*,*) "# Lum_(", j, ") = ", Lum_(j)  ! dbg
+
       enddo
+
+c      write(*,*) "# Lumtot = ", Lumtot  ! dbg
 
       return
       end

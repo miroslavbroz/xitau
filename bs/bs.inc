@@ -17,4 +17,7 @@ c...   maximum numbers of internations
        integer NTRYS
        parameter(NTRYS=30)
   
+      real*8 time_from_bs_step
+      common /cb_time/ time_from_bs_step
+
 c------------------------------------------------------------------------

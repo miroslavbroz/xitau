@@ -62,7 +62,7 @@ c...  Executable code
       n = 6*(nbod+ntp)
 
       xa=x
-      call bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,y,dy)
+      call bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,x,y,dy)
       do i=1,n
          ii=12*i
          tp(ii-1)=dabs(y(i))
@@ -115,7 +115,7 @@ c
          
             do i1=1,i1max
                x=x+hd
-               call bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,y,dy)
+               call bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,x,y,dy)
                do i=1,n
                   ii=12*i
                   tp(ii-1)=dmax1(tp(ii-1),dabs(y(i)))
@@ -125,7 +125,7 @@ c
                enddo 
             enddo
          
-            call bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,y,dy)
+            call bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,x,y,dy)
             do i=1,n
                ii=12*i
                dta=tp(ii-11)

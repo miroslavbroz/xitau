@@ -1,3 +1,88 @@
+        if (t.ge.tout_-eps) then
+          dttmp = t_of_interest(min(j+1,n_of_interest))-t
+          if (dttmp.gt.0.d0) then
+            tout_ = tout_ + min(dtout, dttmp)
+          else
+            tout_ = tout_ + dtout
+          endif
+        endif
+
+
+!          call io_dump_spin('dump_spin.dat',nbod)
+
+!      do i = 1, nbod
+!        R_body(i) = R_star(i)*R_S/AU
+!        R_body5(i) = R_body(i)**5
+!      enddo
+
+
+!        c_ = 5.d0*pixel_scale(i)  ! dbg
+ 
+!        do j = 1, size(silh_OBS,1)
+!          silh_OBS(j,:) = silh_OBS(j,:) - c_
+!        enddo
+!        c_ = center_silh(silh_OBS) - center_silh(silh)
+ 
+ = ', c_/pixel_scale(i),
+     :      ' pxl'
+
+          write(*,*) 'elmts(', i, ',3)_ = ', elmts(i,3)
+          write(*,*) 'elmts(', i, ',4)_ = ', elmts(i,4) 
+      else
+        do i = 2, nbod
+          write(*,*) 'elmts(', i, ',3) = ', elmts(i,3)
+          write(*,*) 'elmts(', i, ',4) = ', elmts(i,4) 
+        enddo
+
+!        phi2 = pi_/2.d0-pole_b
+!        phi3 = pi_/2.d0+pole_l
+!        call rot_x_nodes(nodes_, phi2)
+!        call rot_z_nodes(nodes_, phi3)
+
+!        write(*,*) 't_AO(', i, ') = ', t_AO(i)
+!        write(*,*) 'Tmin = ', Tmin
+!        write(*,*) 'P = ', P
+!        write(*,*) 'phi1 = ', phi1/deg, ' deg'
+!        write(*,*) 'phase = ', phase
+
+            write(*,*) 'x, y, z = ', xh_interp, yh_interp, zh_interp,
+     :        ' u, v, w = ', u, v, w  ! dbg
+
+            call uvw(ecl(i,j), ecb(i,j), u, v, w)
+
+c synthetic spectra
+      integer n_absol(NBODMAX)
+      real*8 lambda_absol(OBSMAX,NBODMAX), flux_absol(OBSMAX,NBODMAX)
+
+     :  n_absol, lambda_absol, flux_absol
+
+      logical percent
+      data percent /.false./
+
+            if (Int_lambda(i) > 1.d0+eps) percent = .true.
+
+c check per-cents
+      if (percent) then
+        do i = 1, N
+          Int_lambda(i) = Int_lambda(i)*0.01d0  ! % -> []
+        enddo
+      endif
+
+      parameter(L0 = 3.055d28)      ! W
+      parameter(Mbol0 = 0.d0)       ! mag
+        write(*,*) '# P = ', P, ' day'
+        write(*,*) '# n = ', n, ' rad/day'
+        write(*,*) '# a = ', a, ' au'
+        write(*,*) '# a = ', a*au/(306.d0*pc)/mas, ' mas'
+
+c a^3/P^2 = GM/(4pi^2)
+c a^3 n^2 = GM
+        write(*,*) '# P = ', P, ' day'
+        write(*,*) '# a = ', a, ' au'
+        write(*,*) '# a = ', a*au/(303*pc)/mas, ' mas'
+
+      real*8 Delta_T_eff, Delta_log_g, Delta_v_rot
+     :  Delta_T_eff, Delta_log_g, Delta_v_rot,
 
 c            write(*,*) "u = ", lambda, u, k  ! dbg
 

@@ -8,6 +8,9 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 15th 2016
       implicit none
       include 'simplex.inc'
 
+      integer STRMAX
+      parameter(STRMAX = 16)
+
       character*(*) filename
       integer N
       real*8 lambda_eff(SEDMAX), band_eff(SEDMAX), mag(SEDMAX),
@@ -15,7 +18,9 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 15th 2016
       character*(*) file_filter(SEDMAX)
 
       integer i, j, length, ierr
-      character*255 str
+      character*255 str, s(STRMAX)
+c functions
+      integer split
 
       if (filename(1:1).eq.'-') then
         N = 0
@@ -41,11 +46,14 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 15th 2016
      :        mag(i), sigma(i), calibration(i)
 
 c get also filename
-            j = length(str)
-            do while (str(j:j).ne.' ')
-              j = j-1
-            enddo
-            file_filter(i) = str(j+1:length(str))
+            j = split(str, ' ', s, STRMAX)
+            if (j.ge.6) then
+              file_filter(i) = s(6)
+            else
+              write(*,*) "read_SED.f: Errorneous data formattting: '",
+     :          trim(str), "'; no TAB's, please!"
+              stop
+            endif
 
           else
             write(*,*) "read_SED.f: Error number of observations .gt. ",

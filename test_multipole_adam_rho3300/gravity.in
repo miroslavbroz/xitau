@@ -1,0 +1,12 @@
+tri_file_octdec_3.1.ele
+tri_file_octdec_3.1.face
+tri_file_octdec_3.1.node
+3300.				! rho [kg m^-3]; i.e. critical equipotential
+500. 0. 0.			! \vec r = (x, y, z) [unit]
+1.d3				! unit [m]
+0.224386764166667		! P [day]
+2444502.76914			! Tmin [JD]
+73.4308				! pole_l [deg]
+20.8808				! pole_b [deg]
+
+

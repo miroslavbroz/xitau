@@ -91,8 +91,8 @@ c find ALL synthetic minima of the eclipsing binary
      :              / (tout(i+1)-tout(i))
                   duration(nmin) = 2.d0*sqrt(dmax**2-d**2) / v
               else
-                write(*,*) "Error: number of minima exceeds MINMAX = ",
-     :            MINMAX
+                write(*,*) "chi2_func_TTV.f: Error number of minima ",
+     :            "exceeds MINMAX = ", MINMAX
                 stop
               endif
             else
@@ -118,7 +118,7 @@ c     :          "minimum. d = ", d, " AU, dmax = ", dmax, " AU"
       if (debug) then
         open(unit=iu,file="chi2_TTV.dat",status="unknown")
         write(iu,*) "# t_TTV & t_of_closest [JD] & ",
-     :    "O-C (with LITE) [day] & LITE & sigmaz_TTV & chi^2"
+     :    "O-C (with LITE) [day] & LITE & sigmat_TTV & chi^2"
       endif
 
       chi2 = 0.d0

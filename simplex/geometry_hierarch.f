@@ -10,7 +10,9 @@ c                 /                |
 
       subroutine geometry_hierarch(nbod, m, elmts, r, v)
 
+      implicit none
       include 'simplex.inc'
+      include '../misc/const.inc'
 c input
       integer nbod
       real*8 m(NBODMAX)
@@ -18,17 +20,27 @@ c input
 c output
       real*8 r(NBODMAX,3), v(NBODMAX,3)
 c internal
-      integer i, ialpha
+      integer i, k, ialpha
       real*8 rj(NBODMAX,3), vj(NBODMAX,3)
-      real*8 msum
+      real*8 msum, P, a, n, tmp
+
+c convert to radians
+      do i = 2, nbod
+        do k = 3, 6
+          elmts(i,k) = elmts(i,k)*deg
+        enddo
+      enddo
 
 c compute Jacobian coordinates
       msum = m(1)
       ialpha = -1
       do i = 2, nbod
         msum = msum + m(i)
+        P = elmts(i,1)
+        n = 2.d0*pi_/P
+        a = (msum / n**2)**(1.d0/3.d0)
         call orbel_el2xv(msum,ialpha,
-     :    elmts(i,1),elmts(i,2),elmts(i,3),
+     :    a,elmts(i,2),elmts(i,3),
      :    elmts(i,4),elmts(i,5),elmts(i,6),
      :    rj(i,1),rj(i,2),rj(i,3),
      :    vj(i,1),vj(i,2),vj(i,3))

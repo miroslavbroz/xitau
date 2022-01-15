@@ -1,13 +1,15 @@
 #!/usr/bin/gnuplot
 
 set term x11
+set colors classic
 
+set tit "orbit misaligned w. observations..."
 set xl "x [AU]"
 set yl "y [AU]"
 set size ratio -1
 
-tmp=60.
-tmp=1.2
+tmp=7.e-6
+tmp=1.e-8
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zeroaxis

@@ -1,4 +1,136 @@
 
+io_write_spin() was commented (to prevent writing file often)
+
+ephemeris_E.dat does not account for daily parallax (but l, b in
+other data files are correct)
+
+check rotation of ecliptic/equatoreal frames (uvw.f)!
+
+output spin.out into memory (similarly as r, v)
+
+check the exchanged the sign in -vector_product in multipole/normal.f90
+
+check a mirror problem in (u, v) plane (plot axis and compare AO images)
+
+--
+
+fit also Delta t (Q) of Mignard OK
+
+implement Mignard tides (cf. swift_rmvs3_fp_tides) OK
+
+check a memory leak in chi2_func_AO.f (deallocate(pnm)) OK
+
+relocation error after SKY3 was added -> decrease OBSMAX to 100000!
+
+use log(e) instead of e OK
+
+use true longitude instead of mean anomaly (as well as varpi)! OK
+
+mutipole_maxl parameter (to test monopole -> l=10; in multipole.in) OK
+
+change format of chi2_SKY2.dat (to be more similar to chi2_SKY.dat) OK
+
+treat pole_b, pole_l also as free parameters?
+<- otherwise, I cannot change i1, i2 much, because orbits start to precess!
+use_varpole
+it's NOT compatible with geometry_1centric.f
+there was a problem w. missing pixel_scale in save, chi2_func_AO.f
+there was a problem w. use_varpole in getacc_*.f90, when all parameters were free
+OK
+
+implement chi2_func_SKY2.f for DIFFERENTIAL astrometry
+(keep SKY to have separate chi^2 for ABSOLUTE astrometry). OK
+
+there is a problem (bruteforce instead of multipole), if dependent.inc
+is modified and multipole/ or ao/ are NOT recompiled "by hand"...
+obj90, depedent.inc were missing in Makefile! (make clean; make) OK
+
+lite was implemented in the chi2_func.SKY.f and *_AO.f (not in data)
+
+phi0 was introduced in bruteforce.in, multipole.in
+
+implement also silhouettes (in chi2_AO.f)? (to constrain the pole) OK
+
+use mass(1) instead of capm in getacc_mp OK
+use mass(1) instead of rho in getacc_bf OK
+
+output_JDATE_uvw.dat, otherwise I cannot plot w. observations
+<- it's NOT easy, because I need an ephemeris for whole orbit! OK
+
+exchange the masses of the moons (as in Descamps)! OK
+
+--
+
+computation is 5 times SLOWER for P = 0.22 d! but ok
+
+why 0.05 phase shift?! (see nodes.plt) <- because JH used SPHERE 1st image <> Tmin
+
+there was an error P in hours (not days) in phi1! OK
+
+there was an error (time vs time_) in getacc_mp.f90! OK
+
+--
+
+multipole expansion (wo. monopole) for central body
+variable distance in astrometry (of asteroids)
+variable geometry!
+
+--
+
+2DO: Improve the accuracy of astrometric computations:
+
+- precession (N direction) between the epochs of observations
+  and that of orbit (Aitken 1935)
+- change of N direction due to proper motion of the binary
+- change of scale ...
+- change of light-time ... (!)
+- change of viewing angle & projection due to z-component
+- line of sight definition
+- differential aberration
+
+(according to G. Kaplan and his proposal)
+
+On the other hand, there are a number of additional problems:
+
+- N-body perturbation by additional (unseen) components
+- photocentre motions due to unresolved binaries
+- photocentres are different for different filter transmissions
+- coupling of parameters with radiative ones, all should be free
+- (correlated) uncertainties of old observations?
+
+(but these are accounted for in our N-body model)
+
+--
+
+2DO: Ideas how to improve (or automate) rectification of spectra:
+
+- detrending of BOTH observed and synthetic by (prescribed)
+  parts, i.e. similarly as fitting TTVs
+- Savitzky-Golay filter, use only higher derivatives?
+- 1st a slowly varying function fitting a BORDER,
+  similarly as Milani et al. (2014)?
+- 2nd a sawtooth function (@ given lambda) to correct for
+  inter-order echelle jumps
+- Fourier transform, extract low-order component and divide
+  by it (LaSala & Kurtz 1985)
+
+--
+
+2DO: We use log(g) as a free parameter instead of R.
+(To fix secondary on the MS.)
+
+OK, including Harmanec (1988) relations.
+
+--
+
+The periods in chi2.in are in days (as a unit of t).
+
+--
+
+2DO: We supply additional spectra (or remaining RVs)!
+
+--
+
 One can also fit SED (spectral energy distribution),
 i.e. standard UBVRIJHK magnitudes.
 

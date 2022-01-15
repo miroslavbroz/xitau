@@ -1,0 +1,6 @@
+ sum =   0.17098435541793794      ; omp_get_max_threads =            1 ; omp_get_wtime =    2.3825029549188912       s
+2.38733
+ sum =   0.17098435541750173      ; omp_get_max_threads =            2 ; omp_get_wtime =    1.3425228768028319       s
+1.34444
+ sum =   0.17098435541759205      ; omp_get_max_threads =            4 ; omp_get_wtime =    1.1208749976940453       s
+1.12291

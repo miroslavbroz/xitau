@@ -67,7 +67,7 @@ c write elements
           elmts(5) = omega  ! peri
           elmts(6) = capm
           msum = msum + m(i)
-          call write_elmts(t,id(i),elmts,msum,0.d0,d)
+          call write_elmts(t,id(i),elmts,gmsum,0.d0,d)
         enddo
       goto 5
 

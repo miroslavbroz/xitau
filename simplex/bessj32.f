@@ -29,6 +29,7 @@ c                pi x     x
 c
 
       real*8 function bessj32(x)
+      implicit none
 c input
       real*8 x
 c internal

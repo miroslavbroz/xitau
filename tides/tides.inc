@@ -1,18 +1,15 @@
 c tides.inc
-c Common block for tides and oblatness computations.
-c Miroslav Broz (miroslav.broz@email.cz), May 25th 2016
+c Common variables for tides computations.
+c Miroslav Broz (miroslav.broz@email.cz), Nov 7th 2013
 
-      real*8 k_L(NPLMAX)
-      real*8 omega_rot(NPLMAX)
-      real*8 R_body(NPLMAX)
+      real*8 capR(NPLMAX)
+      real*8 k_2(NPLMAX)
+      real*8 Delta_t(NPLMAX)
+      real*8 MoI(NPLMAX)
+      real*8 T_tides(3,NPLMAX)
 
-      real*8 koef1(NPLMAX)
-      real*8 koef2(NPLMAX)
-      real*8 R_body5(NPLMAX)
+      logical debug_spin
 
-      logical use_tides, use_oblatness, use_ppn
+      common /tides/ capR, k_2, Delta_t, MoI, T_tides, debug_spin
 
-      common /tides/ k_L, omega_rot, R_body,
-     :  koef1, koef2, R_body5,
-     :  use_tides, use_oblatness, use_ppn
 
