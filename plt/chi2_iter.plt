@@ -14,10 +14,10 @@ set yr [1e0:1e8]
 set logscale y
 set ytics 10
 set mytics 10
-set key bottom
+set key outside samplen 1.5
 
 set arrow from nfree,graph 1 to nfree,graph 0 lt 0 nohead
-set label sprintf(" %.1f ", chi2) at graph 1,first chi2 right
+set label sprintf(" %.1f ", chi2) at graph 1,first chi2*1.5 right
 
 p "<awk '{ i++; print i, $NF; }' chi2_func.tmp"      u 1:2 t "chi^2" w lp lt 1 ps 0.5,\
   "<awk '{ i++; print i, $(NF-14); }' chi2_func.tmp" u 1:2 t "SKY"   w l,\
@@ -33,8 +33,8 @@ p "<awk '{ i++; print i, $NF; }' chi2_func.tmp"      u 1:2 t "chi^2" w lp lt 1 p
   "<awk '{ i++; print i, $(NF -4); }' chi2_func.tmp" u 1:2 t "AO"    w l,\
   "<awk '{ i++; print i, $(NF -3); }' chi2_func.tmp" u 1:2 t "SKY2"  w l,\
   "<awk '{ i++; print i, $(NF -2); }' chi2_func.tmp" u 1:2 t "SKY3"  w l,\
-  "<awk '{ i++; print i, $(NF -1); }' chi2_func.tmp" u 1:2 t "MASS"  w l dt 2,\
-  chi2 t sprintf("%.2f", chi2) w l lt 0
+  "<awk '{ i++; print i, $(NF -1); }' chi2_func.tmp" u 1:2 t "MASS"  w l dt 4,\
+  chi2 w l lt 0 not
 pa -1
 
 set term png small

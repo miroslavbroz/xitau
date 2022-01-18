@@ -8,10 +8,10 @@
 *.mod
 
 # binary files
-chi2
-simplex
-simann
-swift_bs
+main/chi2
+main/simplex
+main/simann
+main/swift_bs
 
 # debugging data files
 out_JDATE_*.dat
