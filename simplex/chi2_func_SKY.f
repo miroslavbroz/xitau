@@ -176,7 +176,7 @@ c use the 1+2+3 photocentre for low-resolution interferometry
           endif
 
           if (use_vardist) then
-            call uvw(ecl(i,k), ecb(i,k), xh_interp, yh_interp,
+            call uvw(t_interp, ecl(i,k), ecb(i,k), xh_interp, yh_interp,
      :        zh_interp, u, v, w)
           else
             u = xh_interp

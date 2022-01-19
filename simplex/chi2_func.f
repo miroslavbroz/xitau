@@ -404,17 +404,17 @@ c convert to yet another photocentric (1+2+3-centric) coordinates
         enddo
       enddo
 
-      if (debug_swift) then
-        open(unit=iu,file="out_JDATE_photocentric3.dat",
-     :    status="unknown")
-        do i = 1, NOUT
-          do j = 1, nbod
-            write(iu,*) tout(i),-j,rp3(i,j,1),rp3(i,j,2),rp3(i,j,3),
-     :        vp3(i,j,1),vp3(i,j,2),vp3(i,j,3)
-          enddo
-        enddo
-        close(iu)
-      endif
+c      if (debug_swift) then
+c        open(unit=iu,file="out_JDATE_photocentric3.dat",
+c     :    status="unknown")
+c        do i = 1, NOUT
+c          do j = 1, nbod
+c            write(iu,*) tout(i),-j,rp3(i,j,1),rp3(i,j,2),rp3(i,j,3),
+c     :        vp3(i,j,1),vp3(i,j,2),vp3(i,j,3)
+c          enddo
+c        enddo
+c        close(iu)
+c      endif
 
 c optionally, write (u, v, w) coordinates
 

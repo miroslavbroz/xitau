@@ -144,8 +144,8 @@ c use relative coordinates
         z12_interp = interp(tout(j-1), tout(j), dz_, dz, t_interp)
 
         if (use_vardist) then
-          call uvw(ecl(i), ecb(i), x12_interp, y12_interp, z12_interp,
-     :      u, v, w)
+          call uvw(t_interp, ecl(i), ecb(i), x12_interp, y12_interp,
+     :      z12_interp, u, v, w)
         else
           u = x12_interp
           v = y12_interp

@@ -161,7 +161,7 @@ c save shape (in ecliptic coordinates; au)
         endif
 
 c sky-plane projection
-        call uvw_nodes(ecl(i), ecb(i), nodes_)
+        call uvw_nodes(t_interp, ecl(i), ecb(i), nodes_)
 
         if (use_vardist) then
           tmp = vardist(i)*AU/pc
@@ -198,7 +198,7 @@ c shadowing (of faces)
 
 c 2DO: check - sign!
         n_ts = (/cos(l)*cos(b), sin(l)*cos(b), sin(b)/)  ! target-sun
-        call uvw(ecl(i), ecb(i), n_ts(1), n_ts(2), n_ts(3),
+        call uvw(t_interp, ecl(i), ecb(i), n_ts(1), n_ts(2), n_ts(3),
      :    n_ts(1), n_ts(2), n_ts(3))
 
         n_to = (/0.d0, 0.d0, 1.d0/)  ! target-observer

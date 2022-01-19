@@ -53,7 +53,7 @@ c
         b = interp(t(j-1), t(j), ecb(j-1), ecb(j), tout(i))
         d = interp(t(j-1), t(j), vardist(j-1), vardist(j), tout(i))
 
-        call uvw1(l, b, hatu, hatv, hatw)
+        call uvw1(tout(i), l, b, hatu, hatv, hatw)
 
         do k = 1, nbod
           x = rh(i,k,1)
