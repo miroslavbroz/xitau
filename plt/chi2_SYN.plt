@@ -1,7 +1,7 @@
 #!/usr/bin/gnuplot
 
 set colors classic
-set term x11
+#set term x11
 
 nm = 1.e-9  # m
 ang = 1.e-10/nm  # nm
@@ -18,8 +18,9 @@ set mytics 1
 set grid ytics mytics
 set zeroaxis
 set bar 0.5
+set key outside font "Helvetica,8" width -3
 
-call "line.plt" "Halpha" 6563
+call "line.plt" "Halpha" 6562.81
 call "line.plt" "Hbeta"  4861
 call "line.plt" "Hgamma" 4341
 call "line.plt" "Hdelta" 4102
@@ -30,23 +31,36 @@ call "line.plt" "HeI"    4143
 call "line.plt" "HeI"    4387
 call "line.plt" "HeI"    4471
 call "line.plt" "HeI"    4713
-call "line.plt" "HeI"    4922
+call "line.plt" "HeI"    4921.9
 call "line.plt" "HeI"    5016
-call "line.plt" "HeI"    5047
-call "line.plt" "HeI"    5876
-call "line.plt" "HeI"    6678
+call "line.plt" "HeI"    5047.7
+call "line.plt" "HeI"    5875.65
+call "line.plt" "HeI"    6678.149
 call "line.plt" "CII"    4267
 call "line.plt" "CII"    6578
 call "line.plt" "CII"    6582
+call "line.plt" "OII"    4649.143
 call "line.plt" "MgII"   4481
 call "line.plt" "SiII"   4128
 call "line.plt" "SiII"   4130
 call "line.plt" "SiII"   6347
 call "line.plt" "SiII"   6371
 call "line.plt" "NeI"    6402
+call "line.plt" "FeIII"  5243.306
+
+# from Walker etal. (2017), Tab. 5
+call "line.plt" "NII"    6610.58
+call "line.plt" "FeI"    6202.31
+call "line.plt" "CIV"    5801.3
+call "line.plt" "SiIII"  5739.7
+call "line.plt" "CIII"   5695.0
+call "line.plt" "OIII"   5592.3
+call "line.plt" "HeII"   5411.5
+call "line.plt" "NII"    4779.7
+call "line.plt" "HeII"   4685.7
 
 p \
-  "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lt 7,\
+  "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lc 'orange',\
   "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lt 3 pt 1 ps 0,\
   "chi2_SYN.dat"  u ($2/nm):($3+shift*($5-1))   t "residua"  w l lt 1 lw 1,\
   "<awk '($NF+0>100)' chi2_SYN.dat" u ($2/nm):($3+shift*($5-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5

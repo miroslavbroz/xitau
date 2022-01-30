@@ -24,6 +24,7 @@ d_pc = x_param44
 f(x) = x*au/(d_pc*pc)/arcsec
 
 p \
+  "<awk '($2==-1){ x=$3; y=$4; }($2==-2){ print $3-x,$4-y; }' out_JDATE_heliocentric.dat" u (f($1)):(f($2)) t "2-1" w l lt 2,\
   "<awk '($2==-1){ x=$3; y=$4; }($2==-3){ print $3-x,$4-y; }' out_JDATE_heliocentric.dat" u (f($1)):(f($2)) t "3-1" w l lt 3,\
   sprintf("<awk '($2==-1){ x=$3; y=$4; }($2==-3) && ($1==%.10f){ print $3-x,$4-y; }' out_JDATE_heliocentric.dat", T0) u (f($1)):(f($2)) t "T_0" w p lc 0 pt 1 ps 2,\
   "<./ellipses.awk arcsec_AU2.dat" u (f($1)):(f($2)) not w l lt 7,\
@@ -39,6 +40,6 @@ rep
 q
 
 
-  "arcsec_AU2.dat" u 2:3 t "observ." w p lt 7 pt 1 ps 0.5,\
-  "arcsec_AU2.dat" u 2:3:(sprintf("  %.0f", $1-2400000)) not w labels left,\
+  "<awk '($2==-1){ x=$3; y=$4; }($2==-4){ print $3-x,$4-y; }' out_JDATE_heliocentric.dat" u (f($1)):(f($2)) t "4-1" w l lt 4,\
+
 

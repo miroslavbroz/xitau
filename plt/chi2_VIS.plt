@@ -14,9 +14,9 @@ set zeroaxis
 fac=2.0
 
 p \
-  "chi2_VIS.dat"   u (sqrt($2**2+$3**2)/$4):($6+fac*$8)   t "residua" w l lt 1 lw 1,\
   "Vis.dat"        u (sqrt($2**2+$3**2)/$4):($6+fac*$8):7 t "observed visibility" w err lt 3 pt 1 ps 0.5,\
   "visibility.dat" u (sqrt($2**2+$3**2)/$4):($5+fac*$6)   t "synthetic visibility" w p lt 7 pt 1,\
+  "chi2_VIS.dat"   u (sqrt($2**2+$3**2)/$4):($6+fac*$8)   t "residua" w l lt 1 lw 1,\
 
 pa -1
 

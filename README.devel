@@ -1,4 +1,7 @@
 
+dereddening is dependent on distance, hence it should be including
+in the fitting procedure! :-(
+
 io_write_spin() was commented (to prevent writing file often)
 
 ephemeris_E.dat does not account for daily parallax (but l, b in

@@ -64,6 +64,12 @@ c internal
           ayb(i) = ayb(i) - ay
           azb(i) = azb(i) - az
 
+          acc = sqrt(ax**2+ay**2+az**2)
+          if (acc.gt.5.d-6) then
+            write(*,*) '# getacc_ppn: acc = ', i, j, acc   ! dbg
+            stop
+          endif
+
         enddo
       enddo
 

@@ -1,3 +1,21 @@
+      do k = 1, 3
+        msum = 0.d0
+        r_barycentre(k) = 0.d0
+        v_barycentre(k) = 0.d0
+        do i = 1, nbod
+           msum = msum + m(i)
+           r_barycentre(k) = r_barycentre(k) + r(i,k)*m(i)
+           v_barycentre(k) = v_barycentre(k) + v(i,k)*m(i)
+        enddo
+        r_barycentre(k) = r_barycentre(k)/msum
+        v_barycentre(k) = v_barycentre(k)/msum
+      enddo
+
+      if (debug_swift) then
+        write(*,*) "# barycentre coordinates:"
+        write(*,*) (r_barycentre(k), k=1,3), (v_barycentre(k), k=1,3)
+      endif
+
         if (t.ge.tout_-eps) then
           dttmp = t_of_interest(min(j+1,n_of_interest))-t
           if (dttmp.gt.0.d0) then

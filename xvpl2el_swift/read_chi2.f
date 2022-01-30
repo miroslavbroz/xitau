@@ -13,7 +13,7 @@ c output
 
 c constants
       integer NDIMMAX
-      parameter(NDIMMAX = 40)
+      parameter(NDIMMAX = 46)
       integer NBODMAX
       parameter(NBODMAX=4)
       integer BANDMAX

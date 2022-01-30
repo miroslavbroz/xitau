@@ -30,6 +30,7 @@ c internal variables
       integer i, j, k, l, i1st, iu, ialpha, nmin
       real*8 chi2
       real*8 r_photocentre(3), v_photocentre(3), Lumtot
+      real*8 r_barycentre(3), v_barycentre(3), msum
       real*8 lambda_eff, band_eff
       real*8 tmin(MINMAX), duration(MINMAX)  ! from chi2_func_TTV.f
       real*8 gamma, gamma_auday
