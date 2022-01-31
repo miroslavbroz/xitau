@@ -34,6 +34,7 @@ obj = \
   misc/au_day.o \
   misc/auday_kms.o \
   misc/dotprod.o \
+  misc/eps_earth.o \
   misc/kms_auday.o \
   misc/length.o \
   misc/normalize.o \

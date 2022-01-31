@@ -151,8 +151,8 @@ c hereinafter, x, y, z, dx, dy, dz, u, v, w denote velocities!
         z12_interp = interp(tout(j-1), tout(j), dz_, dz, t_interp)
 
         if (use_vardist) then
-          call uvw(ecl(i), ecb(i), x12_interp, y12_interp, z12_interp,
-     :      u, v, w)
+          call uvw(t_interp, ecl(i), ecb(i), x12_interp, y12_interp,
+     :      z12_interp, u, v, w)
         else
           u = x12_interp
           v = y12_interp
@@ -185,8 +185,8 @@ c hereinafter, x, y, z, dx, dy, dz, u, v, w denote velocities!
           z12_interp = interp(tout(j-1), tout(j), dz_, dz, t_interp)
 
           if (use_vardist) then
-            call uvw(ecl(i), ecb(i), x12_interp, y12_interp, z12_interp,
-     :        u2, v2, w2)
+            call uvw(t_interp, ecl(i), ecb(i), x12_interp, y12_interp,
+     :        z12_interp, u2, v2, w2)
           else
             u2 = x12_interp
             v2 = y12_interp
