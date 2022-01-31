@@ -1,2 +1,0 @@
- # t_RV & vzb_RV              & sigmavz_RV & ibod & chi^2
- # t_RV & vzb_interp [AU/day] & sigmavz_RV & ibod & chi^2

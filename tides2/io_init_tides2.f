@@ -65,9 +65,6 @@ c functions
       read(iu,*,err=990,end=990) use_tides2
       write(*,*) "# use_tides2 = ", use_tides2
 
-      read(iu,*,err=990,end=990) use_ppn
-      write(*,*) "# use_ppn = ", use_ppn
-
       close(iu)
 
       return

@@ -64,6 +64,7 @@ obj = \
   orbel/orbel_schget.o \
   orbel/orbel_xv2el.o \
   orbel/orbel_zget.o \
+  ppn/getacc_ppn.o \
   pyterpol/pyterpol_.o \
   simplex/amebsa.o \
   simplex/amoeba.o \
@@ -149,7 +150,6 @@ obj = \
   tides/mignard_torque.o \
   tides/spin_evolve.o \
   tides2/io_init_tides2.o \
-  tides2/getacc_ppn.o \
   tides2/getacc_tides2.o \
   tu4/tu4_getaccb.o \
   tu4/tu4_getaccb_tp.o \

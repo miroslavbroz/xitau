@@ -1,0 +1,5 @@
+2			! nbod
+0.0			! external_mass [M_S]
+F			! use_tides2 [T|F]
+F			! use_ppn [T|F]
+

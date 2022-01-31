@@ -12,10 +12,10 @@ c Miroslav Broz (miroslav.broz@email.cz), Sep 2nd 2020
 
       real*8 external_mass
 
-      logical use_tides2, use_ppn
+      logical use_tides2
 
       common /tides2/ k_L, omega_rot, R_body,
      :  koef1, koef2, R_body5,
      :  external_mass,
-     :  use_tides2, use_ppn
+     :  use_tides2
 

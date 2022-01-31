@@ -1,7 +1,0 @@
-0.0d0 365.25d3 0.1d0		! t0, tstop, dt
-36.525d0 36.525d0		! dtout, dttmp
-F T F T T F			! J2 and J4, check close encounters, Jacobi integral, energy integral, binary output, integer*2 output
--1. -1. -1. -1. F		! rmin, rmax, rmaxu, qmin, lclose
-out_DAY_barycentric.dat
-unknown
-

@@ -1,6 +1,0 @@
-
-This is a test of tides (according to Eqs. (2) and (15) from Fabrycky 2010).
-
-We only output barycentric coordinates in this directory.
-Then, longterm/swift_bs.sh script should be run.
-

@@ -12,6 +12,9 @@
       read(*,*,err=990,end=990) use_bruteforce
       write(*,*) "# use_bruteforce = ", use_bruteforce
 
+      read(*,*,err=990,end=990) use_ppn
+      write(*,*) "# use_ppn = ", use_ppn
+
       write(*,*) "# is_forward : "
       read(*,*,err=990,end=990) is_forward
       write(*,*) "# is_forward = ", is_forward

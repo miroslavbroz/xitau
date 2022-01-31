@@ -18,7 +18,7 @@ c   http://physics.nist.gov/cgi-bin/cuu/Value?k
       parameter(pi_ = 4.d0*atan(1.d0))
       parameter(deg = pi_/180.d0, rad = 180.d0/pi_)
 
-      parameter(c = 2.99792458d8)  ! m/s
+      parameter(c = 2.99792458d8)  ! m/s, from CODATA 2018, exact
       parameter(AU = 1.49597870700d11)  ! m, from IAU 2012
       parameter(GM_S = 0.2959122082855911d-03)  ! AU^3/day^2, from JPLEPH DE405
       parameter(R_S = 6.957d8)  ! m, from IAU 2015
@@ -27,8 +27,8 @@ c   http://physics.nist.gov/cgi-bin/cuu/Value?k
       parameter(arcsec = (deg/3600.d0))  ! rad
       parameter(mas = arcsec/1.d3)  ! rad
 
-      parameter(h = 6.626070040d-34)  ! J s, from 2014 CODATA
-      parameter(k_B = 1.38064852d-23)  ! J K^-1, from 2014 CODATA
+      parameter(h = 6.62607015d-34)  ! J s, from 2018 CODATA, exact
+      parameter(k_B = 1.380649d-23)  ! J K^-1, from 2018 CODATA, exact
       parameter(G = 6.67430d-11)  ! m^3 kg^-1 s^-2, from 2018 CODATA
 
       parameter(eps_J2000 = (23.d0+26.d0/60.d0+21.448d0/3600.d0)*deg)

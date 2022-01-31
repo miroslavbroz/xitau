@@ -38,6 +38,7 @@
       logical use_planck, use_filters, use_limbdark, use_pyterpol
       logical use_hec88(NBODMAX)
       logical use_vardist, use_varpole, use_multipole, use_bruteforce
+      logical use_ppn
       logical is_forward
       logical debug, debug_swift
 
@@ -67,6 +68,7 @@
      &  use_planck, use_filters, use_limbdark, use_pyterpol,            &
      &  use_hec88,                                                      &
      &  use_vardist, use_varpole, use_multipole, use_bruteforce,        &
+     &  use_ppn,                                                        &
      &  is_forward,                                                     &
      &  debug, debug_swift
 

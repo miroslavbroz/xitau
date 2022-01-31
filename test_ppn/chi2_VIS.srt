@@ -1,2 +1,0 @@
- # t_VIS & u [m] & v [m] & lambda [m] & Vsq_VIS    [] & sigma_Vsq_VIS [] & dataset & chi^2
- # t_VIS & u [m] & v [m] & lambda [m] & Vsq_interp [] & sigma_Vsq_VIS [] & dataset & chi^2

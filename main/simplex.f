@@ -224,6 +224,9 @@ c
       read(*,*,err=990,end=990) use_bruteforce
       write(*,*) "# use_bruteforce = ", use_bruteforce
 
+      read(*,*,err=990,end=990) use_ppn
+      write(*,*) "# use_ppn = ", use_ppn
+
       write(*,*) "# w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC ",
      :  "w_SYN w_SED w_AO w_SKY2 w_SKY3 : "
       read(*,*,err=990,end=990) w_SKY, w_RV, w_TTV, w_ECL, w_VIS, w_CLO,

@@ -1,2 +1,0 @@
- # t_SKY & xh_SKY         & yh_SKY    & major & minor & PA_ellipse [rad] & ibod & chi^2
- # t_SKY & xh_interp [AU] & yh_interp & major & minor & PA_ellipse [rad] & ibod & chi^2
