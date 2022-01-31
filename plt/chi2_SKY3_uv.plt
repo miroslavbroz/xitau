@@ -13,7 +13,7 @@ set tit "viewing geometry is changing..."
 set xl "u [arcsec]"
 set yl "v [arcsec]"
 
-tmp=0.8
+tmp=1.0
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set size ratio -1
@@ -23,8 +23,8 @@ set key left
 
 load "T0.plt"
 
-d_pc = x_param26
-f(x) = x/((d_pc*pc)/au)/arcsec
+#d_pc = x_param29
+d_pc = x_param20
 
 set cbl "ibod"
 set cbr [2:3]
@@ -35,35 +35,39 @@ set palette defined (\
   )
 
 fac = 0.10
+x1 = 3.7e-6
+y1 = 2.7e-6
 x1 = 0.0
 y1 = 0.0
-r1 = 5.*km/(d_pc*pc)/arcsec
-print "r1 = ", r1
+a1 = 5.*km/(d_pc*pc)/arcsec
 x2 = x1
 y2 = y1
-a2 = 3.63e-3
+a2 = 3.63e-3*arcsec/arcsec
 b2 = a2
-print "a2 = ", a2
 x3 = x1
 y3 = y1
 a3 = 8*a2/2.
 b3 = a3
-print "a3 = ", a3
+print "a1 = ", a1, " arcsec (5 km)"
+print "a2 = ", a2, " arcsec (1 pixel)"
+print "a3 = ", a3, " arcsec (PSF)"
+
+f(x,d) = x/d/arcsec
 
 p \
-  "<awk '($2==-2)' out_JDATE_uvw.dat" u (f($3)):(f($4)) t "2" w l lt 2,\
-  "<awk '($2==-3)' out_JDATE_uvw.dat" u (f($3)):(f($4)) t "3" w l lc '#00ccff',\
+  "<awk '($2==-2)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "2" w l lt 2,\
+  "<awk '($2==-3)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "3" w l lc '#00ccff',\
   "chi2_SKY3.dat" u ($10+fac*$2):($11+fac*$3):9 t "residua" w l lc palette z lw 3,\
   "<awk '!/#/ && (NF>0){ i++; }(i==1){ print; }(NF==0){ i=0; }' chi2_SKY3.dat" u 10:11:(fac*$2):(fac*$3) t "synthetic" w vectors lc '#999999',\
   "<awk '!/#/ && (NF>0){ i++; }(i==2){ print; }(NF==0){ i=0; }' chi2_SKY3.dat" u 10:11:(fac*$2):(fac*$3) t "observed"  w vectors lc 'black',\
   "<awk '!/#/ && (NF>0){ i++; }(i==2){ print; }(NF==0){ i=0; }' chi2_SKY3.dat" u ($10+fac*$2):($11+fac*$3):(sprintf("  %.0f", $1-2400000)) not w labels left,\
   sprintf("<./ellipse2.awk %.6e %.6e %.6e %.6e", x3, y3, a3, b3) u 1:2 t "PSF (3-sigma)" w l lc 'black' dt 2,\
-  sprintf("<./ellipse2.awk %.ef %.ef %.ef %.ef", x1, y1, r1, r1) u 1:2 t "10 km" w l lc 'black',\
+  sprintf("<./ellipse2.awk %.ef %.ef %.ef %.ef", x1, y1, a1, a1) u 1:2 t "10 km" w l lc 'black',\
   "box.dat" u (x2-a2/2+a2*$1):(y2-b2/2+b2*$2) t "1 pixel" w l lc 'gray'
 
 pa -1
 
-set term png small size 1024,1024
+set term png small size 2048,2048
 set out "chi2_SKY3_uv.png"
 rep
 
