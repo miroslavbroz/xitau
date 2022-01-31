@@ -26,10 +26,9 @@ It should be a small fraction (e.g. 1/20 to 1/100) of the SHORTEST orbital perio
 The size of buffers used to store the results can be set up in simplex/simplex.inc.
 
 As usually, one should check for convergence by decreasing dt -> ~0
-or eps_BS parameter. For small dtout this may be rather memory consuming
-(or even impossible) for very small P_1. In this unfortunate case, one should use
-a different code version, which stores only interesting PARTS of the integration
-(in the surroundings of observed times) -- see nyvir_chi2_simplex code.
+or eps_BS parameter. However, if dtout is set too small, it may be rather memory
+consuming (if not impossible). Luckily, the code always integrates to and outputs
+all "times of interest", i.e. close to the times of all observations.
 
 --
 
