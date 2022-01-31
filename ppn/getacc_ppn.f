@@ -14,7 +14,6 @@ c "Orbital ephemerides of the Sun, Moon and Planets."
       include "../misc/const.inc"
       include "../simplex/simplex.inc"
       include "../simplex/dependent.inc"
-      include "../bs/bs.inc"
 
 c input
       integer nbod_
@@ -42,12 +41,6 @@ c internal
       save i1st,last
 
       if (.not.use_ppn) return
-
-      if (i1st.eq.0) then
-        open(unit=25, file="acc.out", status="unknown")
-        last = 0.d0
-        i1st = 1
-      endif
 
       beta = 1.d0
       gama = 1.d0
@@ -105,16 +98,9 @@ c internal
             ayb(i) = ayb(i) + ay
             azb(i) = azb(i) + az
 
-            if ((i.eq.3).and.(j.eq.4).and.(time_from_bs_step.ne.last))
-     :        then
-              write(25,*) time_from_bs_step, i, j, ax, ay, az
-            endif
-
           endif
         enddo
       enddo
-
-      last = time_from_bs_step
 
       return
       end
