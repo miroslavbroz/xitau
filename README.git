@@ -10,5 +10,6 @@ A few examples regarding the usage of git:
   git commit .
   git log
   git ls-files
+  git rebase -i HEAD~4
 
 
