@@ -13,8 +13,8 @@ set grid
 set samples 1000
 
 nparam = 0
-temptr = 200000.
-iter_at_temp = 50
+temptr = 1000000.
+iter_at_temp = 100
 eps_temptr = 0.10
 
 p "<awk 'BEGIN{ itertot = 0; }/# itertot/{ itertot = $4; }/# temptr/{ print itertot, $4; }' simann.out"  u 1:2 not w lp,\

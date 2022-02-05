@@ -15,9 +15,9 @@ set cbl "dataset"
 set size ratio -1
 
 tmp=0.5
-set xr [-tmp:tmp]
-set yr [-tmp:tmp]
-set zr [-tmp:tmp]
+#set xr [-tmp:tmp]
+#set yr [-tmp:tmp]
+#set zr [-tmp:tmp]
 set zeroaxis
 set ang rad
 set xyplane 0

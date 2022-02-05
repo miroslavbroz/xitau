@@ -1,18 +1,21 @@
 
 In order to get Pyterpol running, I had to install the following:
 
-  apt-get install python
-  apt-get install python-matplotlib
-  apt-get install python-scipy
-  apt-get install python-astropy
-  apt-get install python-nlopt
-  apt-get install python-pip
+  apt-get install python3
+  apt-get install python3-matplotlib
+  apt-get install python3-scipy
+  apt-get install python3-astropy
+  apt-get install python3-nlopt
+  apt-get install python3-pip
   pip install emcee
   pip install corner
 
 Additionally, one needs the grid to interpolate in, of course.
 Pyterpol can already use AMBRE, POLLUX, OSTAR, BSTAR and PHOENIX grids.
-To obtain the whole package (5 GB), you can contact Jana Nemravova
-(janicka.ari@gmail.com) directly, I think.
+To obtain the whole package (~5 GB), you can contact Jana Nemravova
+(janicka.ari@gmail.com) directly, I think. Alternatively, download it
+directly from here:
+
+  http://sirrah.troja.mff.cuni.cz/~mira/xitau/
 
 
