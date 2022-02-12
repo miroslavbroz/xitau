@@ -3,7 +3,7 @@
 ! Miroslav Broz (miroslav.broz@email.cz), Aug 19th 2020
 
       integer NDIMMAX
-      parameter(NDIMMAX = 46)		! number of chi^2 dimensions (free parameters)
+      parameter(NDIMMAX = 50)		! number of chi^2 dimensions (free parameters)
 
       integer NBODMAX, OUTMAX1, OUTMAX2, OUTMAX, OBSMAX, MINMAX
       integer TIMEMAX, BANDMAX, SEDMAX, FLTMAX, AOMAX

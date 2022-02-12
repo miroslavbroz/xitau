@@ -49,7 +49,7 @@ c read input parameters (and write input to terminal)
       read(*,*,err=990,end=990) eps_BS
       write(*,*) "# eps_BS = ", eps_BS
 
-      call read_dependent()
+      call read_dependent_bs()
 
 c read integration parameters from files
       call io_init_param(inparfile,t0,tstop,dt,dtout,dtdump,

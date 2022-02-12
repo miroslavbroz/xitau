@@ -29,6 +29,7 @@ obj = \
   limcof/limcof_read.o \
   limcof/limcof_interp.o \
   main/read_dependent.o \
+  main/read_dependent_bs.o \
   misc/arcsec_au.o \
   misc/au_arcsec.o \
   misc/au_day.o \
@@ -141,6 +142,23 @@ obj = \
   simplex/uvw1.o \
   simplex/uvw2.o \
   simplex/write_uvw.o \
+  subplex/calcc.o \
+  subplex/dasum.o \
+  subplex/daxpy.o \
+  subplex/dcopy.o \
+  subplex/dist.o \
+  subplex/dscal.o \
+  subplex/evalf.o \
+  subplex/fstats.o \
+  subplex/newpt.o \
+  subplex/order.o \
+  subplex/partx.o \
+  subplex/setstp.o \
+  subplex/simplx.o \
+  subplex/sortd.o \
+  subplex/start.o \
+  subplex/subopt.o \
+  subplex/subplx.o \
   tides/dissipation_factor.o \
   tides/getaccb_tides.o \
   tides/io_dump_spin.o \
@@ -246,8 +264,9 @@ inc = \
   simplex/cb_t3amp.inc \
   tides/tides.inc \
   wd/lc.inc \
+  subplex/usubc.inc \
 
-all: main/chi2 main/simplex main/simann main/swift_bs
+all: main/chi2 main/simplex main/simann main/subplex main/swift_bs
 
 main/chi2: main/chi2.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
@@ -256,6 +275,9 @@ main/simplex: main/simplex.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 main/simann: main/simann.f $(obj) $(obj90) $(objc) $(inc)
+	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
+
+main/subplex: main/subplex.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 main/swift_bs: main/swift_bs.f $(obj) $(obj90) $(objc) $(inc)

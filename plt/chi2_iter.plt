@@ -1,7 +1,7 @@
 #!/usr/bin/gnuplot
 
 chi2 = `awk 'BEGIN{ min=1e38; }{ chi=$NF; if (chi<min){ min=chi; } }END{ print min; }' chi2_func.tmp`
-nfree = 13
+nfree = 47
 
 set colors classic
 set term x11
@@ -10,7 +10,7 @@ set xl "iter"
 set yl "chi^2"
 
 set yr [1e0:1e8]
-#set yr [200:300]
+#set yr [1700000:1800000]
 set logscale y
 set ytics 10
 set mytics 10
