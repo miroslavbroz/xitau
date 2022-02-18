@@ -15,7 +15,7 @@ c see explanations in lc.in example
       real*8 e, a, f1, f2, vga, xincl, gr1, gr2, abunin
       real*8 tavh, tavc, alb1, alb2, poth, potc, rm
       real*8 xbol1, xbol2, ybol1, ybol2
-      real*8 hlum, clum, xh,xc, yh, yc, el3, opsf, zero, factor, wl
+      real*8 hlum, clum, xh, xc, yh, yc, el3, opsf, zero, factor, wl
 
       common /cb_lc/
      :  jdphs, hjd0, period, dpdt, pshift, stdev, seed,
@@ -24,7 +24,7 @@ c see explanations in lc.in example
      :  e, a, f1, f2, vga, xincl, gr1, gr2, abunin,
      :  tavh, tavc, alb1, alb2, poth, potc, rm,
      :  xbol1, xbol2, ybol1, ybol2,
-     :  hlum, clum, xh,xc, yh, yc, el3, opsf, zero, factor, wl,
+     :  hlum, clum, xh, xc, yh, yc, el3, opsf, zero, factor, wl,
      :  mpage, nref, mref, ifsmv1, ifsmv2, icor1, icor2, ld,
      :  noise,
      :  mode, ipb, ifat1, ifat2, n1, n2,

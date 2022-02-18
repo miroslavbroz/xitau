@@ -46,7 +46,7 @@ c internal variables
       real*8 tavh, tavc, poth, potc, rm, hlum, clum, el3
 
 c functions
-      real*8 interp, dotprod, au_day, omega_kopal, omega_kopal_approx
+      real*8 interp, dotprod, au_day, omega_kopal_approx
 
       data iu /15/  ! not 10 (which is used by the WD code)
       data i1st /0/
@@ -237,6 +237,9 @@ c approximate values of Kopal potential
 c
           poth = omega_kopal_approx(R_star(1)*R_S/(dist*AU), rm, 0.d0)
           potc = omega_kopal_approx(R_star(2)*R_S/(dist*AU), rm, 1.d0)
+!          poth = 4.0d0  ! dbg
+!          potc = 7.0d0  ! dbg
+
 c
 c compute magnitude with the Wilson & Devinney (1971) code
 c

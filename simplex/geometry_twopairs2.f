@@ -137,6 +137,8 @@ c finally, convert to barycentric frame
      :  x,y,z,vx,vy,vz)
 
       include '../misc/const.inc'
+      include 'simplex.inc'
+      include 'dependent.inc'
       integer ialpha
       real*8 msum,P,loge,inc,capom,varpi,lambda
       real*8 x,y,z,vx,vy,vz
@@ -153,6 +155,10 @@ c finally, convert to barycentric frame
      :  capom,omega,capm,
      :  x,y,z,
      :  vx,vy,vz)
+
+      if (debug_swift) then
+        write(*,*) '# a = ', a, ' au = ', a*au/R_S, ' R_S'
+      endif
 
       return
       end

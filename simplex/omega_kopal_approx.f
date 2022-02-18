@@ -8,25 +8,36 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 1st 2016
 c input
       real*8 R, q, x0
 c internal
-      real*8 phi, x, y, z, r1, r2, r3, Omega_, sum
-      integer i, n
+      real*8 phi, theta, x, y, z, r1, r2, r3, Omega_, sum, tmp
+      integer i, j, n, m
 c functions
       real*8 omega_kopal
 
+!      open(unit=25, file='omega_kopal.dat', status='unknown')
+!      write(25,*) '# x [a=1] & y & z & Omega_kopal [a^-1]'
+
       n = 32
+      m = 32
       sum = 0.d0
       do i = 1, n
-        phi = 2.d0*pi_*(i-1)/n
-        x = R*cos(phi) + x0
-        y = R*sin(phi)
-        z = 0.d0
-        r1 = sqrt(x**2 + y**2 + z**2)
-        r2 = sqrt((x-1.d0)**2 + y**2 + z**2)
-        r3 = sqrt((x-q/(1.d0+q))**2 + y**2)
-        sum = sum + omega_kopal(r1, r2, r3, q)
+        do j = 1, m
+          phi = 2.d0*pi_*(i-1)/n
+          theta = -0.5d0*pi_ + pi_*(j-1)/n
+          x = R*cos(phi)*cos(theta) + x0
+          y = R*sin(phi)*cos(theta)
+          z = R*sin(theta)
+          r1 = sqrt(x**2 + y**2 + z**2)
+          r2 = sqrt((x-1.d0)**2 + y**2 + z**2)
+          r3 = sqrt((x-q/(1.d0+q))**2 + y**2)
+          tmp = omega_kopal(r1, r2, r3, q)
+          sum = sum + tmp
+!          write(25,*) x, y, z, tmp  ! dbg
+        enddo
       enddo
 
-      omega_kopal_approx = sum/n
+!      close(25)
+
+      omega_kopal_approx = sum/(n*m)
       return
       end
 

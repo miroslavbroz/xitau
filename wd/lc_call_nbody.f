@@ -18,7 +18,7 @@ c input
       real*8 poth_        ! Kopal potential value for hot
       real*8 potc_        ! dtto for cold
       real*8 rm_          ! mass ratio q = m2/m1
-      integer iband_       ! photometric band (e.g. 7 = V)
+      integer iband_      ! photometric band (e.g. 7 = V)
       real*8 hlum_        ! luminosity of hot component [arbitrary units]
       real*8 clum_        ! dtto for cold
       real*8 el3_         ! 3rd-light flux, L3 = 4*pi*el3

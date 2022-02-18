@@ -1,6 +1,6 @@
 c chi2_func.f
 c Run integrator and calculate chi^2 for a given starting vector x().
-c Miroslav Broz (miroslav.broz@email.cz), Jun 7th 2017
+c Miroslav Broz (miroslav.broz@email.cz), Feb 18th 2022
 
       real*8 function chi2_func(x)
 
@@ -30,13 +30,13 @@ c internal variables
       integer i, j, k, l, i1st, iu, ialpha, nmin
       real*8 chi2
       real*8 r_photocentre(3), v_photocentre(3), Lumtot
-      real*8 r_barycentre(3), v_barycentre(3), msum
       real*8 lambda_eff, band_eff
       real*8 tmin(MINMAX), duration(MINMAX)  ! from chi2_func_TTV.f
       real*8 gamma, gamma_auday
       integer n_of_interest
       real*8 t_of_interest(TIMEMAX)
       real*8 t_of_interest1(TIMEMAX), t_of_interest2(TIMEMAX)
+      real*8 msum, q(NBODMAX)
       real*8 dummy
 
 c functions
@@ -62,13 +62,21 @@ c
       write(*,30) "# x() array:"
 30    format(a,$)
       write(*,*) (x(i), i=1,ndim)
-
+c
 c create m(), elmts() arrays for easy manipulation
-
+c
       j = 0
-      do i = 1, nbod
+
+c      do i = 1, nbod
+c        j = j+1
+c        m(i) = x_param(j)*GM_S
+c      enddo
+
+      j = j+1
+      msum = x_param(j)*GM_S
+      do i = 2, nbod
         j = j+1
-        m(i) = x_param(j)*GM_S
+        q(i) = x_param(j)
       enddo
 
       do i = 2, nbod
@@ -120,6 +128,26 @@ c        R_star(i) = x_param(j)
         write(*,*) "chi2_func.f: Error number of parameters is ", j,
      :    " .ne. nparam = ", nparam
         stop
+      endif
+c
+c convert ratios to masses
+c
+      m(1) = msum
+      do i = 2, nbod
+        m(1) = m(1)/(1.d0+q(i))
+        m(i) = 0.d0
+      enddo
+      do i = 2, nbod
+        do j = 1, i-1
+          m(i) = m(i)+m(j)
+        enddo
+        m(i) = q(i)*m(i)
+      enddo
+
+      if (debug) then
+        do i = 1, nbod
+          write(*,*) '# m(', i, ') = ', m(i)/GM_S, ' M_S'
+        enddo
       endif
 c
 c constrain orbital inclinations and nodes by pole (equator) of 1
@@ -474,8 +502,7 @@ c add an artificial term to constrain the masses!
 c
       chi2_MASS = 0.d0
       do i = 1, nbod
-        j = i  ! in x_param()
-        chi2_MASS = chi2_MASS + merit_func(x_param(j),m_min(i),m_max(i))
+        chi2_MASS = chi2_MASS + merit_func(m(i)/GM_S,m_min(i),m_max(i))
       enddo
 
 c-----------------------------------------------------------------------
@@ -511,4 +538,5 @@ c write hi-precision output
 
       return
       end
+
 

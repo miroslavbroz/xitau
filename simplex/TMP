@@ -1,3 +1,5 @@
+      write(*,*) 'a = ', a*au/R_S, ' R_S'  ! dbg
+
       do k = 1, 3
         msum = 0.d0
         r_barycentre(k) = 0.d0
