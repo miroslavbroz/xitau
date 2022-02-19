@@ -14,12 +14,14 @@ double precision :: V, R
 open(20, file='test_roche.out', status='unknown')
 write(20,*) '# q [1] & F [1] & P [1] & OmegaL1 [1] & OmegaF [1] & V [a=1] & R [a=1]'
 
+q = 1.3d0
+P = 1.0d0
+
+q = 3.9d0
+
 n = 18
 do i = 0, n
-  q = 1.3d0
   F = 0.10d0+(1.0d0-0.10d0)*i/n
-  P = 1.0d0
-
   V = RocheVolume()
   R = (V/(4.d0/3.d0*pi))**(1.d0/3.d0)
 

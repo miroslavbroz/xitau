@@ -135,7 +135,7 @@ c  write intermediate results
       enddo
 
 c  write the result of minimalisation
-      write(*,*) "x = ", x
+      write(*,*) "x = ", x(1:ndim)
       write(*,*) "y = ", y
 
       stop

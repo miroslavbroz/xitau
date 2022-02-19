@@ -152,7 +152,7 @@ else
 endif
 
 ! initial guess
-a = 0.05d0*REggleton(q)
+a = 0.01d0*REggleton(q)
 b = 1.0001d0*RL1
 b = RL1
 
