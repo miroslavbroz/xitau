@@ -4,6 +4,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Apr 20th 2016
 
       subroutine chi2_func_LC(NOUT, NOUT2, m, tout, rh, vh, rb, chi2, n)
 
+      use omega_roche_approx_module
+
       implicit none
       include '../misc/const.inc'
       include 'simplex.inc'
@@ -235,11 +237,8 @@ c   O_EB ... observer's direction
 c
 c approximate values of Kopal potential
 c
-          poth = omega_kopal_approx(R_star(1)*R_S/(dist*AU), rm, 0.d0)
-          potc = omega_kopal_approx(R_star(2)*R_S/(dist*AU), rm, 1.d0)
-!          poth = 4.0d0  ! dbg
-!          potc = 7.0d0  ! dbg
-
+          poth = omega_roche_approx(R_star(1)*R_S/(dist*AU), rm, 1)
+          potc = omega_roche_approx(R_star(2)*R_S/(dist*AU), 1.d0/rm, 2)
 c
 c compute magnitude with the Wilson & Devinney (1971) code
 c

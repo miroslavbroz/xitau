@@ -1,0 +1,35 @@
+ **************Roche Lobe Radius Calculator***************
+            (D.Leahy, University of Calgary, 2014)     
+   Free Parameters are:
+   q (mass ratio M2/M1, for Roche Lobe of M1)
+   F (fillout factor, with F defined by Mochnacki 1984)
+   P (rotation rate of M1 relative to synchronous rotation)
+       P=\Omega_{M1)/\Omega_{binary}, P<1 is subsynchronous,
+       P=1 is synchronous, P>1 is supersynchronous
+   F can be in the range 0.1 to 1.0, P in the range 0.01 to 2.
+   In cases below where F and P are not specified, it is assumed F=P=1.0
+   For file input, one set of input parameters per row is assumed, input is terminated by end of file.
+  
+ *************The following options are available*****************
+ 1. Single input q and output radii,vol,area to terminal;
+ 2. Input set q from file Inputq.txt and output radii,vol,area to file;
+ 3. Single input q,theta,phi and output R(theta,phi) to terminal;
+ 4. Input set (q,theta,phi) from InputqThePhi.txt and output R(theta,phi) to file;
+ 5. Single input q,F,P and output radii,vol,area to terminal;
+ 6. Input set (q,P,F) from InputqPF.txt and output radii,vol,area to file;
+ 7. Single input q,F,P,theta,phi and output R(theta,phi) to terminal;
+ 8. Input set (q,theta,phi,F,P) from InputqThePhiFP.txt and output R(theta,phi) to file;
+ ----> enter the option number(any other integer to exit):
+ -- Output saved in file qFPRVolArea.txt -- 
+ values are: q,F,P,RL1,OmegaL1,X2,Om2,X3,Om3,OmegaF,Rfr,Rbk,Ry,Rz,vol,Req,area,Ra
+ end of file reached
+ *************The following options are available*****************
+ 1. Single input q and output radii,vol,area to terminal;
+ 2. Input set q from file Inputq.txt and output radii,vol,area to file;
+ 3. Single input q,theta,phi and output R(theta,phi) to terminal;
+ 4. Input set (q,theta,phi) from InputqThePhi.txt and output R(theta,phi) to file;
+ 5. Single input q,F,P and output radii,vol,area to terminal;
+ 6. Input set (q,P,F) from InputqPF.txt and output radii,vol,area to file;
+ 7. Single input q,F,P,theta,phi and output R(theta,phi) to terminal;
+ 8. Input set (q,theta,phi,F,P) from InputqThePhiFP.txt and output R(theta,phi) to file;
+ ----> enter the option number(any other integer to exit):

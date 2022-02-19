@@ -148,7 +148,7 @@ deallocate(f_)
 
 end subroutine silhouette2
 
-! Non-monotonic interpolation; we use is for x(f), NOT f(x)!
+! Non-monotonic interpolation; we use it for x(f), NOT f(x)!
 
 double precision function interp_(x, y, x0)
 

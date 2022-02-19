@@ -1,3 +1,6 @@
+          poth = omega_kopal_approx(R_star(1)*R_S/(dist*AU), rm, 0.d0)
+          potc = omega_kopal_approx(R_star(2)*R_S/(dist*AU), rm, 1.d0)
+
       write(*,*) 'a = ', a*au/R_S, ' R_S'  ! dbg
 
       do k = 1, 3

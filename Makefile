@@ -246,6 +246,10 @@ obj90 = \
   multipole/getacc_bf2.o \
   multipole/getacc_mp.o \
   multipole/getacc_mp2.o \
+  roche/root.o \
+  roche/romberg.o \
+  roche/roche.o \
+  roche/omega_roche_approx.o \
   simplex/uvw_nodes.o \
 
 objc = \

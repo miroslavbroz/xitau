@@ -1,0 +1,7 @@
+6	! 5 .. input from InputqPF.txt
+9	! 9 .. exit
+
+# 5		! input q F P
+# 1.3 1.0 1.0	! q F P mass ratio, fill-out factor, rotation parameter
+# 9
+
