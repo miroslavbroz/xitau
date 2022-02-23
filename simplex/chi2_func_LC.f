@@ -4,6 +4,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Apr 20th 2016
 
       subroutine chi2_func_LC(NOUT, NOUT2, m, tout, rh, vh, rb, chi2, n)
 
+      use roche_module
       use omega_roche_approx_module
 
       implicit none
@@ -237,6 +238,8 @@ c   O_EB ... observer's direction
 c
 c approximate values of Kopal potential
 c
+
+c if Omega > OmegaL1, * is smaller than critical equipotential (vice versa)
           poth = omega_roche_approx(R_star(1)*R_S/(dist*AU), rm, 1)
           potc = omega_roche_approx(R_star(2)*R_S/(dist*AU), 1.d0/rm, 2)
 c

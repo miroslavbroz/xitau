@@ -1,6 +1,7 @@
 #!/bin/sh
 
-make
+make clean
+make || exit
 
 ./test_roche
 

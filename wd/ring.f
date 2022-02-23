@@ -1,9 +1,12 @@
 
       SUBROUTINE RING(Q,OM,KOMP,L,FR,HLD,R1,RL)
+
 c   Version of September 14, 1998
+
       IMPLICIT REAL*8(A-H,O-Z)
       DIMENSION RAD(100),THET(100),AA(3),BB(3),FI(150),THA(150),FR(*),
      $HLD(*)
+
       IX=0
       LR=L+1
       DO 92 I=1,LR
@@ -26,17 +29,20 @@ c   Version of September 14, 1998
       TH=EYT*1.570796326794897d0/EL
       COSQ=DCOS(TH)**2
       DELR=0.D0
-   14 R=DABS(R+DELR)
-      RSQ=R*R
-      X2R2=XLSQ+RSQ
-      RX2R2=DSQRT(X2R2)
-      XM2R2=(XL-1.D0)**2+RSQ
-      RXM2R2=DSQRT(XM2R2)
-      OM=1.D0/RX2R2+Q*(1.D0/RXM2R2-XL)+.5D0*(Q+1.D0)*(XLSQ+RSQ*COSQ)
-      DOMDR=-R/(X2R2*RX2R2)-Q*R/(XM2R2*RXM2R2)+(Q+1.D0)*COSQ*R
-      DELR=(OMEGA-OM)/DOMDR
-      ABDELR=DABS(DELR)
-      IF(ABDELR.GT..00001D0) GOTO 14
+
+   14 continue
+        R=DABS(R+DELR)
+        RSQ=R*R
+        X2R2=XLSQ+RSQ
+        RX2R2=DSQRT(X2R2)
+        XM2R2=(XL-1.D0)**2+RSQ
+        RXM2R2=DSQRT(XM2R2)
+        OM=1.D0/RX2R2+Q*(1.D0/RXM2R2-XL)+.5D0*(Q+1.D0)*(XLSQ+RSQ*COSQ)
+        DOMDR=-R/(X2R2*RX2R2)-Q*R/(XM2R2*RXM2R2)+(Q+1.D0)*COSQ*R
+        DELR=(OMEGA-OM)/DOMDR
+        ABDELR=DABS(DELR)
+      if (ABDELR.GT..00001D0) GOTO 14
+
       RAD(IT)=R
    22 THET(IT)=TH*4.D0
       R1=RAD(1)
@@ -77,7 +83,9 @@ c   Version of September 14, 1998
       DELSIN=0.D0
       KNTR=0
       SINTH=DSQRT(COSSQ*(XLSQ+R90SQ)/R90SQ)
-   88 SINTH=SINTH+DELSIN
+
+   88 continue
+      SINTH=SINTH+DELSIN
       KNTR=KNTR+1
       IF(SINTH.GT.1.D0) SINTH=1.D0/SINTH
       CSQ=1.D0-SINTH*SINTH
@@ -100,6 +108,7 @@ c   Version of September 14, 1998
       DELSIN=-F/DFDSIN
       ABDEL=DABS(DELSIN)
       IF(ABDEL.GT..00001D0)  GOTO 88
+
    42 FI(IR)=DATAN(RR*COSTH/XL)
    50 LL1=LL+1
       DELTH=1.570796326794897D0/EL
@@ -205,3 +214,4 @@ c   Version of September 14, 1998
    94 FR(JB)=HLD(JA)
       RETURN
       END
+

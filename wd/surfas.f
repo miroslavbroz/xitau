@@ -3,7 +3,9 @@
      $GRXQ,GRYQ,GRZQ,MMSAVE,FR1,FR2,HLD,FF,D,SNTH,CSTH,SNFI,CSFI,GRV1,
      $GRV2,XX1,YY1,ZZ1,XX2,YY2,ZZ2,CSBT1,CSBT2,GLUMP1,GLUMP2,GMAG1,
      $GMAG2,glog1,glog2,GREXP)
+
 c  Version of June 9, 2004
+
       implicit real*8 (a-h,o-z)
       DIMENSION RV(*),GRX(*),GRY(*),GRZ(*),RVQ(*),GRXQ(*),GRYQ(*),GRZQ(*
      $),MMSAVE(*),FR1(*),FR2(*),HLD(*),SNTH(*),CSTH(*),SNFI(*),CSFI(*)
@@ -15,6 +17,7 @@ c  Version of June 9, 2004
       COMMON /misc/ X1
       COMMON /ECCEN/e,smaxis,period,vgadum,sindum,vfdum,vfadum,vgmdum,
      $v1dum,v2dum,ifcdum
+
       DSQ=D*D
       RMAS=RMASS
       IF(KOMP.EQ.2) RMAS=1.d0/RMASS
@@ -48,24 +51,27 @@ c  Version of June 9, 2004
    15 POT=POTENT
       RM=RMASS
    20 EN=N
+
 c ********************************************
 c  Find the relative polar radius, R/a
       DELR=0.d0
       R=1.d0/pot
       knt=0
-  714 R=R+DELR
-      knt=knt+1
-      tolr=1.d-6*dabs(r)
-      RSQ=R*R
-      PAR=DSQ+RSQ
-      RPAR=dsqrt(PAR)
-      OM=1.d0/R+RM/RPAR
-      DOMR=1.d0/(-1.d0/RSQ-RM*R/(PAR*RPAR))
-      DELR=(POT-OM)*DOMR
-      ABDELR=dabs(DELR)
+  714 continue
+        R=R+DELR
+        knt=knt+1
+        tolr=1.d-6*dabs(r)
+        RSQ=R*R
+        PAR=DSQ+RSQ
+        RPAR=dsqrt(PAR)
+        OM=1.d0/R+RM/RPAR
+        DOMR=1.d0/(-1.d0/RSQ-RM*R/(PAR*RPAR))
+        DELR=(POT-OM)*DOMR
+        ABDELR=dabs(DELR)
       IF(ABDELR.GT.tolr) GOTO 714
       rpole=r
       rsave=r
+
 c ********************************************
 c  Now compute GRPOLE (exactly at the pole)
       x=cmpd
@@ -82,10 +88,15 @@ c  Now compute GRPOLE (exactly at the pole)
       IF(KOMP.EQ.2) OMX=RMS*XL*XNUM2-X*XNUM1-RM1S*XL*RF+1.d0/DSQ
       grpole=dsqrt(OMX*OMX+OMZ*OMZ)
 c ********************************************
+
       call gabs(komp,smaxis,rmass,e,period,d,rpole,xmas,xmaso,absgr,
      $glogg)
+
       if(komp.eq.1) gplog1=glogg
       if(komp.eq.2) gplog2=glogg
+c
+c main cycle
+c
       DO 8 I=1,N
       IF(I.NE.2) GOTO 82
       IF(KOMP.EQ.1) RTEST=.3d0*RV(1)
@@ -99,6 +110,7 @@ c ********************************************
       XLUMP=1.d0-XNUSQ
       MM=EM+1.d0
       afac=rf*rm1*xlump
+
       DO 8 J=1,MM
       KOUNT=0
       IS=IS+1
@@ -112,6 +124,7 @@ c ********************************************
       R=RSAVE
       oldr=r
       knth=0
+
    14 R=R+DELR
       tolr=1.d-6*dabs(r)
       if(kount.lt.1) goto 170
@@ -121,12 +134,13 @@ c ********************************************
       delr=0.5d0*delr
       r=oldr
       goto 14
+
   170 continue
       KOUNT=KOUNT+1
       IF(KOUNT.LT.80) GOTO 70
-      KFLAG=1
-      R=-1.d0
-      GOTO 86
+        KFLAG=1
+        R=-1.d0
+        GOTO 86
    70 continue
       RSQ=R*R
       rcube=r*rsq
@@ -143,6 +157,7 @@ c ********************************************
       oldr=r
       ABDELR=dabs(DELR)
       IF(ABDELR.GT.tolr) GOTO 14
+
       ABR=dabs(R)
       IF(R.GT.RTEST) GOTO 74
       KFLAG=1
@@ -160,9 +175,9 @@ c ********************************************
       R=-1.d0
       GOTO 97
    62 IF(X2T.LT.X2) GOTO 65
-      KFLAG=1
-      R=-1.d0
-      GOTO 98
+        KFLAG=1
+        R=-1.d0
+        GOTO 98
    65 SUMSQ=Y**2+Z**2
       PAR1=X**2+SUMSQ
       RPAR1=dsqrt(PAR1)
@@ -183,6 +198,7 @@ c ********************************************
       C=XNU*OMZ
       COSBET=-(A+B+C)/GRMAG
       IF(COSBET.LT..7d0) COSBET=.7d0
+
    86 IF(KOMP.EQ.2) GOTO 98
    97 RV(IS)=R
       GRX(IS)=OMX
@@ -198,6 +214,7 @@ c ********************************************
       ZZ1(IS)=Z
       CSBT1(IS)=COSBET
       GOTO 8
+
    98 RVQ(IS)=R
       GRXQ(IS)=OMX
       GRYQ(IS)=OMY
@@ -212,6 +229,7 @@ c ********************************************
       ZZ2(IS)=Z
       CSBT2(IS)=COSBET
     8 CONTINUE
+
       if(e.ne.0.d0.or.ff.ne.1.d0) goto 53
       IF(KFLAG.EQ.0) GOTO 53
       ISS=IS-1
@@ -234,6 +252,7 @@ c ********************************************
       GLUMP1(IS)=FR1(IS)*GLUMP1(IS)
   208 CONTINUE
       RETURN
+
    50 if(e.ne.0.d0.or.ff.ne.1.d0) goto 54
       CALL RING(RMASS,POTENT,2,N,FR2,HLD,R1C,RLC)
       DO 56 I=1,IS
@@ -254,3 +273,4 @@ c ********************************************
   108 CONTINUE
       RETURN
       END
+

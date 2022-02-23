@@ -20,18 +20,29 @@ contains
 
 ! Kopal potential w. non-synchorouns rotation, Eq. (2).
 
+! Note: -q**2/(2.d0*(1.d0+q)) term is indeed missing;
+! as in Prsa (2011), Phoebe Sci. Ref., Eq. (3.15)
+
+! Note: for e > 0, we should use Eq. (4):
+! P'^2 = P^2(1 - e^2)/(1 + e cos(nu))^3,
+! where nu is the true anomaly.
+
 double precision function potential(r, theta, phi)
 
 implicit none
 double precision, intent(in) :: r, theta, phi
-double precision :: cosphi, sintheta, term1, term2
+double precision :: cosphi, sintheta, term1, term2, term3
+double precision :: x, y, z, r1, r2
 
 cosphi = cos(phi)
 sintheta = sin(theta)
-term1 = 1.d0/r + q/sqrt(1.d0 - 2.d0*r*cosphi*sintheta + r*r)
-term2 = -q*r*cosphi*sintheta + (q+1.d0)/2.d0 * P*P*r*r*sintheta*sintheta
-potential = term1 + term2
 
+term1 = 1.d0/r
+term2 = q/sqrt(1.d0 - 2.d0*r*cosphi*sintheta + r*r)
+term3 = 0.5d0*(1.d0+q)*P*P*r*r*sintheta*sintheta - q*r*cosphi*sintheta 
+potential = term1 + term2 + term3
+
+return
 end function potential
 
 ! The derivative w.r.t. x of Kopal potential for y = z = 0.
@@ -41,8 +52,8 @@ implicit none
 double precision, intent(in) :: x
 double precision :: term1, term2, term3
 
-term1 = 1.d0/(x*x)
-term2 = q/((1.d0-x)*(1.d0-x))
+term1 = 1.d0/x**2
+term2 = q/((1.d0-x)**2)
 term3 = (q+1.d0)*P*P*x - q
 
 if (x.lt.0.d0) then
@@ -56,7 +67,7 @@ endif
 return
 end function deriv
 
-! Eggleton (1983) formula
+! Eggleton (1983) formula for volume-equivalent critical (L1) radius
 
 double precision function REggleton(q)
 implicit none
@@ -64,7 +75,19 @@ double precision, intent(in) :: q
 
 REggleton = 0.49d0/(0.6d0+q**(2.d0/3.d0)*log(1.d0+q**(-1.d0/3.d0)))
 
+return
 end function REggleton
+
+! Secondary potential correction (see also Harmanec 2021; Eq. (14))
+
+double precision function secondary_correction(Omega, q)
+implicit none
+double precision, intent(in) :: Omega, q
+
+secondary_correction = 1.d0/q*Omega + (q-1.d0)/(2.d0*q)
+
+return
+end function secondary_correction
 
 ! Volume of the Roche surface.
 
@@ -109,6 +132,7 @@ implicit none
 double precision, intent(in) :: mu
 theta_for_func1 = acos(mu)
 func2 = romberg(func1, 0.d0, pi)
+return
 end function func2
 
 ! Helper function to find the root for.
@@ -130,40 +154,34 @@ use root_module
 implicit none
 double precision, intent(in) :: theta, phi
 double precision :: a, b, s
-double precision :: Flim, alim, amax2, ang, ang2, theta2, phi2
-logical :: flag2
+double precision :: Flim, alim, ang, theta2, phi2
+logical :: flag
 
-! near L1 point the Omega-OmegaF is tangent to zero so rootfinder doesn't work
-! in this case just use R at angle alim off the x axis (set alim=1degree).
-! if F.gt.Flim .and. theta and phi within angle alim of x axis, 
-! then use R(theta,phi)=RL1*(1-ang/alim)+R(alim)*ang/alim with ang=angle from x-axis
-! in this case need to find the root for theta2=pi/2.d0;phi2=alim to get R(alim)
+! Near L1 point Omega-OmegaF is tangent to zero so root() doesn't work...
+! ... use R(theta,phi) = RL1*(1-ang/alim) + R(alim)*ang/alim instead.
 
 Flim = 0.997d0
-alim = 0.1d0*pi/180.0d0
-ang2 = phi*phi + (theta-pi/2.d0)*(theta-pi/2.d0)
-ang = sqrt(ang2)
-if ((F.gt.0.997d0).and.(ang.lt.alim)) then
+alim = 0.1d0*deg
+ang = sqrt(phi*phi + (theta-pi/2.d0)*(theta-pi/2.d0))
+
+if ((F.gt.Flim).and.(ang.lt.alim)) then
   theta2 = pi/2.d0; phi2 = alim
-  flag2 = .true.
+  flag = .true.
 else
   theta2 = theta; phi2 = phi
-  flag2 = .false.
+  flag = .false.
 endif
 
 ! initial guess
-a = 0.01d0*REggleton(q)
+a = 0.0001d0*REggleton(q)
 b = 1.0001d0*RL1
-b = RL1
 
 theta_for_func3 = theta2
 phi_for_func3 = phi2
 
 s = root(func3, a, b)
 
-! for case ang<alim then need to calculate R from RL1 and s
-! linear interpolate between s and RL1
-if (flag2) then
+if (flag) then
   GetPotRoot = RL1*(1.d0-ang/alim) + s*ang/alim
 else
   GetPotRoot = s
@@ -181,7 +199,7 @@ use root_module
 integer, intent(in) :: iroot
 double precision :: a, b
 
-! initial guesses for 3 cases 0<x<1, x<0, x>1
+! initial guesses for 3 cases: 0<x<1, x<0, x>1
 if (iroot.eq.1) then
   a = 1.d-3; b = 0.999d0
 else if (iroot.eq.2) then

@@ -15,6 +15,6 @@ $(obj) : %.o:%.f90
 	$(f90) $(opt) -c -o $@ $<
 
 clean :
-	rm -f $(obj)
+	rm -f $(obj) *.mod
 
 
