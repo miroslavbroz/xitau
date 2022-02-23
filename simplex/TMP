@@ -1,3 +1,12 @@
+c
+c osculating semimajor axis (for absolute scale)
+c          
+          call orbel_xv2el(X(1), X(2), X(3), V(1), V(2), V(3),
+     :      m(1)+m(2), ialpha, a, e, inc, capom, omega, capm)
+          sema = a*au/R_S
+          write(*,*) 'a    = ', a*au/R_S, ' R_S'
+          write(*,*) 'dist = ', dist*au/R_S, ' R_S'
+
           poth = omega_kopal_approx(R_star(1)*R_S/(dist*AU), rm, 0.d0)
           potc = omega_kopal_approx(R_star(2)*R_S/(dist*AU), rm, 1.d0)
 

@@ -1,7 +1,11 @@
 
-      subroutine gabs(komp,smaxis,qq,ecc,period,dd,rad,xm,xmo,absgr,
-     $glog)
+      subroutine gabs(komp,smaxis,qq,ecc,period,dd,rad_,xm,xmo,absgr,
+     $  glog)
+
       implicit real*8(a-h,o-z)
+
+      include '../misc/const.inc'
+
 c  Version of September 17, 2004
 c
 c  Input definitions:
@@ -19,14 +23,18 @@ c  Output definitions:
 c   absgr is the polar acceleration due to effective gravity in cm/sec^2
 c   glog is log_10 of absgr
 c
-      twopi=6.2831853072d0
-      gbig=6.670d-8
-      sunmas=1.989d33
-      sunrad=6.9599d10
+      twopi = 2.d0*pi_
+      G_cgs = G*1.d3     ! g^-1 cm^3 s^-2
+      rsunau = AU/R_S    ! AU->R_S
+      sunmas = M_S*1.d3  ! g
+      sunrad = R_S*1.d2  ! cm
+      tropicalyr = 365.2422d0  ! d
+!      julianyr = 365.25d0  ! d
+
       psec=8.64d4*period
       acm=sunrad*smaxis
-      pyears=period/365.2422d0
-      aau=smaxis/214.9426d0
+      pyears=period/tropicalyr
+      aau=smaxis/rsunau
       tmass=aau**3/pyears**2
       qf=1.d0/(1.d0+qq)
       qfm=qq*qf
@@ -38,9 +46,9 @@ c
    10 continue
       xm=tmass*qfm
       xmo=tmass*qf
-      gbigm=gbig*xm*sunmas
-      gbigmo=gbig*xmo*sunmas
-      rcm=rad*acm
+      gbigm=g_cgs*xm*sunmas
+      gbigmo=g_cgs*xmo*sunmas
+      rcm=rad_*acm
       dcm=dd*acm
       dcmsq=dcm*dcm
       efac=dsqrt((1.d0+ecc)*(1.d0-ecc))
@@ -61,3 +69,4 @@ c
       glog=dlog10(absgr)
       return
       end
+

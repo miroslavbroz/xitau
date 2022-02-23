@@ -12,7 +12,7 @@ c   http://physics.nist.gov/cgi-bin/cuu/Value?k
 
       real*8 pi_, deg, rad
       real*8 c, AU, GM_S, R_S, day, pc, arcsec, mas
-      real*8 h, k_B, G
+      real*8 h, k_B, G, M_S
       real*8 J2000, eps_J2000
 
       parameter(pi_ = 4.d0*atan(1.d0))
@@ -30,6 +30,7 @@ c   http://physics.nist.gov/cgi-bin/cuu/Value?k
       parameter(h = 6.62607015d-34)  ! J s, from 2018 CODATA, exact
       parameter(k_B = 1.380649d-23)  ! J K^-1, from 2018 CODATA, exact
       parameter(G = 6.67430d-11)  ! m^3 kg^-1 s^-2, from 2018 CODATA
+      parameter(M_S = GM_S*AU**3/day**2/G)
 
       parameter(J2000 = 2451545.d0)
       parameter(eps_J2000 = (23.d0+26.d0/60.d0+21.448d0/3600.d0)*deg)

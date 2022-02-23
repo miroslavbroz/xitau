@@ -2,7 +2,7 @@ c lc_call_nbody.f
 c A call to the Wilson-Devinney code, 1 lightcurve point, N-body variant.
 c modifications by MB, Apr 18th 2016
 
-      subroutine lc_call_nbody(gpha_, xincl_, tavh_, tavc_,
+      subroutine lc_call_nbody(gpha_, sema, xincl_, tavh_, tavc_,
      :  poth_, potc_, rm_, iband_, hlum_, clum_, el3_, debug, i2nd,
      :  smagg, vkm1_, vkm2_)
 
@@ -12,6 +12,7 @@ c modifications by MB, Apr 18th 2016
 
 c input
       real*8 gpha_        ! true phase of EB (i.e. NOT the usual mean phase)
+      real*8 sema         ! semimajor axis of EB
       real*8 xincl_       ! inclination of EB
       real*8 tavh_        ! temperature for hot (or primary) component [10^4 K]
       real*8 tavc_        ! dtto for cold (secondary) [10^4 K]
@@ -87,7 +88,6 @@ c GMAG1 ... gravity magnitude for primary
 c GMAG2 ... dtto for secondary
 c glog1 ... surface log(g) arising from primary
 c glog2 ... dtto from secondary
-
 c tld ... temperature (new)
 c CORFAC ... contrast factor, spot/base intensity ratio
 
@@ -159,6 +159,7 @@ c
 c pass the subroutine parameters which are already in some common block
 c
       xincl = xincl_
+      a = sema
       tavh = tavh_
       tavc = tavc_
       poth = poth_

@@ -19,13 +19,17 @@ c  xlg1, xlg2= log (base 10) of mean surface acceleration (effective gra
 c  for stars 1 and 2.
 c
       implicit real*8 (a-h,o-z)
-      G=6.668d-8
-      tsun=5800.d0
-      rsunau=214.8d0
-      sunmas=1.991d33
-      sunrad=6.960d10
-      gmr=G*sunmas/sunrad**2
-      sunmb=4.77d0
+
+      include '../misc/const.inc'
+
+      G_cgs = G*1.d3     ! g^-1 cm^3 s^-2
+      rsunau = AU/R_S    ! AU->R_S
+      sunmas = M_S*1.d3  ! g
+      sunrad = R_S*1.d2  ! cm
+      tsun = 5800.d0     ! K
+      sunmb = 4.77d0     ! mag
+
+      gmr=G_cgs*sunmas/sunrad**2
       sr1=r1*a
       sr2=r2*a
       yrsid=365.2564d0

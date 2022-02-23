@@ -11,18 +11,22 @@ M_S = GM_S/G
 
 load "T0.plt"
 
+# definitions:
 #q2 = m2/m1
 #q3 = m3/(m1+m2)
 #q4 = m4/(m1+m2+m3)
 
-msum = x_param1*M_S
-q2 = x_param2
-q3 = x_param3
-q4 = x_param4
-m1 = msum/((1.+q2)*(1.+q3)*(1.+q4))
-m2 = q2*m1
-m3 = q3*(m1+m2)
-m4 = q4*(m1+m2+m3)
+#msum = x_param1*M_S
+#q2 = x_param2
+#q3 = x_param3
+#q4 = x_param4
+#m1 = msum/((1.+q2)*(1.+q3)*(1.+q4))
+#m2 = q2*m1
+#m3 = q3*(m1+m2)
+#m4 = q4*(m1+m2+m3)
+
+m1 = x_param1*M_S
+m2 = x_param2*M_S
 P1 = x_param5*day
 i1 = x_param7*deg
 g1 = 10.**x_param27*cm
