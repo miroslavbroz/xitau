@@ -52,33 +52,31 @@ endif
 
 ! interpolate Omega(R)
 if (R.lt.Rvol(1,k)) then
+
+  OmegaR = Omega(1,k)
   if (debug) then
     write(*,*) '# Warning: stellar radius too small in omega_roche_approx!'
-    write(*,*) '# R    = ', R  , ' a'
-    write(*,*) '# Rvol = ', Rvol(1,k), ' a'
-    write(*,*) '# RL1  = ', RL1, ' a'
   endif
-  omega_roche_approx = Omega(1,k)
-  return
-endif
 
-if (R.gt.Rvol(n,k)) then
+else if (R.gt.Rvol(n,k)) then
+
+  OmegaR = Omega(n,k)  ! L1
   if (debug) then
     write(*,*) '# Warning: stellar radius too BIG in omega_roche_approx!'
     write(*,*) '# R    = ', R  , ' a'
     write(*,*) '# Rvol = ', Rvol(n,k), ' a'
     write(*,*) '# RL1  = ', RL1, ' a'
   endif
-  omega_roche_approx = Omega(n,k)
-  return
+
+else
+
+  i = 2
+  do while ((Rvol(i,k).lt.R).and.(i.lt.n))
+    i = i+1
+  enddo
+  OmegaR = interp(Rvol(i-1,k), Rvol(i,k), Omega(i-1,k), Omega(i,k), R)
+
 endif
-
-i = 2
-do while ((Rvol(i,k).lt.R).and.(i.lt.n))
-  i = i+1
-enddo
-
-OmegaR = interp(Rvol(i-1,k), Rvol(i,k), Omega(i-1,k), Omega(i,k), R)
 
 if (k.eq.2) then
   OmegaR = secondary_correction(OmegaR, q)

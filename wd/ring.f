@@ -7,6 +7,8 @@ c   Version of September 14, 1998
       DIMENSION RAD(100),THET(100),AA(3),BB(3),FI(150),THA(150),FR(*),
      $HLD(*)
 
+      write(*,*) '# Warning: poor convergence inside wd/ring.f!'
+
       IX=0
       LR=L+1
       DO 92 I=1,LR

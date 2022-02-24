@@ -17,11 +17,12 @@ tmp=0.035
 set size ratio -1
 set zeroaxis
 set ang rad
+set key left
 
 load "T0.plt"
 
-d_pc = x_param44
-#d_pc = x_param45
+#d_pc = x_param44
+d_pc = x_param45
 f(x) = x*au/(d_pc*pc)/arcsec
 
 p \
