@@ -209,6 +209,7 @@ obj = \
   xvpl2el/nula2pi.o \
 
 obj90 = \
+  multipole/const.o \
   ao/read_pnm.o \
   ao/write_pnm.o \
   ao/write_silh.o \
@@ -230,7 +231,6 @@ obj90 = \
   multipole/factorial.o \
   multipole/multipole.o \
   multipole/multipole2.o \
-  multipole/const.o \
   multipole/bruteforce.o \
   multipole/rotate.o \
   multipole/nrtype.o \
@@ -278,20 +278,20 @@ main/chi2: main/chi2.f $(obj90) $(obj) $(objc) $(inc)
 main/simplex: main/simplex.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
-main/simann: main/simann.f $(obj) $(obj90) $(objc) $(inc)
+main/simann: main/simann.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 main/subplex: main/subplex.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
-main/swift_bs: main/swift_bs.f $(obj) $(obj90) $(objc) $(inc)
+main/swift_bs: main/swift_bs.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
-
-$(obj) : %.o:%.f $(inc)
-	$(f77) $(opt) -c -o $@ $<
 
 $(obj90) : %.o:%.f90 $(inc)
 	$(f90) $(opt) -c -o $@ $<
+
+$(obj) : %.o:%.f $(inc)
+	$(f77) $(opt) -c -o $@ $<
 
 $(objc) : %.o:%.c $(inc)
 	$(cc) $(opt) -c -o $@ $<

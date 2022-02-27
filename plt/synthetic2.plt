@@ -12,7 +12,7 @@ shift = 0.125
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
-#set xr [500:504]
+set xr [500:504]
 set ytics shift
 set mytics 1
 set grid ytics mytics
