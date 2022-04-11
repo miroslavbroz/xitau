@@ -1,6 +1,6 @@
 c geometries.f
 c An interface for various geometries.
-c Miroslav Broz (miroslav.broz@email.cz), Dec 10th 2021
+c Miroslav Broz (miroslav.broz@email.cz), Apr 11th 2022
 
       subroutine geometries(nbod, m, elmts, r, v, geometry)
 
@@ -37,6 +37,10 @@ c output
       else if (geometry.eq.5) then
 
         call geometry_twopairs2(nbod, m, elmts, r, v)
+
+      else if (geometry.eq.6) then
+
+        call geometry_equatorial(nbod, m, elmts, r, v)
 
       else
         write(*,*) "geometries.f: Error unknown geometry = ",

@@ -98,6 +98,7 @@ obj = \
   simplex/geometries.o \
   simplex/geometry_1centric.o \
   simplex/geometry_ecliptic.o \
+  simplex/geometry_equatorial.o \
   simplex/geometry_hierarch.o \
   simplex/geometry_hierarch2.o \
   simplex/geometry_twopairs.o \

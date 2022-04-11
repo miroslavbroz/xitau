@@ -13,11 +13,12 @@ set xl "x [AU]"
 set yl "y [AU]"
 set cbl "dataset"
 set size ratio -1
+set nokey
 
-tmp=0.5
-#set xr [-tmp:tmp]
-#set yr [-tmp:tmp]
-#set zr [-tmp:tmp]
+tmp=1.e-5
+set xr [-tmp:tmp]
+set yr [-tmp:tmp]
+set zr [-tmp:tmp]
 set zeroaxis
 set ang rad
 set xyplane 0
