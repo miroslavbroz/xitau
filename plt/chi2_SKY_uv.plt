@@ -13,7 +13,7 @@ set tit "viewing geometry is changing..."
 set xl "u [arcsec]"
 set yl "v [arcsec]"
 
-tmp=1.0
+tmp=1.2
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set size ratio -1

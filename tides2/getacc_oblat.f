@@ -27,7 +27,7 @@ c internal
       real*8 xij, yij, zij
       real*8 acc, ax, ay, az, fac
 
-      if (.not.use_oblatness) return
+      if (.not.use_oblat) return
 
       do i = 1, nbod  ! "planet"
         do j = 1, nbod  ! "star"
