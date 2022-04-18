@@ -170,6 +170,7 @@ obj = \
   tides/mignard_torque.o \
   tides/spin_evolve.o \
   tides2/io_init_tides2.o \
+  tides2/getacc_oblat.o \
   tides2/getacc_tides2.o \
   tu4/tu4_getaccb.o \
   tu4/tu4_getaccb_tp.o \

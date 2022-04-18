@@ -151,6 +151,7 @@ c..      save for the J2 and J4 calculations
 
       call getaccb_tides(nbod,mass,xb,yb,zb,vxb,vyb,vzb,axb,ayb,azb)
       call getacc_tides2(time,nbod,mass,xb,yb,zb,axb,ayb,azb)
+      call getacc_oblat(nbod,mass,xb,yb,zb,irij5,axb,ayb,azb)
       call getacc_ppn(nbod,mass,xb,yb,zb,vxb,vyb,vzb,irij,irij2,
      :  axb,ayb,azb)
       call getacc_bf2(time,nbod,mass,xb,yb,zb,axb,ayb,azb)

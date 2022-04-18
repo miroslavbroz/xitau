@@ -42,21 +42,21 @@ c functions
         stop
       endif
 
-!      do i = 1, nbod
-!        read(iu,*,err=990,end=990) k_L(i), P, R_body(i)
-!
-!        Omega_rot(i) = 2.d0*pi/P  ! day -> rad/day
-!        R_body(i) = R_body(i)*R_S/AU  ! R_S -> AU
-!
-!        write(*,*) "# k_L(", i, ") = ", k_L(i)
-!        write(*,*) "# Omega_rot(", i, ") = ", Omega_rot(i), " rad/day"
-!        write(*,*) "# R_body(", i, ") = ", R_body(i), " AU = ",
-!     :    R_body(i)*AU/R_S, " R_S"
-!
-!        koef1(i) = 3.0d0*k_L(i)
-!        koef2(i) = 0.5d0*k_L(i)*Omega_rot(i)**2
-!        R_body5(i) = R_body(i)**5
-!      enddo
+      do i = 1, nbod
+        read(iu,*,err=990,end=990) k_L(i), P, R_body(i)
+
+        Omega_rot(i) = 2.d0*pi/P  ! day -> rad/day
+        R_body(i) = R_body(i)*R_S/AU  ! R_S -> AU
+
+        write(*,*) "# k_L(", i, ") = ", k_L(i)
+        write(*,*) "# Omega_rot(", i, ") = ", Omega_rot(i), " rad/day"
+        write(*,*) "# R_body(", i, ") = ", R_body(i), " AU = ",
+     :    R_body(i)*AU/R_S, " R_S"
+
+        koef1(i) = 3.0d0*k_L(i)
+        koef2(i) = 0.5d0*k_L(i)*Omega_rot(i)**2
+        R_body5(i) = R_body(i)**5
+      enddo
 
       read(iu,*,err=990,end=990) external_mass
       external_mass = external_mass*GM_S
@@ -64,6 +64,9 @@ c functions
 
       read(iu,*,err=990,end=990) use_tides2
       write(*,*) "# use_tides2 = ", use_tides2
+
+      read(iu,*,err=990,end=990) use_oblat
+      write(*,*) "# use_oblateness = ", use_oblat
 
       close(iu)
 
