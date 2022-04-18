@@ -13,7 +13,7 @@ set tit "viewing geometry is changing..."
 set xl "u [arcsec]"
 set yl "v [arcsec]"
 
-tmp=1.0
+tmp=1.2
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set size ratio -1
@@ -55,6 +55,9 @@ print "a3 = ", a3, " arcsec (PSF)"
 f(x,d) = x/d/arcsec
 
 p \
+  sprintf("<awk '($2==-1) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u (f($3,$6)):(f($4,$6)) not w l lw 10 lc 'gray',\
+  sprintf("<awk '($2==-2) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u (f($3,$6)):(f($4,$6)) not w l lw 10 lc 'gray',\
+  sprintf("<awk '($2==-3) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u (f($3,$6)):(f($4,$6)) not w l lw 10 lc 'gray',\
   "<awk '($2==-4)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "4" w l lt 4,\
   "<awk '($2==-3)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "3" w l lt 3,\
   "<awk '($2==-2)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "2" w l lt 2,\
@@ -64,6 +67,7 @@ p \
   sprintf("<awk '($2==-3) && ($1==%.10f)' out_JDATE_uvw.dat", T0) u (f($3,$6)):(f($4,$6)) not     w p lc 0 pt 1 ps 2,\
   "chi2_SKY.dat" u (-$2*sin($3*deg)):($2*cos($3*deg)):8 t "residua" w l lc palette z lw 3,\
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)) t "observ." w p lt 7 pt 1 ps 0.5,\
+  "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left,\
   "<./ellipses.awk arcsec_AU.dat" u (f($1,$3)):(f($2,$3)) not w l lt 7,\
   "<awk '(FNR>1){ print $0,ARGIND; }' nodes001.dat" u 2:3 t "shape" w d lc 'black',\
   sprintf("<./ellipse2.awk %.6e %.6e %.6e %.6e", x3, y3, a3, b3) u 1:2 t "PSF (3-s.)" w l lc 'black' dt 2,\

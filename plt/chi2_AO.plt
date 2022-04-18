@@ -10,19 +10,19 @@ tmp=0.25
 dx=tmp
 dy=tmp
 
-set xr [-0.75*tmp:4.75*tmp]
-set yr [-0.75*tmp:6.75*tmp]
+set xr [-0.75*tmp:9.75*tmp]
+set yr [-0.75*tmp:5.75*tmp]
 
 set xtics 0.5*tmp
 set ytics 0.5*tmp
 set grid xtics ytics
 set size ratio -1
-set key samplen 1.0
+set key samplen 1.0 outside
 
 frc(x) = x-int(x)
 mod(x,y) = frc(x/y)*y
-f(x) = mod(x-1,5)*dx
-g(x) = int((x-1)/5)*dy
+f(x) = mod(x-1,10)*dx
+g(x) = int((x-1)/10)*dy
 
 p \
   "chi2_AO.dat" u ($2+f($6)):($3+g($6)) t "residua" w l lc 'red',\

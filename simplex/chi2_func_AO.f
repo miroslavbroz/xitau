@@ -172,7 +172,7 @@ c sky-plane projection
 
 c save shape (in uvw coordinates; arcsec)
         phase = nula2pi(phi1)/(2.d0*pi_)
-        if (debug) then
+        if (debug_swift) then
           write(str,'(i4.4)') i
           str = 'nodes' // trim(str) // '.dat'
           call write_node(str, nodes_)
