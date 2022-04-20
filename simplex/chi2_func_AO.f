@@ -143,10 +143,8 @@ c axis rotation
         call rot_z_nodes(nodes_, phi1)
 
 c pole direction
-!        if (use_varpole) then
-          pole_l = pole_l_
-          pole_b = pole_b_
-!        endif
+        pole_l = pole_l_
+        pole_b = pole_b_
 
         phi2 = pi_/2.d0-pole_b
         phi3 = pole_l
@@ -208,6 +206,9 @@ c 2DO: check - sign!
 
 c synthetic silhouette
         call silhouette(nodes_, faces, masks, silh)
+
+        call write_poles(t_interp, ecl(i), ecb(i), pole_l, pole_b,
+     :    vardist(i), dataset(i))
 
 c observed silhouette
         write(*,*) 'file_OBS(', i, ') = ', file_OBS(i)

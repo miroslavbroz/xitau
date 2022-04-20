@@ -18,13 +18,14 @@ set origin 0,0
 
 load "T0.plt"
 set arrow from (T0-2400000),graph 0 rto 0,graph 1 nohead lt 0 front
+`awk '!/^#/{ print "set arrow from " $1 "-2400000,graph 0 rto 0,graph 1 nohead lt 0 front;"; }' Sky2.dat`
 
 set xl "JD - 2400000"
-set yl "a [R_S]"
+set yl "a [km]"
 #set xr [T0-2400000:T0-2400000+20.]
 set ytics format "%.5f"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):($3*au/R_S) not w l lt 2
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):($3*au/km) not w l lt 2
 
 set origin 0,0.33
 set yl "e []"
@@ -78,9 +79,13 @@ set size 1.0,0.33
 set origin 0,0
 
 set xl "JD - 2400000"
-set yl "a [R_S]"
+set yl "a [km]"
 
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):($3*au/R_S) not w l lt 3
+set noarrow
+set arrow from (T0-2400000),graph 0 rto 0,graph 1 nohead lt 0 front
+`awk '!/^#/{ print "set arrow from " $1 "-2400000,graph 0 rto 0,graph 1 nohead lt 0 front;"; }' Sky3.dat`
+ 
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):($3*au/km) not w l lt 3
 
 set origin 0,0.33
 set yl "e []"

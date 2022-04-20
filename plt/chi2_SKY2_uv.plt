@@ -38,7 +38,7 @@ p \
 
 pa -1
 
-set term png small
+set term png small size 2048,2048
 set out "chi2_SKY2_uv.png"
 rep
 
