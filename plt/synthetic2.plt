@@ -12,7 +12,7 @@ shift = 0.125
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
-set xr [500:504]
+#set xr [500:504]
 set ytics shift
 set mytics 1
 set grid ytics mytics
@@ -56,11 +56,11 @@ call "line.plt" "FeIII"  5243.306
 
 p \
   "synthetic.dat" u ($2/nm):($3+shift*($4-1)) t "synthetic" w l lc 'gray',\
-  "<awk '($6==1) || (NF==0)' synthetic2.dat" u ($2/nm):(1+($3-1)*$4/$5+shift*($7-1)) t "1" w l lt 1,\
+  "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lc 'gray' pt 1 ps 0,\
+  "<awk '($6==1) || (NF==0)' synthetic2.dat" u ($2/nm):(1+($3-1)*$4/$5+shift*($7-1)) t "1" w l lc 'orange',\
   "<awk '($6==2) || (NF==0)' synthetic2.dat" u ($2/nm):(1+($3-1)*$4/$5+shift*($7-1)) t "2" w l lt 2,\
   "<awk '($6==3) || (NF==0)' synthetic2.dat" u ($2/nm):(1+($3-1)*$4/$5+shift*($7-1)) t "3" w l lt 3,\
-  "<awk '($6==4) || (NF==0)' synthetic2.dat" u ($2/nm):(1+($3-1)*$4/$5+shift*($7-1)) t "4" w l lt 4,\
-  "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lt 3 pt 1 ps 0
+  "<awk '($6==4) || (NF==0)' synthetic2.dat" u ($2/nm):(1+($3-1)*$4/$5+shift*($7-1)) t "4" w l lc 'cyan'
 
 pa -1
 

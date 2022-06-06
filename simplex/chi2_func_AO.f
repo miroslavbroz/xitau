@@ -237,6 +237,7 @@ c chi^2
           dy = silh(k,2)-silh_OBS(k,2)
           chi2_ = (dx/sigma(i))**2 + (dy/sigma(i))**2
 
+          lns = lns + 2.d0*log(sigma(i))
           chi2 = chi2 + chi2_
           n = n+1
 

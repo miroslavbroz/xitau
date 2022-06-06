@@ -191,6 +191,7 @@ c use the 1+2+3 photocentre for low-resolution interferometry
           dy_ = -dx*sin(phi) + dy*cos(phi)
 
           chi2_ = (dx_/major(i,k))**2 + (dy_/minor(i,k))**2
+          lns = lns + log(major(i,k)) + log(minor(i,k))
           chi2 = chi2 + chi2_
           n = n + 2
 

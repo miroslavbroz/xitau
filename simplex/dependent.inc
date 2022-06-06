@@ -13,6 +13,7 @@
 
       real*8 x_param(NDIMMAX)
       logical variable(NDIMMAX)
+      real*8 lns
 
       integer nbod, nband
       integer iband_LC(BANDMAX)
@@ -48,7 +49,7 @@
      &  chi2_SKY3, chi2_MASS,                                           &
      &  w_SKY, w_TTV, w_RV, w_ECL, w_VIS, w_CLO,                        &
      &  w_T3, w_LC, w_SYN, w_SED, w_AO, w_SKY2, w_SKY3,                 &
-     &  x_param, variable,                                              &
+     &  x_param, variable, lns,                                         &
      &  T0, d_pc, R_star, T_eff, Lum, m_min, m_max,                     &
      &  lightcurve_timestep, approx_eclipse_duration,                   &
      &  lambda1, lambda2, lambda3, lambda4,                             &

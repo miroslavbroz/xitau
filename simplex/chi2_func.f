@@ -449,6 +449,9 @@ c optionally, write (u, v, w) coordinates
         call write_uvw(NOUT, tout, rh, rp, rp3)
       endif
 
+c sum of ln sigma_i (for MCMC)
+      lns = 0.d0
+
 c-----------------------------------------------------------------------
 c
 c calculate the chi^2 values

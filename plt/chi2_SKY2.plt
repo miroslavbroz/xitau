@@ -12,8 +12,8 @@ set xl "u [arcsec]"
 set yl "v [arcsec]"
 
 tmp=0.035
-#set xr [-tmp:tmp]
-#set yr [-tmp:tmp]
+set xr [-tmp:tmp]
+set yr [-tmp:tmp]
 set size ratio -1
 set zeroaxis
 set ang rad

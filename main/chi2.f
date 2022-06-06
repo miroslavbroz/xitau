@@ -286,6 +286,7 @@ c  write output
       write(*,*) '# chi2_SKY3 = ', chi2_SKY3
       write(*,*) '# chi2_MASS = ', chi2_MASS
       write(*,*) '# chi2 = ', chi2
+      write(*,*) '# lns = ', lns
       write(*,*) '# n_fit = ', n_fit
       write(*,*) '# nparam = ', nparam
       write(*,*) '# nu = ', int(nu)

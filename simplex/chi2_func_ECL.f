@@ -93,6 +93,7 @@ c find the closest synthetic minimum to the observed one
 c account for light-time effect too? <- probably not necessary
 
           chi2_ = ((d_ECL(i)-d_of_closest)/sigmad_ECL(i))**2
+          lns = lns + log(sigmad_ECL(i))
           chi2 = chi2 + chi2_
           n = n + 1
 

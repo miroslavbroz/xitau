@@ -97,6 +97,7 @@ c
         mag = -2.5d0*log10(flux/(calibration(i)*band))
 
         chi2_ = ((mag-mag_OBS(i))/sigma_mag_OBS(i))**2
+        lns = lns + log(sigma_mag_OBS(i))
         chi2 = chi2 + chi2_
         n = n+1
 

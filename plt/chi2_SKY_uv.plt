@@ -19,12 +19,11 @@ set yr [-tmp:tmp]
 set size ratio -1
 set zeroaxis
 set ang rad
-set key left
+set key right
 
 load "T0.plt"
 
-#d_pc = x_param29
-d_pc = x_param18
+d_pc = x_param20
 
 set cbl "ibod"
 set cbr [2:3]
@@ -34,9 +33,6 @@ set palette defined (\
   1.0 '#ffaa00' \
   )
 
-fac = 0.10
-x1 = 3.7e-6
-y1 = 2.7e-6
 x1 = 0.0
 y1 = 0.0
 a1 = 5.*km/(d_pc*pc)/arcsec

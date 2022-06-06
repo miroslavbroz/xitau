@@ -35,10 +35,15 @@ p "<awk '{ i++; print i, $NF; }' chi2_func.tmp"      u 1:2 t "chi^2" w lp lt 1 p
   "<awk '{ i++; print i, $(NF -2); }' chi2_func.tmp" u 1:2 t "SKY3"  w l,\
   "<awk '{ i++; print i, $(NF -1); }' chi2_func.tmp" u 1:2 t "MASS"  w l dt 4,\
   chi2 w l lt 0 not
+
 pa -1
 
 set term png small
 set out "chi2_iter.png"
 rep
+
+q
+
+  43.06 w l lt 0
 
 

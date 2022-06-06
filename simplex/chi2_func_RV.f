@@ -94,6 +94,7 @@ c linear interpolation of integrated data to a given position in time
 
           dvz = vzb_interp - vzb_RV(i,k)
           chi2_ = (dvz/sigmavz_RV(i,k))**2
+          lns = lns + log(sigmavz_RV(i,k))
           chi2 = chi2 + chi2_
           n = n + 1
 

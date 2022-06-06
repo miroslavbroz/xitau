@@ -174,8 +174,9 @@ c limb-darkened complex visibility (Hanbury-Brown et al. 1974)
         Vsq = (abs(mu)/Lumtot)**2
 
         chi2_ = ((Vsq-Vsq_VIS(i))/sigma_Vsq_VIS(i))**2
+        lns = lns + log(sigma_Vsq_VIS(i))
         chi2 = chi2 + chi2_
-        n = n+1
+        n = n + 1
 
         if (debug) then
           write(iua,*) t_VIS(i), u_VIS(i), v_VIS(i), lambda, band,

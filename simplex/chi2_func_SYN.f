@@ -241,7 +241,8 @@ c normalize the intensity again
         Int_sum(i) = Int_sum(i)/Lumtot(i)
 
 c add to chi^2
-        chi2_ = (Int_OBS(i) - Int_sum(i))**2/sigma_Int_OBS(i)**2
+        chi2_ = ((Int_OBS(i) - Int_sum(i))/sigma_Int_OBS(i))**2
+        lns = lns + log(sigma_Int_OBS(i))
         chi2 = chi2 + chi2_
         n = n + 1
 

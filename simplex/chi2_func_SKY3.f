@@ -166,6 +166,7 @@ c hereinafter, x, y, z, dx, dy, dz, u, v, w denote velocities!
         dy_ = -dx*sin(phi) + dy*cos(phi)
 
         chi2_ = (dx_/major(i))**2 + (dy_/minor(i))**2
+        lns = lns + log(major(i)) + log(minor(i))
         chi2 = chi2 + chi2_
         n = n + 2
 

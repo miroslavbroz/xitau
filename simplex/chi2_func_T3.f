@@ -46,8 +46,9 @@ c chi^2 for |T_3| data
         lambda = lambda_eff_OBS(i)
         band = band_eff_OBS(i)
         chi2_ = ((t3amp(i)-t3amp_OBS(i))/sigma_t3amp_OBS(i))**2
-        n = n + 1
+        lns = lns + log(sigma_t3amp_OBS(i))
         chi2 = chi2 + chi2_
+        n = n + 1
 
         if (debug) then
           write(iu,*) t_OBS(i), u1_OBS(i), v1_OBS(i), u2_OBS(i),

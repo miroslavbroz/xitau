@@ -183,6 +183,7 @@ c            stop
 c          endif
 
           chi2_ = (OMC/sigmat_TTV(i))**2
+          lns = lns + log(sigmat_TTV(i))
           chi2 = chi2 + chi2_
           n = n + 1
 

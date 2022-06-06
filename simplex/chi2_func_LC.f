@@ -303,8 +303,9 @@ c
           endif
 
           chi2_ = ((mag_interp-mag_OBS(i,k))/sigma_mag_OBS(i,k))**2
-          n = n + 1
+          lns = lns + log(sigma_mag_OBS(i,k))
           chi2 = chi2 + chi2_
+          n = n + 1
          
           if (debug) then
             write(iu,*) t_OBS(i,k), mag_interp, sigma_mag_OBS(i,k),
