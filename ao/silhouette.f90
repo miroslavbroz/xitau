@@ -8,7 +8,7 @@ integer, parameter :: nsilh = 360
 
 contains
 
-! Compute a silhouette from nodes/faces; convex version.
+! Compute a synthetic silhouette from nodes/faces; convex version.
 
 subroutine silhouette(nodes, faces, masks, silh)
 
@@ -85,7 +85,7 @@ return
 
 end function intersect
 
-! Compute a silhouette for a PNM image
+! Compute an observed silhouette for a PNM image
 
 subroutine silhouette2(pnm, silh_factor, center, silh)
 

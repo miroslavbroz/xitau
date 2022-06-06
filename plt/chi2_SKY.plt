@@ -8,7 +8,7 @@ pc = 648000.0/pi*au  # m, from IAU 2015
 set colors classic
 set term x11
 
-#set tit "orbit misaligned w. observations..."
+set tit "orbit misaligned w. observations..."
 set xl "x [AU]"
 set yl "y [AU]"
 set size ratio -1

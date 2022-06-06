@@ -44,6 +44,7 @@ c compute Jacobian coordinates
         P = elmts(i,1)
         n = 2.d0*pi_/P
         a = (msum / n**2)**(1.d0/3.d0)
+        write(*,*) '# a = ', a, ' au = ', a*au/1.d3, ' km'
         e = 10.d0**elmts(i,2)
         capm = elmts(i,6)
         call orbel_el2xv(msum,ialpha,

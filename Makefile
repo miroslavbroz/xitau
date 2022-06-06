@@ -142,6 +142,7 @@ obj = \
   simplex/uvw.o \
   simplex/uvw1.o \
   simplex/uvw2.o \
+  simplex/write_poles.o \
   simplex/write_uvw.o \
   subplex/calcc.o \
   subplex/dasum.o \

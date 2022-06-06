@@ -1,5 +1,10 @@
 #!/usr/bin/gnuplot
 
+km = 1.e3
+au = 1.49597870700e11  # m, from IAU 2012
+deg = pi/180.
+arcsec = deg/3600.
+
 set colors classic
 set term x11
 
@@ -10,25 +15,29 @@ tmp=0.25
 dx=tmp
 dy=tmp
 
-set xr [-0.75*tmp:4.75*tmp]
-set yr [-0.75*tmp:6.75*tmp]
+set xr [-0.75*tmp:9.75*tmp]
+set yr [-0.75*tmp:5.75*tmp]
 
 set xtics 0.5*tmp
 set ytics 0.5*tmp
 set grid xtics ytics
 set size ratio -1
-set key samplen 1.0
+set key samplen 1.0 outside
 
 frc(x) = x-int(x)
 mod(x,y) = frc(x/y)*y
-f(x) = mod(x-1,5)*dx
-g(x) = int((x-1)/5)*dy
+f(x) = mod(x-1,10)*dx
+g(x) = int((x-1)/10)*dy
+
+h(x,d) = x*100.*km/(d*au)/arcsec
 
 p \
   "chi2_AO.dat" u ($2+f($6)):($3+g($6)) t "residua" w l lc 'red',\
   "<awk '(FNR>1){ print $0,ARGIND; }' nodes*.dat"  u ($2+f($5)):($3+g($5)) t "shape" w d lc 'gray',\
   "<awk '(FNR==1){ print s; }(FNR>1){ print $0,ARGIND; }' nodes*.silh"  u ($1+f($3)):($2+g($3)) t "synthetic" w l lc 'orange',\
   "<awk '(FNR==1){ print s; }(FNR>1){ print $0,ARGIND; }' nodes*.silh_" u ($1+f($3)):($2+g($3)) t "observed"  w l lc 'blue',\
+  "<awk '($4<=0) || (NF==0)' poles.dat"  u (h($2,$5)+f($1)):(h($3,$5)+g($1)) t "poles" w lines lc 'green' lw 3,\
+  "<awk '($4>=0) || (NF==0)' poles.dat"  u (h($2,$5)+f($1)):(h($3,$5)+g($1)) not       w lines lc 'cyan'  lw 3,\
 
 pa -1
 
