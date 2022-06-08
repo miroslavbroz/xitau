@@ -31,7 +31,7 @@ c observational data
 c internal variables
       real*8 xh_SKY(OBSMAX,NBODMAX), yh_SKY(OBSMAX,NBODMAX),
      :  major(OBSMAX,NBODMAX), minor(OBSMAX,NBODMAX)
-      integer i, j, k, l, i1st, iu, nmin, ialpha
+      integer i, j, k, l, i1st, iu, iub, nmin, ialpha
       real*8 chi2_
       real*8 xh_interp, yh_interp, zh_interp, dx, dy, dx_, dy_, phi
       real*8 rho_interp, rho, theta_interp, theta
@@ -43,7 +43,7 @@ c functions
 
       data i1st /0/
       data m_SKY /NBODMAX*0/
-      data iu /10/
+      data iu,iub /10,25/
 
       save i1st,
      :  m_SKY, t_SKY, xh_SKY, yh_SKY, major, minor, PA_ellipse
@@ -216,6 +216,15 @@ c use the 1+2+3 photocentre for low-resolution interferometry
      :        major_arcsec(i,k), minor_arcsec(i,k), PA_ellipse(i,k)*rad,
      :        vardist(i,k), k, chi2_
             write(iu,*)
+          endif
+
+! some variables to output
+!          if (t_SKY(i,k).ge.2459875.d0) then
+          if (t_SKY(i,k).ge.0.d0) then
+            open(unit=iub, file="variables.tmp", access="append")
+            write(iub,*) t_SKY(i,k), au_arcsec(u,tmp), au_arcsec(v,tmp),
+     :        chi2_
+            close(iub)
           endif
 
         enddo

@@ -6,6 +6,7 @@
 # object files
 *.o
 *.mod
+*.pyc
 
 # binary files
 main/chi2

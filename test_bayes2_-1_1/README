@@ -1,0 +1,22 @@
+
+Interval of x = <-1,1>.
+
+Consequently, the rule "chi^2 + 1" works:
+
+    chi2 = Syy - 2*a*Sxy - 2*b*Sy + a**2*Sxx + 2*a*b*Sx + b**2*S
+
+    incr = -2*sigma_a*Sxy + 2*a*sigma_a*Sxx + sigma_a**2*Sxx + 2*sigma_a*b*Sx
+    incr = sigma_a*(-2*Sxy + 2*a*Sxx + sigma_a*Sxx + 2*b*Sx)
+    incr = sigma_a*(-2*Sxy + 2*(S*Sxy - Sx*Sy)/Delta*Sxx + sigma_a*Sxx + 2*(Sxx*Sy - Sx*Sxy)/Delta*Sx)
+    incr = sigma_a/Delta*(-2*Sxy*Delta + 2*(S*Sxy - Sx*Sy)*Sxx + sigma_a*Sxx*Delta + 2*(Sxx*Sy - Sx*Sxy)*Sx)
+    incr = sigma_a/Delta*(-2*Sxy*S*Sxx + 2*Sxy*Sx**2 + 2*S*Sxy*Sxx - 2*Sx*Sy*Sxx + sigma_a*Sxx*S*Sxx - sigma_a*Sxx*Sx**2 + 2*Sxx*Sy*Sx - 2*Sx*Sxy*Sx)
+    incr = sigma_a/Delta*(sigma_a*Sxx*S*Sxx - sigma_a*Sxx*Sx**2)
+    incr = sigma_a**2/Delta*(Sxx*S*Sxx - Sxx*Sx**2)
+    incr = sigma_a**2*Sxx/Delta*(S*Sxx - Sx**2)
+    incr = S*Sxx/Delta**2*(S*Sxx - Sx**2)
+    incr = S*Sxx/Delta
+    incr = S*Sxx/(S*Sxx - Sx**2)
+    incr = 1.0/(1.0 - (Sx**2/(S*Sxx)))
+    incr = 1.0
+
+

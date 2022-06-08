@@ -21,9 +21,17 @@ class Myxitau(object):
     '''
     Initialisation.
 
+    :param debug: Debugging.
+    :return:
+
+    lns ... \sum_i\ln sigma_i
+    n   ... number of measurements
+
+    ^* see ../xitau/simplex/chi2_func_SKY.f
+
     '''
-    self.lns = None    # \sum_i\ln sigma_i
-    self.n = None      # number of measurements
+    self.lns = None
+    self.n = None
     self.debug = debug
 
     self.template = """# chi2.in
@@ -111,7 +119,8 @@ F			! debug integrator?
 
   def chi2(self, theta):
     '''
-    Computes chi^2.
+    Computes chi^2 by calling Xitau.
+    Uses stdin/stdout to be thread-safe!
 
     :param theta: Vector of free parameters.
     :return:
@@ -120,23 +129,35 @@ F			! debug integrator?
     if self.debug:
       print('theta = ', theta)
 
-    stdin = bytes(self.template % tuple(theta),'utf-8')
+    stdin = self.template % tuple(theta)
+#    if self.debug:
+#      f = open("chi2.in", "w")
+#      f.write(stdin)
+#      f.close()
+    stdin = bytes(stdin,'utf-8')
 
     stdout = subprocess.check_output("./chi2", input=stdin, shell=True)
 
     stdout = str(stdout,'utf-8')
+#    if self.debug:
+#      f = open("chi2.out", "w")
+#      f.write(stdout)
+#      f.close()
     stdout = stdout.split('\n')
+
     for line in stdout:
       l = line.split()
-      if len(l)<3:
+      if len(l)<=3:
         continue
 
-      if l[1]=="chi2":
-         chi2 = float(l[3])
-      elif l[1]=="lns":
-         self.lns = float(l[3])
-      elif l[1]=="n_fit":
-         self.n = int(l[3])
+      key = l[1]
+      val = l[3]
+      if key == "chi2":
+         chi2 = float(val)
+      elif key == "lns":
+         self.lns = float(val)
+      elif key == "n_fit":
+         self.n = int(val)
 
     if self.debug:
       print('chi2 = ', chi2)
@@ -279,7 +300,8 @@ def run_mcmc(myxitau, nwalkers=16, niter=1000, seed=1, thin=1, delta=1.0e-3, **k
   sampler = emcee.EnsembleSampler(nwalkers, ndim, myxitau.lnprob, **kwarg)
 
   f = open(f'chain.tmp', 'a')
-  f.write("# iter walker lnprob param1 param2 param3 ...\n")
+  f.write("# iter walker lnprob m1 P1 loge1 i1 Omega1 varpi1 lambda1\n")
+  f.write("# - - 1 M_S 1 deg deg deg deg\n")
 
   print("Running production...")
   t1 = time.time()
