@@ -1,0 +1,14 @@
+2459875.589308		! t [JD(TDB)]; mid-time of occultation
+10.0			! delta [s]; duration of occultation
+0.04			! sigma_t [s]; uncertainty of t
+0.04			! sigma_delta [s]; uncertainty of delta
+4.3825604333305		! d_geocentric [au]; occulting asteroid (3548) Eurybates
+6.98690383595606	! RA_J2000 [h]; geocentric, occulting asteroid
+29.2735809873381	! DE_J2000 [deg]; geocentric, occulting asteroid
+-0.0144898260771704	! dd [au d^-1]; proper motion
+0.00296666666666656	! dra [h d^-1]; proper motion
+0.0282777777777774	! dde [deg d^-1]; proper motion
+32.0			! R_A [km]; asteroid radius
+6.98692666446133	! RA_J2000 [h]; occulted star TYC 1907-01007-1=HD 51593
+29.27330740515		! DE_J2000 [deg]; occulted star
+
