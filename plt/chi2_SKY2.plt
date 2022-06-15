@@ -21,8 +21,8 @@ set key left
 
 load "T0.plt"
 
-#d_pc = x_param44
-d_pc = x_param45
+d_pc = x_param44
+#d_pc = x_param45
 f(x) = x*au/(d_pc*pc)/arcsec
 
 p \

@@ -8,13 +8,14 @@ c     1 2          3               4
 c     \_/          |               |
 c                 /                |
 
-      subroutine geometry_hierarch(nbod, m, elmts, r, v)
+      subroutine geometry_hierarch(nbod_, m, elmts, r, v)
 
       implicit none
       include 'simplex.inc'
+      include 'dependent.inc'
       include '../misc/const.inc'
 c input
-      integer nbod
+      integer nbod_
       real*8 m(NBODMAX)
       real*8 elmts(NBODMAX,6)
 c output
@@ -54,6 +55,10 @@ c adjust coordinates (the elements were standard stellar-astronomy)
         vj(i,1) = -vj(i,2)
         vj(i,2) = tmp
         vj(i,3) = -vj(i,3)
+
+        if (debug_swift) then
+          write(*,*) '# a = ', a, ' au = ', a*au/R_S, ' R_S'
+        endif
       enddo
 
 c convert to barycentric frame

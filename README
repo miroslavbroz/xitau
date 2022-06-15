@@ -1,6 +1,6 @@
-This code xitau_chi2_simplex computes orbital evolution of multiple stars,
+This N-body code Xitau computes orbital evolution of multiple stars,
 accounting for *mutual* gravitational interactions. It includes a chi^2
-metric computation and simplex algorithm. It was originally designed for
+metric computation and a simplex algorithm. It was originally designed for
 the solution of \xi Tauri problem (published in Nemravova et al. 2016).
 
 If you use this code, please cite the original references:
@@ -13,7 +13,7 @@ If you use this code, please cite the original references:
   A&A, 594, A55, 47pp.
 
 Observational data (speckle-interferometry, RV's, minima timings aka TTV, ...)
-have to be in suitable format, of course (cf. DATA.tar.gz archive).
+have to be in suitable format, of course (see examples in DATA.tar.gz archive).
 The home page is http://sirrah.troja.mff.cuni.cz/~mira/xitau/ .
 
 --
@@ -67,7 +67,7 @@ Coordinate convention:
                                 
                  z (observer)   
                                 
-  stellar-astronomy             
+  standard stellar-astronomy             
 
   (x, y) is plane-of-sky
   x positive towards N
@@ -75,5 +75,15 @@ Coordinate convention:
   z radial, towards observer
   PA counterclockwise from x to y
   in an eyepiece, it may by reflected
+
+--
+                                    *****
+The primary time scale for Xitau is *TDB* (i.e., as in the JPL ephemerides).
+                                    *****
+
+UTC times of observations should be converted to TDB prior to computations;
+otherwise, the time scales would be inconsistent!! In particular, the UTC
+is discontinuous (cf. leap seconds) and we can hardly integrate the E.O.M.
+and compare (discretized) continuous w. discontinuous...
 
 

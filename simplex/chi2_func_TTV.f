@@ -18,6 +18,7 @@ c input
 
 c output
       integer nmin
+      integer eclipsed(MINMAX)
       real*8 tmin(MINMAX), duration(MINMAX)
       real*8 chi2
       integer n
@@ -86,10 +87,15 @@ c find ALL synthetic minima of the eclipsing binary
             if (d.le.dmax) then
               nmin = nmin+1
               if (nmin.lt.MINMAX) then
-                  tmin(nmin) = tout(i) + t_ * (tout(i+1)-tout(i))
-                  v = sqrt((B(1)-A(1))**2 + (B(2)-A(2))**2)
-     :              / (tout(i+1)-tout(i))
-                  duration(nmin) = 2.d0*sqrt(dmax**2-d**2) / v
+                tmin(nmin) = tout(i) + t_ * (tout(i+1)-tout(i))
+                v = sqrt((B(1)-A(1))**2 + (B(2)-A(2))**2)
+     :            / (tout(i+1)-tout(i))
+                duration(nmin) = 2.d0*sqrt(dmax**2-d**2) / v
+                if (rh(i,2,3).gt.0.d0) then
+                  eclipsed(nmin) = 2
+                else
+                  eclipsed(nmin) = 1
+                endif
               else
                 write(*,*) "chi2_func_TTV.f: Error number of minima ",
      :            "exceeds MINMAX = ", MINMAX
@@ -104,13 +110,39 @@ c     :          "minimum. d = ", d, " AU, dmax = ", dmax, " AU"
         enddo
       endif
 
+c barycenter at T0
+      zb_interp0 = (rb(NOUT2,1,3)*m(1)+rb(NOUT2,2,3)*m(2))/(m(1)+m(2))
+
       if (debug_swift) then
         write(*,*) "# nmin = ", nmin
 
         open(unit=iu,file="minima.dat",status="unknown")
-        write(iu,*) "# Min JD (primary or secondary)"
+        write(iu,*) "# Min JD (without LITE) & eclipsed [1|2]",
+     :    " & LITE [d] & LITE12 [d]"
+
+        j = 2
         do i = 1, nmin
-          write(iu,*) tmin(i)
+          t_of_closest = tmin(i)
+
+          do while ((j.lt.NOUT).and.(tout(j).le.t_of_closest))
+            j = j+1
+          enddo
+
+c light-time effect for all of them
+          zb1 = interp(tout(j-1), tout(j), rb(j-1,1,3), rb(j,1,3),
+     :      t_of_closest)
+          zb2 = interp(tout(j-1), tout(j), rb(j-1,2,3), rb(j,2,3),
+     :      t_of_closest)
+          zb_interp = (zb1*m(1)+zb2*m(2)) / (m(1)+m(2))  ! barycenter of 1+2 body, z coordinate
+
+          LITE = au_day(zb_interp - zb_interp0)
+
+          zh2 = interp(tout(j-1), tout(j), rh(j-1,2,3), rh(j,2,3),
+     :      t_of_closest)
+
+          LITE12 = -au_day(zh2)
+
+          write(iu,*) tmin(i), eclipsed(i), LITE, LITE12
         enddo
         close(iu)
       endif
@@ -125,9 +157,6 @@ c     :          "minimum. d = ", d, " AU, dmax = ", dmax, " AU"
       n = 0
 
       if (nmin.ge.2) then
-
-c barycenter at T0
-        zb_interp0 = (rb(NOUT2,1,3)*m(1)+rb(NOUT2,2,3)*m(2))/(m(1)+m(2))
 
         j = 2
         k = 2
@@ -149,7 +178,7 @@ c find the closest synthetic minimum to the observed one
             j = j+1
           enddo
 
-c account for light-time effect due to external bodies
+c light-time effect due to external bodies
 
           zb1 = interp(tout(j-1), tout(j), rb(j-1,1,3), rb(j,1,3),
      :      t_of_closest)
@@ -167,6 +196,7 @@ c and the synthetic minimum occurs earlier
      :      t_of_closest)
 
           LITE12 = -au_day(zh2)
+
           t_of_closest = t_of_closest + LITE + LITE12
 
           OMC = t_TTV(i)-t_of_closest

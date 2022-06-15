@@ -219,8 +219,7 @@ c use the 1+2+3 photocentre for low-resolution interferometry
           endif
 
 ! some variables to output
-!          if (t_SKY(i,k).ge.2459875.d0) then
-          if (t_SKY(i,k).ge.0.d0) then
+          if (t_SKY(i,k).ge.2459875.d0) then
             open(unit=iub, file="variables.tmp", access="append")
             write(iub,*) t_SKY(i,k), au_arcsec(u,tmp), au_arcsec(v,tmp),
      :        chi2_

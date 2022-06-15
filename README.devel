@@ -1,4 +1,19 @@
 
+occultation predictions for moons:
+
+- proper motion of *
+- parallax motion of * (if close)
+- temporal resolution (<1 h)
+- updated ephemeris?
+- ellipsoid
+- elevation?
+- Earth orientation! (precession, nutation) .. i.e., not in J2000!
+- equivalent computations in ecliptic-of-date
+- curved path durring occultation
+- comparison with Occult
+
+Note: 0.1" * 5.2 au = 400 km (!)
+
 dereddening is dependent on distance, hence it should be including
 in the fitting procedure! :-(
 

@@ -93,8 +93,8 @@ sp \
   "star2.dat" u 1:(-$2):(+$3):8 w d ls 2 lc palette z,\
   "star2.dat" u 1:(+$2):(-$3):8 w d ls 2 lc palette z,\
   "star2.dat" u 1:(-$2):(-$3):8 w d ls 2 lc palette z,\
-  fx(R1/a1,u,v)+0.0, fy(R1/a1,u,v), fz(R1/a1,u,v) lc 'green',\
-  fx(R2/a1,u,v)+1.0, fy(R2/a1,u,v), fz(R2/a1,u,v) lc 'green'
+  fx(r1/a1,u,v)+0.0, fy(r1/a1,u,v), fz(r1/a1,u,v) lc 'green',\
+  fx(r2/a1,u,v)+1.0, fy(r2/a1,u,v), fz(r2/a1,u,v) lc 'green'
 
 pa -1
 
