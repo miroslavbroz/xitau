@@ -2,13 +2,18 @@
 10.0			! delta [s]; duration of occultation
 0.04			! sigma_t [s]; uncertainty of t
 0.04			! sigma_delta [s]; uncertainty of delta
-4.3825604333305		! d_geocentric [au]; occulting asteroid (3548) Eurybates
-6.98690383595606	! RA_J2000 [h]; geocentric, occulting asteroid
-29.2735809873381	! DE_J2000 [deg]; geocentric, occulting asteroid
--0.0144898260771704	! dd [au d^-1]; proper motion
-0.00296666666666656	! dra [h d^-1]; proper motion
-0.0282777777777774	! dde [deg d^-1]; proper motion
+4.3825573884224		! delta [au]; geocentric, occulting asteroid (3548) Eurybates
+6.98691562394074	! RA_J2000 [h]; geocentric, occulting asteroid
+29.273557767943		! DE_J2000 [deg]; geocentric, occulting asteroid
+-0.0145196249523001 	! dd [au d^-1]; proper motion
+0.00307028664378179	! dra_J2000 [h d^-1]; proper motion
+0.0281193997904505	! dde_J2000 [deg d^-1]; proper motion
 32.0			! R_A [km]; asteroid radius
-6.98692666446133	! RA_J2000 [h]; occulted star TYC 1907-01007-1=HD 51593
-29.27330740515		! DE_J2000 [deg]; occulted star
+6.98692617821836	! RA_J2000+p.m. [h]; occulted star TYC 1907-01007-1=HD 51593
+29.2732734669007	! DE_J2000+p.m. [deg]; occulted star
+13.8187563264502	! RA_J2000 [h]; Sun
+-11.2376363542507	! DE_J2000 [deg]; Sun
+1.31204949276939	! prxl [mas]; parallax of star
+0.0			! ra_offset [mas]; offset of asteroid
+0.0			! de_offset [mas]; offset of asteroid
 

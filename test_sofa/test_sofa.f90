@@ -10,6 +10,8 @@
 
 subroutine test_sofa(UTC1, UTC2)
 
+use hhms_module
+
 implicit none
 double precision, parameter :: pi = 4.d0*atan(1.d0)
 integer :: j
@@ -74,6 +76,7 @@ implicit none
 
 call test_sofa(2451545.0d0, 0.d0)  ! J2000
 call test_sofa(2453371.5d0, 0.d0)  ! Jan 1st 2005
+call test_sofa(2459875.589308d0, 0.d0)  ! Oct 23rd 2022
 
 stop
 

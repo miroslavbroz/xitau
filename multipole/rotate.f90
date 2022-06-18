@@ -106,9 +106,10 @@ end subroutine rot_z_nodes
 
 function rot_x(r, c, s)
 
+implicit none
 double precision, dimension(3) :: rot_x
-double precision, dimension(3) :: r
-double precision :: c, s
+double precision, dimension(3), intent(in) :: r
+double precision, intent(in) :: c, s
 
 double precision, dimension(3) :: r_
 
@@ -123,9 +124,10 @@ end function rot_x
 
 function rot_y(r, c, s)
 
+implicit none
 double precision, dimension(3) :: rot_y
-double precision, dimension(3) :: r
-double precision :: c, s
+double precision, dimension(3), intent(in) :: r
+double precision, intent(in) :: c, s
 
 double precision, dimension(3) :: r_
 
@@ -140,9 +142,10 @@ end function rot_y
 
 function rot_z(r, c, s)
 
+implicit none
 double precision, dimension(3) :: rot_z
-double precision, dimension(3) :: r
-double precision :: c, s
+double precision, dimension(3), intent(in) :: r
+double precision, intent(in) :: c, s
 
 double precision, dimension(3) :: r_
 

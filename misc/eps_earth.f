@@ -16,9 +16,14 @@ c Reference: Astronomical almanac, 2010, p. B52.
       T4 = T3*T
       T5 = T4*T
 
+c Astronomical Almanac, 2010, p. B52; https://en.wikipedia.org/wiki/Ecliptic
       eps_earth = (23.d0 + 26.d0/60.d0 + (21.406d0 - 46.836769d0*T
      :  - 0.0001831d0*T2 + 0.00200340d0*T3 - 0.576d-6*T4
      :  - 4.34e-8*T5)/3600.d0)*deg
+
+c Lieske etal. (1977)
+c      eps_earth = (23.d0 + 26.d0/60.d0 + (21.448d0 - 46.8150d0*T
+c     : - 0.00059d0*T2 + 0.001813*T3)/3600.d0)*deg
 
       return
       end

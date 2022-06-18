@@ -1,0 +1,14 @@
+Ephemeris of 3548 Eurybates at 0 hrs UTC   (J2000)
+
+T 2022 Jun 15.0000 TT     Orbit : Astorb 2022 Jun 10
+MA   6.534343°
+q  4.7325198    Peri.  27.264534°
+a  5.2035282    Node   43.546196°
+e  0.0905171    Incl.   8.054888°
+
+   y  m   d   h  m   s         o  '   "        delta  RSun   Elong  Phase    Mag   "/min  PA
+2022 Oct 23   6 59 11.62828   29 16 16.1854    4.384  4.758  106.2   11.6   17.2    0.11  55.3
+2022 Oct 24   6 59 22.30084   29 17 58.0327    4.369  4.758  107.1   11.5   17.1    0.10  52.4
+
+
+

@@ -1,6 +1,3 @@
-! hhms.f90
-! Convert decimal hours to h:m:s.
-! Miroslav Broz (miroslav.broz@email.cz), Jun 9th 2022
 
 module hhms_module
 

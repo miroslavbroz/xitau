@@ -44,10 +44,16 @@ obj = \
   fal03.o \
   bpn2xy.o \
 
-test_sofa: test_sofa.f90 $(obj)
-	gfortran $(opt) $(obj) -o $@ $<
+obj90 = \
+  ../test_occult1/hhms.o \
+
+test_sofa: test_sofa.f90 $(obj) $(obj90)
+	gfortran $(opt) $(obj) $(obj90) -o $@ $<
 
 $(obj): %.o:%.f
+	gfortran $(opt) -c -o $@ $<
+
+$(obj90): %.o:%.f90
 	gfortran $(opt) -c -o $@ $<
 
 clean:

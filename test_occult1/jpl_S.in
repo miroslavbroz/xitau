@@ -69,7 +69,7 @@ Subject: Re: BATCH-LONG
 ! is space or comma delimited. "COMMAND=" is used only once,
 ! so it does not supercede a previous COMMAND assignment.
 
- COMMAND    = '3548;'
+ COMMAND    = '10'
 
 ! OBJ_DATA toggles return of object summary data. 
 ! Values: YES or NO
