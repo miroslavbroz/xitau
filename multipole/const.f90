@@ -8,7 +8,7 @@ double precision, parameter :: pi = 4.0d0*atan(1.d0), deg = pi/180.d0, rad = 180
 double precision, parameter :: arcsec = deg/3600.d0
 double precision, parameter :: mas = 1.d-3*arcsec
 
-double precision, parameter :: c = 2.99792458d8  ! m/s, from CODATA 2018, exact
+double precision, parameter :: clight = 2.99792458d8  ! m/s, from CODATA 2018, exact
 double precision, parameter :: G = 6.67430d-11  ! kg^-1 m^3 s^-2, CODATA 2018; https://physics.nist.gov/cgi-bin/cuu/Value?bg
 double precision, parameter :: GM_S = 0.2959122082855911d-03  ! AU^3/day^2, from JPLEPH DE405
 double precision, parameter :: au = 1.49597870700d11  ! m, from IAU 2012
