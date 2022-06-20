@@ -7,9 +7,10 @@ arcsec = deg/3600.
 mas = 1.e-3*arcsec
 
 d = 4.38264413834859*au
-a = 20.*km
+a = 5.*km
 phi = a/d
 
+print "a = ", a/km, " km"
 print "phi = ", phi, " rad = ", phi/arcsec, " arcsec"
 
 

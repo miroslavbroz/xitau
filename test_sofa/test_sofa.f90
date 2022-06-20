@@ -18,6 +18,7 @@ integer :: j
 double precision :: UTC1, UTC2
 double precision :: TAI1, TAI2
 double precision :: UT11, UT12, DUT1
+double precision :: DAT, DTA
 double precision :: TT1, TT2
 double precision :: TDB1, TDB2, DTDB, u, v, elong, iau_dtdb
 double precision :: TCB1, TCB2
@@ -26,6 +27,8 @@ double precision :: ERA, iau_era00
 double precision :: GMST, iau_gmst06
 double precision :: GST, iau_gst06a
 double precision :: h, m, s
+integer :: IY, IM, ID
+double precision :: FD
 character(128) :: fmt
 
 DUT1 = 0.4d0 ! UT1-UTC; https://datacenter.iers.org/data/17/bulletind-081.txt
@@ -45,15 +48,21 @@ ERA = iau_era00(UT11, UT12)
 GMST = iau_gmst06(UT11, UT12, TT1, TT2)
 GST = iau_gst06a(UT11, UT12, TT1, TT2)
 
+call iau_jd2cal(UTC1, UTC2, IY, IM, ID, FD, j)
+call iau_dat(IY, IM, ID, FD, DAT, j)
+DTA = DUT1-DAT
+
 write(*,*) '----'
-write(*,*) 'DUT1', DUT1/86400.d0, ' d', DUT1, ' s'
-write(*,*) 'DTDB', DTDB/86400.d0, ' d', DTDB, ' s'
+write(*,*) 'DUT1', DUT1/86400.d0, ' d', DUT1, ' s .. UT1-UTC'
+write(*,*) 'DTA ', DTA/86400.d0, ' d', DTA, ' s .. UT1-TAI'
+write(*,*) 'DAT ', DAT/86400.d0, ' d', DAT, ' s .. TAI-UTC'
+write(*,*) 'DTDB', DTDB/86400.d0, ' d', DTDB, ' s .. TDB-TT'
 write(*,*)
 
-write(*,*) 'UTC ', UTC1+UTC2
+write(*,*) 'UTC ', UTC1+UTC2, (UTC1-UTC1+UTC2-UTC2)*86400.d0, ' s', j
 write(*,*) 'UT1 ', UT11+UT12, (UT11-UTC1+UT12-UTC2)*86400.d0, ' s', j
 write(*,*) 'TAI ', TAI1+TAI2, (TAI1-UTC1+TAI2-UTC2)*86400.d0, ' s', j
-write(*,*) 'TT  ', TT1+TT2, (TT1-UTC1+TT2-UTC2)*86400.d0, ' s', j
+write(*,*) 'TT  ', TT1 +TT2 , (TT1 -UTC1+TT2 -UTC2)*86400.d0, ' s', j
 write(*,*) 'TDB ', TDB1+TDB2, (TDB1-UTC1+TDB2-UTC2)*86400.d0, ' s', j
 write(*,*) 'TCG ', TCG1+TCG2, (TCG1-UTC1+TCG2-UTC2)*86400.d0, ' s', j
 write(*,*) 'TCB ', TCB1+TCB2, (TCB1-UTC1+TCB2-UTC2)*86400.d0, ' s', j

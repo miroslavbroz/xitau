@@ -15,34 +15,34 @@ obj = \
   ../sofa/tttcg.o \
   ../sofa/tttdb.o \
   ../sofa/utctai.o \
-  gst06a.o \
-  pnm06a.o \
-  nut06a.o \
-  fw2m.o \
-  ir.o \
-  rx.o \
-  ry.o \
-  rz.o \
-  gst06.o \
-  nut00a.o \
-  pfw06.o \
-  eors.o \
-  fae03.o \
-  faf03.o \
-  faju03.o \
-  fama03.o \
-  fame03.o \
-  faom03.o \
-  fapa03.o \
-  fasa03.o \
-  faur03.o \
-  fave03.o \
-  obl06.o \
-  s06.o \
-  falp03.o \
-  fad03.o \
-  fal03.o \
-  bpn2xy.o \
+  ../sofa/gst06a.o \
+  ../sofa/pnm06a.o \
+  ../sofa/nut06a.o \
+  ../sofa/fw2m.o \
+  ../sofa/ir.o \
+  ../sofa/rx.o \
+  ../sofa/ry.o \
+  ../sofa/rz.o \
+  ../sofa/gst06.o \
+  ../sofa/nut00a.o \
+  ../sofa/pfw06.o \
+  ../sofa/eors.o \
+  ../sofa/fae03.o \
+  ../sofa/faf03.o \
+  ../sofa/faju03.o \
+  ../sofa/fama03.o \
+  ../sofa/fame03.o \
+  ../sofa/faom03.o \
+  ../sofa/fapa03.o \
+  ../sofa/fasa03.o \
+  ../sofa/faur03.o \
+  ../sofa/fave03.o \
+  ../sofa/obl06.o \
+  ../sofa/s06.o \
+  ../sofa/falp03.o \
+  ../sofa/fad03.o \
+  ../sofa/fal03.o \
+  ../sofa/bpn2xy.o \
 
 obj90 = \
   ../test_occult1/hhms.o \

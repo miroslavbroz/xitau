@@ -15,6 +15,7 @@ use lst_module
 use preces_module
 use nutate_module
 use geodetic_module
+use hhms_module
 
 implicit none
 double precision, intent(in) :: t_TDB
@@ -27,6 +28,7 @@ integer :: j
 double precision :: abse
 double precision, dimension(3) :: e_, e__
 double precision :: TDB1, TDB2, DTDB
+double precision :: UTC1, UTC2
 double precision :: UT11, UT12, DUT1
 double precision :: TT1, TT2
 double precision :: TAI1, TAI2
@@ -36,8 +38,12 @@ double precision :: ERA
 double precision :: t0, t, zeta, zz, theta
 double precision :: eps, deltapsi, deltaeps
 double precision :: s0, ss, s
+double precision :: h, m, s_
 double precision :: eps_earth
 double precision :: iau_dtdb, iau_gst06a, iau_era00
+
+!write(*,*) 'r_EA = ', r_EA
+!write(*,*) 'r_AS = ', r_AS
 
 call intersect_AB_e(r_EA, -r_AS, e, axes, has_solution)
 
@@ -57,9 +63,9 @@ DUT1 = 0.4d0 ! UT1-UTC; https://datacenter.iers.org/data/17/bulletind-081.txt
 DTDB = iau_dtdb(TDB1, TDB2, UT12, elong, u, v)
 call iau_tdbtt(TDB1, TDB2, DTDB, TT1, TT2, j)
 call iau_tttai(TT1, TT2, TAI1, TAI2, j)
-call iau_taiut1(TAI1, TAI2, DUT1, UT11, UT12, j)
+call iau_taiutc(TAI1, TAI2, UTC1, UTC2, j)
+call iau_utcut1(UTC1, UTC2, DUT1, UT11, UT12, j)
 ERA = iau_era00(UT11, UT12)
-!GMST = iau_gmst06(UT11, UT12, TT1, TT2)
 GST = iau_gst06a(UT11, UT12, TT1, TT2)
 t_UT1 = UT11+UT12
 
@@ -75,12 +81,31 @@ call preces2(e_,zeta,zz,theta)
 call nutate_angle(t,deltapsi,deltaeps)
 call nutate2(e_,eps,deltapsi,deltaeps)
 
+!write(*,*) 'eps      = ', eps
+!write(*,*) 'zeta     = ', zeta
+!write(*,*) 'zz       = ', zz
+!write(*,*) 'theta    = ', theta
+!write(*,*) 'deltapsi = ', deltapsi
+!write(*,*) 'deltaeps = ', deltaeps
+
 ! Earth rotation
 lambda = 0.d0
 call lst(t_UT1,lambda,eps,deltapsi,s0,ss,s)
 e__ = rot_z(e_, cos(s), sin(s))
 
 call geodetic(e__, axes, lambda, phi)
+
+!call hhms(t_UT1/pi*12.d0, h, m, s_)
+!write(*,*) 't_UT1 = ', t_UT1/pi*12.d0, ' h = ', int(h), int(m), s_
+!call hhms(s/pi*12.d0, h, m, s_)
+!write(*,*) '# s   = ', s/pi*12.d0, ' h = ', int(h), int(m), s_
+!call hhms(GST/pi*12.d0, h, m, s_)
+!write(*,*) '# GST = ', GST/pi*12.d0, ' h = ', int(h), int(m), s_
+!write(*,*) 'e_ = ', e_
+!write(*,*) 'e__ = ', e__
+!write(*,*) 'lambda = ', lambda
+!write(*,*) 'phi = ', phi
+!stop
 
 return
 end subroutine occult

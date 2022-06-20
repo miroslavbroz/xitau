@@ -19,9 +19,11 @@ R_P = 6.3567523142e6  # m; WGS-84 http://wiki.gis.com/wiki/index.php/Reference_e
 # 2022-Oct-23 02:00:00.000 2459875.583333333     06 59 12.830208 +29 16 24.20315  07 00 38.979941 +29 14 31.30357           n.a.          n.a.   17.155   8.397   98.98147  0.020098        n.a.       n.a.   91.323030   5.982607   4.758207967562   0.4204189  4.38264413834859 -25.1430383    36.44933985  106.2558 /L   11.5863   Gem  103.2794693   6.5000264       n.a.       n.a.
 # 2022-Oct-23 03:00:00.000 2459875.625000000     06 59 13.290751 +29 16 28.42106  07 00 39.442201 +29 14 35.50499           n.a.          n.a.   17.155   8.397   98.98191  0.020101        n.a.       n.a.   91.327155   5.982995   4.758218086544   0.4204986  4.38203915397107 -25.1377125    36.44430835  106.2954 /L   11.5837   Gem  103.2810285   6.5013631       n.a.       n.a.
 
+# utctest.out:
+
 t = 2459875.589308
-t1 = 2459875.583333333
-t2 = 2459875.625000000
+t1 = 2459875.584134
+t2 = 2459875.625801
 d1 = 4.38264413834859
 d2 = 4.38203915397107
 ra1 = h(06, 59, 12.830208)/12.*pi
@@ -37,7 +39,7 @@ dra = (ra2-ra1)/(t2-t1)
 dde = (de2-de1)/(t2-t1)
 pm = sqrt((dra*cos(de))**2 + dde**2)
 pa = atan2((dra*cos(de)), dde)
-prx = R_E/(d*au)
+prlx = R_E/(d*au)
 
 print "# (3548) Eurybates:"
 print "d = ", d, " au"   
@@ -48,15 +50,15 @@ print "dra = ", dra/pi*12, " h d^-1 = ", dra/(arcsec/min), " arcsec min^-1"
 print "dde = ", dde/deg, " deg d^-1 = ", dde/(arcsec/min), " arcsec min^-1"
 print "pm  = ", pm/deg, " deg d^-1 = ", pm/(arcsec/min), " arcsec min^-1"
 print "pa  = ", pa/deg, " deg"
-print "prx = ", prx/deg, " deg = ", prx/mas, " mas (diurnal)"
+print "prlx = ", prlx/deg, " deg = ", prlx/mas, " mas (diurnal)"
 print ""
 
 # Gaia DR3, https://gea.esac.esa.int/archive/
 
-t0 = 2457388.5  # 2016.0
+t0 = 2457388.500789  # 2016.0 (TDB)
 ra0 = 104.80389464787285*deg
 de0 = 29.273283598517132*deg
-prx = 1.3120494927693929*mas
+prlx = 1.3120494927693929*mas
 dra = -1.0439505469262131*mas/yr
 dde = -5.3564873754165045*mas/yr
 ra = ra0 + (t-t0)*dra
@@ -69,10 +71,10 @@ print "ra  = ", ra/pi*12, " h"
 print "de  = ", de/deg, " deg"
 print "dra = ", dra/pi*12, " h d^-1"
 print "dde = ", dde/deg, " deg d^-1"
-print "prx = ", prx/deg, " deg = ", prx/mas, " mas (annual)"
+print "prlx = ", prlx/deg, " deg = ", prlx/mas, " mas (annual)"
 print ""
 
-# jpl2.out:
+# jpl_S.out:
 
 #*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 # Date__(UT)__HR:MN:SC.fff Date_________JDUT     R.A.___(ICRF)___DEC  R.A._(a-appar)_DEC.  Azi____(a-app)___Elev    APmag   S-brt      Illu%  Ang-diam  ObsSub-LON ObsSub-LAT  hEcl-Lon hEcl-Lat                r        rdot             delta      deldot  1-way_down_LT     S-O-T /r     S-T-O  Cnst     ObsEcLon    ObsEcLat  N.Pole-RA  N.Pole-DC

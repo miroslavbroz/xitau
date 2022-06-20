@@ -11,7 +11,7 @@ use paralax_module
 use hhms_module
 
 implicit none
-double precision :: t0
+double precision :: t0_TDB
 double precision :: vardist, ecl, ecb, dvardist, decl, decb
 double precision :: R_A
 double precision :: ra, de, dra, dde
@@ -20,7 +20,7 @@ double precision :: ra_O, de_O, prlx
 double precision :: ra_S, de_S
 double precision :: ra_offset, de_offset
 
-integer :: i, n
+integer :: i, j, n
 double precision :: t, lambda, phi, ht, eps
 double precision, dimension(3) :: r, r_, r_EA, r_AS, e, axes
 double precision :: l, b, d
@@ -28,9 +28,10 @@ double precision :: dummy
 logical :: has_solution
 double precision :: eps_earth
 double precision :: h, m, s
+double precision :: t_TDB
 character(128) :: fmt
 
-read(*,*) t0
+read(*,*) t0_TDB
 read(*,*) dummy
 read(*,*) dummy
 read(*,*) dummy
@@ -61,7 +62,7 @@ prlx = prlx*mas
 ra_offset = ra_offset*mas
 de_offset = de_offset*mas
 
-write(*,*) '# t0 = ', t0
+write(*,*) '# t0_TDB = ', t0_TDB
 call hhms(ra_A/pi*12.d0, h, m, s)
 write(*,*) '# ra_A = ', ra_A/pi*12.d0, " h = ", int(h), int(m), s
 call hhms(ra_O/pi*12.d0, h, m, s)
@@ -79,6 +80,8 @@ call paralax(ra_O, de_O, prlx, ra_S, de_S)
 
 r_AS = (/cos(ra_O)*cos(de_O), sin(ra_O)*cos(de_O), sin(de_O)/)
 
+axes = (/R_E, R_E, R_P/)/au
+
 write(*,*) '# t_TDB [jd] & lambda [deg] & phi [deg]'
 
 open(unit=10, file='test_occult.tmp', status='unknown')
@@ -86,17 +89,15 @@ open(unit=10, file='test_occult.tmp', status='unknown')
 n = 300
 do i = 0, n
 
-  t = t0 + 0.03d0*(dble(i)/n-0.5d0)
+  t_TDB = t0_TDB + 0.03d0*(dble(i)/n-0.5d0)
 
-  d = vardist + dvardist*(t-t0)
-  ra = ra_A + dra*(t-t0) + ra_offset
-  de = de_A + dde*(t-t0) + de_offset
+  d = vardist + dvardist*(t_TDB-t0_TDB)
+  ra = ra_A + dra*(t_TDB-t0_TDB) + ra_offset
+  de = de_A + dde*(t_TDB-t0_TDB) + de_offset
 
   r_EA = d*(/cos(ra)*cos(de), sin(ra)*cos(de), sin(de)/)
 
-  axes = (/R_E, R_E, R_P/)/au
-
-  call occult(t, r_EA, r_AS, e, axes, lambda, phi, dummy, has_solution)
+  call occult(t_TDB, r_EA, r_AS, e, axes, lambda, phi, dummy, has_solution)
 
   if (has_solution) then
     write(*,*) t, lambda/deg, phi/deg
