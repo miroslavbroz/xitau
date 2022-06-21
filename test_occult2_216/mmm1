@@ -1,0 +1,20 @@
+From durech@sirrah.troja.mff.cuni.cz Mon Jun 20 13:47:05 2022
+Date: Mon, 20 Jun 2022 13:47:05 +0200 (CEST)
+From: Josef Durech <durech@sirrah.troja.mff.cuni.cz>
+To: Miroslav Broz <mira@sirrah.troja.mff.cuni.cz>
+Subject: zakryt Kleopatrou
+
+Miro, v priloze je zakryt z 2015-03-12. Na radcich jsou jednotlivi 
+pozorovatele ve formatu:
+
+lambda [deg] | phi [deg] | alt [km] | JD_in [UTC] | JD_in_error | JD_out [UTC] | JD_out_error | index
+
+index je -1 pro negativni pozorovani
+
+Vice kdyztak zitra odpoledne, ted odchazim.
+
+P.
+
+
+    [ Part 2, ""  Text/PLAIN (Name: "Kleopatra_occ") ~4.4 KB. ]
+    [ Unable to print this part. ]

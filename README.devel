@@ -6,7 +6,7 @@ occultation predictions for moons:
 - ellipsoid instead of sphere OK
 - ellipsoidal longitude, latitude OK
 - parallax of * (if close) OK
-- light-time effect
+- light-time effect (no, it's already in ephemeris)
 - temporal resolution (<1 h)
 - curved asteroid path during occultation
 - updated ephemeris? NO

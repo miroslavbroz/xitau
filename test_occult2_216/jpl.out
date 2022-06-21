@@ -1,0 +1,304 @@
+From horizons@ssd.jpl.nasa.gov Mon Jun 20 16:33:53 2022
+Date: Mon, 20 Jun 2022 07:33:01 -0700 (PDT)
+From: Horizons Ephemeris System <horizons@ssd.jpl.nasa.gov>
+Subject: [Horizons] SMALL BODY #C(500@399)_T(216 Kleopatra (A880 GB)) (1/1)
+
+ Automated mail xmit by MAIL_REQUEST, PID= 2232 Mon Jun 20 07:33:01 2022
+++++++++++++++++++++++++++++++++ (part 1 of 1)  +++++++++++++++++++++++++++++++
+*******************************************************************************
+JPL/HORIZONS               216 Kleopatra (A880 GB)         2022-Jun-20 07:33:01
+Rec #:     216 (+COV) Soln.date: 2022-Jun-10_02:39:55   # obs: 4246 (1880-2022)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457040.5 ! 2015-Jan-18.00 (TDB)         Residual RMS= .21444
+   EC= .2496726515602654   QR= 2.097907267151665   TP= 2456560.5857203165
+   OM= 215.38963259441     W=  180.2875170074477   IN= 13.10066314869885
+   A= 2.795989339205282    MA= 101.1729654289275   ADIST= 3.494071411258899
+   PER= 4.67532            N= .210814654           ANGMOM= .027853047
+   DAN= 3.49406            DDN= 2.09791            L= 35.6696765
+   B= -.0651702            MOID= 1.10377002        TP= 2013-Sep-25.0857203165
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 61.                ROTPER= 5.385
+   H= 7.08                 G= .290                 B-V= .713
+                           ALBEDO= .1164           STYP= Xe
+ 
+ASTEROID comments: 
+1: soln ref.= JPL#136, OCC=0           radar( 1 delay, 0 Dop.)
+2: source=ORB
+*******************************************************************************
+ 
+ 
+*******************************************************************************
+Ephemeris / MAIL_REQUEST Mon Jun 20 07:33:01 2022 Pasadena, USA  / Horizons    
+*******************************************************************************
+Target body name: 216 Kleopatra (A880 GB)         {source: JPL#136}
+Center body name: Earth (399)                     {source: DE441}
+Center-site name: GEOCENTRIC
+*******************************************************************************
+Start time      : A.D. 2015-Mar-12 00:00:00.0000 UT      
+Stop  time      : A.D. 2015-Mar-13 00:00:00.0000 UT      
+Step-size       : 60 minutes
+*******************************************************************************
+Target pole/equ : No model available
+Target radii    : 61.0 km                                                      
+Center geodetic : 0.00000000,0.00000000,0.0000000 {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.00000000,0.00000000,0.0000000 {E-lon(deg),Dxy(km),Dz(km)}
+Center pole/equ : ITRF93                          {East-longitude positive}
+Center radii    : 6378.1 x 6378.1 x 6356.8 km     {Equator, meridian, pole}    
+Target primary  : Sun
+Vis. interferer : MOON (R_eq= 1737.400) km        {source: DE441}
+Rel. light bend : Sun, EARTH                      {source: DE441}
+Rel. lght bnd GM: 1.3271E+11, 3.9860E+05 km^3/s^2                              
+Small-body perts: Yes                             {source: SB441-N16}
+Atmos refraction: NO (AIRLESS)
+RA format       : HMS
+Time format     : BOTH
+EOP file        : eop.220617.p220909                                           
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2022-JUN-17. PREDICTS-> 2022-SEP-08
+Units conversion: 1 au= 149597870.700 km, c= 299792.458 km/s, 1 day= 86400.0 s 
+Table cut-offs 1: Elevation (-90.0deg=NO ),Airmass (>38.000=NO), Daylight (NO )
+Table cut-offs 2: Solar elongation (  0.0,180.0=NO ),Local Hour Angle( 0.0=NO )
+Table cut-offs 3: RA/DEC angular rate (     0.0=NO )                           
+*******************************************************************************
+Initial IAU76/J2000 heliocentric ecliptic osculating elements (au, days, deg.):
+  EPOCH=  2457040.5 ! 2015-Jan-18.00 (TDB)         Residual RMS= .21444        
+   EC= .2496726515602654   QR= 2.097907267151665   TP= 2456560.5857203165      
+   OM= 215.38963259441     W=  180.2875170074477   IN= 13.10066314869885       
+  Equivalent ICRF heliocentric cartesian coordinates (au, au/d):
+   X=-2.901750313669778E+00  Y= 1.026831731341810E+00  Z=-1.625168210612388E-01
+  VX=-4.807758421100277E-03 VY=-7.581656507584270E-03 VZ=-2.360722928052564E-03
+Asteroid physical parameters (km, seconds, rotational period in hours):        
+   GM= n.a.                RAD= 61.                ROTPER= 5.385               
+   H= 7.08                 G= .290                 B-V= .713                   
+                           ALBEDO= .1164           STYP= Xe                    
+***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+ Date__(UT)__HR:MN:SC.fff Date_________JDUT     R.A._________(ICRF)_________DEC  R.A.___(airless-apparent)___DEC  Azimuth__(a-app)__Elevation    APmag   S-brt      Illu%  Ang-diam  ObsSub-LON ObsSub-LAT    hEcl-Lon   hEcl-Lat                r        rdot             delta      deldot  1-way_down_LT     S-O-T /r     S-T-O  Cnst     ObsEcLon    ObsEcLat  N.Pole-RA  N.Pole-DC
+***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+$$SOE
+ 2015-Mar-12 00:00:00.000 2457093.500000000     11 10 30.119548 -09 01 58.90218  11 11 17.736562 -09 07 07.71002           n.a.          n.a.   11.631   5.772   99.87213  0.076010        n.a.       n.a.  171.799288  -9.115702   3.188154970146   3.2268242  2.21303001151696   2.0049255    18.40520938  166.7387 /T    4.0991   Crt  172.4428614 -13.1930324       n.a.       n.a.
+ 2015-Mar-12 01:00:00.000 2457093.541666667     11 10 28.177740 -09 01 40.35000  11 11 15.794870 -09 06 49.15573           n.a.          n.a.   11.631   5.772   99.87226  0.076009        n.a.       n.a.  171.805823  -9.114628   3.188232617085   3.2264508  2.21307851667284   2.0263770    18.40561278  166.7452 /T    4.0970   Crt  172.4332253 -13.1914967       n.a.       n.a.
+ 2015-Mar-12 02:00:00.000 2457093.583333333     11 10 26.236280 -09 01 21.78767  11 11 13.853529 -09 06 30.59130           n.a.          n.a.   11.631   5.772   99.87238  0.076007        n.a.       n.a.  171.812357  -9.113553   3.188310255033   3.2260774  2.21312753806142   2.0478299    18.40602048  166.7516 /T    4.0950   Crt  172.4235894 -13.1899577       n.a.       n.a.
+ 2015-Mar-12 03:00:00.000 2457093.625000000     11 10 24.295172 -09 01 03.21522  11 11 11.912543 -09 06 12.01676           n.a.          n.a.   11.631   5.772   99.87250  0.076005        n.a.       n.a.  171.818891  -9.112479   3.188387883989   3.2257039  2.21317707571635   2.0692843    18.40643247  166.7578 /T    4.0930   Crt  172.4139538 -13.1884155       n.a.       n.a.
+ 2015-Mar-12 04:00:00.000 2457093.666666667     11 10 22.354419 -09 00 44.63268  11 11 09.971914 -09 05 53.43214           n.a.          n.a.   11.631   5.772   99.87262  0.076003        n.a.       n.a.  171.825425  -9.111404   3.188465503951   3.2253304  2.21322712967085   2.0907400    18.40684876  166.7639 /T    4.0911   Crt  172.4043183 -13.1868700       n.a.       n.a.
+ 2015-Mar-12 05:00:00.000 2457093.708333333     11 10 20.414024 -09 00 26.04007  11 11 08.031648 -09 05 34.83745           n.a.          n.a.   11.631   5.772   99.87273  0.076002        n.a.       n.a.  171.831958  -9.110330   3.188543114921   3.2249569  2.21327769995772   2.1121970    18.40726934  166.7697 /T    4.0893   Crt  172.3946831 -13.1853212       n.a.       n.a.
+ 2015-Mar-12 06:00:00.000 2457093.750000000     11 10 18.473991 -09 00 07.43742  11 11 06.091746 -09 05 16.23274           n.a.          n.a.   11.631   5.772   99.87284  0.076000        n.a.       n.a.  171.838491  -9.109255   3.188620716896   3.2245834  2.21332878660930   2.1336554    18.40769421  166.7753 /T    4.0875   Crt  172.3850481 -13.1837692       n.a.       n.a.
+ 2015-Mar-12 07:00:00.000 2457093.791666667     11 10 16.534323 -08 59 48.82476  11 11 04.152212 -09 04 57.61802           n.a.          n.a.   11.631   5.772   99.87295  0.075998        n.a.       n.a.  171.845024  -9.108181   3.188698309877   3.2242099  2.21338038965755   2.1551151    18.40812338  166.7808 /T    4.0858   Crt  172.3754134 -13.1822140       n.a.       n.a.
+ 2015-Mar-12 08:00:00.000 2457093.833333333     11 10 14.595023 -08 59 30.20212  11 11 02.213049 -09 04 38.99333           n.a.          n.a.   11.631   5.772   99.87305  0.075996        n.a.       n.a.  171.851556  -9.107106   3.188775893862   3.2238363  2.21343250913394   2.1765761    18.40855685  166.7860 /T    4.0841   Crt  172.3657789 -13.1806555       n.a.       n.a.
+ 2015-Mar-12 09:00:00.000 2457093.875000000     11 10 12.656094 -08 59 11.56952  11 11 00.274262 -09 04 20.35868           n.a.          n.a.   11.631   5.772   99.87315  0.075995        n.a.       n.a.  171.858088  -9.106031   3.188853468852   3.2234627  2.21348514506955   2.1980383    18.40899461  166.7911 /T    4.0825   Crt  172.3561448 -13.1790937       n.a.       n.a.
+ 2015-Mar-12 10:00:00.000 2457093.916666667     11 10 10.717541 -08 58 52.92699  11 10 58.335852 -09 04 01.71411           n.a.          n.a.   11.631   5.771   99.87325  0.075993        n.a.       n.a.  171.864619  -9.104956   3.188931034846   3.2230891  2.21353829749501   2.2195019    18.40943666  166.7960 /T    4.0809   Crt  172.3465110 -13.1775287       n.a.       n.a.
+ 2015-Mar-12 11:00:00.000 2457093.958333333     11 10 08.779367 -08 58 34.27455  11 10 56.397824 -09 03 43.05964           n.a.          n.a.   11.631   5.771   99.87334  0.075991        n.a.       n.a.  171.871151  -9.103881   3.189008591842   3.2227154  2.21359196644051   2.2409666    18.40988301  166.8007 /T    4.0794   Crt  172.3368775 -13.1759604       n.a.       n.a.
+ 2015-Mar-12 12:00:00.000 2457094.000000000     11 10 06.841574 -08 58 15.61224  11 10 54.460181 -09 03 24.39531           n.a.          n.a.   11.631   5.771   99.87343  0.075989        n.a.       n.a.  171.877681  -9.102807   3.189086139841   3.2223417  2.21364615193581   2.2624327    18.41033366  166.8052 /T    4.0780   Crt  172.3272443 -13.1743889       n.a.       n.a.
+ 2015-Mar-12 13:00:00.000 2457094.041666667     11 10 04.904166 -08 57 56.94008  11 10 52.522926 -09 03 05.72113           n.a.          n.a.   11.631   5.771   99.87351  0.075987        n.a.       n.a.  171.884212  -9.101731   3.189163678842   3.2219680  2.21370085401023   2.2838999    18.41078860  166.8095 /T    4.0766   Crt  172.3176115 -13.1728141       n.a.       n.a.
+ 2015-Mar-12 14:00:00.000 2457094.083333333     11 10 02.967148 -08 57 38.25810  11 10 50.586062 -09 02 47.03713           n.a.          n.a.   11.631   5.771   99.87359  0.075985        n.a.       n.a.  171.890742  -9.100656   3.189241208844   3.2215943  2.21375607269266   2.3053683    18.41124784  166.8136 /T    4.0753   Crt  172.3079791 -13.1712361       n.a.       n.a.
+ 2015-Mar-12 15:00:00.000 2457094.125000000     11 10 01.030520 -08 57 19.56633  11 10 48.649593 -09 02 28.34335           n.a.          n.a.   11.631   5.771   99.87367  0.075983        n.a.       n.a.  171.897272  -9.099581   3.189318729847   3.2212206  2.21381180801154   2.3268379    18.41171138  166.8175 /T    4.0740   Crt  172.2983471 -13.1696548       n.a.       n.a.
+ 2015-Mar-12 16:00:00.000 2457094.166666667     11 09 59.094289 -08 57 00.86479  11 10 46.713522 -09 02 09.63980           n.a.          n.a.   11.632   5.771   99.87374  0.075981        n.a.       n.a.  171.903801  -9.098506   3.189396241850   3.2208468  2.21386805999487   2.3483086    18.41217921  166.8213 /T    4.0728   Crt  172.2887155 -13.1680703       n.a.       n.a.
+ 2015-Mar-12 17:00:00.000 2457094.208333333     11 09 57.158456 -08 56 42.15351  11 10 44.777853 -09 01 50.92652           n.a.          n.a.   11.632   5.771   99.87381  0.075980        n.a.       n.a.  171.910330  -9.097431   3.189473744853   3.2204730  2.21392482867022   2.3697805    18.41265134  166.8248 /T    4.0717   Crt  172.2790844 -13.1664825       n.a.       n.a.
+ 2015-Mar-12 18:00:00.000 2457094.250000000     11 09 55.223025 -08 56 23.43252  11 10 42.842588 -09 01 32.20354           n.a.          n.a.   11.632   5.771   99.87388  0.075978        n.a.       n.a.  171.916859  -9.096355   3.189551238854   3.2200992  2.21398211406471   2.3912535    18.41312777  166.8282 /T    4.0706   Crt  172.2694537 -13.1648915       n.a.       n.a.
+ 2015-Mar-12 19:00:00.000 2457094.291666667     11 09 53.287999 -08 56 04.70184  11 10 40.907731 -09 01 13.47087           n.a.          n.a.   11.632   5.771   99.87394  0.075976        n.a.       n.a.  171.923387  -9.095280   3.189628723854   3.2197253  2.21403991620501   2.4127275    18.41360850  166.8313 /T    4.0695   Crt  172.2598234 -13.1632973       n.a.       n.a.
+ 2015-Mar-12 20:00:00.000 2457094.333333333     11 09 51.353382 -08 55 45.96151  11 10 38.973286 -09 00 54.72854           n.a.          n.a.   11.632   5.771   99.87400  0.075974        n.a.       n.a.  171.929915  -9.094205   3.189706199852   3.2193514  2.21409823511737   2.4342027    18.41409352  166.8343 /T    4.0686   Crt  172.2501936 -13.1616998       n.a.       n.a.
+ 2015-Mar-12 21:00:00.000 2457094.375000000     11 09 49.419178 -08 55 27.21155  11 10 37.039255 -09 00 35.97660           n.a.          n.a.   11.632   5.771   99.87406  0.075972        n.a.       n.a.  171.936443  -9.093129   3.189783666847   3.2189775  2.21415707082755   2.4556789    18.41458284  166.8371 /T    4.0676   Crt  172.2405643 -13.1600991       n.a.       n.a.
+ 2015-Mar-12 22:00:00.000 2457094.416666667     11 09 47.485388 -08 55 08.45198  11 10 35.105643 -09 00 17.21505           n.a.          n.a.   11.632   5.771   99.87411  0.075970        n.a.       n.a.  171.942970  -9.092053   3.189861124839   3.2186036  2.21421642336091   2.4771562    18.41507646  166.8397 /T    4.0668   Crt  172.2309356 -13.1584951       n.a.       n.a.
+ 2015-Mar-12 23:00:00.000 2457094.458333333     11 09 45.552018 -08 54 49.68284  11 10 33.172451 -08 59 58.44393           n.a.          n.a.   11.632   5.771   99.87416  0.075967        n.a.       n.a.  171.949497  -9.090978   3.189938573827   3.2182297  2.21427629274233   2.4986345    18.41557438  166.8421 /T    4.0660   Crt  172.2213073 -13.1568880       n.a.       n.a.
+ 2015-Mar-13 00:00:00.000 2457094.500000000     11 09 43.619070 -08 54 30.90416  11 10 31.239685 -08 59 39.66326           n.a.          n.a.   11.632   5.772   99.87420  0.075965        n.a.       n.a.  171.956023  -9.089902   3.190016013810   3.2178557  2.21433667899626   2.5201138    18.41607660  166.8442 /T    4.0652   Crt  172.2116796 -13.1552775       n.a.       n.a.
+$$EOE
+***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+Column meaning:
+ 
+TIME
+
+  Times PRIOR to 1962 are UT1, a mean-solar time closely related to the
+prior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current
+civil or "wall-clock" time-scale. UTC is kept within 0.9 seconds of UT1
+using integer leap-seconds for 1972 and later years.
+
+  Conversion from the internal Barycentric Dynamical Time (TDB) of solar
+system dynamics to the non-uniform civil UT time-scale requested for output
+has not been determined for UTC times after the next July or January 1st.
+Therefore, the last known leap-second is used as a constant over future
+intervals.
+
+  Time tags refer to the UT time-scale conversion from TDB on Earth
+regardless of observer location within the solar system, although clock
+rates may differ due to the local gravity field and no analog to "UT"
+may be defined for that location.
+
+  Any 'b' symbol in the 1st-column denotes a B.C. date. First-column blank
+(" ") denotes an A.D. date. Calendar dates prior to 1582-Oct-15 are in the
+Julian calendar system. Later calendar dates are in the Gregorian system.
+
+  NOTE: "n.a." in output means quantity "not available" at the print-time.
+ 
+ 'R.A._________(ICRF)_________DEC' =
+  Astrometric right ascension and declination of the target center with
+respect to the observing site (coordinate origin) in the reference frame of
+the planetary ephemeris (ICRF). Compensated for down-leg light-time delay
+aberration.
+
+  Units: RA  in hours-minutes-seconds of time,    HH MM SS.ff{ffff}
+         DEC in degrees-minutes-seconds of arc,  sDD MN SC.f{ffff}
+ 
+ 'R.A.___(airless-apparent)___DEC' =
+  Airless apparent right ascension and declination of the target center with
+respect to an instantaneous reference frame defined by the Earth equator of-dat
+(z-axis) and meridian containing the Earth equinox of-date (x-axis, EOP-correct
+IAU76/80). Compensated for down-leg light-time delay, gravitational deflection
+of light, stellar aberration, precession & nutation. Note: equinox (RA origin)
+is offset -53 mas from the of-date frame defined by the IAU06/00a P & N system.
+
+  Units: RA  in hours-minutes-seconds of time,   HH MM SS.ff{ffff}
+         DEC in degrees-minutes-seconds of arc, sDD MN SC.f{ffff}
+ 
+ 'Azimuth__(a-app)__Elevation' =
+  Airless apparent azimuth and elevation of target center. Compensated
+for light-time, the gravitational deflection of light, stellar aberration,
+precession and nutation. Azimuth is measured clockwise from north:
+
+  North(0) -> East(90) -> South(180) -> West(270) -> North (360)
+
+Elevation angle is with respect to a plane perpendicular to the reference
+surface local zenith direction. TOPOCENTRIC ONLY.  Units: DEGREES
+ 
+ 'APmag   S-brt' =
+   The asteroids' approximate apparent airless visual magnitude and surface
+brightness using the standard IAU H-G system magnitude model:
+
+   APmag = H + 5*log10(delta) + 5*log10(r) - 2.5*log10((1-G)*phi_1 + G*phi_2)
+
+   For solar phase angles >90 deg, the error could exceed 1 magnitude. For
+phase angles >120 degrees, output values are rounded to the nearest integer to
+indicate error could be large and unknown. For Earth-based observers, the
+estimated dimming due to atmospheric absorption (extinction) is available as
+a separate, requestable quantity.
+
+   Surface brightness is the average airless visual magnitude of a
+square-arcsecond of the illuminated portion of the apparent disk. It is
+computed only if the target radius is known.
+
+   Units: MAGNITUDES & MAGNITUDES PER SQUARE ARCSECOND
+ 
+ 'Illu%' =
+   Fraction of the target objects' assumed circular disk illuminated by Sun
+(phase), as seen by the observer.  Units: PERCENT
+ 
+ 'Ang-diam' =
+   The equatorial angular width of the target body full disk, if it were fully
+illuminated and visible to the observer. If the target body diameter is unknown
+"n.a." is output.
+
+   Units: ARCSECONDS
+ 
+ 'ObsSub-LON ObsSub-LAT' =
+   Apparent planetodetic longitude and latitude of the center of the target
+disc seen by the OBSERVER at print-time. This is NOT exactly the same as the
+"nearest" sub-point for a non-spherical target shape (since the center of
+the disc might not be the point closest to the observer), but is generally
+very close if not a very irregular body shape. Down-leg light travel-time
+from target to observer is taken into account. Latitude is the angle between
+the equatorial plane and the line perpendicular to the reference ellipsoid of
+the body, so includes body oblateness. The reference ellipsoid is an oblate
+spheroid with a single flatness coefficient in which the y-axis body radius
+is taken to be the same value as the x-axis radius. Positive longitude is to
+the WEST for this target. Cartographic system is given in the header.
+   Units: DEGREES DEGREES
+ 
+ 'hEcl-Lon   hEcl-Lat' =
+     Geometric heliocentric J2000 ecliptic longitude and latitude of target
+center at the instant light leaves it to be observed at print time (print time
+minus down-leg light-time).  Units: DEGREES
+ 
+ 'r        rdot' =
+   The Sun's apparent range ("r", light-time aberrated) and range-rate ("rdot")
+relative to the target center, as seen by the observer. A positive "rdot" means
+the target center was moving away from the Sun, negative means moving toward
+the Sun.  Units: AU and KM/S
+ 
+ 'delta      deldot' =
+   Apparent range ("delta", light-time aberrated) and range-rate ("delta-dot")
+of the target center relative to the observer. A positive "deldot" means the
+target center is moving away from the observer, negative indicates movement
+toward the observer.  Units: AU and KM/S
+ 
+ '1-way_down_LT' =
+   1-way down-leg light-time from target center to observer. The elapsed time
+since light (observed at print-time) would have left or reflected off a point
+at the center of the target. Units: MINUTES
+ 
+ 'S-O-T /r' =
+   Sun-Observer-Target apparent SOLAR ELONGATION ANGLE seen from the observers'
+location at print-time.
+
+   The '/r' column provides a code indicating the targets' apparent position
+relative to the Sun in the observers' sky, as described below:
+
+   Case A: For an observing location on the surface of a rotating body, that
+body rotational sense is considered:
+
+    /T indicates target TRAILS Sun   (evening sky: rises and sets AFTER Sun)
+    /L indicates target LEADS Sun    (morning sky: rises and sets BEFORE Sun)
+
+   Case B: For an observing point that does not have a rotational model (such
+as a spacecraft), the "leading" and "trailing" condition is defined by the
+observers' heliocentric ORBITAL motion:
+
+    * If continuing in the observers' current direction of heliocentric
+       motion would encounter the targets' apparent longitude first, followed
+       by the Sun's, the target LEADS the Sun as seen by the observer.
+
+    * If the Sun's apparent longitude would be encountered first, followed
+       by the targets', the target TRAILS the Sun.
+
+   Two other codes can be output:
+    /* indicates observer is Sun-centered    (undefined)
+    /? Target is aligned with Sun center     (no lead or trail)
+
+   The S-O-T solar elongation angle is numerically the minimum separation
+angle of the Sun and target in the sky in any direction. It does NOT indicate
+the amount of separation in the leading or trailing directions, which would
+be defined along the equator of a spherical coordinate system.
+
+   Units: DEGREES
+ 
+ 'S-T-O' =
+   The Sun-Target-Observer angle; the interior vertex angle at target center
+formed by a vector from the target to the apparent center of the Sun (at
+reflection time on the target) and the apparent vector from target to the
+observer at print-time. Slightly different from true PHASE ANGLE (requestable
+separately) at the few arcsecond level in that it includes stellar aberration
+on the down-leg from target to observer.  Units: DEGREES
+ 
+ 'Cnst' =
+   Constellation ID; the 3-letter abbreviation for the name of the
+constellation containing the target centers' astrometric position,
+as defined by IAU (1930) boundary delineation.  See documentation
+for list of abbreviations.
+ 
+ 'ObsEcLon    ObsEcLat' =
+   Observer-centered IAU76/80 ecliptic-of-date longitude and latitude of the
+target centers' apparent position, with light-time, gravitational deflection of
+light, and stellar aberrations.  Units: DEGREES
+ 
+ 'N.Pole-RA  N.Pole-DC' =
+    ICRF right ascension and declination of the target body's north-pole
+direction at the time light left the body to be observed at print time.
+Target pole/rotation model is given in the header. Units: DEGREES
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/hrzn_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Author      : Jon.D.Giorgini@jpl.nasa.gov
+
+***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
