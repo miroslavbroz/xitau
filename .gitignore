@@ -12,6 +12,7 @@
 main/chi2
 main/simplex
 main/simann
+main/subplex
 main/swift_bs
 
 # debugging data files
@@ -25,6 +26,7 @@ duration.dat
 lightcurve.dat
 limbdark.dat
 minima.dat
+occultation.dat
 star1.dat
 star2.dat
 times.dat

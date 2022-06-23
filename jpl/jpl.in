@@ -1,0 +1,144 @@
+!$$SOF
+
+ COMMAND    = '3548;'
+
+ OBJ_DATA   = 'YES' 
+ MAKE_EPHEM = 'YES' 
+ EPHEM_TYPE = 'OBS' 
+ EXTRA_PREC = 'YES'
+ CSV_FORMAT = 'YES'
+ CAL_FORMAT = 'BOTH'
+ REF_SYSTEM = 'ICRF'
+ REF_PLANE  = 'ECLIPTIC'
+ APPARENT   = 'AIRLESS'
+ COORD_TYPE = 'GEODETIC'
+ SITE_COORD = '0,0,0'
+
+! 500 .. geocentric
+! 309 .. Paranal
+! 568 .. Mauna Kea
+! L36 .. BlueEye600 @ Ondrejov
+! @hst .. HST
+ CENTER     = '@hst'
+
+ START_TIME = '2018-SEP-01 00:00'
+ STOP_TIME  = '2021-MAR-01 00:00' 
+ STEP_SIZE  = '1 day'
+
+ TLIST = ''
+
+ QUANTITIES = '1,2,4,9,10,13,14,18,19,20,21,23,24,29,31,32'
+
+!      1. Astrometric RA & DEC  
+!    * 2. Apparent RA & DEC    
+!      3.   Rates; RA & DEC    
+!    * 4. Apparent AZ & EL     
+!      5.   Rates; AZ & EL     
+!      6. Satellite X & Y, position angle 
+!      7. Local apparent sidereal time 
+!      8. Airmass and Extinction             
+!      9. Visual magnitude & Surface Brightness
+!     10. Illuminated fraction 
+!     11. Defect of illumination
+!     12. Satellite angle of separation/visibility code 
+!     13. Target angular diameter
+!     14. Observer sub-longitude & sub-latitude 
+!     15. Sun sub-longitude & sub-latitude
+!     16. Sub-Sun Position Angle & Distance
+!     17. North Pole Position Angle & Distance
+!     18. Heliocentric ecliptic longitude & latitude
+!     19. Heliocentric range & range-rate
+!     20. Observer range & range-rate
+!     21. One-Way Down-leg Light-Time
+!     22. Speed of target with respect to Sun & observer
+!     23. Sun-Observer-Targ ELONGATION angle
+!     24. Sun-Target-Observer ~PHASE angle
+!     25. Target-Observer-Moon/Illumination%
+!     26. Observer-Primary-Target angle
+!     27. Position Angles; radius & -velocity 
+!     28. Orbit plane angle
+!     29. Constellation Name
+!     30. Delta-T (TDB - UT)
+!   * 31. Observer-centered ecliptic longitude & latitude
+!     32. North pole RA & DEC
+!     33. Galactic longitude and latitude
+!     34. Local apparent SOLAR time
+!     35. Earth->Site light-time
+!   > 36. RA & DEC uncertainty
+!   > 37. Plane-of-Sky (POS) error ellipse
+!   > 38. Plane-of-Sky (POS) uncertainty (RSS)
+!   > 39. Range & Range-rate sigma
+!   > 40. Doppler/delay sigmas
+!     41. True anomaly angle
+!   * 42. Local apparent hour angle
+!     43. PHASE angle & bisector
+!     44. Apparent Target-centered Longitude of Sun (L_s)
+!   * 45. Inertial frame apparent RA & DEC
+!     46.   Rates: Inertial RA & DEC
+
+ OUT_UNITS  = 'KM-S'
+ VEC_TABLE = '3' 
+ VEC_CORR  = 'NONE'
+ ANG_FORMAT = 'HMS'
+ TIME_DIGITS = 'SEC'
+ TIME_ZONE   = '+00:00'
+ RANGE_UNITS = 'AU'
+ SUPPRESS_RANGE_RATE= 'NO'
+ ELEV_CUT   = '-90'
+ SKIP_DAYLT = 'NO'
+ SOLAR_ELONG= "0,180"
+ AIRMASS    = '38.0'
+ LHA_CUTOFF = '0.0'
+ ANG_RATE_CUTOFF = '0.0'
+ VEC_LABELS = 'YES'
+ VEC_DELTA_T = 'NO' 
+ ELM_LABELS = 'YES'
+ TP_TYPE = 'ABSOLUTE'
+ R_T_S_ONLY = 'NO'
+ CA_TABLE_TYPE= 'STANDARD'
+ TCA3SG_LIMIT = '14400'
+ CALIM_SB= '0.05'
+ CALIM_PL= '.1, .1, .1, .1, 1.0, 1.0, 1.0, 1.0, .1, .003'
+ TLE = ' '
+
+! The inputs below are used ONLY when defining an arbitrary
+! body for the integrator (COMMAND=';') using HELIOCENTRIC 
+! ECLIPTIC OSCULATING ELEMENTS.
+
+ OBJECT =
+ EPOCH  = 
+ FRAME  =
+ EC     =
+ QR     =
+ TP     =
+ OM     =
+ W      =
+ IN     =
+ MA     =
+ A      =
+ N      =
+ RAD    =
+
+ H      =
+ G      =
+
+ M1     =
+ M2     =
+ K1     =
+ K2     =
+ PHCOF  =
+ DT     =
+ 
+ A1     =
+ A2     =
+ A3     =
+ R0     =
+ ALN    =
+ NM     =
+ NN     =
+ NK     =
+ AMRAT  =
+
+ EMAIL_ADDR = ' '  
+!$$EOF
+
