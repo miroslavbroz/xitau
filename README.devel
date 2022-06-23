@@ -11,6 +11,7 @@ occultation predictions for moons:
 - curved asteroid path during occultation
 - updated ephemeris? NO
 - elevation?
+- exact ecliptic inclination in JPL ephemerides?
 - equivalent computations in ecliptic (J2000)
 - equivalent computations in ecliptic (of-date)
 - comparison with Occult OK

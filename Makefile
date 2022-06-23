@@ -124,6 +124,7 @@ obj = \
   simplex/read_CLO.o \
   simplex/read_ECL.o \
   simplex/read_LC.o \
+  simplex/read_OCC.o \
   simplex/read_RV.o \
   simplex/read_SED.o \
   simplex/read_SKY.o \
@@ -210,6 +211,16 @@ obj = \
   wd/surfas.o \
   wd/volume.o \
   xvpl2el/nula2pi.o \
+  sofa/cal2jd.o \
+  sofa/dat.o \
+  sofa/dtdb.o \
+  sofa/jd2cal.o \
+  sofa/taiut1.o \
+  sofa/taiutc.o \
+  sofa/tdbtt.o \
+  sofa/tttai.o \
+  sofa/utctai.o \
+  sofa/utcut1.o \
 
 obj90 = \
   multipole/const.o \
@@ -253,7 +264,17 @@ obj90 = \
   roche/romberg.o \
   roche/roche.o \
   roche/omega_roche_approx.o \
+  occult/intersect_AB_e.o \
+  occult/rotateinv.o \
+  occult/geodetic.o \
+  occult/hhms.o \
+  occult/lst.o \
+  occult/nutate.o \
+  occult/paralax.o \
+  occult/preces.o \
+  occult/occult.o \
   simplex/uvw_nodes.o \
+  simplex/chi2_func_OCC.o \
 
 objc = \
 

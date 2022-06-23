@@ -38,8 +38,9 @@ c in (x,y) plane
 c perpendicular, left-handed?!
       call vproduct(hatu, hatw, hatv)
 
-c ecliptic -> equatoreal
-      eps = eps_earth(t)
+c ecliptic J2000 -> equatorial J2000
+c      eps = eps_earth(t)
+      eps = eps_earth(j2000)
       zeta = atan2(sin(eps)*cos(l),
      :  (cos(b)*cos(eps) - sin(b)*sin(eps)*sin(l)))
       hatu = vaxis_rotate(hatu, hatw, -zeta)

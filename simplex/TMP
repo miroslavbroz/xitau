@@ -1,3 +1,26 @@
+!do l_ = -1, 1
+
+!r = (/cos(ra_A)*cos(de_A), sin(ra_A)*cos(de_A), sin(de_A)/)
+!v = (/-sin(ra)*dra*cos(de) - cos(ra)*sin(de)*dde, cos(ra)*dra*cos(de) - sin(ra)*sin(de)*dde, cos(de)*dde/)
+!v = d*v + dvardist*r
+!v = normalize(v)
+!r_ = vector_product(r_AO, v)
+!r_EA = d*r + l_*R_A*r_
+
+!      enddo  ! l
+
+
+!
+! centre-of-mass, upper or lower limit
+!
+
+
+! Note: if (l, b, eps) is not precise enough, use astrometric ra_j2000, de_j2000
+
+do while ((j.gt.2).and.(t_s(j-1).gt.t_interp))
+  j = j-1
+enddo
+
 c
 c osculating semimajor axis (for absolute scale)
 c          

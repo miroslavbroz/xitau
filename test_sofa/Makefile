@@ -45,7 +45,7 @@ obj = \
   ../sofa/bpn2xy.o \
 
 obj90 = \
-  ../test_occult1/hhms.o \
+  ../occult/hhms.o \
 
 test_sofa: test_sofa.f90 $(obj) $(obj90)
 	gfortran $(opt) $(obj) $(obj90) -o $@ $<

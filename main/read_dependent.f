@@ -1,6 +1,6 @@
 c read_dependent.f
 c Read dependent parameters.
-c Miroslav Broz (miroslav.broz@email.cz), Feb 12th 2022
+c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
 
       subroutine read_dependent()
 
@@ -96,6 +96,10 @@ c Miroslav Broz (miroslav.broz@email.cz), Feb 12th 2022
       read(*,10,err=990,end=990) file_SKY3
       write(*,*) "# file_SKY3 = ", trim(file_SKY3)
 
+      write(*,*) "# file_OCC : "
+      read(*,10,err=990,end=990) file_OCC
+      write(*,*) "# file_OCC = ", trim(file_OCC)
+
       write(*,*) "# geometry : "
       read(*,*,err=990,end=990) geometry
       write(*,*) "# geometry = ", geometry
@@ -178,13 +182,19 @@ c Miroslav Broz (miroslav.broz@email.cz), Feb 12th 2022
       read(*,*,err=990,end=990) use_bruteforce
       write(*,*) "# use_bruteforce = ", use_bruteforce
 
+      if ((use_multipole).and.(use_bruteforce)) then
+        write(*,*) "Error: use_multipole = ", use_multipole,
+     :    " and use_bruteforce = ", use_bruteforce
+        stop
+      endif
+
       read(*,*,err=990,end=990) use_ppn
       write(*,*) "# use_ppn = ", use_ppn
 
       write(*,*) "# w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC ",
-     :  "w_SYN w_SED w_AO w_SKY2 w_SKY3 : "
+     :  "w_SYN w_SED w_AO w_SKY2 w_SKY3 w_OCC : "
       read(*,*,err=990,end=990) w_SKY, w_RV, w_TTV, w_ECL, w_VIS, w_CLO,
-     :  w_T3, w_LC, w_SYN, w_SED, w_AO, w_SKY2, w_SKY3
+     :  w_T3, w_LC, w_SYN, w_SED, w_AO, w_SKY2, w_SKY3, w_OCC
       write(*,*) "# w_SKY = ", w_SKY
       write(*,*) "# w_RV = ", w_RV
       write(*,*) "# w_TTV = ", w_TTV
@@ -198,6 +208,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Feb 12th 2022
       write(*,*) "# w_AO = ", w_AO
       write(*,*) "# w_SKY2 = ", w_SKY2
       write(*,*) "# w_SKY3 = ", w_SKY3
+      write(*,*) "# w_OCC = ", w_OCC
 
       write(*,*) "# eps_BS : "
       read(*,*,err=990,end=990) eps_BS
@@ -214,7 +225,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Feb 12th 2022
       return
 
 990   continue
-      write(*,*) 'read_dependent2: Error reading dependent parameters.'
+      write(*,*) 'read_dependent: Error reading dependent parameters.'
       stop
 
       end

@@ -4,6 +4,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Feb 18th 2022
 
       real*8 function chi2_func(x)
 
+      use chi2_func_OCC_module
+
       include '../swift.inc'
       include '../misc/const.inc'
       include '../tides/spin.inc'
@@ -497,6 +499,8 @@ c
 
       call chi2_func_SKY3(NOUT, tout, rh, vh, chi2_SKY3, n_SKY3)
 
+      call chi2_func_OCC(NOUT, tout, rh, chi2_OCC, n_OCC)
+
 c-----------------------------------------------------------------------
 c
 c add an artificial term to constrain the masses!
@@ -511,28 +515,30 @@ c-----------------------------------------------------------------------
 c sum the results
 
       n_fit = n_SKY + n_RV + n_TTV + n_ECL + n_VIS + n_CLO + n_T3 + n_LC
-     :  + n_SYN + n_SED + n_AO + n_SKY2 + n_SKY3
+     :  + n_SYN + n_SED + n_AO + n_SKY2 + n_SKY3 + n_OCC
       chi2 = w_SKY*chi2_SKY + w_RV*chi2_RV + w_TTV*chi2_TTV
      :  + w_ECL*chi2_ECL + w_VIS*chi2_VIS + w_CLO*chi2_CLO
      :  + w_T3*chi2_T3 + w_LC*chi2_LC + w_SYN*chi2_SYN
      :  + w_SED*chi2_SED + w_AO*chi2_AO + w_SKY2*chi2_SKY2
-     :  + w_SKY3*chi2_SKY3 + chi2_MASS
+     :  + w_SKY3*chi2_SKY3 + w_OCC*chi2_OCC + chi2_MASS
 
       write(*,30) "# chi^2 value: "
       write(*,*)
      :  n_SKY, n_RV, n_TTV, n_ECL, n_VIS, n_CLO, n_T3, n_LC, n_SYN,
-     :  n_SED, n_AO, n_SKY2, n_SKY3, n_fit, chi2_SKY, chi2_RV, chi2_TTV,
-     :  chi2_ECL, chi2_VIS, chi2_CLO, chi2_T3, chi2_LC, chi2_SYN,
-     :  chi2_SED, chi2_AO, chi2_SKY2, chi2_SKY3, chi2_MASS, chi2
+     :  n_SED, n_AO, n_SKY2, n_SKY3, n_OCC, n_fit, chi2_SKY, chi2_RV,
+     :  chi2_TTV, chi2_ECL, chi2_VIS, chi2_CLO, chi2_T3, chi2_LC,
+     :  chi2_SYN, chi2_SED, chi2_AO, chi2_SKY2, chi2_SKY3, chi2_OCC,
+     :  chi2_MASS, chi2
 
 c write hi-precision output
 
       open(unit=iu, file="chi2_func.tmp", access="append")
       write(iu,*) (x_param(j), j=1,nparam),
      :  n_SKY, n_RV, n_TTV, n_ECL, n_VIS, n_CLO, n_T3, n_LC, n_SYN,
-     :  n_SED, n_AO, n_SKY2, n_SKY3, n_fit, chi2_SKY, chi2_RV, chi2_TTV,
-     :  chi2_ECL, chi2_VIS, chi2_CLO, chi2_T3, chi2_LC, chi2_SYN,
-     :  chi2_SED, chi2_AO, chi2_SKY2, chi2_SKY3, chi2_MASS, chi2
+     :  n_SED, n_AO, n_SKY2, n_SKY3, n_OCC, n_fit, chi2_SKY, chi2_RV,
+     :  chi2_TTV, chi2_ECL, chi2_VIS, chi2_CLO, chi2_T3, chi2_LC,
+     :  chi2_SYN, chi2_SED, chi2_AO, chi2_SKY2, chi2_SKY3, chi2_OCC,
+     :  chi2_MASS, chi2
       close(iu)
 
       chi2_func = chi2

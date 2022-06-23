@@ -6,7 +6,7 @@
       parameter(NDIMMAX = 50)		! number of chi^2 dimensions (free parameters)
 
       integer NBODMAX, OUTMAX1, OUTMAX2, OUTMAX, OBSMAX, MINMAX
-      integer TIMEMAX, BANDMAX, SEDMAX, FLTMAX, AOMAX
+      integer TIMEMAX, BANDMAX, SEDMAX, FLTMAX, AOMAX, OCCMAX
       parameter (NBODMAX=5)			! max number of bodies
       parameter (OUTMAX1=400000)		! max number of forward integration points
       parameter (OUTMAX2=600000)		! max number of backward integration points
@@ -18,4 +18,5 @@
       parameter (SEDMAX=100)			! max number of SED points
       parameter (FLTMAX=2000)			! max number of filter points
       parameter (AOMAX=3000)			! max number of AO images
+      parameter (OCCMAX=1000)			! max number of occultations
 

@@ -4,6 +4,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Aug 24th 2020
 
       subroutine read_ephemeris(filename,N,t,vardist,l,b)
 
+      use rotate_module
+
       implicit none
       include '../misc/const.inc'
       include 'simplex.inc'
@@ -14,6 +16,11 @@ c Miroslav Broz (miroslav.broz@email.cz), Aug 24th 2020
 
       integer i,length,ierr
       character*255 str
+      real*8 eps, alpha, delta
+      real*8 r(3),r_(3)
+
+c functions
+      real*8 eps_earth
 
       if (filename(1:1).eq.'-') then
         N = 0
@@ -35,15 +42,24 @@ c Miroslav Broz (miroslav.broz@email.cz), Aug 24th 2020
         if ((str(1:1).ne.'#').and.(length(str).gt.0)) then
           i = i+1
           if (i.le.OBSMAX) then
-            read(str,*,err=20,end=20) t(i),vardist(i),l(i),b(i)
+            read(str,*,err=20,end=20) t(i),vardist(i),alpha,delta
           else
             write(*,*) "read_ephemeris.f: Error number of data .gt. ",
      :        "OBSMAX = ", OBSMAX
             stop
           endif
 
-          l(i) = l(i)*deg
-          b(i) = b(i)*deg
+          alpha = alpha*deg
+          delta = delta*deg
+
+c equatorial J2000 -> ecliptic J2000
+          eps = eps_earth(j2000)
+          r(1) = cos(alpha)*cos(delta)
+          r(2) = sin(alpha)*cos(delta)
+          r(3) = sin(delta)
+          r_ = rot_x(r, cos(-eps), sin(-eps))
+          l(i) = atan2(r_(2),r_(1))
+          b(i) = asin(r_(3))
         endif
       goto 5
 20    continue
