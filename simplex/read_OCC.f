@@ -40,8 +40,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
           i = i+1
           if (i.le.OCCMAX) then
             read(str,*,err=20,end=20) t(i),sigma(i),lambda(i),phi(i),
-     :        alt(i),alpha(i),delta(i),prlx(i),pmra(i),pmde(i),epoch(i),
-     :        offra(i),offde(i),contact(i),dataset(i)
+     :        alt(i),contact(i),alpha(i),delta(i),prlx(i),
+     :        pmra(i),pmde(i),epoch(i),offra(i),offde(i),dataset(i)
           else
             write(*,*) "read_OCC.f: Error number of observations .gt. ",
      :        "OCCMAX = ", OCCMAX

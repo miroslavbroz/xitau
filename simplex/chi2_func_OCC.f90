@@ -51,7 +51,6 @@ double precision :: lambda_, phi_
 double precision :: lite, t_lite, t_nolite
 double precision :: u, v, w
 double precision :: xh_interp, yh_interp, zh_interp
-double precision :: dummy
 logical :: has_solution
 
 ! functions
@@ -188,7 +187,7 @@ do i = 1, m_OCC
       r_EA = (/cos(ra)*cos(de), sin(ra)*cos(de), sin(de)/)
       r_EA = d*r_EA
 
-      call occult(t_nolite, r_EA, r_AO, e, axes, lambda_, phi_, dummy, has_solution)
+      call occult(t_nolite, r_EA, r_AO, e, axes, lambda_, phi_, has_solution)
 
       if (has_solution) then
         write(iu,*) t_nolite, lambda_/deg, phi_/deg, j

@@ -17,6 +17,11 @@ occultation predictions for moons:
 - comparison with Occult OK
 - comparison with Sora OK
 
+- angular offset vs. maximum absolute distance (i.e., not the same!)
+- precession before intersection
+- fundamental plane intersection
+- x, y, z position, not angular u, b, v?
+
 Note: 0.1" * 5.2 au = 400 km (!)
 
 dereddening is dependent on distance, hence it should be including
