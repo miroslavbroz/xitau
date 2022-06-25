@@ -39,7 +39,6 @@ c perpendicular, left-handed?!
       call vproduct(hatu, hatw, hatv)
 
 c ecliptic J2000 -> equatorial J2000
-c      eps = eps_earth(t)
       eps = eps_earth(j2000)
       zeta = atan2(sin(eps)*cos(l),
      :  (cos(b)*cos(eps) - sin(b)*sin(eps)*sin(l)))
@@ -64,15 +63,15 @@ c      eps = eps_earth(t)
         write(iu,*)
         close(iu)
 
-        if (i1st.eq.0) then
-          open(unit=iu,file="ecliptic.dat",status="unknown")
-          write(iu,*) '# t eps zeta'
-          write(iu,*) '# JD deg deg'
-        else
-          open(unit=iu,file="ecliptic.dat",access="append")
-        endif
-        write(iu,*) t, eps/deg, zeta/deg
-        close(iu)
+!        if (i1st.eq.0) then
+!          open(unit=iu,file="ecliptic.dat",status="unknown")
+!          write(iu,*) '# t eps zeta'
+!          write(iu,*) '# JD deg deg'
+!        else
+!          open(unit=iu,file="ecliptic.dat",access="append")
+!        endif
+!        write(iu,*) t, eps/deg, zeta/deg
+!        close(iu)
 
         i1st = 1
       endif
