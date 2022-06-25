@@ -9,6 +9,7 @@ contains
 subroutine chi2_func_OCC(NOUT, tout, rh, chi2, n)
 
 use const_module
+use interp2_module
 use rotate_module
 use paralax_module
 use occult_module
@@ -25,7 +26,7 @@ integer, intent(out) :: n
 
 ! observational data
 integer, save :: m_OCC = 0
-double precision, dimension(OCCMAX), save :: t, sigma, lambda, phi, alt
+double precision, dimension(OCCMAX), save :: t, sigma, lambda_obs, phi_obs, alt
 double precision, dimension(OCCMAX), save :: alpha, delta, prlx, pmra, pmde, epoch, offra, offde
 integer, dimension(OCCMAX), save :: contact, dataset
 
@@ -47,7 +48,7 @@ double precision :: chi2_
 double precision :: l, b, d
 double precision :: ra, de, dra, dde, ra_S, de_S
 double precision :: eps0
-double precision :: lambda_, phi_
+double precision :: lambda, phi
 double precision :: lite, t_lite, t_nolite
 double precision :: u, v, w
 double precision :: xh_interp, yh_interp, zh_interp
@@ -61,14 +62,14 @@ double precision :: interp, eps_earth
 !
 if (i1st.eq.0) then
 
-  call read_OCC(file_OCC, m_OCC, t, sigma, lambda, phi, alt, &
+  call read_OCC(file_OCC, m_OCC, t, sigma, lambda_obs, phi_obs, alt, &
     alpha, delta, prlx, pmra, pmde, epoch, offra, offde, contact, dataset)
 
   if (debug) then
     write(*,*) '# m_OCC = ', m_OCC
   endif
 !
-! read ephemerides (Earth, Sun, occultation)
+! read ephemerides (Earth==399, Sun==10, occultation)
 !
   if (m_OCC.gt.0) then
     call read_ephemeris("ephemeris_E.dat", N_e, t_e, vardist, ecl, ecb)
@@ -187,10 +188,10 @@ do i = 1, m_OCC
       r_EA = (/cos(ra)*cos(de), sin(ra)*cos(de), sin(de)/)
       r_EA = d*r_EA
 
-      call occult(t_nolite, r_EA, r_AO, e, axes, lambda_, phi_, has_solution)
+      call occult(t_nolite, r_EA, r_AO, e, axes, lambda, phi, has_solution)
 
       if (has_solution) then
-        write(iu,*) t_nolite, lambda_/deg, phi_/deg, j
+        write(iu,*) t_nolite, lambda/deg, phi/deg, j
       else
         write(iu,*) t_nolite, ' ?', ' ?', j
       endif
@@ -212,23 +213,6 @@ n = 0
 
 return
 end subroutine chi2_func_OCC
-
-
-double precision function interp2(x1, x2, y1, y2, x)
-use const_module
-implicit none
-double precision, intent(in) :: x1, x2, y1, y2, x
-double precision :: tmp
-double precision :: interp
-tmp = y1
-if ((y2-tmp).gt.180.d0*deg) then
-  tmp = tmp + 360.d0*deg
-elseif ((y2-tmp).lt.-180.d0*deg) then
-  tmp = tmp - 360.d0*deg
-endif
-interp2 = interp(x1, x2, tmp, y2, x)
-return
-end function interp2
 
 end module chi2_func_OCC_module
 

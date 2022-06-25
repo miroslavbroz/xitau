@@ -8,6 +8,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Sep 7th 2020
       implicit none
       include '../misc/const.inc'
       include 'simplex.inc'
+      include 'dependent.inc'
 
       character*(*) filename
       integer N
@@ -17,6 +18,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Sep 7th 2020
       real*8 vardist(OBSMAX),l(OBSMAX),b(OBSMAX)
 
       integer i,length,ierr
+      real*8 t_(OBSMAX)
       character*255 str
 
       if (filename(1:1).eq.'-') then
@@ -40,7 +42,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Sep 7th 2020
           i = i+1
           if (i.le.OBSMAX) then
             read(str,*,err=20,end=20) t(i),one(i),two(i),x12(i),y12(i),
-     :        major(i),minor(i),PA_ellipse(i),vardist(i),l(i),b(i)
+     :        major(i),minor(i),PA_ellipse(i)
           else
             write(*,*) "read_SKY2.f: Error number of observations",
      :        " .gt. OBSMAX = ", OBSMAX
@@ -48,14 +50,21 @@ c Miroslav Broz (miroslav.broz@email.cz), Sep 7th 2020
           endif
 
           PA_ellipse(i) = PA_ellipse(i)*deg
-          l(i) = l(i)*deg
-          b(i) = b(i)*deg
         endif
       goto 5
 20    continue
       close(10)
 
       N = i
+
+      if (use_vardist) then
+        str = filename(1:length(filename)-4) // '.eph'
+        call read_ephemeris(str,i,t_,vardist,l,b)
+      endif
+      if (i.ne.N) then 
+        write(*,*) "read_SKY2.f: Error number of ephmerides .ne. ", N
+        stop
+      endif
 
       return
       end

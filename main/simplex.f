@@ -54,6 +54,8 @@ c
         write(*,*) "# variable(", i, ") = ", variable(i)
       enddo
 
+      call read_dependent()
+
       write(*,*) "# ftol : "
       read(*,*,err=990,end=990) ftol
       write(*,*) "# ftol = ", ftol

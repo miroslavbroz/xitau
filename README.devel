@@ -6,21 +6,19 @@ occultation predictions for moons:
 - ellipsoid instead of sphere OK
 - ellipsoidal longitude, latitude OK
 - parallax of * (if close) OK
-- light-time effect (no, it's already in ephemeris)
-- temporal resolution (<1 h)
-- curved asteroid path during occultation
+- light-time effect NO (it's already in ephemeris)
+- temporal resolution (<1 h) OK
+- curved asteroid path during occultation OK
 - updated ephemeris? NO
+- precession before intersection OK
 - elevation?
 - exact ecliptic inclination in JPL ephemerides?
+- angular offset != maximum absolute distance ( as size)!
 - equivalent computations in ecliptic (J2000)
 - equivalent computations in ecliptic (of-date)
 - comparison with Occult OK
 - comparison with Sora OK
-
-- angular offset vs. maximum absolute distance (i.e., not the same!)
-- precession before intersection
 - fundamental plane intersection
-- x, y, z position, not angular u, b, v?
 
 Note: 0.1" * 5.2 au = 400 km (!)
 
