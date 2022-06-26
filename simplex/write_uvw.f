@@ -23,7 +23,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Aug 24th 2020
       real*8 t(OUTMAX),vardist(OUTMAX),ecl(OUTMAX),ecb(OUTMAX)
 
 c functions
-      real*8 interp
+      real*8 interp,interp2
 
       data iu /10/
 c
@@ -49,7 +49,7 @@ c
         elseif ((ecl(j)-tmp).lt.-180.d0*deg) then
           tmp = tmp - 360.d0*deg
         endif
-        l = interp(t(j-1), t(j), tmp, ecl(j), tout(i))
+        l = interp2(t(j-1), t(j), tmp, ecl(j), tout(i))
         b = interp(t(j-1), t(j), ecb(j-1), ecb(j), tout(i))
         d = interp(t(j-1), t(j), vardist(j-1), vardist(j), tout(i))
 

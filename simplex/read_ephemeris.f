@@ -61,7 +61,9 @@ c equatorial J2000 -> ecliptic J2000
           r(2) = sin(alpha)*cos(delta)
           r(3) = sin(delta)
           r_ = rot_x(r, cos(-eps), sin(-eps))
-          l(i) = atan2(r_(2),r_(1))
+          tmp = atan2(r_(2),r_(1))
+          if (tmp.lt.0.d0) tmp = tmp+2.d0*pi_
+          l(i) = tmp
           b(i) = asin(r_(3))
         endif
       goto 5
@@ -76,9 +78,7 @@ c equatorial J2000 -> ecliptic J2000
         write(iu,*) '# JD [TDB] & d [au] & l_j2000 [deg]',
      :    ' & b_j2000 [deg]'
         do i = 1, N
-          tmp = l(i)
-          if (l(i).lt.0.d0) tmp = tmp+2.d0*pi_
-          write(iu,*) t(i),vardist(i),tmp/deg,b(i)/deg
+          write(iu,*) t(i),vardist(i),l(i)/deg,b(i)/deg
         enddo
         write(iu,*)
         close(iu)

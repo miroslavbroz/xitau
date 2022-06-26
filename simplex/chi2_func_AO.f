@@ -60,7 +60,7 @@ c internal variables
       character*80 str,str_
 
 c functions
-      real*8 nula2pi,interp
+      real*8 nula2pi,interp,interp2
 
       data i1st /0/
       data m_AO /0/
@@ -191,7 +191,7 @@ c shadowing (of faces)
           j = j+1
         enddo
 
-        l = interp(t_s(j-1), t_s(j), ecl_s(j-1), ecl_s(j), t_interp)
+        l = interp2(t_s(j-1), t_s(j), ecl_s(j-1), ecl_s(j), t_interp)
         b = interp(t_s(j-1), t_s(j), ecb_s(j-1), ecb_s(j), t_interp)
 
 c 2DO: check - sign!
