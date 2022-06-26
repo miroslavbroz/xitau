@@ -36,11 +36,25 @@ obj = \
   misc/auday_kms.o \
   misc/dotprod.o \
   misc/eps_earth.o \
+  misc/gammln.o \
+  misc/gammp.o \
+  misc/gammq.o \
+  misc/gcf.o \
+  misc/gser.o \
+  misc/hermite.o \
+  misc/integrate.o \
+  misc/interp.o \
+  misc/interp2.o \
   misc/kms_auday.o \
   misc/length.o \
+  misc/lsm.o \
   misc/normalize.o \
   misc/quicksort.o \
+  misc/qtrap.o \
+  misc/ran1.o \
   misc/split.o \
+  misc/srtidx.o \
+  misc/trapzd.o \
   misc/vproduct.o \
   mvs/drift/drift_dan.o \
   mvs/drift/drift_kepmd.o \
@@ -91,10 +105,6 @@ obj = \
   simplex/chi2_func_VIS.o \
   simplex/distance_AB_C.o \
   simplex/filter.o \
-  simplex/gammln.o \
-  simplex/gammp.o \
-  simplex/gammq.o \
-  simplex/gcf.o \
   simplex/geometries.o \
   simplex/geometry_1centric.o \
   simplex/geometry_ecliptic.o \
@@ -103,12 +113,7 @@ obj = \
   simplex/geometry_hierarch2.o \
   simplex/geometry_twopairs.o \
   simplex/geometry_twopairs2.o \
-  simplex/gser.o \
   simplex/hec88.o \
-  simplex/hermite.o \
-  simplex/interp.o \
-  simplex/integrate.o \
-  simplex/lsm.o \
   simplex/lum_func.o \
   simplex/luminosities.o \
   simplex/luminosity_planck_bandpass.o \
@@ -118,8 +123,6 @@ obj = \
   simplex/omega_kopal.o \
   simplex/omega_kopal_approx.o \
   simplex/planck.o \
-  simplex/qtrap.o \
-  simplex/ran1.o \
   simplex/read_AO.o \
   simplex/read_CLO.o \
   simplex/read_ECL.o \
@@ -137,9 +140,7 @@ obj = \
   simplex/read_synth.o \
   simplex/read_time.o \
   simplex/read_time_all.o \
-  simplex/srtidx.o \
   simplex/swift_bs_xyzb.o \
-  simplex/trapzd.o \
   simplex/uvw.o \
   simplex/uvw1.o \
   simplex/uvw2.o \
@@ -264,7 +265,6 @@ obj90 = \
   roche/romberg.o \
   roche/roche.o \
   roche/omega_roche_approx.o \
-  occult/interp2.o \
   occult/intersect_AB_e.o \
   occult/rotateinv.o \
   occult/geodetic.o \

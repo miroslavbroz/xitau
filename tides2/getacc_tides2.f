@@ -29,7 +29,7 @@ c internal
       real*8 t(OUTMAX),vardist(OUTMAX),ecl(OUTMAX),ecb(OUTMAX)
 
 c functions
-      real*8 interp
+      real*8 interp,interp2
 
       save i1st, j, N, t, vardist, ecl, ecb
       data i1st /0/
@@ -56,7 +56,7 @@ c functions
         j = j+1
       enddo
 
-      l = interp(t(j-1), t(j), ecl(j-1), ecl(j), time_)
+      l = interp2(t(j-1), t(j), ecl(j-1), ecl(j), time_)
       b = interp(t(j-1), t(j), ecb(j-1), ecb(j), time_)
       d = interp(t(j-1), t(j), vardist(j-1), vardist(j), time_)
 

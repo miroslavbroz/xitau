@@ -9,7 +9,6 @@ contains
 subroutine chi2_func_OCC(NOUT, tout, rh, chi2, n)
 
 use const_module
-use interp2_module
 use rotate_module
 use paralax_module
 use occult_module
@@ -55,7 +54,7 @@ double precision :: xh_interp, yh_interp, zh_interp
 logical :: has_solution
 
 ! functions
-double precision :: interp, eps_earth
+double precision :: interp, interp2, eps_earth
 
 !
 ! read occultations (only 1st time!)

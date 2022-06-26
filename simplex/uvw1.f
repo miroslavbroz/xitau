@@ -64,7 +64,7 @@ c ecliptic J2000 -> equatorial J2000
         close(iu)
 
 !        if (i1st.eq.0) then
-!          open(unit=iu,file="ecliptic.dat",status="unknown")
+!          open(unit=iu,file="ecliptic.tmp",status="unknown")
 !          write(iu,*) '# t eps zeta'
 !          write(iu,*) '# JD deg deg'
 !        else

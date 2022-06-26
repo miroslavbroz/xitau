@@ -1,4 +1,4 @@
-! rotate.f90
+! rotateinv.f90
 ! Rotation matrices (as defined in Wolf et al. 1992).
 ! Miroslav Broz (miroslav.broz@email.cz), Jun 17th 2022
 

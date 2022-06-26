@@ -9,18 +9,21 @@ c Miroslav Broz (miroslav.broz@email.cz), Aug 24th 2020
       implicit none
       include '../misc/const.inc'
       include 'simplex.inc'
+      include 'dependent.inc'
 
       character*(*) filename
       integer N
       real*8 t(OBSMAX),vardist(OBSMAX),l(OBSMAX),b(OBSMAX)
 
-      integer i,length,ierr
+      integer i,length,iu,ierr
       character*255 str
-      real*8 eps, alpha, delta
-      real*8 r(3),r_(3)
+      real*8 eps,alpha,delta
+      real*8 r(3),r_(3),tmp
 
 c functions
       real*8 eps_earth
+
+      data iu /10/
 
       if (filename(1:1).eq.'-') then
         N = 0
@@ -28,7 +31,7 @@ c functions
       endif
 
       i = 0
-      open(unit=10,file=filename,status="old",form="formatted",
+      open(unit=iu,file=filename,status="old",form="formatted",
      :  iostat=ierr)
       if (ierr.ne.0) then
         write(*,*) "read_ephemeris.f: Error opening file '",
@@ -37,7 +40,7 @@ c functions
       endif
 
 5     continue
-        read(10,10,err=20,end=20) str
+        read(iu,10,err=20,end=20) str
 10      format(a)
         if ((str(1:1).ne.'#').and.(length(str).gt.0)) then
           i = i+1
@@ -63,9 +66,23 @@ c equatorial J2000 -> ecliptic J2000
         endif
       goto 5
 20    continue
-      close(10)
+      close(iu)
 
       N = i
+
+      if (debug_swift) then
+        open(unit=iu, file='ephemeris.tmp', access='append')
+        write(iu,*) '# file = ', trim(filename)
+        write(iu,*) '# JD [TDB] & d [au] & l_j2000 [deg]',
+     :    ' & b_j2000 [deg]'
+        do i = 1, N
+          tmp = l(i)
+          if (l(i).lt.0.d0) tmp = tmp+2.d0*pi_
+          write(iu,*) t(i),vardist(i),tmp/deg,b(i)/deg
+        enddo
+        write(iu,*)
+        close(iu)
+      endif
 
       return
       end
