@@ -15,8 +15,10 @@ tmp=0.25
 dx=tmp
 dy=tmp
 
-set xr [-0.75*tmp:9.75*tmp]
-set yr [-0.75*tmp:5.75*tmp]
+i=5
+j=2
+set xr [-0.75*tmp:(i-1+0.75)*tmp]
+set yr [-0.75*tmp:(j-1+0.75)*tmp]
 
 set xtics 0.5*tmp
 set ytics 0.5*tmp
@@ -26,8 +28,8 @@ set key samplen 1.0 outside
 
 frc(x) = x-int(x)
 mod(x,y) = frc(x/y)*y
-f(x) = mod(x-1,10)*dx
-g(x) = int((x-1)/10)*dy
+f(x) = mod(x-1,i)*dx
+g(x) = int((x-1)/i)*dy
 
 h(x,d) = x*100.*km/(d*au)/arcsec
 

@@ -9,6 +9,7 @@ contains
 subroutine chi2_func_OCC(NOUT, tout, rh, chi2, n)
 
 use const_module
+use normalize_module
 use rotate_module
 use paralax_module
 use occult_module
@@ -29,7 +30,7 @@ double precision, dimension(OCCMAX), save :: t, sigma, lambda_obs, phi_obs, alt
 double precision, dimension(OCCMAX), save :: alpha, delta, prlx, pmra, pmde, epoch, offra, offde
 integer, dimension(OCCMAX), save :: contact, dataset
 
-integer, parameter :: ntime = 300
+integer, parameter :: ntime = 1000
 double precision, parameter :: duration = 0.05d0  ! d
 
 ! internal variables
@@ -41,7 +42,7 @@ integer :: N_e, N_s, N_o
 double precision, dimension(OUTMAX) :: t_e, vardist, ecl, ecb
 double precision, dimension(OUTMAX) :: t_s, vardist_s, ecl_s, ecb_s
 double precision, dimension(OUTMAX) :: t_o, vardist_o, ecl_o, ecb_o
-double precision, dimension(3) :: r, r_, r_AO, r_EA
+double precision, dimension(3) :: r, r_, r_AO, r_EA, r_EO
 double precision, dimension(3) :: e, axes
 double precision :: chi2_
 double precision :: l, b, d
@@ -163,7 +164,9 @@ do i = 1, m_OCC
       ra = alpha(i) + pmra(i)*(t_nolite-epoch(i)) + dra
       de = delta(i) + pmde(i)*(t_nolite-epoch(i)) + dde
 
-      r_AO = (/cos(ra)*cos(de), sin(ra)*cos(de), sin(de)/)
+      r_EO = (/cos(ra)*cos(de), sin(ra)*cos(de), sin(de)/)
+      d = 1.d0/(prlx(i)/arcsec)*pc/au
+      r_EO = d*r_EO
 !
 ! interpolate occultation (orbit, offset, ecliptic, J2000)
 !
@@ -186,6 +189,9 @@ do i = 1, m_OCC
 
       r_EA = (/cos(ra)*cos(de), sin(ra)*cos(de), sin(de)/)
       r_EA = d*r_EA
+
+      r_AO = r_EA + r_EO
+      r_AO = normalize(r_AO)
 
       call occult(t_nolite, r_EA, r_AO, e, axes, lambda, phi, has_solution)
 

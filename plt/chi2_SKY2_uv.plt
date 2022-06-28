@@ -13,6 +13,7 @@ set xl "u [arcsec]"
 set yl "v [arcsec]"
 
 tmp=1.8
+tmp=1.4
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set size ratio -1

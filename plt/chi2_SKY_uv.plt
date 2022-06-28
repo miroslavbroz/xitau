@@ -14,12 +14,13 @@ set xl "u [arcsec]"
 set yl "v [arcsec]"
 
 tmp=1.2
+tmp=0.8
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set size ratio -1
 set zeroaxis
 set ang rad
-set key right
+set key left
 
 load "T0.plt"
 

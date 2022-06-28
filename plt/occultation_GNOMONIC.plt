@@ -43,7 +43,7 @@ p \
 
 pa -1
 
-set term png small size 1024,1024
+set term png small size 2048,2048
 set out "occultation_GNOMONIC.png"
 rep
 

@@ -266,7 +266,9 @@ obj90 = \
   roche/roche.o \
   roche/omega_roche_approx.o \
   occult/intersect_AB_e.o \
+  occult/intersect_AB_p.o \
   occult/rotateinv.o \
+  occult/fplane.o \
   occult/geodetic.o \
   occult/hhms.o \
   occult/lst.o \

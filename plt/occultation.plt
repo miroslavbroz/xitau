@@ -10,7 +10,7 @@ tmp=1.2
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zr [-tmp:tmp]
-set cbr [0.5:2.5]
+set cbr [1:3]
 set view equal xyz
 set xyplane 0.0
 set view 90,90,1.5
@@ -18,7 +18,11 @@ set isosamples 12+1
 set hidden3d
 set key
 set nocolorbox
-set palette rgbformulae 33,13,10
+set palette defined (\
+  0.0 '#00ffff',\
+  0.5 '#ff0000',\
+  1.0 '#ffaa00' \
+  )
 
 set parametric
 set urange [0:360.0]
@@ -34,14 +38,16 @@ sp \
   "xitau/plt/world_50m.txt" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l lc 'black' not,\
   fx(1,u,v),fy(1,u,v),fz(1,u,v) lc 'gray' not,\
   "<awk 'BEGIN{ FS=\",\"; }{ print $1,$2; }' green.dat" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w lp ls 1 t "Occult",\
+  "<awk 'BEGIN{ FS=\",\"; }{ print $1,$2; }' green_Alexhelios.dat" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l lw 2 lc '#999999' t "outer moon (ERRONEOUS)",\
   "<awk '($4==1)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "Xitau",\
-  "<awk '($4>=2)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "moon(s)",\
+  "<awk '($4==2)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "inner moon",\
+  "<awk '($4==3)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "outer moon",\
   "<awk 'BEGIN{ for (i=-90;i<=90;i++){ print 0,i; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l lc 'green' not,\
   "<awk 'BEGIN{ for (i=0;i<=360;i++){ print i,51.477777; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l lc 'cyan' not
 
 pa -1
 
-set term png small size 1024,1024
+set term png small size 2048,2048
 set out "occultation.png"
 rep
 

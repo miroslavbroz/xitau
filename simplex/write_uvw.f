@@ -16,7 +16,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Aug 24th 2020
      :  rp3(OUTMAX,NBODMAX,3)
 
       integer i, j, k, iu
-      real*8 l, b, x, y, z, u, v, w, d, tmp
+      real*8 l, b, x, y, z, u, v, w, d
       real*8 hatu(3), hatv(3), hatw(3)
 
       integer N
@@ -43,13 +43,7 @@ c
           j = j+1
         enddo
 
-        tmp = ecl(j-1)
-        if ((ecl(j)-tmp).gt.180.d0*deg) then
-          tmp = tmp + 360.d0*deg
-        elseif ((ecl(j)-tmp).lt.-180.d0*deg) then
-          tmp = tmp - 360.d0*deg
-        endif
-        l = interp2(t(j-1), t(j), tmp, ecl(j), tout(i))
+        l = interp2(t(j-1), t(j), ecl(j-1), ecl(j), tout(i))
         b = interp(t(j-1), t(j), ecb(j-1), ecb(j), tout(i))
         d = interp(t(j-1), t(j), vardist(j-1), vardist(j), tout(i))
 

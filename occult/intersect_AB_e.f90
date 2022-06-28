@@ -24,9 +24,9 @@ implicit none
 double precision, dimension(3), intent(in) :: A, B
 double precision, dimension(3), intent(out) :: e
 double precision, dimension(3), intent(in) :: axes
+logical, intent(out) :: has_solution
 
 double precision :: a_, b_, c_, x, x1, x2
-logical :: has_solution
 
 a_ = (B(1)/axes(1))**2 + (B(2)/axes(2))**2 + (B(3)/axes(3))**2
 b_ = 2.d0*(A(1)*B(1)/axes(1)**2 + A(2)*B(2)/axes(2)**2 + A(3)*B(3)/axes(3)**2)
