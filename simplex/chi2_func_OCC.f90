@@ -12,6 +12,7 @@ use const_module
 use normalize_module
 use rotate_module
 use paralax_module
+use write_kml_module
 use occult_module
 
 implicit none
@@ -30,7 +31,6 @@ double precision, dimension(OCCMAX), save :: t, sigma, lambda_obs, phi_obs, alt
 double precision, dimension(OCCMAX), save :: alpha, delta, prlx, pmra, pmde, epoch, offra, offde
 integer, dimension(OCCMAX), save :: contact, dataset
 
-integer, parameter :: ntime = 1000
 double precision, parameter :: duration = 0.05d0  ! d
 
 ! internal variables
@@ -38,6 +38,7 @@ integer, save :: i1st = 0
 integer, parameter :: iu = 10
 integer :: i, j, k, l_
 integer :: j1, j2, j3, j4
+integer :: kml
 integer :: N_e, N_s, N_o
 double precision, dimension(OUTMAX) :: t_e, vardist, ecl, ecb
 double precision, dimension(OUTMAX) :: t_s, vardist_s, ecl_s, ecb_s
@@ -106,10 +107,11 @@ do i = 1, m_OCC
     j2 = 2
     j3 = 2
     j4 = 2
+    kml = 0
 
-    do k = 0, ntime
+    do k = 0, OCCMAX2
 
-      t_nolite = t(i) + duration*(dble(k)/ntime-0.5d0)
+      t_nolite = t(i) + duration*(dble(k)/OCCMAX2-0.5d0)
 !
 ! interpolate Earth (topocentric, airless, ecliptic, J2000)
 !
@@ -197,21 +199,24 @@ do i = 1, m_OCC
 
       if (has_solution) then
         write(iu,*) t_nolite, lambda/deg, phi/deg, j
+        call to_kml(lambda, phi, j)
       else
         write(iu,*) t_nolite, ' ?', ' ?', j
       endif
 
-    enddo  ! k
+    enddo  ! k, OCCMAX2
 
     write(iu,*)
     write(iu,*)
 
-  enddo  ! j
-enddo  ! i
+  enddo  ! j, nbod
+enddo  ! i, m_OCC
 
 if (debug) then
   close(iu)
 endif
+
+call write_kml('occultation.kml')
 
 chi2 = 0.d0
 n = 0

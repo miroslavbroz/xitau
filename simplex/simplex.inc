@@ -18,5 +18,5 @@
       parameter (SEDMAX=100)			! max number of SED points
       parameter (FLTMAX=2000)			! max number of filter points
       parameter (AOMAX=3000)			! max number of AO images
-      parameter (OCCMAX=1000)			! max number of occultations
+      parameter (OCCMAX=1000)			! max number of occultation events
 

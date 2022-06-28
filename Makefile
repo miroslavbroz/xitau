@@ -276,6 +276,7 @@ obj90 = \
   occult/paralax.o \
   occult/preces.o \
   occult/occult.o \
+  occult/write_kml.o \
   simplex/uvw_nodes.o \
   simplex/chi2_func_OCC.o \
 
