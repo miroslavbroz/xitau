@@ -13,6 +13,7 @@ use normalize_module
 use rotate_module
 use paralax_module
 use write_kml_module
+use fplane_module
 use occult_module
 
 implicit none
@@ -35,7 +36,7 @@ double precision, parameter :: duration = 0.05d0  ! d
 
 ! internal variables
 integer, save :: i1st = 0
-integer, parameter :: iu = 10
+integer, parameter :: iu = 10, iub = 20
 integer :: i, j, k, l_
 integer :: j1, j2, j3, j4
 integer :: kml
@@ -88,6 +89,9 @@ endif  ! i1st
 if (debug) then
   open(unit=iu, file='occultation.dat', status='unknown')
   write(iu,*) '# jd [TDB,nolite] & lambda [deg,wgs84] & phi [deg] & ibod'
+
+  open(unit=iub, file='occultation2.dat', status='unknown')
+  write(iub,*) '# jd [TDB,nolite] & u [au] & v [au] & ibod'
 endif
 
 ! Notation:
@@ -203,17 +207,28 @@ do i = 1, m_OCC
       else
         write(iu,*) t_nolite, ' ?', ' ?', j
       endif
+!
+! fundamental plane
+!
+      call fplane(r_EA, r_AO, r_EO, u, v, has_solution)
+
+      if (has_solution) then
+        write(iub,*) t_nolite, u, v, j
+      endif
 
     enddo  ! k, OCCMAX2
 
     write(iu,*)
     write(iu,*)
+    write(iub,*)
+    write(iub,*)
 
   enddo  ! j, nbod
 enddo  ! i, m_OCC
 
 if (debug) then
   close(iu)
+  close(iub)
 endif
 
 call write_kml('occultation.kml')
