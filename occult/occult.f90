@@ -26,7 +26,8 @@ use hhms_module
 implicit none
 double precision, intent(in) :: t_TDB
 double precision, dimension(3), intent(in) :: r_EA, r_AO
-double precision, dimension(3), intent(out) :: e, axes
+double precision, dimension(3), intent(out) :: e
+double precision, dimension(3), intent(in) :: axes
 double precision, intent(out) :: lambda, phi
 logical, intent(out) :: has_solution
 

@@ -14,6 +14,7 @@ use rotate_module
 use paralax_module
 use write_kml_module
 use fplane_module
+use spath_module
 use occult_module
 
 implicit none
@@ -36,16 +37,16 @@ double precision, parameter :: duration = 0.05d0  ! d
 
 ! internal variables
 integer, save :: i1st = 0
-integer, parameter :: iu = 10, iub = 20
+integer, parameter :: iu = 21, iub = 22, iuc = 23
 integer :: i, j, k, l_
 integer :: j1, j2, j3, j4
-integer :: kml
 integer :: N_e, N_s, N_o
 double precision, dimension(OUTMAX) :: t_e, vardist, ecl, ecb
 double precision, dimension(OUTMAX) :: t_s, vardist_s, ecl_s, ecb_s
 double precision, dimension(OUTMAX) :: t_o, vardist_o, ecl_o, ecb_o
 double precision, dimension(3) :: r, r_, r_AO, r_EA, r_EO
 double precision, dimension(3) :: e, axes
+double precision, dimension(:,:), pointer :: silh_
 double precision :: chi2_
 double precision :: l, b, d
 double precision :: ra, de, dra, dde, ra_S, de_S
@@ -92,6 +93,9 @@ if (debug) then
 
   open(unit=iub, file='occultation2.dat', status='unknown')
   write(iub,*) '# jd [TDB,nolite] & u [au] & v [au] & ibod'
+
+  open(unit=iuc, file='occultation3.dat', status='unknown')
+  write(iuc,*) '# jd [TDB,nolite] & lambda [deg,wgs84] & phi [deg] & ibod'
 endif
 
 ! Notation:
@@ -111,11 +115,10 @@ do i = 1, m_OCC
     j2 = 2
     j3 = 2
     j4 = 2
-    kml = 0
 
     do k = 0, OCCMAX2
 
-      t_nolite = t(i) + duration*(dble(k)/OCCMAX2-0.5d0)
+      t_nolite = t(i) + duration*(dble(k-OCCMAX2/2)/OCCMAX2)
 !
 ! interpolate Earth (topocentric, airless, ecliptic, J2000)
 !
@@ -215,6 +218,25 @@ do i = 1, m_OCC
       if (has_solution) then
         write(iub,*) t_nolite, u, v, j
       endif
+!
+! shadow path
+!
+      if ((j.eq.1).and.(mod(k,5).eq.0)) then
+
+        call spath(t_nolite, lite, r_EA, r_AO, e, axes, silh_, has_solution)
+
+        if (has_solution) then
+          do l_ = 1, size(silh_, 1)
+            if (silh_(l_, 1).ne.NAN) then
+              write(iuc,*) t_nolite, silh_(l_, :)/deg, j
+            else
+              write(iuc,*) t_nolite, ' ?', ' ?', j
+            endif
+          enddo
+          write(iuc,*)
+          write(iuc,*)
+        endif
+      endif
 
     enddo  ! k, OCCMAX2
 
@@ -229,6 +251,7 @@ enddo  ! i, m_OCC
 if (debug) then
   close(iu)
   close(iub)
+  close(iuc)
 endif
 
 call write_kml('occultation.kml')

@@ -53,7 +53,7 @@ write(iu,fmt) '  <Style id="2"><LineStyle><color>ff0000ff</color><width>1.0</wid
 write(iu,fmt) '  <Style id="3"><LineStyle><color>ff0099ff</color><width>1.0</width></LineStyle></Style>'
 
 do j = 1, NBODMAX
-  if (lambda(i,j).eq.NAN) then
+  if (lambda(1,j).eq.NAN) then
     continue
   endif
   write(iu,fmt) '  <Placemark>'

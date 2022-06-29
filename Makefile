@@ -268,7 +268,6 @@ obj90 = \
   occult/intersect_AB_e.o \
   occult/intersect_AB_p.o \
   occult/rotateinv.o \
-  occult/fplane.o \
   occult/geodetic.o \
   occult/hhms.o \
   occult/lst.o \
@@ -276,6 +275,8 @@ obj90 = \
   occult/paralax.o \
   occult/preces.o \
   occult/occult.o \
+  occult/fplane.o \
+  occult/spath.o \
   occult/write_kml.o \
   simplex/uvw_nodes.o \
   simplex/chi2_func_OCC.o \
