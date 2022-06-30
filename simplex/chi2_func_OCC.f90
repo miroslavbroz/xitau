@@ -223,7 +223,7 @@ do i = 1, m_OCC
 !
       if ((j.eq.1).and.(mod(k,5).eq.0)) then
 
-        call spath(t_nolite, lite, r_EA, r_AO, e, axes, silh_, has_solution)
+        call spath(t_nolite, lite, r_EA, r_AO, e, axes, l, b, silh_, has_solution)
 
         if (has_solution) then
           do l_ = 1, size(silh_, 1)

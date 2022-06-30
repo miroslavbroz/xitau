@@ -43,8 +43,7 @@ sp \
   "<awk '($4==2)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "inner moon",\
   "<awk '($4==3)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "outer moon",\
   "occultation3.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)) w l lw 2 lc 'black' not,\
-  "<awk 'BEGIN{ for (i=-90;i<=90;i++){ print 0,i; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l lc 'green' not,\
-  "<awk 'BEGIN{ for (i=0;i<=360;i++){ print i,51.477777; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l lc 'cyan' not
+  "<awk 'BEGIN{ for (i=-90;i<=90;i++){ print 0,i; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l dt 2 lc '#666666' not,\
 
 pa -1
 
