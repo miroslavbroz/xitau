@@ -265,6 +265,7 @@ obj90 = \
   roche/romberg.o \
   roche/roche.o \
   roche/omega_roche_approx.o \
+  simplex/uvw_nodes.o \
   occult/intersect_AB_e.o \
   occult/intersect_AB_p.o \
   occult/rotateinv.o \
@@ -278,7 +279,6 @@ obj90 = \
   occult/fplane.o \
   occult/spath.o \
   occult/write_kml.o \
-  simplex/uvw_nodes.o \
   simplex/chi2_func_OCC.o \
 
 objc = \

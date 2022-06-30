@@ -221,7 +221,7 @@ do i = 1, m_OCC
 !
 ! shadow path
 !
-      if ((j.eq.1).and.(mod(k,5).eq.0)) then
+      if ((j.eq.1).and.(mod(k,3).eq.0)) then
 
         call spath(t_nolite, lite, r_EA, r_AO, e, axes, l, b, silh_, has_solution)
 

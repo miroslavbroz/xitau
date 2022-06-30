@@ -106,10 +106,6 @@ do j = 1, size(silh,1)
   ! v .. +DE
   ra = ra0 - u 
   de = de0 + v
-!  ra = ra0 + u 
-!  de = de0 - v
-!  ra = ra0 + u 
-!  de = de0 + v
   r_limb = (/cos(ra)*cos(de), sin(ra)*cos(de), sin(de)/)
   r_limb = d*r_limb
 
