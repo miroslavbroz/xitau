@@ -101,7 +101,8 @@ lambda = 0.d0
 call lst(t_UT1, lambda, eps, deltapsi, s0, ss, s)
 e_ = rot_z(e, cos(s), sin(s))
 
-call geodetic(e_, axes, lambda, phi)
+h = 0.d0
+call geodetic(e_, axes, lambda, phi, h)
 
 !call hhms(t_UT1/pi*12.d0, h, m, s_)
 !write(*,*) '# t_UT1 = ', t_UT1/pi*12.d0, ' h = ', int(h), int(m), s_

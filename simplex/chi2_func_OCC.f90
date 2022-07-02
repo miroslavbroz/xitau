@@ -1,6 +1,6 @@
 ! chi2_func_OCC.f90
-! Calculate occultations (no chi^2).
-! Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
+! Calculate occultations (incl. chi^2).
+! Miroslav Broz (miroslav.broz@email.cz), Jul 1st 2022
 
 module chi2_func_OCC_module
 
@@ -37,10 +37,11 @@ double precision, parameter :: duration = 0.05d0  ! d
 
 ! internal variables
 integer, save :: i1st = 0
-integer, parameter :: iu = 21, iub = 22, iuc = 23
-integer :: i, j, k, l_
+integer, parameter :: iu = 21, iua=22, iub = 23, iuc = 24
+integer :: i, j, k, l_, maxk
 integer :: j1, j2, j3, j4
 integer :: N_e, N_s, N_o
+integer :: last
 double precision, dimension(OUTMAX) :: t_e, vardist, ecl, ecb
 double precision, dimension(OUTMAX) :: t_s, vardist_s, ecl_s, ecb_s
 double precision, dimension(OUTMAX) :: t_o, vardist_o, ecl_o, ecb_o
@@ -52,10 +53,14 @@ double precision :: l, b, d
 double precision :: ra, de, dra, dde, ra_S, de_S
 double precision :: eps0
 double precision :: lambda, phi
+double precision :: lambda_, phi_
+double precision :: lambda0, phi0
 double precision :: lite, t_lite, t_nolite
 double precision :: u, v, w
 double precision :: xh_interp, yh_interp, zh_interp
-logical :: has_solution
+double precision :: chi_, sigma_
+double precision :: tmp
+logical :: has_solution, has_solution_
 
 ! functions
 double precision :: interp, interp2, eps_earth
@@ -88,8 +93,14 @@ endif  ! i1st
 ! compute occultations
 !
 if (debug) then
-  open(unit=iu, file='occultation.dat', status='unknown')
-  write(iu,*) '# jd [TDB,nolite] & lambda [deg,wgs84] & phi [deg] & ibod'
+  open(unit=iu, file='chi2_OCC.dat', status='unknown')
+  write(iu,*) '# jd [TDB,nolite] & sigma [d] & lambda_interp [deg,wgs84] & phi_interp [deg] & alt [km]', &
+    ' & sigma_ [deg] & ibod & dataset & chi^2'
+  write(iu,*) '# jd [TDB,nolite] & sigma [d] & lambda_obs    [deg,wgs84] & phi_obs    [deg] & alt [km]', &
+    ' & sigma_ [deg] & ibod & dataset & chi^2'
+
+  open(unit=iua, file='occultation.dat', status='unknown')
+  write(iua,*) '# jd [TDB,nolite] & lambda [deg,wgs84] & phi [deg] & ibod'
 
   open(unit=iub, file='occultation2.dat', status='unknown')
   write(iub,*) '# jd [TDB,nolite] & u [au] & v [au] & ibod'
@@ -107,8 +118,18 @@ endif
 
 axes = (/R_E, R_E, R_P/)/au
 eps0 = eps_earth(J2000)
+last = -1
+
+chi2 = 0.d0
+n = 0
 
 do i = 1, m_OCC
+
+  maxk = OCCMAX2
+  maxk = 0  ! dbg
+!  if (dataset(i).eq.last) maxk = 0
+!  last = dataset(i)
+
   do j = 1, nbod
 
     j1 = 2
@@ -116,9 +137,9 @@ do i = 1, m_OCC
     j3 = 2
     j4 = 2
 
-    do k = 0, OCCMAX2
+    do k = 0, maxk
 
-      t_nolite = t(i) + duration*(dble(k-OCCMAX2/2)/OCCMAX2)
+      t_nolite = t(i) + duration*(dble(k-maxk/2)/max(maxk,1))
 !
 ! interpolate Earth (topocentric, airless, ecliptic, J2000)
 !
@@ -205,10 +226,10 @@ do i = 1, m_OCC
       call occult(t_nolite, r_EA, r_AO, e, axes, lambda, phi, has_solution)
 
       if (has_solution) then
-        write(iu,*) t_nolite, lambda/deg, phi/deg, j
+        write(iua,*) t_nolite, lambda/deg, phi/deg, j
         call to_kml(lambda, phi, j)
       else
-        write(iu,*) t_nolite, ' ?', ' ?', j
+        write(iua,*) t_nolite, ' ?', ' ?', j
       endif
 !
 ! fundamental plane
@@ -237,11 +258,59 @@ do i = 1, m_OCC
           write(iuc,*)
         endif
       endif
+!
+! compute chi^2
+!
+      if ((j.eq.1).and.(k.eq.maxk/2)) then
 
-    enddo  ! k, OCCMAX2
+        write(*,*) ''
+        call spath(t_nolite, lite, r_EA, r_AO, e, axes, l, b, silh_, has_solution)
+
+! minimum distance
+        if (has_solution) then
+          chi_ = 1.d38
+          do l_ = 1, size(silh_,1)
+            if (silh_(l_,1).ne.NAN) then
+              lambda = silh_(l_,1)
+              phi = silh_(l_,2)
+
+              tmp = (great_circle(lambda, phi, lambda_obs(i), phi_obs(i)))**2
+
+              if (tmp.lt.chi_) then
+                chi_ = tmp
+                lambda_ = lambda
+                phi_ = phi
+              endif
+            endif
+          enddo
+
+! Well, the problem with the uncertainty is that it is given in time;
+! however, we compare the angular distance (observer<->silhouette)
+! on the (spherical) surface. We estimate it as a difference for 2 times,
+! for the centre (NOT the limb).
+ 
+! uncertainty
+          call occult(t_nolite, r_EA, r_AO, e, axes, lambda, phi, has_solution)
+          call occult(t_nolite+sigma(i), r_EA, r_AO, e, axes, lambda0, phi0, has_solution_)
+         
+          if (has_solution.and.has_solution_) then
+            sigma_ = great_circle(lambda, phi, lambda0, phi0)
+         
+            chi_ = chi_/sigma_**2
+            chi2 = chi2 + chi_
+            n = n + 1
+         
+            write(iu,*) t(i), sigma(i), lambda_/deg, phi_/deg, alt(i), sigma_/deg, j, dataset(i), chi_
+            write(iu,*) t(i), sigma(i), lambda_obs(i)/deg, phi_obs(i)/deg, alt(i), sigma_/deg, j, dataset(i), chi_
+          endif
+        endif
+      endif
+
+    enddo  ! k, maxk
 
     write(iu,*)
-    write(iu,*)
+    write(iua,*)
+    write(iua,*)
     write(iub,*)
     write(iub,*)
 
@@ -250,17 +319,34 @@ enddo  ! i, m_OCC
 
 if (debug) then
   close(iu)
+  close(iua)
   close(iub)
   close(iuc)
 endif
 
 call write_kml('occultation.kml')
 
-chi2 = 0.d0
-n = 0
-
 return
 end subroutine chi2_func_OCC
+
+
+! https://en.wikipedia.org/wiki/Great-circle_distance
+
+double precision function great_circle(lambda1, phi1, lambda2, phi2)
+
+use vector_product_module
+implicit none
+double precision, intent(in) :: lambda1, phi1, lambda2, phi2
+
+double precision, dimension(3) :: n1, n2, n3
+
+n1 = (/cos(lambda1)*cos(phi1), sin(lambda1)*cos(phi1), sin(phi1)/)
+n2 = (/cos(lambda2)*cos(phi2), sin(lambda2)*cos(phi2), sin(phi2)/)
+n3 = vector_product(n1, n2)
+
+great_circle = atan(sqrt(dot_product(n3,n3)/dot_product(n1,n2)))
+
+end function great_circle
 
 end module chi2_func_OCC_module
 

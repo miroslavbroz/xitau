@@ -2,13 +2,16 @@
 ! Fundamental plane for occultations.
 ! Miroslav Broz (miroslav.broz@email.cz), Jun 28th 2022
 
-!      /|                
-!     / <--___           
-!    /  |     --A--___   
-!   | E-----------------O
-!   |  /                 
-!   | /                  
-!   |/                   
+!      /|              
+!     / <--___         
+!    /  |     -A-___   
+!   | E---------------O
+!   |  /               
+!   | /                
+!   |/                 
+
+! Note: This is not a traditional fundamental plane (A<->O),
+! but an Earth-centered plane, across which a shadow moves.
 
 module fplane_module
 

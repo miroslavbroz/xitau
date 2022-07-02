@@ -2,9 +2,10 @@
 ! Intersection of line AB with plane p(a, b, c, d).
 ! Miroslav Broz (miroslav.broz@email.cz), Jun 28th 2022
 
-! A .. 
-! B .. 
-! p .. 
+! A .. 1st point
+! B .. direction ("B-A"); NOT the 2nd point wrt. origin!
+! p .. intersection on a plane
+! param .. 4 parameters defining the plane (a, b, c, d)
 
 ! \vec A + x \vec B = \vec p
 ! a p1 + b p2 + c p3 + d = 0
