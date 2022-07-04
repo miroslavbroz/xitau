@@ -31,7 +31,7 @@ integer :: IY, IM, ID
 double precision :: FD
 character(128) :: fmt
 
-DUT1 = 0.4d0 ! UT1-UTC; https://datacenter.iers.org/data/17/bulletind-081.txt
+DUT1 = +0.4d0  ! UT1-UTC; https://datacenter.iers.org/data/17/bulletind-081.txt
 
 elong = 0.d0
 u = 0.d0

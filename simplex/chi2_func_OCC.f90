@@ -126,9 +126,9 @@ n = 0
 do i = 1, m_OCC
 
   maxk = OCCMAX2
-  maxk = 0  ! dbg
-!  if (dataset(i).eq.last) maxk = 0
-!  last = dataset(i)
+  if (dataset(i).eq.last) maxk = 0
+  if (dataset(i).gt.0) maxk = 0  ! dbg
+  last = dataset(i)
 
   do j = 1, nbod
 
@@ -137,9 +137,9 @@ do i = 1, m_OCC
     j3 = 2
     j4 = 2
 
-    do k = 0, maxk
+    do k = -maxk/2, maxk/2
 
-      t_nolite = t(i) + duration*(dble(k-maxk/2)/max(maxk,1))
+      t_nolite = t(i) + duration*(dble(k)/max(maxk,1))
 !
 ! interpolate Earth (topocentric, airless, ecliptic, J2000)
 !
@@ -242,16 +242,16 @@ do i = 1, m_OCC
 !
 ! shadow path
 !
-      if ((j.eq.1).and.(mod(k,3).eq.0)) then
+      if ((j.eq.1).and.(mod(k,10).eq.0)) then
 
         call spath(t_nolite, lite, r_EA, r_AO, e, axes, l, b, silh_, has_solution)
 
         if (has_solution) then
           do l_ = 1, size(silh_, 1)
             if (silh_(l_, 1).ne.NAN) then
-              write(iuc,*) t_nolite, silh_(l_, :)/deg, j
+              write(iuc,*) t_nolite, silh_(l_, :)/deg, j, dataset(i)
             else
-              write(iuc,*) t_nolite, ' ?', ' ?', j
+              write(iuc,*) t_nolite, ' ?', ' ?', j, dataset(i)
             endif
           enddo
           write(iuc,*)
@@ -261,10 +261,7 @@ do i = 1, m_OCC
 !
 ! compute chi^2
 !
-      if ((j.eq.1).and.(k.eq.maxk/2)) then
-
-        write(*,*) ''
-        call spath(t_nolite, lite, r_EA, r_AO, e, axes, l, b, silh_, has_solution)
+      if ((j.eq.1).and.(k.eq.0)) then
 
 ! minimum distance
         if (has_solution) then
@@ -287,7 +284,7 @@ do i = 1, m_OCC
 ! Well, the problem with the uncertainty is that it is given in time;
 ! however, we compare the angular distance (observer<->silhouette)
 ! on the (spherical) surface. We estimate it as a difference for 2 times,
-! for the centre (NOT the limb).
+! for the centre (NOT for the limb).
  
 ! uncertainty
           call occult(t_nolite, r_EA, r_AO, e, axes, lambda, phi, has_solution)
@@ -302,13 +299,14 @@ do i = 1, m_OCC
          
             write(iu,*) t(i), sigma(i), lambda_/deg, phi_/deg, alt(i), sigma_/deg, j, dataset(i), chi_
             write(iu,*) t(i), sigma(i), lambda_obs(i)/deg, phi_obs(i)/deg, alt(i), sigma_/deg, j, dataset(i), chi_
+            write(iu,*)
+            write(iu,*)
           endif
         endif
       endif
 
     enddo  ! k, maxk
 
-    write(iu,*)
     write(iua,*)
     write(iua,*)
     write(iub,*)

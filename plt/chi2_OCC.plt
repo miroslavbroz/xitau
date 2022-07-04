@@ -37,6 +37,7 @@ d = 1.*deg*6378.
 sp \
   "xitau/plt/world_50m.txt" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l lc 'black' not,\
   fx(1,u,v),fy(1,u,v),fz(1,u,v) lc 'gray' not,\
+  "occultation3.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)) w l lw 2 lc 'black' not,\
   "chi2_OCC.dat" u (fx(1,$3,$4)):(fy(1,$3,$4)):(fz(1,$3,$4)) w l lw 3 lc 'red' not,\
   "<awk 'BEGIN{ for (i=-90;i<=90;i++){ print 0,i; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l dt 2 lc '#666666' not,\
 
@@ -51,6 +52,5 @@ q
   "<awk '($4==1)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "Xitau",\
   "<awk '($4==2)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "inner moon",\
   "<awk '($4==3)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "outer moon",\
-  "occultation3.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)) w l lw 2 lc 'black' not,\
 
 

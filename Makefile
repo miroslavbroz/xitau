@@ -223,6 +223,39 @@ obj = \
   sofa/utctai.o \
   sofa/utcut1.o \
 
+# additional files if GST is needed!
+
+#  sofa/gst06a.o \
+#  sofa/anp.o \
+#  sofa/era00.o \
+#  sofa/pnm06a.o \
+#  sofa/nut06a.o \
+#  sofa/fw2m.o \
+#  sofa/ir.o \
+#  sofa/rx.o \
+#  sofa/ry.o \
+#  sofa/rz.o \
+#  sofa/gst06.o \
+#  sofa/nut00a.o \
+#  sofa/pfw06.o \
+#  sofa/eors.o \
+#  sofa/fae03.o \
+#  sofa/faf03.o \
+#  sofa/faju03.o \
+#  sofa/fama03.o \
+#  sofa/fame03.o \
+#  sofa/faom03.o \
+#  sofa/fapa03.o \
+#  sofa/fasa03.o \
+#  sofa/faur03.o \
+#  sofa/fave03.o \
+#  sofa/obl06.o \
+#  sofa/s06.o \
+#  sofa/falp03.o \
+#  sofa/fad03.o \
+#  sofa/fal03.o \
+#  sofa/bpn2xy.o \
+
 obj90 = \
   multipole/const.o \
   ao/read_pnm.o \

@@ -40,13 +40,14 @@ double precision :: UTC1, UTC2
 double precision :: UT11, UT12, DUT1
 double precision :: TT1, TT2
 double precision :: TAI1, TAI2
+double precision :: GST
 double precision :: elong, u, v
 double precision :: t0, t, zeta, zz, theta
 double precision :: eps, deltapsi, deltaeps
 double precision :: s0, ss, s
 double precision :: h, m, s_
 double precision :: eps_earth
-double precision :: iau_dtdb
+double precision :: iau_dtdb, iau_gst06a
 
 ! a sphere test
 atmp = max(axes(1),axes(2),axes(3))*(/1.d0, 1.d0, 1.d0/)
@@ -66,13 +67,16 @@ elong = 0.d0
 u = 0.d0
 v = 0.d0
 
-DUT1 = 0.4d0 ! UT1-UTC; https://datacenter.iers.org/data/17/bulletind-081.txt
+DUT1 = +0.4d0  ! UT1-UTC; https://datacenter.iers.org/data/17/bulletind-081.txt
+DUT1 = -0.1d0  ! UT1-UTC; https://datacenter.iers.org/data/17/bulletind-141.txt
+
 
 DTDB = iau_dtdb(TDB1, TDB2, UT12, elong, u, v)
 call iau_tdbtt(TDB1, TDB2, DTDB, TT1, TT2, j)
 call iau_tttai(TT1, TT2, TAI1, TAI2, j)
 call iau_taiutc(TAI1, TAI2, UTC1, UTC2, j)
 call iau_utcut1(UTC1, UTC2, DUT1, UT11, UT12, j)
+!GST = iau_gst06a(UT11, UT12, TT1, TT2)
 
 t_UT1 = UT11+UT12
 
@@ -100,6 +104,8 @@ endif
 lambda = 0.d0
 call lst(t_UT1, lambda, eps, deltapsi, s0, ss, s)
 e_ = rot_z(e, cos(s), sin(s))
+
+! Note: the difference between s and GST is only ~3 ms
 
 h = 0.d0
 call geodetic(e_, axes, lambda, phi, h)
