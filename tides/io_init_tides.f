@@ -49,6 +49,7 @@ c  read input parameters
       read(7,*) dtspinout
       read(7,10) outspinfile
 10    format(a)
+      read(7,*) use_tides
       read(7,*) debug_spin
       
       close(unit = 7)

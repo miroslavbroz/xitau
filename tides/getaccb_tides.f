@@ -38,6 +38,8 @@ c temporary
       save i1st
       data i1st /0/
 
+      if (.not.use_tides) return
+
       if (i1st.eq.0) then
         call dissipation_factor(nbod_,mass,xb,yb,zb)
         i1st = 1
