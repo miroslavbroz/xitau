@@ -1,5 +1,6 @@
 #!/usr/bin/gnuplot
 
+set colors classic
 set term x11
 
 nm = 1.e-9  # m
@@ -9,8 +10,9 @@ shift=0.25
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
-set xr [405:450]
-set yr [12*shift:22*shift]
+set xr [440:455]
+#set yr [12*shift:22*shift]
+set yr [1-shift:1+8*shift]
 
 set ytics shift
 set mytics 1
@@ -45,10 +47,10 @@ call "line.plt" "SiII"   6371
 call "line.plt" "NeI"    6402
 
 p \
-  "synthetic.dat" u ($2/nm):($3+shift*$4)   t "synthetic" w l lt 7,\
-  "Spectra.dat"   u ($2/nm):($3+shift*$5):4 t "observed" w err lt 3 pt 1 ps 0,\
-  "chi2_SYN.dat"  u ($2/nm):($3+shift*$5)   t "residua"  w l lt 1 lw 1,\
-  "<awk '($NF+0>20)' chi2_SYN.dat" u ($2/nm):($3+shift*$5) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5
+  "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lt 7,\
+  "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lt 3 pt 1 ps 0,\
+  "chi2_SYN.dat"  u ($2/nm):($3+shift*($5-1))   t "residua"  w l lt 1 lw 1,\
+  "<awk '($NF+0>20)' chi2_SYN.dat" u ($2/nm):($3+shift*($5-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5
 pa -1
 
 set term png small size 1280,800

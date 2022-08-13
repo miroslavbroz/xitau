@@ -10,7 +10,7 @@ shift = 0.25
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
-set xr [390:]
+set xr [:]
 tmp=5.
 #set xr [501.6-tmp:501.6+tmp]
 set ytics shift
@@ -19,11 +19,13 @@ set grid ytics mytics
 set zeroaxis
 set bar 0.5
 set key outside font "Helvetica,8" width -3
+set tmargin 2.0
 
 call "line.plt" "Halpha" 6562.81
 call "line.plt" "Hbeta"  4861
 call "line.plt" "Hgamma" 4341
 call "line.plt" "Hdelta" 4102
+call "line.plt" "Hepsil" 3970
 call "line.plt" "HeI"    4009.258
 call "line.plt" "HeI"    4026.210
 call "line.plt" "HeI"    4120.811
@@ -55,9 +57,14 @@ call "line.plt" "CIV"    5801.3
 call "line.plt" "SiIII"  5739.7
 call "line.plt" "CIII"   5695.0
 call "line.plt" "OIII"   5592.3
-call "line.plt" "HeII"   5411.5
 call "line.plt" "NII"    4779.7
 call "line.plt" "HeII"   4685.7
+call "line.plt" "HeII"   5411.5
+
+# from Shenar etal. (2015), Sec. 3.2
+call "line.plt" "HeII"   4200
+call "line.plt" "HeII"   4542
+call "line.plt" "HeII"   6683
 
 p \
   "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lc 'orange',\
@@ -66,7 +73,7 @@ p \
   "<awk '($NF+0>100)' chi2_SYN.dat" u ($2/nm):($3+shift*($5-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5
 pa -1
 
-set term png small size 2048,1024
+set term png small size 2048,1536
 set out "chi2_SYN.png"
 rep
 

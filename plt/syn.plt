@@ -1,5 +1,6 @@
 #!/usr/bin/gnuplot
 
+set colors classic
 set term x11
 
 nm = 1.e-9  # m

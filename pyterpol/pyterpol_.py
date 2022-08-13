@@ -41,9 +41,11 @@ else:
     extension = ".syn"
     step = 0.01
     
-sg = pyterpol3.SyntheticGrid(flux_type=flux_type)
+sg = pyterpol3.SyntheticGrid(flux_type=flux_type, debug=False)
 
 #sg.default_grid_order = ['BSTAR', 'OSTAR', 'AMBRE', 'POLLUX']
+#sg.ABS_default_grid_order = ['BSTAR', 'OSTAR', 'PHOENIX', 'POLLUX']
+sg.ABS_default_grid_order = ['BSTAR', 'OSTAR', 'PHOENIX']
 
 # interpolate spectra
 for j in range(0, nbod):

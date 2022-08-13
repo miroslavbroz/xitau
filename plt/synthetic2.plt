@@ -1,7 +1,7 @@
 #!/usr/bin/gnuplot
 
 set colors classic
-set term x11
+#set term x11
 
 nm = 1.e-9  # m
 km = 1.e3  # m
@@ -18,6 +18,7 @@ set mytics 1
 set grid ytics mytics
 set zeroaxis
 set bar 0.5
+set tmargin 2.0
 
 call "line.plt" "Halpha" 6563
 call "line.plt" "Hbeta"  4861
@@ -64,7 +65,7 @@ p \
 
 pa -1
 
-set term png small
+set term png small size 2048,1536
 set out "synthetic2.png"
 rep
 
