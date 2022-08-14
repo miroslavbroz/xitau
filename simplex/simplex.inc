@@ -11,7 +11,7 @@
       parameter (OUTMAX1=400000)		! max number of forward integration points
       parameter (OUTMAX2=600000)		! max number of backward integration points
       parameter (OUTMAX=OUTMAX1+OUTMAX2)        ! max number of integration points
-      parameter (OBSMAX=400000)			! max number of observations
+      parameter (OBSMAX=650000)			! max number of observations
       parameter (MINMAX=OUTMAX)			! max number of minima
       parameter (TIMEMAX=OBSMAX*(2*NBODMAX+4))	! max number of times of interest
       parameter (BANDMAX=5)			! max number of photometric bands

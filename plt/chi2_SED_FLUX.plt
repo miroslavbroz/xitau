@@ -25,7 +25,7 @@ load "T0.plt"
 #logg4 = x_param30
 #d_pc = x_param44*pc
 
-T = 30000.  # K
+#T = 30000.  # K
 
 #R1 = sqrt(G*m1/(10.**logg1*cm))
 #R2 = sqrt(G*m2/(10.**logg2*cm))
@@ -49,6 +49,15 @@ set yl "flux F [J s^-1 m^-2 m^-1]"
 
 set logscale x
 set logscale y
+
+tmp= 367; set label "U" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
+tmp= 436; set label "B" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
+tmp= 545; set label "V" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
+tmp= 720; set label "R" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
+tmp= 900; set label "I" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
+tmp=1220; set label "J" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
+tmp=1630; set label "H" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
+tmp=2190; set label "K" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
 
 f(mag,calibration_flux) = 10.**(-0.4*mag)*calibration_flux
 

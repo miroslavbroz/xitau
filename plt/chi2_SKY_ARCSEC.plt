@@ -41,7 +41,7 @@ p \
 pa -1
 
 set term png small
-set out "chi2_SKY.png"
+set out "chi2_SKY_ARCSEC.png"
 rep
 
 q
