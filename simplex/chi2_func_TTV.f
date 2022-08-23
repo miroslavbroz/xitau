@@ -35,6 +35,7 @@ c internal variables
       logical extra
       real*8 t_of_closest,OMC
       real*8 LITE, LITE12, zb1, zb2, zb_interp, zb_interp0, zh2
+      real*8 vx, vy
 
 c functions
       real*8 interp, au_day, distance_AB_C
@@ -72,6 +73,14 @@ c find ALL synthetic minima of the eclipsing binary
       nmin = 0
       dmax = (R_star(1)+R_star(2))*R_S/AU
 
+      if (debug_swift) then
+        open(unit=iu,file="eclipses.dat",status='unknown')
+        write(iu,*) "# A(1) A(2) B(1) B(2) d  dmax vx   vy   duration",
+     :    " eclipsed"
+        write(iu,*) "# au   au   au   au   au au   au/d au/d day     ",
+     :    " -"
+      endif
+
       if ((m_TTV.gt.0).or.(debug_swift)) then
         do i = 1, NOUT-1
           A(1) = rh(i,2,1)
@@ -96,6 +105,12 @@ c find ALL synthetic minima of the eclipsing binary
                 else
                   eclipsed(nmin) = 1
                 endif
+                if (debug_swift) then
+                  vx = (B(1)-A(1))/(tout(i+1)-tout(i))
+                  vy = (B(2)-A(2))/(tout(i+1)-tout(i))
+                  write(iu,*) A(1),A(2),B(1),B(2),d,dmax,vx,vy,
+     :              duration(nmin),eclipsed(nmin)
+                endif
               else
                 write(*,*) "chi2_func_TTV.f: Error number of minima ",
      :            "exceeds MINMAX = ", MINMAX
@@ -108,6 +123,10 @@ c     :          "minimum. d = ", d, " AU, dmax = ", dmax, " AU"
           endif
 
         enddo
+      endif
+
+      if (debug_swift) then
+        close(iu)
       endif
 
 c barycenter at T0

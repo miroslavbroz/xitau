@@ -27,14 +27,18 @@ load "T0.plt"
 
 m1 = x_param1*M_S
 m2 = x_param2*M_S
-P1 = x_param5*day
-i1 = x_param7*deg
-g1 = 10.**x_param27*cm
-g2 = 10.**x_param28*cm
+P1 = x_param4*day
+e1 = 10.0**x_param5
+i1 = x_param6*deg
+g1 = 10.**x_param19*cm
+g2 = 10.**x_param20*cm
 
 R1 = sqrt(G*m1/g1)
 R2 = sqrt(G*m2/g2)
 a1 = (G*(m1+m2)/(4.*pi**2)*P1**2)**(1./3.)
+q1 = a1*(1.-e1)
+
+# use q1 instead of a1 if e1 > 0.0!!!
 
 print "m1 = ", m1/M_S, " M_S"
 print "m2 = ", m2/M_S, " M_S"
@@ -63,7 +67,7 @@ set xyplane 0
 set nokey
 set grid
 set zeroaxis
-set view i1/deg+180,90,1.5,1.5
+#set view i1/deg+180,90,1.5,1.5
 set view equal xyz
 set colorbox
 
@@ -93,8 +97,8 @@ sp \
   "star2.dat" u 1:(-$2):(+$3):8 w d ls 2 lc palette z,\
   "star2.dat" u 1:(+$2):(-$3):8 w d ls 2 lc palette z,\
   "star2.dat" u 1:(-$2):(-$3):8 w d ls 2 lc palette z,\
-  fx(r1/a1,u,v)+0.0, fy(r1/a1,u,v), fz(r1/a1,u,v) lc 'green',\
-  fx(r2/a1,u,v)+1.0, fy(r2/a1,u,v), fz(r2/a1,u,v) lc 'green'
+  fx(R1/q1,u,v)+0.0, fy(R1/q1,u,v), fz(R1/q1,u,v) lc 'green',\
+  fx(R2/q1,u,v)+1.0, fy(R2/q1,u,v), fz(R2/q1,u,v) lc 'green'
 
 pa -1
 

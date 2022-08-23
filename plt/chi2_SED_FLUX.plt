@@ -49,6 +49,7 @@ set yl "flux F [J s^-1 m^-2 m^-1]"
 
 set logscale x
 set logscale y
+set xr [300:30000]
 
 tmp= 367; set label "U" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
 tmp= 436; set label "B" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0

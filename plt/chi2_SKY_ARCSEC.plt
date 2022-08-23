@@ -20,7 +20,8 @@ set ang rad
 
 load "T0.plt"
 
-d_pc = x_param32
+#d_pc = x_param32
+d_pc = x_param33
 f(x) = x*arcsec*(d_pc*pc)/au
 g(x) = x*au/(d_pc*pc)/arcsec
 
