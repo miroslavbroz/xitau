@@ -6,7 +6,9 @@ set term x11
 set xl "JD - 2400000"
 set yl "eclipse duration [day]"
 
+set yr [0:]
 set zeroaxis
+set key bottom
 
 load "T0.plt"
 set arrow from T0-2400000,graph 0 to T0-2400000,graph 1 nohead lt 0
