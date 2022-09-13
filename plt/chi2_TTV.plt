@@ -11,6 +11,7 @@ set yl "O-C [day]"
 
 #tmp = 0.25*day; set yr [-tmp:tmp]
 set zeroaxis
+set key left
 
 load "T0.plt"
 set arrow from T0-2400000,graph 0 to T0-2400000,graph 1 nohead lt 0

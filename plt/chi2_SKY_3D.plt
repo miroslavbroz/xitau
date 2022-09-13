@@ -15,7 +15,7 @@ set cbl "dataset"
 set size ratio -1
 set nokey
 
-tmp=1.e-5
+tmp=1.1e0
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zr [-tmp:tmp]
@@ -32,7 +32,8 @@ set cbr [1:]
 
 load "T0.plt"
 
-d_pc = x_param26
+d_pc = x_param19
+#d_pc = x_param26
 #d_pc = x_param36
 f(x) = x*arcsec*(d_pc*pc)/au
 

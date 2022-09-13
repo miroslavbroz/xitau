@@ -1,6 +1,4 @@
 
-Test of a 2-body problem (Sun+Earth).
-
-We only output barycentric coordinates in this directory;
-then, longterm/swift_bs.sh script should be run!
+Test of a 2-body problem (Sun+Mercury) with PPN,
+i.e., relativistic precession (43'' per cy).
 

@@ -40,15 +40,9 @@ p \
 
 pa -1
 
-set term png small
+set term png small size 1536,1024
 set out "chi2_LC.png"
 rep
 
 q
-
-
-f(flux, calibration_flux) = -2.5*log10(flux/calibration_flux)
-
-  "../data_20220205_tess/lightcurve_tess/Lc.dat" u ($1-2400000-4832.0-2.8):(f($2, 6.8e5)) w p ps 0.5 lc 'black' t "TESS"
-
 

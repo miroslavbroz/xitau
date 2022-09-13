@@ -10,9 +10,7 @@ shift = 0.25
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
-set xr [:]
-tmp=5.
-#set xr [501.6-tmp:501.6+tmp]
+#tmp=5.; set xr [501.6-tmp:501.6+tmp]
 set ytics shift
 set mytics 1
 set grid ytics mytics
@@ -42,12 +40,16 @@ call "line.plt" "CII"    4267
 call "line.plt" "CII"    6578
 call "line.plt" "CII"    6582
 call "line.plt" "OII"    4649.143
+call "line.plt" "MgII"   4384.637
+#call "line.plt" "MgII"   4390.514  # weak
+call "line.plt" "MgII"   4390.572
 call "line.plt" "MgII"   4481
 call "line.plt" "SiII"   4128
 call "line.plt" "SiII"   4130
 call "line.plt" "SiII"   6347
 call "line.plt" "SiII"   6371
 call "line.plt" "NeI"    6402
+call "line.plt" "FeIII"  4382.511
 call "line.plt" "FeIII"  5243.306
 
 # from Walker etal. (2017), Tab. 5
@@ -66,11 +68,16 @@ call "line.plt" "HeII"   4200
 call "line.plt" "HeII"   4542
 call "line.plt" "HeII"   6683
 
+# from Greenstein & Aller (1950)
+call "line.plt" "DIB"    4430
+call "line.plt" "DIB"    6284
+
 p \
   "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lc 'orange',\
   "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lt 3 pt 1 ps 0,\
   "chi2_SYN.dat"  u ($2/nm):($3+shift*($5-1))   t "residua"  w l lt 1 lw 1,\
-  "<awk '($NF+0>100)' chi2_SYN.dat" u ($2/nm):($3+shift*($5-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5
+  "<awk '($NF+0>100)' chi2_SYN.dat" u ($2/nm):($3+shift*($5-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5,\
+  "<awk '($5!=l){ print; }{ l=$5; }' Spectra.dat" u (430.0):(1.0-0.05+shift*($5-1)):5 w labels left not
 pa -1
 
 set term png small size 2048,1536

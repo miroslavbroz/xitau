@@ -4,34 +4,41 @@ day = 86400.  # s
 c = 299792458.  # m/s, from CODATA 2018, exact
 au = 1.49597870700e11  # m, from IAU 2012
 
+load "T0.plt"
+
+P1 = x_param1
+jd0 = 2457733.83207
+
 # Mayer et al., Eq. (1)
-P1 = 5.998570
-jd0 = 2441033.033
+#P1 = 5.998570
+#jd0 = 2441033.033
 
 # Mayer et al. 
-P1 = 5.998693
-jd0 = 2449425.099
+#P1 = 5.998693
+#jd0 = 2449425.099
 
 # chi2.in, osculating
-P1 = 5.9985999098751694
-jd0 = 2435589.3105465779
+#P1 = 5.9985999098751694
+#jd0 = 2435589.3105465779
 
 # chi2.in, mean (adjusted)
-P1 = 5.998680
-jd0 = 2435589.3105465779
+#P1 = 5.998680
+#jd0 = 2435589.3105465779
 
 frac(x) = x-int(x)
 g(x) = x < 0.5 ? x : x-1.0
 OMC(jd) = g(frac((jd-jd0)/P1))*P1
 OMCs(jd) = g(frac((jd-jd0-0.5*P1)/P1))*P1
 
+########################################################################
+
 #set colors classic
 
 set xl "JD {/Symbol -} 2400000"
 set yl "ETV [day] wrt. 2-body model" offset +0.5,0
 
-tmp = 0.25
-set yr [-tmp:tmp]
+#tmp = 0.25
+#set yr [-tmp:tmp]
 set tics front
 set key
 set samples 2000

@@ -1,0 +1,5 @@
+2		! nbod \\ sx, sy, sz [] spin axis unitvector & omega [rad/day] spin rate
+0.	0.	1.	 1.0	! Aa1; NOT USED
+0.	0.	1.	 1.0	! Aa2; NOT USED
+
+

@@ -102,4 +102,9 @@ sp \
 
 pa -1
 
+set term png small size 1024,1024
+set out "stars.png"
+rep
+
+
 
