@@ -18,7 +18,7 @@ e1 = x_param4
 i1 = x_param5*deg
 g1 = 10.**x_param11*cm
 
-J2 = -2.e-7  # see multipole.in; J2 = -Clm(2,0)
+J2 = +2.e-7  # see multipole.in; J2 = -Clm(2,0)
 
 R1 = sqrt(G*m1/g1)
 a1 = (G*(m1+m2)/(4.*pi**2)*P1**2)**(1./3.)
