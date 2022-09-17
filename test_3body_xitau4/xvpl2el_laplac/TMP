@@ -1,0 +1,3 @@
+
+
+#dotomega = -3.*n1*J2*(R1/a1)**2 * (5.*sin(i1)**2-1.)/(4.*eta1**4)  # Curtis (2005); ERROR sin->cos?!

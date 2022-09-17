@@ -1,0 +1,95 @@
+# chi2.in
+# nparam number of paramters
+# x() vector:
+#
+#  m1 m2 m3 m4
+#  P1 e1 i1 Omega1 omega1 M1
+#  P2 e2 i2 Omega2 omega2 M2
+#  P3 e3 i3 Omega3 omega3 M3
+#  T1 T2 T3 T4
+#  logg1 logg2 logg3 logg4
+#  vrot1 vrot2 vrot3 vrot4
+#  metal1 metal2 metal3 metal4
+#  Delta_t1 Delta_t2 Delta_t3 Delta_t4
+#  gamma
+#  d_pc
+#  pole_l pole_b
+#  ...
+#
+46
+
+    2.2384830095784594     2.0096448513217915     3.7471923521156687     0.9227802616706736
+7.15002502450324    0.0000000000000000    87.6082671086565199   329.0722201076235933   275.6464804048562200   174.4418584731718909
+145.828613724511    0.2166940316213084    86.2982665024314457   328.5728278826143196    -0.0379820044321431    88.0427875188085380
+18506.1364703017    0.5684269640202005   -18.2278479323102545   114.6857054826851368     1.0002050215792400    32.7066155474839775
+10727.2495395699552319 10275.2778040508637787 13199.6545091780517396  6526.3922835742305324
+    4.3876093642603022     4.3106337757950293     4.1404012490551327     4.5176431380409277     
+   16.2231770470651036    12.4952259989465606   234.9075498314994945    80.0961419293382875
+    0.0                    0.0                    0.0                    0.0
+    0.0                    0.0                    0.0                    0.0
+    8.8208644998766328 
+   67.8887379313507608 
+    0.0                    0.0
+
+2456224.724705		! fixed (dependent) parameters: T0 [JD]
+
+4			! nbod number of bodies; a list of 2*nbod+4 files with observational data (or '-' if no data)...
+-Speckle1.dat
+-Speckle2.dat
+-Speckle3.dat
+-Speckle4.dat
+-RV1.dat
+-RV2.dat
+-RV3.dat
+-RV4.dat
+-Omc12.dat
+-Ecl.dat
+-Vis.dat
+-Closure.dat
+
+0			! nband number of photometric bands; a list of bands and lightcurve files
+-Spectra_10.dat
+-1.syn
+-2.syn
+-3.syn
+-4.syn
+-Sed.dat
+-1.abs
+-2.abs
+-3.abs
+-4.abs
+-AO1.dat
+-Sky_differential.dat
+-Sky_angularvelocity.dat
+-Occ.dat
+
+0                       ! geometry of the system: 0 ... hierarchical ((1+2)+3)+4, 1 ... two pairs ((1+2)+(3+4))+5
+
+0.0 0.0 0.0 0.0		! m_min(nbod) [M_S] minimum masses
+10.0 10.0 10.0 10.0	! m_max(nbod) [M_S] maximum masses
+F F F F			! use_hec88(nbod) use Harmanec (1988) to constrain components (i.e. use only T_eff as a parameter!)
+
+0.005			! lightcurve_timestep [day] timestep of synthetic lightcurve; set to 0.0 if all observed points should be computed
+0.100			! approx_eclipse_duration [day] approximate eclipse duration for eclipse detection
+420.e-9 550.e-9		! lambda1 lambda2 [metres] wavelength range for rectified synthetic spectra
+301.e-9 2700.e-9	! lambda3 lambda4 [metres] range for absolute spectra (to fit SED)
+0.0 0.0 0.0 0.0         ! pyterpol_Delta for Teff, logg, vrot, metal [K,1,km/s,1]
+
+0.2			! silh_factor [] signal = factor*max(signal) to compute a silhouette
+
+T			! use_planck [T|F] use Planck approximation; otherwise use absolute synthetic spectra (*.abs files)
+F			! use_filters [T|F] use filter transmissions to compute SED; otherwise use effective wavelengths and bandpasses
+F			! use_limbdark [T|F] use linear limb-darkening coefficients for visibility |V|^2 calculation
+F			! use_pyterpol [T|F] use Pyterpol (Nemravova et al. 2016) to generate synthetic spectra on-the-fly
+F			! use_vardist [T|F] use variable distance/geometry (in solar system)
+F			! use_varpole [T|F] use variable pole of body 1 (in solar system)
+F			! use_multipole [T|F] use multipole expansion of body 1
+F			! use_bruteforce [T|F] use shape of body 1 and brute-force algorithm
+F                       ! use_ppn [T|F] use parametrized post-Newtonian approximation
+
+1.0 1.0 1.0 1.0   0.1 1.0 0.0   1.0 1.0 1.0   0.3 1.0 1.0 1.0 1.0	! w_SKY w_RV w_TTV w_ECL   w_VIS w_CLO w_T3   w_LC w_SYN w_SED   w_AO w_SKY2 w_SKY3 w_OCC weights for chi^2 computation
+1.e-8			! eps_BS for Bulirsch-Stoer integrator
+
+T			! debugging output?
+T			! debug integrator?
+

@@ -1,0 +1,5 @@
+3		! nbod \\ sx, sy, sz [] spin axis unitvector & omega [rad/day] spin rate
+0.	0.	1.	 28.0015861475352	! Kleopatra
+0.	0.	1.	 3.44782915904493	! moon1; synchronous
+0.	0.	1.	 3.44782915904493	! moon1; synchronous
+

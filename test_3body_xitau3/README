@@ -1,0 +1,13 @@
+
+3-body perturbation as in the xi Tauri system.
+
+Theory of Breiter & Vokrouhicky (2015) must be used,
+becase all bodies are massive.
+
+See also Nemravova et al. (2016).
+
+Beware! Only 3, not 4, bodies must be used, otherwise,
+the angular momentum is "skewed" by the 4th body and
+the nodes do not circulate. :-(
+
+
