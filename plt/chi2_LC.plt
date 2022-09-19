@@ -12,6 +12,7 @@ set colors classic
 set term x11
 
 band = 7
+band = 54
 shift = 0.2
 
 set xl "JD - 2400000"

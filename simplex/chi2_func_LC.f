@@ -131,9 +131,11 @@ c
         rm = m(2)/m(1)
         iband = iband_LC(k)
 
-        write(*,*) 'iband = ', iband
-        write(*,*) 'lambda_eff = ', lambda_eff(iband)
-        write(*,*) 'band_eff = ', band_eff(iband)
+        if (debug) then
+          write(*,*) '# iband = ', iband
+          write(*,*) '# lambda_eff = ', lambda_eff(iband)
+          write(*,*) '# band_eff = ', band_eff(iband)
+        endif
  
         call luminosities(T_eff, R_star, nbod, lambda_eff(iband),
      :    band_eff(iband), Lum, Lumtot, use_planck)
