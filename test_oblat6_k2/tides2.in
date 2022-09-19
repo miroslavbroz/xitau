@@ -1,0 +1,9 @@
+2			! nbod;  k_L []  P_rot [d]  R [R_S]
+
+0.0105495883570853   26.6       1.0      # Sun -- ZERO Love number!
+0.0                  1.0        0.01     # Earth -- ZERO Love number!
+
+0.0			! external_mass [M_S]
+F			! use_tides2 [T|F]
+T			! use_oblat [T|F]
+

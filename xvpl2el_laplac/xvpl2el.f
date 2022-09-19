@@ -61,8 +61,8 @@ c        call angmom(3, m, y, Lh)
 
 c rotate both r, v
         a = -Ls(2)
-        b = 0.5d0*pi_-Ls(3)+pi_
         b = 0.5d0*pi_-Ls(3)
+!        b = 0.5d0*pi_-Ls(3)+pi_  ! i.e., opposite \dot\Omega
         do i = 1, npl
           call rotat3(y(1,i), ctmp, a)
           call rotat2(ctmp, y(1,i), b)
@@ -92,6 +92,7 @@ c write elements
 990   continue
 
       close(10)
+      close(20)
       stop
       end
 

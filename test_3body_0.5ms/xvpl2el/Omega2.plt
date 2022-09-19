@@ -27,7 +27,7 @@ J2 = 1./2. * (a1/a1)**2 * m1*m2/(m1+m2)**2  # perturbation radius r = a1, refere
 
 n2 = 2.*pi/P2
 eta2 = sqrt(1.-e2**2)
-dotOmega2 = -3./2.*n2*J2*(a1/a2)**2*cos(i2)/eta2**4  # standard coefficients; Bertotti etal. (2003), p. 332
+dotOmega2 = -3./2.*n2*J2*(a1/a2)**2 * cos(i2)/eta2**4  # standard coefficients; Bertotti etal. (2003), p. 332
 
 print "a1 = ", a1/au, " au"
 print "a2 = ", a2/au, " au"

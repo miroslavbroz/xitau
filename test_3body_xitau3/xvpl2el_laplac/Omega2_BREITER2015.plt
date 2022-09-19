@@ -35,7 +35,7 @@ cosJ = cos(i1)*cos(i2) + sin(i1)*sin(i2)*cos(Omega1-Omega2)
 eta2 = sqrt(1.-e2**2)
 gamma = L1/(L2*eta2)
 
-dotOmega2 = n2*3./(4.*eta2**3)*m3/(m1+m2+m3)*n2/n1*cosJ * sqrt(1. + gamma**2 + 2.*gamma*cosJ)  # Nemravova etal. (2016), Eq. (27)
+dotOmega2 = 3./4.*n2/(eta2**3)*m3/(m1+m2+m3)*n2/n1*cosJ * sqrt(1. + gamma**2 + 2.*gamma*cosJ)  # Nemravova etal. (2016), Eq. (27)
 
 print "a1 = ", a1/au, " au"
 print "a2 = ", a2/au, " au"

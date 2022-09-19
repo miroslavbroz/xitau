@@ -1,5 +1,6 @@
 #!/usr/bin/gnuplot
 
+set colors classic
 set term x11
 
 set xl "JD"

@@ -4,8 +4,12 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
 
       subroutine read_dependent()
 
+      implicit none
       include "../simplex/simplex.inc"
       include "../simplex/dependent.inc"
+      include "../simplex/filters.inc"
+
+      integer i
 
       write(*,*) "# T0 : "
       read(*,*,err=990,end=990) T0
@@ -62,6 +66,11 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
         read(*,*,err=990,end=990) iband_LC(i), file_LC(i)
         write(*,*) "# iband_LC(", i, ") = ", iband_LC(i)
         write(*,*) "# file_LC(", i, ") = ", trim(file_LC(i))
+        if (iband_LC(i).gt.WDBANDS) then
+          write(*,*) "# Error iband = ", iband_LC(i),
+     :      ".gt. WDBANDS = ", WDBANDS
+          stop
+        endif
       enddo
 
       write(*,*) "# file_SYN : "

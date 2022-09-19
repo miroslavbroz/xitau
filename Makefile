@@ -181,6 +181,7 @@ obj = \
   util/util_version.o \
   wd/atmx.o \
   wd/bbl_nbody.o \
+  wd/binnum.o \
   wd/cloud.o \
   wd/conjph.o \
   wd/dgmprd.o \
@@ -204,6 +205,7 @@ obj = \
   wd/nekmin.o \
   wd/olump.o \
   wd/planckint.o \
+  wd/rangau.o \
   wd/ranuni.o \
   wd/ring.o \
   wd/romq.o \

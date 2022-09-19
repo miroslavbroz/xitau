@@ -1,12 +1,13 @@
 #!/usr/bin/gnuplot
 
+set colors classic
 set term x11
 
 set xl "JD"
 set yl "mag+K"
 
 set xr [56224.5:56224.9]
-set yr [0.98:1.12] reverse
+set yr [1.12:0.98]
 
 p \
   "lc.out"  u 1:3 w lp,\

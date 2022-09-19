@@ -1,0 +1,81 @@
+# chi2.in
+# nparam number of paramters
+# x() vector:
+#
+#  m1 m2
+#  P1 loge1 i1 Omega1 varpi1 lambda1
+#  T1 T2
+#  logg1 logg2
+#  vrot1 vrot2
+#  Delta_t1 Delta_t2
+#  metal1 metal2
+#  gamma
+#  d_pc
+#  pole_l pole_b
+#  ...
+22
+
+   1.0      3.e-6
+   365.2422 0.016   1.0   0.0   0.0   0.0
+   5770.0   300.0
+   4.45     1.0
+   10.0     1.0
+   0.0      0.0
+   0.0      0.0
+   0.0
+   1.0
+   0.0      90.0
+
+2458773.18865178	! fixed (dependent) parameters: T0 [JD]; 2019 WDS interferometry
+
+2			! nbod number of bodies; a list of 2*nbod+4 files with observational data (or '-' if no data)...
+-Sky1.dat
+-Sky2.dat
+-RV1.dat_gamma
+-RV2.dat_gamma
+-Omc12.dat
+-Ecl12.dat
+-Vis.dat_fake
+-Clo.dat_fake
+
+0			! nband number of photometric bands; a list of bands and lightcurve files
+-Spectra.dat
+-1.syn
+-2.syn
+-Sed.dat
+-1.abs
+-2.abs
+-AO1.dat
+-Sky_differential.dat_minusuv
+-Sky_angularvelocity.dat
+-Occ.dat
+
+0			! geometry of the system: 0 ... hierarchical ((1+2)+3)+4, 1 ... two pairs ((1+2)+(3+4))+5, 4 ... hierarchical w. P,loge,varpi,lambda, 5 ... twopairs w. dtto
+
+0.0 0.0 		! m_min(nbod) [M_S] minimum masses
+100.0 100.0		! m_max(nbod) [M_S] maximum masses
+F F F			! use_hec88(nbod) use Harmanec (1988) to constrain components (i.e. use only T_eff as a parameter!)
+
+0.05			! lightcurve_timestep [day] timestep of synthetic lightcurve; set to 0.0 if all observed points should be computed
+0.667255		! approx_eclipse_duration [day] approximate eclipse duration for eclipse detection
+425.e-9 455.e-9		! lambda1 lambda2 [metres] wavelength range for rectified synthetic spectra
+321.e-9 2700.e-9	! lambda3 lambda4 [metres] range for absolute spectra (to fit SED)
+10.0 0.001 0.1 0.0001	! pyterpol_Delta's for T_eff [K], log_g [cgs], v_rot, metal [km/s]
+
+0.2			! silh_factor [] signal = factor*max(signal) to compute a silhouette
+
+T			! use_planck [T|F] use Planck approximation; otherwise use absolute synthetic spectra (*.abs files)
+F			! use_filters [T|F] use filter transmissions to compute SED; otherwise use effective wavelengths and bandpasses
+F			! use_limbdark [T|F] use linear limb-darkening coefficients for visibility |V|^2 calculation
+F			! use_pyterpol [T|F] use Pyterpol (Nemravova et al. 2016) to generate synthetic spectra on-the-fly
+F			! use_vardist [T|F] use variable distance/geometry (in solar system)
+F			! use_varpole [T|F] use variable pole of body 1 (in solar system)
+T			! use_multipole [T|F] use multipole expansion of body 1
+F			! use_bruteforce [T|F] use shape of body 1 and brute-force algorithm
+F                       ! use_ppn [T|F] use parametrized post-Newtonian approximation
+
+1.0 1.0 1.0 1.0  1.0 1.0 1.0  1.0 1.0 1.0  1.0 1.0 1.0 1.0	! w_SKY w_RV w_TTV w_ECL  w_VIS w_CLO w_T3  w_LC w_SYN w_SED  w_AO w_SKY2 w_SKY3 w_OCC weights for chi^2 computation
+1.e-8			! eps_BS for Bulirsch-Stoer integrator
+T			! debugging output?
+T			! debug integrator?
+

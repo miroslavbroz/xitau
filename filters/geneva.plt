@@ -2,6 +2,7 @@
 
 ang = 0.1
 
+set colors classic
 set term x11
 
 set xl "lambda [nm]"
@@ -26,5 +27,5 @@ pa -1
 
 set term png small
 set out "geneva.png"
-
+rep
 

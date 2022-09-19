@@ -94,26 +94,58 @@ c CORFAC ... contrast factor, spot/base intensity ratio
 c
 c declarations of ALL variables
 c
-      dimension rad(4),drdo(4),xtha(4),xfia(4),po(2)
-      dimension rv(3011),grx(3011),gry(3011),grz(3011),rvq(3011),
-     $  grxq(3011),gryq(3011),grzq(3011),slump1(3011),slump2(3011),
-     $  fr1(3011),fr2(3011),glump1(3011),glump2(3011),xx1(3011),
-     $  xx2(3011),yy1(3011),yy2(3011),zz1(3011),zz2(3011),grv1(3011),
-     $  grv2(3011),rftemp(3011),rf1(3011),rf2(3011),csbt1(3011),
-     $  csbt2(3011),gmag1(3011),gmag2(3011),glog1(3011),glog2(3011),
-     $  hld(3200),snfi(6400),csfi(6400),tld(6400),snth(260),csth(260),
-     $  theta(520),rho(520),aa(20),bb(20),mmsave(124)
-      dimension fbin1(100000),fbin2(100000),delv1(100000),delv2(100000),
-     $  count1(100000),count2(100000),delwl1(100000),delwl2(100000),
-     $  resf1(100000),resf2(100000),wl1(100000),wl2(100000),dvks1(100),
-     $  dvks2(100),wll1(100),wll2(100),tau1(100),tau2(100),emm1(100),
-     $  emm2(100),ewid1(100),ewid2(100),depth1(100),depth2(100),
-     $  hbarw1(100),hbarw2(100),taug(100000),emmg(100000)
-      DIMENSION XLAT(2,100),xlong(2,100)
-      dimension xcl(100),ycl(100),zcl(100),rcl(100),op1(100),fcl(100),
-     $  dens(100),encl(100),edens(100),xmue(100),yskp(14000),zskp(14000)
+      parameter (Nmax=200)       ! maximum grid fineness
+      parameter (igsmax=33202)   ! maximum grid size
+      parameter (lpimax=100)     ! maximum dimension of line profile input arrays
+      parameter (lpomax=100000)  ! maximum dimension of line profile output arrays
+      parameter (ispmax=100)     ! maximum number of spots
+      parameter (iclmax=100)     ! maximum number of clouds
+      parameter (iplmax=68)      ! number of defined passbands
+      parameter (itemppts=48)    ! number of temperature coefficients per spectrum
+      parameter (iloggpts=11)    ! number of log(g) nodes
+      parameter (imetpts=19)     ! number of metallicity nodes
+
+      parameter (iatmpts=iloggpts*itemppts)
+      parameter (iatmchunk=iatmpts*iplmax)
+      parameter (iatmsize=iatmchunk*imetpts)
+      parameter (MMmax=2*Nmax+4)
+      parameter (immax=4*igsmax+100)
+      parameter (ifrmax=4*Nmax)
+      parameter (iplcof=50*iplmax)
+
+      dimension rad(4),drdo(4),xtha(4),xfia(4)
+      dimension po(2)
       dimension message(2,4)
-      dimension abun(19),glog(11),grand(250800),plcof(1300)
+      dimension aa(20),bb(20)
+
+      real*8,dimension(igsmax) :: rv,grx,gry,grz,rvq,grxq,gryq,grzq,
+     $  slump1,slump2,fr1,fr2,glump1,glump2,xx1,xx2,yy1,yy2,zz1,zz2,
+     $  grv1,grv2,rftemp,rf1,rf2,csbt1,csbt2,gmag1,gmag2,glog1,glog2
+
+      real*8,dimension(igsmax) :: hld
+      real*8,dimension(2*igsmax) :: tld
+      real*8,dimension(2*igsmax+100) :: snfi,csfi
+      real*8,dimension(2*Nmax) :: snth,csth
+      real*8,dimension(MMmax) :: mmsave
+      real*8,dimension(ifrmax) :: theta,rho
+
+      real*8,dimension(lpomax) :: fbin1,fbin2,delv1,delv2,count1,count2,
+     $  delwl1,delwl2,resf1,resf2,wl1,wl2,taug,emmg
+
+      real*8,dimension(lpimax) :: dvks1,dvks2,wll1,wll2,tau1,tau2,
+     $  emm1,emm2,ewid1,ewid2,depth1,depth2,hbarw1,hbarw2
+
+      real*8,dimension(2,ispmax) :: xlat,xlong
+      real*8,dimension(immax) :: yskp,zskp
+      real*8,dimension(iplcof) :: plcof
+      real*8,dimension(imetpts) :: abun
+      real*8,dimension(iloggpts) :: glog
+      real*8,dimension(iatmsize) :: grand
+
+      real*8,dimension(iclmax) :: xcl,ycl,zcl,rcl,op1,fcl,dens,encl,
+     $  edens,xmue
+      real*8,dimension(2,ispmax) :: SINLAT,COSLAT,SINLNG,COSLNG,RADSP,
+     $  temsp,xlng,kks,Lspot
 
       integer i1st
 c
@@ -132,9 +164,8 @@ c
       COMMON /KFAC/ KFF1,KFF2,kfo1,kfo2
       COMMON /INVAR/ KH,IPB_,IRTE,NREF_,IRVOL1,IRVOL2,mref_,
      $  ifsmv1_,ifsmv2_,icor1_,icor2_,ld_,ncl,jdphs_,ipc
-      COMMON /SPOTS/SINLAT(2,100),COSLAT(2,100),SINLNG(2,100),
-     $  COSLNG(2,100),RADSP(2,100),temsp(2,100),xlng(2,100),kks(2,100),
-     $  Lspot(2,100)
+      COMMON /SPOTS/ SINLAT,COSLAT,SINLNG,COSLNG,RADSP,temsp,xlng,kks,
+     $  Lspot
       common /cld/ acm,opsf_
       common /ardot/ dperdt_,hjd,hjd0_,perr
       common /prof2/ du1,du2,du3,du4,binw1,binw2,sc1,sc2,sl1,sl2,
@@ -200,13 +231,13 @@ c
 c
 c check parameters (see p. 30 in ebdoc2003.2feb2004.pdf)
 c
-        if (N1.gt.60) then
-          write(*,*) "Error: grid is too fine, N1 = ", N1, " .gt. 60"
+        if (N1.gt.Nmax) then
+          write(*,*) "Error: grid is too fine, N1 = ", N1, ".gt.", Nmax
           stop
         endif
 
-        if (N2.gt.60) then
-          write(*,*) "Error: grid is too fine, N2 = ", N2, " .gt. 60"
+        if (N2.gt.Nmax) then
+          write(*,*) "Error: grid is too fine, N2 = ", N2, ".gt.", Nmax
           stop
         endif
 c
@@ -340,7 +371,7 @@ c  Ramp ranges are set below. The following values seem to work. They may be cha
 c
 c read atmosphere files
 c
-        open(unit=22,file='atmcof.dat',status='old')
+        open(unit=22,file='phoebe_atmcof.dat',status='old')
         read(22,*) grand
         close(22)
        
@@ -365,10 +396,10 @@ c  The following lines take care of abundances that may not be among
 c  the 19 Kurucz values (see abun array). abunin is reset at the allowed
 c  value nearest the input value.
 c
-        call binnum(abun,19,abunin,iab)
+        call binnum(abun,imetpts,abunin,iab)
        
         dif1=abunin-abun(iab)
-        if(iab.ne.19) then
+        if(iab.ne.imetpts) then
           dif2=abun(iab+1)-abun(iab)
           dif=dif1/dif2
           if ((dif.lt.0.d0).or.(dif.gt.0.5d0)) then
@@ -382,7 +413,7 @@ c
      $      'the program. Replaced by ',f5.2)
         endif
         abunin=abun(iab)
-        istart=1+(iab-1)*13200
+        istart=1+(iab-1)*iatmchunk
 c
 c no spots
 c
@@ -412,7 +443,7 @@ c
         IRVOL2=0
 
 c Note: If mmsave array is re-dimensioned, change upper limit in DO 421 loop. imm of 124 is OK up to N=60.
-        do imm=1,124
+        do imm=1,MMax
           mmsave(imm)=0
         enddo
         nn1=n1

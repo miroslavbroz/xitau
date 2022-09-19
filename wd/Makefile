@@ -4,13 +4,14 @@
 
 f77 = gfortran
 
-opt = -O3
+opt = -O3 -pg -mcmodel=large
 
 lib = -L.
 
 obj = \
   atmx.o \
   bbl.o \
+  binnum.o \
   cloud.o \
   conjph.o \
   dgmprd.o \
@@ -33,6 +34,7 @@ obj = \
   nekmin.o \
   olump.o \
   planckint.o \
+  rangau.o \
   ranuni.o \
   ring.o \
   romq.o \

@@ -1,10 +1,39 @@
-
       subroutine atmx(t,g,ifil,xintlog,xint)
       implicit real*8 (a-h,o-z)
 c Version of January 23, 2004
-      dimension abun(19),glog(11),grand(250800)
-      dimension pl(10),yy(4),pha(4),tte(2),effwvl(26)
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+c
+c     Model atmosphere grid properties:
+c
+c       itemppts  ..   number of temperature coefficients per spectrum
+c                        default: itemppts=48 (4x12)
+c       iloggpts  ..   number of log(g) nodes
+c                        default: iloggpts=11 (atmosphere grid)
+c       imetpts   ..   number of metallicity nodes
+c                        default: imetpts=19  (atmosphere grid)
+c       iatmpts   ..   size of the atmosphere grid per passband per
+c                      metallicity
+c                        default: iatmpts = 11*48 = 528
+c                        11 log(g) values and
+c                        48=4x12 temperature coefficients
+c       iatmchunk ..   size of the atmosphere grid per metallicity
+c                        default: iatmchunk = 528*25 = 13200
+c       iatmsize  ..   size of the atmosphere grid
+c                        default: iatmsize = 13200*19 = 250800
+c
+      parameter (iplmax  =68)
+      parameter (itemppts=48)
+      parameter (iloggpts=11)
+      parameter (imetpts =19)
+      parameter (iatmpts=iloggpts*itemppts)
+      parameter (iatmchunk=iatmpts*iplmax)
+      parameter (iatmsize=iatmchunk*imetpts)
+c
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+      dimension abun(imetpts),glog(iloggpts),grand(iatmsize)
+      dimension pl(10),yy(4),pha(4),tte(2),effwvl(iplmax)
       dimension message(2,4)
+      common /err/ ierrcode
       common/abung/abun,glog
       common/arrayleg/ grand,istart
       common /ramprange/ tlowtol,thightol,glowtol,ghightol
@@ -12,7 +41,13 @@ c Version of January 23, 2004
       data effwvl/350.d0,412.d0,430.d0,546.d0,365.d0,440.d0,
      $550.d0,680.d0,870.d0,1220.d0,2145.d0,3380.d0,4900.d0,
      $9210.d0,650.d0,790.d0,230.d0,250.d0,270.d0,290.d0,
-     $310.d0,330.d0,430.d0,520.d0,500.d0,1620.d0/
+     $310.d0,330.d0,430.d0,520.d0,500.d0,640.d0,640.d0,
+     $1620.d0,345.6d0,424.5d0,402.4d0,448.d0,550.d0,540.5d0,
+     $580.5d0,592.0d0,355.7d0,482.5d0,626.1d0,767.2d0,909.7d0,
+     $367.d0,485.d0,624.d0,752.d0,867.d0,963.d0,963.d0,326.d0,
+     $362.d0,382.d0,431.d0,540.d0,547.d0,550.d0,550.d0,427.d0,
+     $623.d0,797.d0,3600.d0,4500.d0,5800.d0,8000.d0,690.d0,
+     $690.d0,690.d0,690.d0,700.d0/
       tlog=dlog10(t)
       trec=1.d0/t
       tlow=3500.d0-tlowtol
@@ -36,16 +71,16 @@ c The following is for 4-point interpolation in log g.
 ccccccccccccccccccccccccccccccccccccccccccccccccccccc
       m=4
       ifreturn=0
-      icase=istart+(ifil-1)*528
-      call binnum(glog,11,g,j)
+      icase=istart+(ifil-1)*iatmpts
+      call binnum(glog,iloggpts,g,j)
       k=min(max(j-(m-1)/2,1),12-m)
       if(g.le.0.d0) j=1
   10  continue
-      ib=icase+(k-1)*48
-      ib=ib-48
+      ib=icase+(k-1)*itemppts
+      ib=ib-itemppts
 ccccccccccccccccccccccccccccccccccccccccccccccccccccc
       do 4 ii=1,m
-      ib=ib+48
+      ib=ib+itemppts
       do 719 ibin=1,4
       it=ib+(ibin-1)*12
       it1=it+1
