@@ -49,6 +49,8 @@ c internal variables
       real*8 tavh, tavc, poth, potc, rm, hlum, clum, el3
       integer ialpha
       real*8 a, e, inc, capom, omega, capm
+      real*8 varperiod
+      real*8 distnorm
 
 c functions
       real*8 interp, dotprod, au_day, omega_kopal_approx
@@ -222,12 +224,16 @@ c   O_EB ... observer's direction
           V(1) = (vx1-vx2)/2.d0  ! average, w. negative vx2
           V(2) = (vy1-vy2)/2.d0
           V(3) = (vz1-vz2)/2.d0
-
+c
+c scale (in primary-secondary distance)
+c
           call orbel_xv2el(X(1), X(2), X(3), V(1), V(2), V(3),
      :      mu, ialpha, a, e, inc, capom, omega, capm)
-          sema = a*au/R_S
-!          sema = dist*AU/R_S  ! dbg
 
+          sema = a*au/R_S
+c
+c true phase
+c
           call vproduct(X, V, Z)
           call vproduct(Z, X, Y)
           call normalize(X)
@@ -251,8 +257,15 @@ c   O_EB ... observer's direction
 c
 c approximate values of Kopal potential
 c
-          poth = omega_roche_approx(R_star(1)*R_S/(dist*AU), rm, 1)
-          potc = omega_roche_approx(R_star(2)*R_S/(dist*AU), 1.d0/rm, 2)
+          poth = omega_roche_approx(R_star(1)*R_S/(a*AU), rm, 1)  ! dbg
+          potc = omega_roche_approx(R_star(2)*R_S/(a*AU), 1.d0/rm, 2)  ! dbg
+
+          varperiod = sqrt(4.d0*pi_**2*a**3/mu)
+          distnorm = dist/a
+
+c          write(*,*) i, ' gpha = ', gpha, ' dist = ', dist,
+c     :      ' poth = ', poth, ' potc = ', potc, ' sema = ', sema,
+c     :      ' varperiod = ', varperiod, ' distnorm = ', distnorm
 
 c Note: if Omega > OmegaL1, * is smaller than critical equipotential (vice versa)
 
@@ -261,7 +274,7 @@ c compute magnitude with the Wilson & Devinney (1971) code
 c
           call lc_call_nbody(gpha, sema, xincl, tavh, tavc,
      :      poth, potc, rm, iband, hlum, clum, el3, debug, i2nd,
-     :      mag(i,k), vkm1(i,k), vkm2(i,k))
+     :      mag(i,k), vkm1(i,k), vkm2(i,k), varperiod, distnorm)
 
           mag(i,k) = mag(i,k) + zero(k)
 

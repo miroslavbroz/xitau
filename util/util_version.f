@@ -27,7 +27,7 @@ c  functions
 
       character*32 DRIVER
       common /drivername/ DRIVER
-      data DRIVER /"xitau_chi2_simplex"/       ! default driver name
+      data DRIVER /"Xitau"/       ! default driver name
 
 c-----
 c...  Executable code 

@@ -1,0 +1,106 @@
+1 2 1 0 0 1 1 2												! mpage  nref  mref  ifsmv1  ifsmv2  icor1  icor2  ld
+
+2   58773.18865178  5.732436  0.000000D+00    0.0000 0.0000D+00 0         0.				! jdphs  hjd0  period  dpdt  pshift  stdev  noise  seed
+
+0.000000  1.000000  0.100000   0.0 1.0 0.001  0.250000				! hjdst   hjdsp  hjdin  phstrt  phstop  phin  phn
+
+ 0 0 1 1  40  40     0.0  0.00000D+00   0.00000 100.00						! MODE  IPB  IFAT1  IFAT2  N1  N2  perr0  dperdt  the  VUNIT
+
+ 0.5   40.085058040110539   1.0000 1.0000 0.0000   90.0    0.320  0.320   0.00			! E  A  F1  F2  VGA  XINCL  GR1  GR2  abunin
+
+ 3.0000  2.0000   1.0  1.0    5.5066759895763573   6.7361433694182704    0.47752808988764045  0.500  0.500  0.500  0.500	! tavh  tavc  alb1  alb2  poth  potc  rm  xbol1  xbol2  ybol1  ybol2
+
+  7   0.91059661312570295   8.9403386874296956E-002  0.500  0.500  0.500  0.500   0.0   0.0000D+00   0.000  1.0000 0.550000		! iband  HLUM  CLUM  XH  xc  yh  yc  EL3  opsf  ZERO  FACTOR  wl
+
+300. 0. 0. 0.
+300. 0. 0. 0.
+150. 0. 0. 0. 0. 0. 0. 0. 0.
+
+9  0  0  0  0  0  0  0		! mpage = 9 ... stop
+
+! EXPLANATORY NOTES:
+!
+! mpage          ... output quantities, 1 ... lightcurve, 2 ... RVs, 4 ... radii (constant), 5 ... star shapes in Y,Z coordinates, 9 ... stop
+! nref           ... number of reflections (if mref = 2)
+! mref           ... reflection treatment, 1 ... simple (inverse square law), 2 ... detailed <-- do NOT use for eccentric orbits
+! ifsmv1, ifsmv2 ... spots motion, 0 ... fixed longitudes wrt. the line of centers (accretion stream), 1 ... follow asynchronously rotating surface (magnetic spots)
+! icor1, icor2   ... Rossiter effect on RVs [0|1]
+! ld             ... limb darkening, 1 ... linear cosine, 2 ... logarthmic, 3 ... square root
+!
+! jdphs  ... a switch for either Julian date or phase, 1 ... JD, 2 ... phase
+! hjd0   ... epoch JD_0
+! period ... orbital period P
+! dpdt   ... period rate dP/dt
+! pshift ... period shift
+! stdev  ... sigma standard deviation for noise
+! noise  ... add noise to synthetic data? [0|1]
+! seed   ... random seed number
+!
+! jdphs  ... use Juliand date or phase? [0|1]
+! hjdst  ... HJD start
+! hjdsp  ... HJD stop
+! hjdin  ... HJD increment [day]
+! phstrt ... phase start
+! phstop ... phase stop
+! phinc  ... phase increment []
+! phn    ... phase of normalisation
+!
+! MODE         ... mode of program, -1 ... X-ray binaries, 0 ... no constraits, 1 ... overcontact, 2 ... detached (L2 iscomputed), 3 ... overcontact, 4 ... semi-detached, 5 ... Algol-type, 6 ... double contact
+! IPB          ... lumunisity of secondary, 0 ... compute from T_1, T_2 and HLUM, 1 ... use CLUM value
+! IFAT1, IFAT2 ... atmosphere radiation, 0 ... black-body, 1 ... stellar (Kurucz)
+! N1, N2       ... discretisations in longitude, latitude []
+! perr0        ... argument of pericentre omega at epoch JD_0 [RADIANS]
+! dperdt       ... precession rate domega/dt [rad/day]
+! the          ... semi-duration of X-ray eclipse (in circular measure, i.e. multiplied by 2pi)
+! VUNIT        ... velocity unit [km/s]
+!
+! E        ... eccentricity
+! A        ... semimajor axis [R_S]
+! F1, F2   ... values of (scaled) potential Omega for the two stars <-- these determine "radii"
+! VGA      ... gamma velocity [km/s]
+! XINCL    ... inclination [deg]
+! GR1, GR2 ... gravity brightening, 1.0 ... flux \propro local g, radiative evelopes, ~0.3 ... convective, 0.0 ... constant
+! abunin   ... metallicity [M/H] for Kurucz atmospheric models
+! 
+! tavh         ... temperature T1 of the hot component in 10^4 Kelvins
+! tavc         ... cool
+! alb1, alb2   ... albedo, 1.0 ... radiative envelopes, ~0.5 ... convective
+! poth         ... Kopal potential Omega(r, theta, phi) of the hot component
+! potc         ... cool
+! rm           ... mass ratio q = M2/M1
+! xbol1, xbol2 ... cos(gamma) limb darkening coefficients
+! ybol1, ybol2 ... cos(gamma) ln(cos(gamma)) coefficients (for ld = 2)
+!
+! iband  ... 7 = Johnson V
+! HLUM   ... luminosity L1 of hot component (arbitrary units)
+! CLUM   ... L2 cold <-- actually not used, but computed!
+! EL3    ... third light (in FLUX units assuming a BIG detector covering 1 srad angle); for isotropic source, L3 = 4 pi EL3 <-- this is comparable to L1
+! opsf   ... 
+! ZERO   ... magnitude at phase PHN
+! FACTOR ... scaling factor for normalized light, i.e. FACTOR at PHN
+! wl     ... wavelength [microns]
+
+! XLAT(KP,1) ... spots on primary, if XLAT > 200. skip everything 
+! XLONG(KP,1)
+! RADSP(KP,1)
+! TEMSP(KP,1)
+
+! XLAT(KP,2) ... spots on secondary
+! XLONG(KP,2)
+! RADSP(KP,2)
+! TEMSP(KP,2)
+
+! xcl(i)  ... circumstellar clouds, if xcl > 100. skip everything
+! ycl(i)
+! zcl(i)
+! rcl(i)
+! op1(i)
+! fcl(i)
+! edens(i)
+! xmue(i)
+! encl(i)
+
+! BEWARE! The luminosities are not given in MOST passbands but Johnson V!
+! BEWARE! This code version does not need the lines with spots, clouds and mpage = 9
+
+

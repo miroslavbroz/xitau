@@ -1,0 +1,9 @@
+2			! nbod;  k_L []  P_rot [d]  R [R_S]
+
+0.0  5.7325893698699524  13.936
+0.0  5.7325893698699524   3.516
+
+0.0			! external_mass [M_S]
+F			! use_tides2 [T|F]
+F			! use_oblat [T|F]
+

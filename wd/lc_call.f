@@ -6,6 +6,8 @@ c modifications by MB, Apr 18th 2016
 
       implicit real*8(a-h,o-z)
 
+!      save  ! everything
+
 c input
       real*8 phas  ! orbital phase of EB
       logical debug
@@ -141,68 +143,11 @@ c
         hjd0_ = hjd0
         mpage_ = mpage
 c
-c physical constants (cgs)
-c
-        ot=1.d0/3.d0
-        KH=17
-        pi=dacos(-1.d0)
-        clight=2.99792458d5
-        en0=6.0254d23
-        rsuncm=6.960d10
-
-c  Ramp ranges are set below. The following values seem to work. They may be changed.
-        tlowtol=1500.d0
-        thightol=50000.d0
-        glowtol=4.0d0
-        ghightol=4.0d0
-       
-        abun(1)=1.d0
-        abun(2)=0.5d0
-        abun(3)=0.3d0
-        abun(4)=0.2d0
-        abun(5)=0.1d0
-        abun(6)=0.0d0
-        abun(7)=-0.1d0
-        abun(8)=-0.2d0
-        abun(9)=-0.3d0
-        abun(10)=-0.5d0
-        abun(11)=-1.0d0
-        abun(12)=-1.5d0
-        abun(13)=-2.0d0
-        abun(14)=-2.5d0
-        abun(15)=-3.0d0
-        abun(16)=-3.5d0
-        abun(17)=-4.0d0
-        abun(18)=-4.5d0
-        abun(19)=-5.0d0
-       
-        glog(1)=0.0d0
-        glog(2)=0.5d0
-        glog(3)=1.0d0
-        glog(4)=1.5d0
-        glog(5)=2.0d0
-        glog(6)=2.5d0
-        glog(7)=3.0d0
-        glog(8)=3.5d0
-        glog(9)=4.0d0
-        glog(10)=4.5d0
-        glog(11)=5.0d0
-        nn=100
-        gau=0.d0
-c
-c read atmosphere files
-c
-        open(unit=22,file='phoebe_atmcof.dat',status='old')
-        read(22,*) grand
-        close(22)
-       
-        open(unit=23,file='phoebe_atmcofplanck.dat',status='old')
-        read(23,*) plcof
-        close(23)
-c
 c write input parameters
 c
         if (debug) then
+          write(*,*) '# parameters read from lc.in file:'
+          write(*,*)
           write(*,*) '# mpage  = ', mpage
           write(*,*) '# nref   = ', nref
           write(*,*) '# mref   = ', mref
@@ -270,12 +215,72 @@ c
           write(*,*) '# yh     = ', yh
           write(*,*) '# yc     = ', yc
           write(*,*) '# EL3    = ', EL3, ' (flux)'
+          write(*,*) '# Lum3   = ', EL3*4.d0*pi, ' (luminosity)'
           write(*,*) '# opsf   = ', opsf
           write(*,*) '# ZERO   = ', ZERO, ' mag'
           write(*,*) '# FACTOR = ', FACTOR
           write(*,*) '# wl     = ', wl, ' mu'
           write(*,*)
         endif
+c
+c physical constants (cgs)
+c
+        ot=1.d0/3.d0
+        KH=17
+        pi=dacos(-1.d0)
+        clight=2.99792458d5
+        en0=6.0254d23
+        rsuncm=6.960d10
+
+c  Ramp ranges are set below. The following values seem to work. They may be changed.
+        tlowtol=1500.d0
+        thightol=50000.d0
+        glowtol=4.0d0
+        ghightol=4.0d0
+       
+        abun(1)=1.d0
+        abun(2)=0.5d0
+        abun(3)=0.3d0
+        abun(4)=0.2d0
+        abun(5)=0.1d0
+        abun(6)=0.0d0
+        abun(7)=-0.1d0
+        abun(8)=-0.2d0
+        abun(9)=-0.3d0
+        abun(10)=-0.5d0
+        abun(11)=-1.0d0
+        abun(12)=-1.5d0
+        abun(13)=-2.0d0
+        abun(14)=-2.5d0
+        abun(15)=-3.0d0
+        abun(16)=-3.5d0
+        abun(17)=-4.0d0
+        abun(18)=-4.5d0
+        abun(19)=-5.0d0
+       
+        glog(1)=0.0d0
+        glog(2)=0.5d0
+        glog(3)=1.0d0
+        glog(4)=1.5d0
+        glog(5)=2.0d0
+        glog(6)=2.5d0
+        glog(7)=3.0d0
+        glog(8)=3.5d0
+        glog(9)=4.0d0
+        glog(10)=4.5d0
+        glog(11)=5.0d0
+        nn=100
+        gau=0.d0
+c
+c read atmosphere files
+c
+        open(unit=22,file='phoebe_atmcof.dat',status='old')
+        read(22,*) grand
+        close(22)
+       
+        open(unit=23,file='phoebe_atmcofplanck.dat',status='old')
+        read(23,*) plcof
+        close(23)
 c
 c convert units
 c
@@ -291,8 +296,8 @@ c
         message(2,4)=0
 c
 c  The following lines take care of abundances that may not be among
-c  the 19 Kurucz values (see abun array). abunin is reset at the allowed value nearest
-c  the input value.
+c  the 19 Kurucz values (see abun array). abunin is reset at the allowed
+c  value nearest the input value.
 c
         call binnum(abun,imetpts,abunin,iab)
        
@@ -352,7 +357,9 @@ c
         CALL SINCOS(2,N2,N1,SNTH,CSTH,SNFI,CSFI,MMSAVE)
 
         hjd=hjd0
-
+c 
+c compute critial potentials and volumetric quantities 
+c
         CALL modlog(RV,GRX,GRY,GRZ,RVQ,GRXQ,GRYQ,GRZQ,MMSAVE,FR1,FR2,
      $    HLD,rm,poth,potc,gr1,gr2,alb1,alb2,n1,n2,f1,f2,mod,xincl,the,
      $    mode,snth,csth,snfi,csfi,grv1,grv2,xx1,yy1,zz1,xx2,yy2,zz2,
@@ -367,7 +374,6 @@ c
      $    GRXQ,GRYQ,GRZQ,MMSAVE,FR1,FR2,HLD,SNTH,CSTH,SNFI,CSFI,SUMMD,
      $    SMD,GRV1,GRV2,XX1,YY1,ZZ1,XX2,YY2,ZZ2,CSBT1,CSBT2,GLUMP1,
      $    GLUMP2,GMAG1,GMAG2,glog1,glog2,GR2,1)
-
 c
 c non-zero eccentricity case
 c
@@ -400,7 +406,9 @@ c save potentials
           write(6,*) ' PROGRAM SHOULD NOT BE USED IN MODE 1 OR 3',
      $      ' WITH NON-ZERO ECCENTRICITY'
         endif
-
+c
+c compute lightcuve point at the normalisation phase phn
+c
         CALL BBL(RV,GRX,GRY,GRZ,RVQ,GRXQ,GRYQ,GRZQ,MMSAVE,FR1,FR2,HLD,
      $    SLUMP1,SLUMP2,THETA,RHO,AA,BB,POTH,POTC,N1,N2,F1,F2,D,HLUM,
      $    clum,xh,xc,yh,yc,gr1,gr2,wl,sm1,sm2,tpolh,tpolc,sbrh,sbrc,
@@ -467,11 +475,11 @@ c restore potentials
         POTC=PCSV
         PO(1)=POTH
         PO(2)=POTC
-        IF(E.EQ.0.d0) then
-          IRVOL1=1
-          IRVOL2=1
-          IRTE=1
-        endif
+c        IF(E.EQ.0.d0) then
+c          IRVOL1=1
+c          IRVOL2=1
+c          IRTE=1
+c        endif
        
         i1st = 1
       endif  ! i1st

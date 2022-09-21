@@ -1,10 +1,10 @@
 c lc_call_nbody.f
 c A call to the Wilson-Devinney code, 1 lightcurve point, N-body variant.
-c modifications by MB, Apr 18th 2016
+c modifications by MB, Sep 21st 2022
 
       subroutine lc_call_nbody(gpha_, sema, xincl_, tavh_, tavc_,
      :  poth_, potc_, rm_, iband_, hlum_, clum_, el3_, debug, i2nd,
-     :  smagg, vkm1_, vkm2_)
+     :  smagg, vkm1_, vkm2_, varperiod, distnorm)
 
       implicit real*8(a-h,o-z)
 
@@ -25,6 +25,8 @@ c input
       real*8 el3_         ! 3rd-light flux, L3 = 4*pi*el3
       integer i2nd        ! 2nd call with enforced initialisation
       logical debug       ! debugging
+      real*8 varperiod
+      real*8 distnorm
 
 c output
       real*8 smagg       ! magnitude
@@ -200,9 +202,11 @@ c
       hlum = hlum_
       clum = clum_
       el3 = el3_ 
+      period = varperiod
 c
 c this (long) part is called only once!
 c
+!      i1st = 0  ! dbg
       if (i1st.eq.0) then
 c
 c some varibles are in multiple common blocks, so we must assign them manually
@@ -304,6 +308,7 @@ c
           write(*,*) '# xbol2 = ', xbol2
           write(*,*) '# ybol1 = ', ybol1
           write(*,*) '# ybol2 = ', ybol2
+          write(*,*)
           write(*,*) '# iband  = ', iband
           write(*,*) '# HLUM   = ', HLUM
           write(*,*) '# CLUM   = ', CLUM
@@ -317,6 +322,8 @@ c
           write(*,*) '# ZERO   = ', ZERO, ' mag'
           write(*,*) '# FACTOR = ', FACTOR
           write(*,*) '# wl     = ', wl, ' mu'
+          write(*,*) '# varperiod = ', varperiod
+          write(*,*) '# distnorm = ', distnorm
           write(*,*)
         endif
 c
@@ -458,6 +465,7 @@ c
         i1st = 1
       endif  ! i1st
 
+!      i2nd = 0  ! dbg
       if (i2nd.eq.0) then
 c
 c compute critial potentials and volumetric quantities
@@ -508,7 +516,6 @@ c save potentials
           write(6,*) ' PROGRAM SHOULD NOT BE USED IN MODE 1 OR 3',
      $      ' WITH NON-ZERO ECCENTRICITY'
         endif
-
 c
 c compute lightcuve point at the normalisation phase phn
 c
@@ -521,7 +528,7 @@ c
      $    gmag1,gmag2,glog1,glog2,fbin1,fbin2,delv1,delv2,count1,count2,
      $    delwl1,delwl2,resf1,resf2,wl1,wl2,dvks1,dvks2,tau1,tau2,emm1,
      $    emm2,hbarw1,hbarw2,xcl,ycl,zcl,rcl,op1,fcl,dens,encl,edens,
-     $    taug,emmg,yskp,zskp,mode,iband,ifat1,ifat2,1)
+     $    taug,emmg,yskp,zskp,mode,iband,ifat1,ifat2,1,distnorm)
 
 c save the total flux at phn
         ALL=HOT+COOL+EL3
@@ -643,7 +650,7 @@ c
      $  gmag1,gmag2,glog1,glog2,fbin1,fbin2,delv1,delv2,count1,count2,
      $  delwl1,delwl2,resf1,resf2,wl1,wl2,dvks1,dvks2,tau1,tau2,emm1,
      $  emm2,hbarw1,hbarw2,xcl,ycl,zcl,rcl,op1,fcl,dens,encl,edens,
-     $  taug,emmg,yskp,zskp,mode,iband,ifat1,ifat2,0)
+     $  taug,emmg,yskp,zskp,mode,iband,ifat1,ifat2,0,distnorm)
 
       HTT=HOT
       TOTAL=HTT+COOL+EL3

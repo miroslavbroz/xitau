@@ -1,6 +1,6 @@
 c bbl_nbody.f
 c Compute true phase and call light subroutines, N-body version.
-c modified Apr 16th 2016 by MB
+c modified Sep 21st 2022 by MB
 
       SUBROUTINE BBL_nbody(RV,GRX,GRY,GRZ,RVQ,GRXQ,GRYQ,GRZQ,MMSAVE,FR1,
      $  FR2,HLD,SLUMP1,SLUMP2,THETA,RHO,AA,BB,PHSV,PCSV,N1,N2,F1,F2,d,
@@ -11,7 +11,7 @@ c modified Apr 16th 2016 by MB
      $  csbt2,gmag1,gmag2,glog1,glog2,fbin1,fbin2,delv1,delv2,count1,
      $  count2,delwl1,delwl2,resf1,resf2,wl1,wl2,dvks1,dvks2,tau1,tau2,
      $  emm1,emm2,hbarw1,hbarw2,xcl,ycl,zcl,rcl,op1,fcl,dens,encl,edens,
-     $  taug,emmg,yskp,zskp,mode,iband,ifat1,ifat2,ifphn)
+     $  taug,emmg,yskp,zskp,mode,iband,ifat1,ifat2,ifphn,distnorm)
 
       implicit real*8 (a-h,o-z)
 
@@ -32,6 +32,7 @@ c  Version of December 18, 2003
      $  emm2(*),emmg(*)
       dimension xcl(*),ycl(*),zcl(*),rcl(*),op1(*),fcl(*),dens(*),
      $  edens(*),encl(*),yskp(*),zskp(*)
+      real*8 distnorm
 
       COMMON /INVAR/ KH,IPBDUM,IRTE,NREF,IRVOL1,irvol2,mref,ifsmv1,
      $  ifsmv2,icor1,icor2,ld,ncl,jdphs,ipc
@@ -46,7 +47,7 @@ c  Version of December 18, 2003
       common /prof2/ vo1,vo2,ff1,ff2,du1,du2,du3,du4,du5,du6,du7
 
       gpha = phas  ! it's that simple in our N-body case...
-      D = 1.d0
+      D = distnorm
 
 c e = 0 => IRTE = 1
 c non-zero eccentricity case

@@ -12,11 +12,11 @@ c modified Apr 16th 2016 by MB
      $  emm1,emm2,hbarw1,hbarw2,xcl,ycl,zcl,rcl,op1,fcl,dens,encl,edens,
      $  taug,emmg,yskp,zskp,mode,iband,ifat1,ifat2,ifphn)
 
+      implicit real*8 (a-h,o-z)
+
 c other input parameters are passed in common blocks!
 
 c  Version of December 18, 2003
-
-      implicit real*8 (a-h,o-z)
 
       DIMENSION RV(*),GRX(*),GRY(*),GRZ(*),RVQ(*),GRXQ(*),GRYQ(*),
      $  GRZQ(*),MMSAVE(*),FR1(*),FR2(*),HLD(*),SLUMP1(*),SLUMP2(*),

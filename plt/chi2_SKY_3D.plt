@@ -23,6 +23,7 @@ set zeroaxis
 set ang rad
 set xyplane 0
 set view equal xyz
+set view 0,0
 set colorbox
 set palette defined (\
   0.0 '#000000',\

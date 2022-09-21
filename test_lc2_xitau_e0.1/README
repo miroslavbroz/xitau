@@ -1,0 +1,9 @@
+
+Problems:
+
+  optimized lc_call_nbody.f (i1st=1, i2nd=0)
+  dist is used to compute sema
+  dist is used to compute potentials
+  P = const. => m1, m2 != const.!
+  for e = 0.1, very faint reflection!
+
