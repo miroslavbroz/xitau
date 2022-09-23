@@ -142,7 +142,7 @@ c MOST passband from Walker etal. (2003)
      :   550.d-9,
      :   427.d-9,
      :   623.d-9,
-     :   797.d-9,
+     :   797.d-9,  ! TESS
      :  3600.d-9,
      :  4500.d-9,
      :  5800.d-9,
@@ -213,7 +213,7 @@ c MOST passband from Walker etal. (2003)
      :     0.d-9,
      :     0.d-9,
      :     0.d-9,
-     :     0.d-9,
+     :   400.d-9,  ! TESS
      :     0.d-9,
      :     0.d-9,
      :     0.d-9,
@@ -288,7 +288,7 @@ c converted from erg s^-1 cm^-2 cm^-1 (i.e. divided by 10);
      :  0.0d0,
      :  0.0d0,
      :  0.0d0,
-     :  0.0d0,
+     :  0.0d0,         ! TESS
      :  0.0d0,
      :  0.0d0,
      :  0.0d0,
