@@ -53,7 +53,7 @@ c internal variables
       real*8 distnorm
 
 c functions
-      real*8 interp, dotprod, au_day, omega_kopal_approx
+      real*8 interp, dotprod, au_day
 
       data iu /15/  ! not 10 (which is used by the WD code)
       data i1st /0/

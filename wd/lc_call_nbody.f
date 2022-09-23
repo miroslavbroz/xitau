@@ -45,7 +45,7 @@ c GRZ ... z
 c GRXQ ... dtto on secondary
 c GRYQ ... y
 c GRZQ ... z
-c MMSAVE ... 
+c MMSAVE ... numbers of surface points, both primary and secondary
 c FR1 ... 
 c FR2 ... 
 c HLD ... 
@@ -128,7 +128,7 @@ c
       real*8,dimension(2*igsmax) :: tld
       real*8,dimension(2*igsmax+100) :: snfi,csfi
       real*8,dimension(2*Nmax) :: snth,csth
-      real*8,dimension(MMmax) :: mmsave
+      integer,dimension(MMmax) :: mmsave
       real*8,dimension(ifrmax) :: theta,rho
 
       real*8,dimension(lpomax) :: fbin1,fbin2,delv1,delv2,count1,count2,

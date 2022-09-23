@@ -37,6 +37,7 @@ R1 = sqrt(G*m1/g1)
 R2 = sqrt(G*m2/g2)
 a1 = (G*(m1+m2)/(4.*pi**2)*P1**2)**(1./3.)
 q1 = a1*(1.-e1)
+L1 = 0.57516403411249928*a1  # test_roche_q0.487
 
 # use q1 instead of a1 if e1 > 0.0!!!
 
@@ -47,6 +48,7 @@ print "logg2 = ", log10(g2/cm)
 print "a1 = ", a1/au, " au = ", a1/R_S, " R_S"
 print "R1 = ", R1/R_S, " R_S = ", R1/a1, " a1"
 print "R2 = ", R2/R_S, " R_S = ", R2/a1, " a1"
+print "L1 = ", L1/R_S, " R_S = ", L1/a1, " a1"
 
 set term x11
 
@@ -67,7 +69,7 @@ set xyplane 0
 set nokey
 set grid
 set zeroaxis
-#set view i1/deg+180,90,1.5,1.5
+set view i1/deg+180,90,1.5,1.5
 set view equal xyz
 set colorbox
 
@@ -97,8 +99,9 @@ sp \
   "star2.dat" u 1:(-$2):(+$3):8 w d ls 2 lc palette z,\
   "star2.dat" u 1:(+$2):(-$3):8 w d ls 2 lc palette z,\
   "star2.dat" u 1:(-$2):(-$3):8 w d ls 2 lc palette z,\
-  fx(R1/q1,u,v)+0.0, fy(R1/q1,u,v), fz(R1/q1,u,v) lc 'green',\
-  fx(R2/q1,u,v)+1.0, fy(R2/q1,u,v), fz(R2/q1,u,v) lc 'green'
+  fx(R1/a1,u,v)+0.0, fy(R1/a1,u,v), fz(R1/a1,u,v) lc 'green',\
+  fx(R2/a1,u,v)+q1/a1, fy(R2/a1,u,v), fz(R2/a1,u,v) lc 'green',\
+  "<echo 0 0 0" u (L1/a1):(0):(0) w p pt 1 ps 2 lc 'black'
 
 pa -1
 
