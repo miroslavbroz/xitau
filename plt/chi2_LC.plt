@@ -14,6 +14,7 @@ set term x11
 band = 7
 band = 54
 shift = 0.2
+shift = 0.0
 
 set xl "JD - 2400000"
 set yl "magnitude [mag]"
@@ -33,6 +34,7 @@ set arrow from jd2-2400000,graph 0 rto 0,graph 1 nohead lt 1 lc 'green' front
 p \
   "chi2_LC.dat"    u ($1-2400000):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
   "Lc.dat"         u ($1-2400000):2:3 w l lt 3 t "observed",\
+  "Lc_tess.dat"    u ($1-2400000):2:3 w l lt 3 not,\
   "Lc_U.dat"       u ($1-2400000):($2+(5-band)*shift):3 t "U" w err lt 4 pt 1 ps 0.5,\
   "Lc_B.dat"       u ($1-2400000):($2+(6-band)*shift):3 t "B" w err lt 5 pt 1 ps 0.5,\
   "Lc_V.dat"       u ($1-2400000):($2+(7-band)*shift):3 t "V" w err lt 2 pt 1 ps 0.5,\

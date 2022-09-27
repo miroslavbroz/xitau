@@ -8,6 +8,8 @@ c modifications by MB, Sep 21st 2022
 
       implicit real*8(a-h,o-z)
 
+      include '../misc/const.inc'
+
       save  ! everything
 
 c input
@@ -115,7 +117,7 @@ c
       parameter (ifrmax=4*Nmax)
       parameter (iplcof=50*iplmax)
 
-      dimension rad(4),drdo(4),xtha(4),xfia(4)
+      dimension rad__(4),drdo(4),xtha(4),xfia(4)
       dimension po(2)
       dimension message(2,4)
       dimension aa(20),bb(20)
@@ -332,9 +334,12 @@ c
         ot=1.d0/3.d0
         KH=17
         pi=dacos(-1.d0)
-        clight=2.99792458d5
-        en0=6.0254d23
-        rsuncm=6.960d10
+c        clight=2.99792458d5  ! i.e., ERRONEOUS VALUE!!
+c        rsuncm=6.960d10
+c        en0=6.0254d23
+        clight=c*1.d2  ! cm s^-1
+        rsuncm=R_S*1.d2  ! cm
+        en0=6.02214076d23  ! mol^-1, Avogadro constant; CODATA 2018, exact
 
 c  Ramp ranges are set below. The following values seem to work. They may be changed.
         tlowtol=1500.d0
