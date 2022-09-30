@@ -50,6 +50,7 @@ load "T0.plt"
 
 p \
   "xvpl2el.out" u (($1-T0)*day/yr):(f($7)) w lp,\
+  "../../../xitau_20220920_LCECC/test_oblat6_k2/xvpl2el/xvpl2el.out" u (($1-T0)*day/yr):(f($7)) w lp,\
   (0.0 + dotomega*(x*yr))/deg lw 2 lc 'orange',\
   (0.0 + 1./6.*dotomega*(x*yr))/deg lw 2 dt 2 lc 'gray'
   

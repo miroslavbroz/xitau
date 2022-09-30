@@ -1,6 +1,8 @@
 #!/usr/bin/gnuplot
 
 f(x) = x>720. ? x-720. : x>360. ? x-360. : x
+g(x) = x>180. ? x-360. : x
+
 au = 1.49597870700e11  # m
 km = 1.e3  # m
 R_S = 6.957e8  # m
@@ -53,12 +55,12 @@ set origin 0,0
 set xl "JD - 2400000"
 set yl "Omega [deg]"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):6 not w d lt 2
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):(g($6)) not w d lt 2
 
 set origin 0,0.33
 set yl "varpi [deg]"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):(f($6+$7)) not w d lt 2
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):(g(f($6+$7))) not w d lt 2
 
 set origin 0,0.66
 set yl "lambda [deg]"

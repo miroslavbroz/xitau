@@ -1,0 +1,237 @@
+----------------------------------------------------
+Xitau version Sep 20th 2022
+Author: Miroslav Broz, Charles University
+        e-mail: miroslav.broz@email.cz
+        http://sirrah.troja.mff.cuni.cz/~mira/xitau/
+----------------------------------------------------
+ 
+************* SWIFT: Version 2.0 *************
+  
+ Authors:
+    Martin Duncan: Queen's University 
+    Hal Levison: Southwest Research Institute 
+  
+  Please address any comments or questions to:
+    Hal Levison 
+    Geophysical, Astrophysical, & Planetary Sciences
+    Southwest Research Institute
+    1050 Walnut St.
+    Suite 429 
+    Boulder, Co  80302 
+    (303) 546-0290 
+    Fax: (303) 546-9687 
+    (D)  swri::levison 
+    (I)  hal@gort.space.swri.edu 
+  
+ # nparam : 
+ # nparam =           24
+ # x_param() : 
+ # x_param(           1 ) =    39.569000000000003     
+ # x_param(           2 ) =   0.39000000000000001     
+ # x_param(           3 ) =    5.7332741495762942     
+ # x_param(           4 ) =   -1.0764269882727353     
+ # x_param(           5 ) =    83.058740837344999     
+ # x_param(           6 ) =    224.64396895995299     
+ # x_param(           7 ) =    44.562924383908324     
+ # x_param(           8 ) =    73.713845564244508     
+ # x_param(           9 ) =    32539.269216302288     
+ # x_param(          10 ) =    25770.077841951752     
+ # x_param(          11 ) =    3.5907677556250226     
+ # x_param(          12 ) =    4.2441624583949791     
+ # x_param(          13 ) =    124.74984259327324     
+ # x_param(          14 ) =    184.47003357793133     
+ # x_param(          15 ) =    0.0000000000000000     
+ # x_param(          16 ) =    0.0000000000000000     
+ # x_param(          17 ) =    0.0000000000000000     
+ # x_param(          18 ) =    0.0000000000000000     
+ # x_param(          19 ) =   -1.2999999999999999E-003
+ # x_param(          20 ) =    0.0000000000000000     
+ # x_param(          21 ) =    0.0000000000000000     
+ # x_param(          22 ) =    1.0000000000000000     
+ # x_param(          23 ) =    0.0000000000000000     
+ # x_param(          24 ) =    90.000000000000000     
+ # T0 : 
+ # T0 =    2458773.1886517801     
+ # nbod : 
+ # nbod =            2
+ # file_SKY(           1 ) : 
+ # file_SKY(           1 ) = -Sky1.dat
+ # file_SKY(           2 ) : 
+ # file_SKY(           2 ) = -Sky2.dat
+ # file_RV(           1 ) : 
+ # file_RV(           1 ) = -RV1.dat_gamma
+ # file_RV(           2 ) : 
+ # file_RV(           2 ) = -RV2.dat_gamma
+ # file_TTV : 
+ # file_TTV = -Omc12.dat
+ # file_ECL : 
+ # file_ECL = -Ecl12.dat
+ # file_VIS : 
+ # file_VIS = -Vis.dat_fake
+ # file_CLO : 
+ # file_CLO = -Clo.dat_fake
+ # nband : 
+ # nband =            0
+ # file_SYN : 
+ # file_SYN = -Spectra.dat
+ # file_synth(           1 ) : 
+ # file_synth(           1 ) = -1.syn
+ # file_synth(           2 ) : 
+ # file_synth(           2 ) = -2.syn
+ # file_SED : 
+ # file_SED = -Sed.dat
+ # file_absol(           1 ) : 
+ # file_absol(           1 ) = -1.abs
+ # file_absol(           2 ) : 
+ # file_absol(           2 ) = -2.abs
+ # file_AO : 
+ # file_AO = -AO1.dat
+ # file_SKY2 : 
+ # file_SKY2 = -Sky_differential.dat_minusuv
+ # file_SKY3 : 
+ # file_SKY3 = -Sky_angularvelocity.dat
+ # file_OCC : 
+ # file_OCC = -Occ.dat
+ # geometry : 
+ # geometry =            0
+ # m_min() : 
+ # m_min(           1 ) =    0.0000000000000000       M_S
+ # m_min(           2 ) =    0.0000000000000000       M_S
+ # m_max() : 
+ # m_max(           1 ) =    100.00000000000000       M_S
+ # m_max(           2 ) =    100.00000000000000       M_S
+ # use_hec88() : 
+ # use_hec88(           1 ) =  F
+ # use_hec88(           2 ) =  F
+ # lightcurve_timestep : 
+ # lightcurve_timestep =    5.0000000000000003E-002
+ # approx_eclipse_duration : 
+ # approx_eclipse_duration =   0.66725500000000004     
+ # lambda1 lambda2 : 
+ # lambda1 =    4.2500000000000001E-007  m =    425.00000000000000       nm
+ # lambda2 =    4.5499999999999998E-007  m =    454.99999999999994       nm
+ # lambda3 lambda4 : 
+ # lambda3 =    3.2099999999999998E-007  m =    320.99999999999994       nm
+ # lambda4 =    2.7000000000000000E-006  m =    2700.0000000000000       nm
+ # pyterpol_Delta(4) : 
+ # pyterpol_Delta(           1 ) =    10.000000000000000     
+ # pyterpol_Delta(           2 ) =    1.0000000000000000E-003
+ # pyterpol_Delta(           3 ) =   0.10000000000000001     
+ # pyterpol_Delta(           4 ) =    1.0000000000000000E-004
+ # silh_factor : 
+ # silh_factor =   0.20000000000000001     
+ # use_planck : 
+ # use_planck =  T
+ # use_filters : 
+ # use_filters =  F
+ # use_limbdark : 
+ # use_limbdark =  F
+ # use_pyterpol : 
+ # use_pyterpol =  F
+ # use_vardist : 
+ # use_vardist =  F
+ # use_varpole : 
+ # use_varpole =  F
+ # use_multipole : 
+ # use_multipole =  F
+ # use_bruteforce : 
+ # use_bruteforce =  F
+ # use_ppn =  F
+ # w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC w_SYN w_SED w_AO w_SKY2 w_SKY3 w_OCC : 
+ # w_SKY =    1.0000000000000000     
+ # w_RV =    1.0000000000000000     
+ # w_TTV =    1.0000000000000000     
+ # w_ECL =    1.0000000000000000     
+ # w_VIS =    1.0000000000000000     
+ # w_CLO =    1.0000000000000000     
+ # w_T3 =    1.0000000000000000     
+ # w_LC =    1.0000000000000000     
+ # w_SYN =    1.0000000000000000     
+ # w_SED =    1.0000000000000000     
+ # w_AO =    1.0000000000000000     
+ # w_SKY2 =    1.0000000000000000     
+ # w_SKY3 =    1.0000000000000000     
+ # w_OCC =    1.0000000000000000     
+ # eps_BS : 
+ # eps_BS =    1.0000000000000000E-008
+ # debug : 
+ # debug =  T
+ # debug_swift : 
+ # debug_swift =  T
+# x() array:   39.569000000000003       0.39000000000000001        5.7332741495762942       -1.0764269882727353        83.058740837344999        224.64396895995299        44.562924383908324        73.713845564244508        32539.269216302288        25770.077841951752        3.5907677556250226        4.2441624583949791        124.74984259327324        184.47003357793133        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000       -1.2999999999999999E-003   0.0000000000000000        0.0000000000000000        1.0000000000000000        0.0000000000000000        90.000000000000000     
+ # m(           1 ) =    28.466906474820146       M_S
+ # m(           2 ) =    11.102093525179857       M_S
+ # R_star(           1 ) =    14.152073425633176       R_S
+ # R_star(           2 ) =    4.1653838159099186       R_S
+ # Lum(           1 ) =   0.94278699559987034     
+ # Lum(           2 ) =    5.7213004400129663E-002
+  ERROR in orbel_el2xv: e<0, setting e=0!!1
+ # a =   0.21362621529221479       au =    45.936505582025461       R_S
+ # barycentric coordinates:
+   1.5414132631464203E-002  -2.4685114497554863E-002   5.2398934341228984E-002   4.3325993417098564E-002  -3.8516053584087745E-002  -3.0890051906355302E-002
+  -3.9523417003754363E-002   6.3295165378345800E-002 -0.13435624190058712      -0.11109229081307323        9.8759111754071149E-002   7.9205261298346930E-002
+ # 1-centric coordinates:
+   0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000     
+  -5.4937549635218567E-002   8.7980279875900666E-002 -0.18675517624181609      -0.15441828423017179       0.13727516533815889       0.11009531320470223     
+ # Spin axes data file called spin.in
+  
+ # Tides parameters file called tides.in
+  
+ # k_L(           1 ) =    0.0000000000000000     
+ # Omega_rot(           1 ) =    1.0959157269051796       rad/day
+ # R_body(           1 ) =    6.5806632386657155E-002  AU =    14.150542019522163       R_S
+ # Warning: k_L, R_body will be overwritten by C20!
+ # k_L(           2 ) =    0.0000000000000000     
+ # Omega_rot(           2 ) =    1.0959157269051796       rad/day
+ # R_body(           2 ) =    1.9377481755714319E-002  AU =    4.1667816733979581       R_S
+ # Warning: k_L, R_body will be overwritten by C20!
+ # external_mass =    0.0000000000000000       M_S
+ # use_tides2 =  F
+ # use_oblateness =  T
+ # dt =    2.0000000000000000       day
+ # dtout =    2.0000000000000000       day
+ # dt =    2.0000000000000000       day
+ # dtout =    2.0000000000000000       day
+ # NOUT =         5002
+ # m_SKY(           1 ) =            0
+ # m_SKY(           2 ) =            0
+ # m_RV(           1 ) =            0
+ # m_RV(           2 ) =            0
+ # m_TTV =            0
+ # nmin =         3585
+ # m_ECL =            0
+ # m_VIS =            0
+ # n_limb =            0
+ # n_avail =            0
+ # m_CLO =            0
+ # m_SYN =            0
+ # n_synth(           1 ) =            0
+ # n_synth(           2 ) =            0
+ # m_SED =            0
+ # m_AO =            0
+ # m_SKY2 =            0
+ # m_SKY3 =            0
+ # m_OCC =            0
+# chi^2 value:            0           0           0           0           0           0           0           0           0           0           0           0           0           0           0   0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        1.2462992809889848E-011   1.2462992809889848E-011
+ # chi2_SKY  =    0.0000000000000000     
+ # chi2_RV   =    0.0000000000000000     
+ # chi2_TTV  =    0.0000000000000000     
+ # chi2_ECL  =    0.0000000000000000     
+ # chi2_VIS  =    0.0000000000000000     
+ # chi2_CLO  =    0.0000000000000000     
+ # chi2_T3   =    0.0000000000000000     
+ # chi2_LC   =    0.0000000000000000     
+ # chi2_SYN  =    0.0000000000000000     
+ # chi2_SED  =    0.0000000000000000     
+ # chi2_AO   =    0.0000000000000000     
+ # chi2_SKY2 =    0.0000000000000000     
+ # chi2_SKY3 =    0.0000000000000000     
+ # chi2_OCC  =    0.0000000000000000     
+ # chi2_MASS =    1.2462992809889848E-011
+ # chi2 =    1.2462992809889848E-011
+ # lns =    0.0000000000000000     
+ # n_fit =            0
+ # nparam =           24
+ # nu =          -24
+ # probp =    0.0000000000000000     
+ # probq =    1.0000000000000000     

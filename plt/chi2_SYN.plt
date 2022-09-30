@@ -6,6 +6,7 @@ set colors classic
 nm = 1.e-9  # m
 ang = 1.e-10/nm  # nm
 shift = 0.25
+shift = 0.125
 
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
@@ -40,16 +41,12 @@ call "line.plt" "CII"    4267
 call "line.plt" "CII"    6578
 call "line.plt" "CII"    6582
 call "line.plt" "OII"    4649.143
-call "line.plt" "MgII"   4384.637
-#call "line.plt" "MgII"   4390.514  # weak
-call "line.plt" "MgII"   4390.572
 call "line.plt" "MgII"   4481
 call "line.plt" "SiII"   4128
 call "line.plt" "SiII"   4130
 call "line.plt" "SiII"   6347
 call "line.plt" "SiII"   6371
 call "line.plt" "NeI"    6402
-call "line.plt" "FeIII"  4382.511
 call "line.plt" "FeIII"  5243.306
 
 # from Walker etal. (2017), Tab. 5
@@ -71,6 +68,20 @@ call "line.plt" "HeII"   6683
 # from Greenstein & Aller (1950)
 call "line.plt" "DIB"    4430
 call "line.plt" "DIB"    6284
+
+# Harmanec (pers. comm.)
+#call "line.plt" "MgII"   4384.637  # weak
+#call "line.plt" "MgII"   4390.514  # weak
+#call "line.plt" "MgII"   4390.572  # weak
+#call "line.plt" "FeIII"  4382.511  # weak
+
+# unknown l.
+call "line.plt" "?" 4318
+call "line.plt" "?" 4350
+call "line.plt" "?" 4367
+call "line.plt" "?" 4379
+call "line.plt" "?" 4415
+call "line.plt" "?" 4447
 
 p \
   "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lc 'orange',\

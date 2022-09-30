@@ -14,7 +14,7 @@ obj = \
 
 inc = \
   common.inc \
-  const.inc \
+  ../misc/const.inc \
 
 all : xvpl2el
 

@@ -41,7 +41,7 @@ p \
   "chi2_SKY.dat" u (-$2*sin($3*deg)):($2*cos($3*deg)) t "residua" w l lt 1 lw 3
 pa -1
 
-set term png small
+set term png small size 1024,1024
 set out "chi2_SKY_ARCSEC.png"
 rep
 

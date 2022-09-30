@@ -2,18 +2,19 @@
 # nparam number of paramters
 # x() vector:
 #
-#  m1 m2
+#  msum q1
 #  P1 loge1 i1 Omega1 varpi1 lambda1
 #  T1 T2
 #  logg1 logg2
 #  vrot1 vrot2
-#  Delta_t1 Delta_t2
 #  metal1 metal2
+#  Delta_t(1) Delta_t(2)
+#  C20(1) C20(2)
 #  gamma
 #  d_pc
 #  pole_l pole_b
 #  ...
-22
+24
 
    1.0      3.e-6
    365.2422 0.016   1.0   0.0   0.0   0.0
@@ -22,6 +23,7 @@
    10.0     1.0
    0.0      0.0
    0.0      0.0
+  -2.0e-7   0.0
    0.0
    1.0
    0.0      90.0

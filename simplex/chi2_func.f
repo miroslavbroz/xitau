@@ -68,16 +68,16 @@ c
 c create m(), elmts() arrays for easy manipulation
 c
       j = 0
-      do i = 1, nbod
-        j = j+1
-        m(i) = x_param(j)*GM_S
-      enddo
-c      j = j+1
-c      msum = x_param(j)*GM_S
-c      do i = 2, nbod
+c      do i = 1, nbod
 c        j = j+1
-c        q(i) = x_param(j)
+c        m(i) = x_param(j)*GM_S
 c      enddo
+      j = j+1
+      msum = x_param(j)*GM_S
+      do i = 2, nbod
+        j = j+1
+        q(i) = x_param(j)
+      enddo
 
       do i = 2, nbod
         do k = 1, 6
@@ -109,6 +109,11 @@ c        R_star(i) = x_param(j)
         Delta_t_(i) = x_param(j)/day
       enddo
 
+      do i = 1, nbod
+        j = j+1
+        C20(i) = x_param(j)
+      enddo
+
       do i = 1, nband
         j = j+1
         zero(i) = x_param(j)
@@ -132,23 +137,23 @@ c        R_star(i) = x_param(j)
 c
 c convert ratios to masses
 c
-c      m(1) = msum
-c      do i = 2, nbod
-c        m(1) = m(1)/(1.d0+q(i))
-c        m(i) = 0.d0
-c      enddo
-c      do i = 2, nbod
-c        do j = 1, i-1
-c          m(i) = m(i)+m(j)
-c        enddo
-c        m(i) = q(i)*m(i)
-c      enddo
-c
-c      if (debug) then
-c        do i = 1, nbod
-c          write(*,*) '# m(', i, ') = ', m(i)/GM_S, ' M_S'
-c        enddo
-c      endif
+      m(1) = msum
+      do i = 2, nbod
+        m(1) = m(1)/(1.d0+q(i))
+        m(i) = 0.d0
+      enddo
+      do i = 2, nbod
+        do j = 1, i-1
+          m(i) = m(i)+m(j)
+        enddo
+        m(i) = q(i)*m(i)
+      enddo
+
+      if (debug) then
+        do i = 1, nbod
+          write(*,*) '# m(', i, ') = ', m(i)/GM_S, ' M_S'
+        enddo
+      endif
 c
 c constrain orbital inclinations and nodes by pole (equator) of 1
 c

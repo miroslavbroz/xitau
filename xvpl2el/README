@@ -1,0 +1,7 @@
+
+xvpl2el.f MUST correpond to ../simplex/chi2_func.f subroutine!!
+Especially the masses must be interpreted correctly;
+in this version, we should: mtot, q1, q2 -> m1, m2, m3. 
+
+Otherwise, "strange" oscillations of the elements will occur...
+

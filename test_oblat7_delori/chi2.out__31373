@@ -1,0 +1,406 @@
+----------------------------------------------------
+Xitau version Sep 20th 2022
+Author: Miroslav Broz, Charles University
+        e-mail: miroslav.broz@email.cz
+        http://sirrah.troja.mff.cuni.cz/~mira/xitau/
+----------------------------------------------------
+ 
+************* SWIFT: Version 2.0 *************
+  
+ Authors:
+    Martin Duncan: Queen's University 
+    Hal Levison: Southwest Research Institute 
+  
+  Please address any comments or questions to:
+    Hal Levison 
+    Geophysical, Astrophysical, & Planetary Sciences
+    Southwest Research Institute
+    1050 Walnut St.
+    Suite 429 
+    Boulder, Co  80302 
+    (303) 546-0290 
+    Fax: (303) 546-9687 
+    (D)  swri::levison 
+    (I)  hal@gort.space.swri.edu 
+  
+ # nparam : 
+ # nparam =           35
+ # x_param() : 
+ # x_param(           1 ) =    65.758729661184105     
+ # x_param(           2 ) =   0.39034627817113049     
+ # x_param(           3 ) =   0.66182067341591400     
+ # x_param(           4 ) =    5.7332741495762942     
+ # x_param(           5 ) =   -1.0764269882727353     
+ # x_param(           6 ) =    83.058740837344999     
+ # x_param(           7 ) =    224.64396895995299     
+ # x_param(           8 ) =    44.562924383908324     
+ # x_param(           9 ) =    73.713845564244508     
+ # x_param(          10 ) =    41137.769101814833     
+ # x_param(          11 ) =   -1.3597384377131504E-002
+ # x_param(          12 ) =   -129.66206338955604     
+ # x_param(          13 ) =    66.784892255548868     
+ # x_param(          14 ) =    174.86466214915896     
+ # x_param(          15 ) =    1.4010051565129262     
+ # x_param(          16 ) =    32539.269216302288     
+ # x_param(          17 ) =    25770.077841951752     
+ # x_param(          18 ) =    29660.884872565057     
+ # x_param(          19 ) =    3.5907677556250226     
+ # x_param(          20 ) =    4.2441624583949791     
+ # x_param(          21 ) =    3.8338203150266450     
+ # x_param(          22 ) =    124.74984259327324     
+ # x_param(          23 ) =    184.47003357793133     
+ # x_param(          24 ) =    250.38951456700664     
+ # x_param(          25 ) =    0.0000000000000000     
+ # x_param(          26 ) =    0.0000000000000000     
+ # x_param(          27 ) =    0.0000000000000000     
+ # x_param(          28 ) =    0.0000000000000000     
+ # x_param(          29 ) =    0.0000000000000000     
+ # x_param(          30 ) =    0.0000000000000000     
+ # x_param(          31 ) =    2.2228576157872850     
+ # x_param(          32 ) =    21.350113234258369     
+ # x_param(          33 ) =    382.00000000000000     
+ # x_param(          34 ) =    0.0000000000000000     
+ # x_param(          35 ) =    0.0000000000000000     
+ # T0 : 
+ # T0 =    2458773.1886517801     
+ # nbod : 
+ # nbod =            3
+ # file_SKY(           1 ) : 
+ # file_SKY(           1 ) = -Sky1.dat
+ # file_SKY(           2 ) : 
+ # file_SKY(           2 ) = -Sky2.dat
+ # file_SKY(           3 ) : 
+ # file_SKY(           3 ) = Sky3.dat
+ # file_RV(           1 ) : 
+ # file_RV(           1 ) = RV1.dat_gamma
+ # file_RV(           2 ) : 
+ # file_RV(           2 ) = RV2.dat_gamma
+ # file_RV(           3 ) : 
+ # file_RV(           3 ) = -RV3.dat
+ # file_TTV : 
+ # file_TTV = Omc12.dat
+ # file_ECL : 
+ # file_ECL = Ecl12.dat
+ # file_VIS : 
+ # file_VIS = -Vis.dat_fake
+ # file_CLO : 
+ # file_CLO = -Clo.dat_fake
+ # nband : 
+ # nband =            1
+ # iband_LC(           1 ) file_LC(           1 ) : 
+ # iband_LC(           1 ) =           54
+ # file_LC(           1 ) = Lc_most.dat
+ # file_SYN : 
+ # file_SYN = Spectra.dat_norect_no4471
+ # file_synth(           1 ) : 
+ # file_synth(           1 ) = 1.syn
+ # file_synth(           2 ) : 
+ # file_synth(           2 ) = 2.syn
+ # file_synth(           3 ) : 
+ # file_synth(           3 ) = 3.syn
+ # file_SED : 
+ # file_SED = Sed.dat
+ # file_absol(           1 ) : 
+ # file_absol(           1 ) = 1.abs
+ # file_absol(           2 ) : 
+ # file_absol(           2 ) = 2.abs
+ # file_absol(           3 ) : 
+ # file_absol(           3 ) = 3.abs
+ # file_AO : 
+ # file_AO = -AO1.dat
+ # file_SKY2 : 
+ # file_SKY2 = -Sky_differential.dat_minusuv
+ # file_SKY3 : 
+ # file_SKY3 = -Sky_angularvelocity.dat
+ # file_OCC : 
+ # file_OCC = -Occ.dat
+ # geometry : 
+ # geometry =            4
+ # m_min() : 
+ # m_min(           1 ) =    5.0000000000000000       M_S
+ # m_min(           2 ) =    2.0000000000000000       M_S
+ # m_min(           3 ) =    2.0000000000000000       M_S
+ # m_max() : 
+ # m_max(           1 ) =    100.00000000000000       M_S
+ # m_max(           2 ) =    100.00000000000000       M_S
+ # m_max(           3 ) =    100.00000000000000       M_S
+ # use_hec88() : 
+ # use_hec88(           1 ) =  F
+ # use_hec88(           2 ) =  F
+ # use_hec88(           3 ) =  F
+ # lightcurve_timestep : 
+ # lightcurve_timestep =    5.0000000000000003E-002
+ # approx_eclipse_duration : 
+ # approx_eclipse_duration =   0.66725500000000004     
+ # lambda1 lambda2 : 
+ # lambda1 =    4.2500000000000001E-007  m =    425.00000000000000       nm
+ # lambda2 =    4.5499999999999998E-007  m =    454.99999999999994       nm
+ # lambda3 lambda4 : 
+ # lambda3 =    3.2099999999999998E-007  m =    320.99999999999994       nm
+ # lambda4 =    2.7000000000000000E-006  m =    2700.0000000000000       nm
+ # pyterpol_Delta(4) : 
+ # pyterpol_Delta(           1 ) =    10.000000000000000     
+ # pyterpol_Delta(           2 ) =    1.0000000000000000E-003
+ # pyterpol_Delta(           3 ) =   0.10000000000000001     
+ # pyterpol_Delta(           4 ) =    1.0000000000000000E-004
+ # silh_factor : 
+ # silh_factor =   0.20000000000000001     
+ # use_planck : 
+ # use_planck =  T
+ # use_filters : 
+ # use_filters =  F
+ # use_limbdark : 
+ # use_limbdark =  F
+ # use_pyterpol : 
+ # use_pyterpol =  T
+ # use_vardist : 
+ # use_vardist =  F
+ # use_varpole : 
+ # use_varpole =  F
+ # use_multipole : 
+ # use_multipole =  F
+ # use_bruteforce : 
+ # use_bruteforce =  F
+ # use_ppn =  T
+ # w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC w_SYN w_SED w_AO w_SKY2 w_SKY3 w_OCC : 
+ # w_SKY =    10.000000000000000     
+ # w_RV =    1.0000000000000000     
+ # w_TTV =    1.0000000000000000     
+ # w_ECL =    10.000000000000000     
+ # w_VIS =    1.0000000000000000     
+ # w_CLO =    1.0000000000000000     
+ # w_T3 =    1.0000000000000000     
+ # w_LC =    1.0000000000000000     
+ # w_SYN =   0.10000000000000001     
+ # w_SED =   0.10000000000000001     
+ # w_AO =    1.0000000000000000     
+ # w_SKY2 =    1.0000000000000000     
+ # w_SKY3 =    1.0000000000000000     
+ # w_OCC =    1.0000000000000000     
+ # eps_BS : 
+ # eps_BS =    1.0000000000000000E-008
+ # debug : 
+ # debug =  T
+ # debug_swift : 
+ # debug_swift =  T
+# x() array:   65.758729661184105       0.39034627817113049       0.66182067341591400        5.7332741495762942       -1.0764269882727353        83.058740837344999        224.64396895995299        44.562924383908324        73.713845564244508        41137.769101814833       -1.3597384377131504E-002  -129.66206338955604        66.784892255548868        174.86466214915896        1.4010051565129262        32539.269216302288        25770.077841951752        29660.884872565057        3.5907677556250226        4.2441624583949791        3.8338203150266450        124.74984259327324        184.47003357793133        250.38951456700664        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        2.2228576157872850        21.350113234258369        382.00000000000000        0.0000000000000000        0.0000000000000000     
+ # m(           1 ) =    28.460745959037670       M_S
+ # m(           2 ) =    11.109546259084397       M_S
+ # m(           3 ) =    26.188437443062046       M_S
+ # R_star(           1 ) =    14.150542019522163       R_S
+ # R_star(           2 ) =    4.1667816733979581       R_S
+ # R_star(           3 ) =    10.260734483004070       R_S
+ # Lum(           1 ) =   0.65834324265808974     
+ # Lum(           2 ) =    3.9987015307772850E-002
+ # Lum(           3 ) =   0.30166974203413749     
+ # a =   0.21362854075458657       au =    45.937005631212195       R_S
+ # a =    94.133891147936595       au =    20241.813535197489       R_S
+ # barycentric coordinates:
+   39.138646014904815        31.778405671071422        53.819046194720720       -2.0410226401390990E-002   3.1013214314906990E-002  -5.9933158997726610E-002
+   39.013776398443731        31.885652943560210        53.929774680394694        5.4000963288829924E-002  -8.1131269744065246E-002  0.15249002704743356     
+  -59.084869741280492       -48.062136960319151       -81.366653993479119       -7.2688304360765568E-004   7.1300093145249910E-004   4.4475365320055532E-004
+ # 1-centric coordinates:
+   0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000     
+ -0.12486961646108341       0.10724727248878807       0.11072848567397386        7.4411189690220911E-002 -0.11214448405897223       0.21242318604516017     
+  -98.223515756185307       -79.840542631390576       -135.18570018819983        1.9683343357783333E-002  -3.0300213383454490E-002   6.0377912650927165E-002
+ # Spin axes data file called spin.in
+  
+ # Tides parameters file called tides.in
+  
+ # k_L(           1 ) =    3.4880000000000001E-002
+ # Omega_rot(           1 ) =    1.0960466382266132       rad/day
+ # R_body(           1 ) =    6.4808911748768627E-002  AU =    13.936000000000000       R_S
+ # k_L(           2 ) =    3.4880000000000001E-002
+ # Omega_rot(           2 ) =    1.0960466382266132       rad/day
+ # R_body(           2 ) =    1.6351042889542946E-002  AU =    3.5160000000000000       R_S
+ # k_L(           3 ) =    3.4880000000000001E-002
+ # Omega_rot(           3 ) =    2.6053996825362979       rad/day
+ # R_body(           3 ) =    4.6300052050139241E-002  AU =    9.9559999999999995       R_S
+ # external_mass =    0.0000000000000000       M_S
+ # use_tides2 =  F
+ # use_oblateness =  T
+ # dt =   0.20000000000000001       day
+ # dtout =   0.20000000000000001       day
+ # dt =   0.20000000000000001       day
+ # dtout =   0.20000000000000001       day
+ # NOUT =       257331
+ # m_SKY(           1 ) =            0
+ # m_SKY(           2 ) =            0
+ # m_SKY(           3 ) =           39
+ # m_RV(           1 ) =           65
+ # m_RV(           2 ) =           40
+ # m_RV(           3 ) =            0
+ # m_TTV =            6
+ # nmin =        18178
+ # m_ECL =            1
+ # m_VIS =            0
+ # n_limb =            0
+ # n_avail =            0
+ # m_CLO =            0
+ # m_LC(           1 ) =        22136
+ # m_BIN(           1 ) =          303
+ # iband =           54
+ # lambda_eff =    5.2499999999999995E-007
+ # band_eff =    2.9999999999999999E-007
+ # parameters read from lc.in file:
+
+ # mpage  =            1
+ # nref   =            2
+ # mref   =            1
+ # ifsmv1 =            0
+ # ifsmv2 =            0
+ # icor1  =            1
+ # icor2  =            1
+ # ld     =            2
+
+ # jdphs  =    2.0000000000000000     
+ # hjd0   =    56224.725019999998       day
+ # period =    5.7332824583985511       day
+ # dpdt   =    0.0000000000000000     
+ # pshift =    0.0000000000000000     
+ # stdev  =    0.0000000000000000       mag
+ # noise  =            0
+ # seed   =    0.0000000000000000     
+
+ # hjdst  =    0.0000000000000000       day
+ # hjdsp  =    1.0000000000000000       day
+ # hjdin  =   0.10000000000000001       day
+ # phstrt =  -0.20000000000000001     
+ # phstop =    1.2000000000000000     
+ # phin   =    1.0000000000000000E-003
+ # phn    =   0.25000000000000000     
+
+ # MODE   =            0
+ # IPB    =            0
+ # IFAT1  =            1
+ # IFAT2  =            1
+ # N1     =           40
+ # N2     =           40
+ # perr0  =    1.5708000000000000       rad
+ # dperdt =    0.0000000000000000       rad/day
+ # the    =    0.0000000000000000     
+ # VUNIT  =    100.00000000000000     
+
+ # E      =    6.5000000000000002E-002
+ # A      =    45.937050013335750       R_S
+ # F1     =    1.0000000000000000     
+ # F2     =    1.0000000000000000     
+ # VGA    =    0.0000000000000000       km/s
+ # XINCL  =    83.058744112410807       deg
+ # GR1    =   0.32000000000000001     
+ # GR2    =   0.32000000000000001     
+ # abunin =    0.0000000000000000       [M/H]
+
+ # tavh =    3.2539269216302289       10^4 K
+ # tavc =    2.5770077841951751       10^4 K
+ # alb1 =   0.59999999999999998     
+ # alb2 =   0.59999999999999998     
+ # poth =    3.6826748914029310     
+ # potc =    5.6128503929732050     
+ # rm    =   0.39034627817113049     
+ # xbol1 =   0.50000000000000000     
+ # xbol2 =   0.50000000000000000     
+ # ybol1 =   0.50000000000000000     
+ # ybol2 =   0.50000000000000000     
+
+ # iband  =           54
+ # HLUM   =   0.66078321251724370     
+ # CLUM   =    3.9155347507634823E-002
+ # XH     =   0.50000000000000000     
+ # xc     =   0.50000000000000000     
+ # yh     =   0.50000000000000000     
+ # yc     =   0.50000000000000000     
+ # EL3    =    2.3878130701656314E-002  (flux)
+ # Lum3   =    0.0000000000000000       (luminosity)
+ # opsf   =    0.0000000000000000     
+ # ZERO   =    0.0000000000000000       mag
+ # FACTOR =    1.0000000000000000     
+ # wl     =   0.55000000000000004       mu
+ # varperiod =    5.7332824583985511     
+ # distnorm =   0.92314700361450075     
+
+ # tav1 =    32539.269216302288       K
+ # tav2 =    25770.077841951752       K
+ # sms1 =    28.460668300110918       M_S
+ # sms2 =    11.109515945211372       M_S
+ # sr1 =    14.271894798715634       R_S
+ # sr2 =    4.2346414219692585       R_S
+ # bolm1 =   -8.4922061941958074       mag
+ # bolm2 =   -4.8409605750254610       mag
+ # xlg1 =    3.5833494496815526       (cgs)
+ # xlg2 =    4.2301294813945782       (cgs)
+
+ # m_SYN =        76794
+1.syn: {'teff': 32539.269216302288, 'logg': 3.5907677556250226, 'z': 1.0} vrot=124.74984259327324
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G32500g350v10.vis.1 loaded:False teff:32500.0 logg:3.5 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G32500g375v10.vis.1 loaded:False teff:32500.0 logg:3.75 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G32500g325v10.vis.1 loaded:False teff:32500.0 logg:3.25 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G32500g400v10.vis.1 loaded:False teff:32500.0 logg:4.0 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G35000g350v10.vis.1 loaded:False teff:35000.0 logg:3.5 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G35000g375v10.vis.1 loaded:False teff:35000.0 logg:3.75 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G35000g325v10.vis.1 loaded:False teff:35000.0 logg:3.25 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G35000g400v10.vis.1 loaded:False teff:35000.0 logg:4.0 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG30000g350v2.vis.1 loaded:False teff:30000.0 logg:3.5 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG30000g375v2.vis.1 loaded:False teff:30000.0 logg:3.75 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG30000g325v2.vis.1 loaded:False teff:30000.0 logg:3.25 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG30000g400v2.vis.1 loaded:False teff:30000.0 logg:4.0 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG29000g350v2.vis.1 loaded:False teff:29000.0 logg:3.5 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG29000g375v2.vis.1 loaded:False teff:29000.0 logg:3.75 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG29000g325v2.vis.1 loaded:False teff:29000.0 logg:3.25 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG29000g400v2.vis.1 loaded:False teff:29000.0 logg:4.0 z:1.0 family:BSTAR 
+2.syn: {'teff': 25770.077841951752, 'logg': 4.244162458394979, 'z': 1.0} vrot=184.47003357793133
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG26000g425v2.vis.1 loaded:False teff:26000.0 logg:4.25 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG26000g400v2.vis.1 loaded:False teff:26000.0 logg:4.0 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG26000g450v2.vis.1 loaded:False teff:26000.0 logg:4.5 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG26000g375v2.vis.1 loaded:False teff:26000.0 logg:3.75 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG25000g425v2.vis.1 loaded:False teff:25000.0 logg:4.25 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG25000g400v2.vis.1 loaded:False teff:25000.0 logg:4.0 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG25000g450v2.vis.1 loaded:False teff:25000.0 logg:4.5 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG25000g375v2.vis.1 loaded:False teff:25000.0 logg:3.75 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG27000g425v2.vis.1 loaded:False teff:27000.0 logg:4.25 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG27000g400v2.vis.1 loaded:False teff:27000.0 logg:4.0 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG27000g450v2.vis.1 loaded:False teff:27000.0 logg:4.5 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG27000g375v2.vis.1 loaded:False teff:27000.0 logg:3.75 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G27500g425v10.vis.1 loaded:False teff:27500.0 logg:4.25 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G27500g400v10.vis.1 loaded:False teff:27500.0 logg:4.0 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G27500g450v10.vis.1 loaded:False teff:27500.0 logg:4.5 z:1.0 family:OSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G27500g375v10.vis.1 loaded:False teff:27500.0 logg:3.75 z:1.0 family:OSTAR 
+3.syn: {'teff': 29660.884872565057, 'logg': 3.833820315026645, 'z': 1.0} vrot=250.38951456700664
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG30000g425v2.vis.1 loaded:False teff:30000.0 logg:4.25 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG29000g425v2.vis.1 loaded:False teff:29000.0 logg:4.25 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG28000g375v2.vis.1 loaded:False teff:28000.0 logg:3.75 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG28000g400v2.vis.1 loaded:False teff:28000.0 logg:4.0 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG28000g350v2.vis.1 loaded:False teff:28000.0 logg:3.5 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/BSTAR_Z_1.0/BG28000g425v2.vis.1 loaded:False teff:28000.0 logg:4.25 z:1.0 family:BSTAR 
+Loading spectrum: filename:/home/mira/a/deltaori/xitau_20220928_qratios/pyterpol/pyterpol3/grids/OSTAR_Z_1.0/G27500g350v10.vis.1 loaded:False teff:27500.0 logg:3.5 z:1.0 family:OSTAR 
+ # n_synth(           1 ) =        30001
+ # n_synth(           2 ) =        30001
+ # n_synth(           3 ) =        30001
+ # m_SED =           31
+ # m_AO =            0
+ # m_SKY2 =            0
+ # m_SKY3 =            0
+ # m_OCC =            0
+# chi^2 value:           78         105           6           1           0           0           0       22136       76794          31           0           0           0           0       99151   53.428453004701758        6505.9707007107945        33.945847693843298        2.1452062073710478        0.0000000000000000        0.0000000000000000        0.0000000000000000        13920.418099150789        81791.291375830930        21784.182597059076        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        1.1675880105705240E-009   31373.618636966326     
+ # chi2_SKY  =    53.428453004701758     
+ # chi2_RV   =    6505.9707007107945     
+ # chi2_TTV  =    33.945847693843298     
+ # chi2_ECL  =    2.1452062073710478     
+ # chi2_VIS  =    0.0000000000000000     
+ # chi2_CLO  =    0.0000000000000000     
+ # chi2_T3   =    0.0000000000000000     
+ # chi2_LC   =    13920.418099150789     
+ # chi2_SYN  =    81791.291375830930     
+ # chi2_SED  =    21784.182597059076     
+ # chi2_AO   =    0.0000000000000000     
+ # chi2_SKY2 =    0.0000000000000000     
+ # chi2_SKY3 =    0.0000000000000000     
+ # chi2_OCC  =    0.0000000000000000     
+ # chi2_MASS =    1.1675880105705240E-009
+ # chi2 =    31373.618636966326     
+ # lns =   -456417.02286170429     
+ # n_fit =        99151
+ # nparam =           35
+ # nu =        99116
+ # probp =    0.0000000000000000     
+ # probq =    1.0000000000000000     

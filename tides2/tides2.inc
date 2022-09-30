@@ -3,7 +3,7 @@ c Common block for tides and oblatness computations.
 c Miroslav Broz (miroslav.broz@email.cz), Sep 2nd 2020
 
       real*8 k_L(NPLMAX)
-      real*8 omega_rot(NPLMAX)
+      real*8 Omega_rot(NPLMAX)
       real*8 R_body(NPLMAX)
 
       real*8 koef1(NPLMAX)
@@ -14,7 +14,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Sep 2nd 2020
 
       logical use_tides2, use_oblat
 
-      common /tides2/ k_L, omega_rot, R_body,
+      common /tides2/ k_L, Omega_rot, R_body,
      :  koef1, koef2, R_body5,
      :  external_mass,
      :  use_tides2, use_oblat

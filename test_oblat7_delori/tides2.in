@@ -1,0 +1,9 @@
+2			! nbod;  k_L []  P_rot [d]  R [R_S]
+
+0.0   5.7332741495762942       14.150542019522163     # delta Ori Aa1
+0.0   5.7332741495762942       4.1667816733979581     # delta Ori Aa2
+
+0.0			! external_mass [M_S]
+F			! use_tides2 [T|F]
+T			! use_oblat [T|F]
+

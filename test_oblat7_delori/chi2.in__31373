@@ -1,0 +1,94 @@
+# chi2.in
+# nparam number of paramters
+# x() vector:
+#
+#  mtot q1=m2/m1 q2=m3/(m1+m2)
+#  P1 loge1 i1 Omega1 varpi1 lambda1
+#  P2 loge2 i2 Omega2 varpi2 lambda2
+#  T1 T2 T3
+#  logg1 logg2 logg3
+#  vrot1 vrot2 vrot3
+#  metal1 metal2 metal3
+#  Delta_t1 Delta_t2 Delta_t3
+#  zero
+#  gamma
+#  d_pc
+#  pole_l pole_b
+#  ...
+#
+# 1 = Aa1
+# 2 = Aa2      
+# 3 = Ab          
+35
+
+   65.758729661184105       0.39034627817113049       0.66182067341591400
+   5.7332741495762942       -1.0764269882727353        83.058740837344999        224.64396895995299        44.562924383908324        73.713845564244508
+   41137.769101814833       -1.3597384377131504E-002  -129.66206338955604        66.784892255548868        174.86466214915896        1.4010051565129262
+   32539.269216302288        25770.077841951752        29660.884872565057
+   3.5907677556250226        4.2441624583949791        3.8338203150266450
+   124.74984259327324        184.47003357793133        250.38951456700664
+   0.0000000000000000        0.0000000000000000        0.0000000000000000
+   0.0000000000000000        0.0000000000000000        0.0000000000000000
+   2.2228576157872850
+   21.350113234258369
+   382.00000000000000
+   0.0000000000000000        0.0000000000000000               78         105           6           1           0           0           0       22136       76794          31           0           0           0           0       99151   53.424627247026478        6172.7712436653583        38.812882646109784        2.1449326672609779        0.0000000000000000        0.0000000000000000        0.0000000000000000        13935.548749641621        81833.115649637475        21784.182597059076        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        1.1675880105705240E-009   31064.558299766788     
+
+2458773.18865178		! fixed (dependent) parameters: T0 [JD]; 2019 WDS interferometry
+
+3			! nbod number of bodies; a list of 2*nbod+4 files with observational data (or '-' if no data)...
+-Sky1.dat
+-Sky2.dat
+Sky3.dat
+RV1.dat_gamma
+RV2.dat_gamma
+-RV3.dat
+Omc12.dat
+Ecl12.dat
+-Vis.dat_fake
+-Clo.dat_fake
+
+1			! nband number of photometric bands; a list of bands and lightcurve files: 7 .. V, 54 .. MOST, 59 .. TESS
+  54  Lc_most.dat
+Spectra.dat_norect_no4471
+1.syn
+2.syn
+3.syn
+Sed.dat
+1.abs
+2.abs
+3.abs
+-AO1.dat
+-Sky_differential.dat_minusuv
+-Sky_angularvelocity.dat
+-Occ.dat
+
+4                     ! geometry of the system: 0 ... hierarchical ((1+2)+3)+4, 1 ... two pairs ((1+2)+(3+4))+5, 4 ... hierarchical w. P,loge,varpi,lambda, 5 ... twopairs w. dtto
+
+5.0 2.0 2.0 		! m_min(nbod) [M_S] minimum masses
+100.0 100.0 100.0	! m_max(nbod) [M_S] maximum masses
+F F F			! use_hec88(nbod) use Harmanec (1988) to constrain components (i.e. use only T_eff as a parameter!)
+
+0.05			! lightcurve_timestep [day] timestep of synthetic lightcurve; set to 0.0 if all observed points should be computed
+0.667255		! approx_eclipse_duration [day] approximate eclipse duration for eclipse detection
+425.e-9 455.e-9		! lambda1 lambda2 [metres] wavelength range for rectified synthetic spectra
+321.e-9 2700.e-9	! lambda3 lambda4 [metres] range for absolute spectra (to fit SED)
+10.0 0.001 0.1 0.0001	! pyterpol_Delta's for T_eff [K], log_g [cgs], v_rot [km/s], metal [1]
+
+0.2			! silh_factor [] signal = factor*max(signal) to compute a silhouette
+
+T			! use_planck [T|F] use Planck approximation; otherwise use absolute synthetic spectra (*.abs files)
+F			! use_filters [T|F] use filter transmissions to compute SED; otherwise use effective wavelengths and bandpasses
+F			! use_limbdark [T|F] use linear limb-darkening coefficients for visibility |V|^2 calculation
+T			! use_pyterpol [T|F] use Pyterpol (Nemravova et al. 2016) to generate synthetic spectra on-the-fly
+F			! use_vardist [T|F] use variable distance/geometry (in solar system)
+F			! use_varpole [T|F] use variable pole of body 1 (in solar system)
+F			! use_multipole [T|F] use multipole expansion of body 1
+F			! use_bruteforce [T|F] use shape of body 1 and brute-force algorithm
+T                       ! use_ppn [T|F] use parametrized post-Newtonian approximation
+
+10.0 1.0 1.0 10.0  1.0 1.0 1.0  1.0 0.1 0.1  1.0 1.0 1.0 1.0	! w_SKY w_RV w_TTV w_ECL  w_VIS w_CLO w_T3  w_LC w_SYN w_SED  w_AO w_SKY2 w_SKY3 w_OCC weights for chi^2 computation
+1.e-8			! eps_BS for Bulirsch-Stoer integrator
+T			! debugging output?
+T			! debug integrator?
+

@@ -29,6 +29,7 @@
       real*8 silh_factor
       real*8 pole_l_, pole_b_
       real*8 Delta_t_(NBODMAX)
+      real*8 C20(NBODMAX)
       real*8 eps_BS
 
       character*80 file_SKY(NBODMAX), file_TTV, file_RV(NBODMAX),       &
@@ -59,6 +60,7 @@
      &  silh_factor,                                                    &
      &  pole_l_, pole_b_,                                               &
      &  Delta_t_,                                                       &
+     &  C20,                                                            &
      &  eps_BS,                                                         &
      &  file_SKY, file_TTV, file_RV, file_ECL, file_VIS, file_CLO,      &
      &  file_LC, file_SYN, file_synth, file_SED, file_absol, file_AO,   &

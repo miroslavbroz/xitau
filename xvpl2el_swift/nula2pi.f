@@ -6,7 +6,7 @@ c
 c  <0,2pi) truncation
 c
       double precision x,frac,y,pi2
-      parameter(pi2=6.283185307d0)
+      parameter(pi2=8.0d0*atan(1.d0))
       y=frac(x/pi2)*pi2
       if (y.lt.0d0) y=y+pi2
       nula2pi=y

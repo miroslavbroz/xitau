@@ -5,7 +5,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jul 30th 2015
       program xvpl2el
 
       include 'common.inc'
-      include 'const.inc'
+      include '../misc/const.inc'
 
 c input parameters
       integer npl, id(NPLMAX)

@@ -52,6 +52,7 @@ c functions
         write(*,*) "# Omega_rot(", i, ") = ", Omega_rot(i), " rad/day"
         write(*,*) "# R_body(", i, ") = ", R_body(i), " AU = ",
      :    R_body(i)*AU/R_S, " R_S"
+        write(*,*) "# Warning: k_L, R_body will be overwritten by C20!"
 
         koef1(i) = 3.0d0*k_L(i)
         koef2(i) = 0.5d0*k_L(i)*Omega_rot(i)**2

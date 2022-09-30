@@ -1,20 +1,25 @@
 c getacc_oblat.f
 c Oblatness accelerations (to be added).
-c Miroslav Broz (miroslav.broz@email.cz), May 26th 2016
+c Miroslav Broz (miroslav.broz@email.cz), Sep 29th 2022
 
 c Reference: Fabrycky (2010), Eq. (4)
 c
-c f_R = -1/2 k_L,star Omega_star^2 R_star^5 / r^4 \hat r
+c f_R = -1/2 k_L,star Omega_star^2 R_star^5 / r^5 \vec r
 c
 c Warning: This only holds for a spin PERPENDICULAR to the orbit!
+c Warning: This only includes the radial component of acceleration!
+c Hence, the factor 1/6 wrt. the multipole model.
 
-      subroutine getacc_oblat(nbod,mass,xb,yb,zb,irij5,axb,ayb,azb)
+      subroutine getacc_oblat(nbod_,mass,xb,yb,zb,irij5,axb,ayb,azb)
 
       include "../swift.inc"
       include "tides2.inc"
+      include '../simplex/simplex.inc'
+      include '../simplex/dependent.inc'
+      include '../misc/const.inc'
 
 c input
-      integer nbod
+      integer nbod_
       real*8 mass(nbod)
       real*8 xb(nbod),yb(nbod),zb(nbod)
       real*8 irij5(NPLMAX,NPLMAX)
@@ -26,8 +31,19 @@ c internal
       integer i, j
       real*8 xij, yij, zij
       real*8 acc, ax, ay, az, fac
+      real*8 n0
 
       if (.not.use_oblat) return
+
+c n0 = sqrt(mass/R_body^3)
+c k_L = -C20 (n0/Omega_rot)^2
+c koef2 = 0.5 k_L Omega_rot^2
+c acc = koef2 R_body^5 / rij^5
+
+      do i = 1, nbod
+        R_body(i) = R_star(i)*R_S/AU
+        koef2(i) = -0.5d0*C20(i)*mass(i)*R_body(i)**2
+      enddo
 
       do i = 1, nbod  ! "planet"
         do j = 1, nbod  ! "star"
@@ -37,7 +53,7 @@ c internal
             yij = yb(i) - yb(j)
             zij = zb(i) - zb(j)
 
-            acc = koef2(j) * R_body5(j) * irij5(i,j)
+            acc = koef2(j) * irij5(i,j)
             ax = acc*xij
             ay = acc*yij
             az = acc*zij

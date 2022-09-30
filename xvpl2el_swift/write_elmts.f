@@ -5,7 +5,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jul 30th 2015
       subroutine write_elmts(t,id,elmts,m1,m2,d)
 
       include 'common.inc'
-      include 'const.inc'
+      include '../misc/const.inc'
       integer id
       real*8 t, elmts(6), m1, m2, d
 
