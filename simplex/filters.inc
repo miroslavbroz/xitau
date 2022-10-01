@@ -1,6 +1,6 @@
 c filters.inc
 c Effective wavelengths and bandpasses for photometric filters.
-c Miroslav Broz (miroslav.broz@email.cz), Sep 19th 2022
+c Miroslav Broz (miroslav.broz@email.cz), Oct 1st 2022
 
 c photometric bands
       integer WDBANDS
@@ -140,8 +140,8 @@ c MOST passband from Walker etal. (2003)
      :   525.d-9,  ! MOST
      :   550.d-9,
      :   550.d-9,
-     :   427.d-9,
-     :   623.d-9,
+     :   426.d-9,  ! BRITE blue
+     :   621.d-9,  ! BRITE red
      :   797.d-9,  ! TESS
      :  3600.d-9,
      :  4500.d-9,
@@ -211,8 +211,8 @@ c MOST passband from Walker etal. (2003)
      :   300.d-9,  ! MOST
      :     0.d-9,
      :     0.d-9,
-     :     0.d-9,
-     :     0.d-9,
+     :    61.d-9,  ! BRITE blue
+     :   145.d-9,  ! BRITE red
      :   400.d-9,  ! TESS
      :     0.d-9,
      :     0.d-9,
@@ -286,8 +286,8 @@ c converted from erg s^-1 cm^-2 cm^-1 (i.e. divided by 10);
      :  0.0d0,         ! MOST
      :  0.0d0,
      :  0.0d0,
-     :  0.0d0,
-     :  0.0d0,
+     :  0.0d0,         ! BRITE
+     :  0.0d0,         ! BRITE
      :  0.0d0,         ! TESS
      :  0.0d0,
      :  0.0d0,
