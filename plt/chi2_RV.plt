@@ -14,10 +14,14 @@ g(vb_z) = vb_z*AU/86400. / 1.e3
 set xl "JD - 2400000"
 set yl "vzb [km/s]"
 
+#tmp=60.0; set yr [-tmp:tmp]
 set zeroaxis
 
 load "T0.plt"
 set arrow from T0-2400000,graph 0 to T0-2400000,graph 1 nohead lt 0
+
+gamma = x_param21
+set arrow from graph 0,first gamma rto graph 1,first 0 nohead lt 0
 
 p \
   "<awk '($2==-1)' out_JDATE_barycentric.dat" u ($1-2400000):(g($8)) t "1" w l lt 1,\

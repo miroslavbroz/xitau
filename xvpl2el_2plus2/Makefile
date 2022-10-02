@@ -5,7 +5,9 @@ f77 = gfortran
 opt = -O3
 
 obj = \
+  barycenters.o \
   e1.o \
+  jacobian.o \
   jdate2bessel.o \
   nula2pi.o \
   read_chi2.o \

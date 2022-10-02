@@ -1,7 +1,7 @@
 #!/usr/bin/gnuplot
 
 f(x) = x>720. ? x-720. : x>360. ? x-360. : x
-g(x) = x>180. ? x-360. : x
+g(x) = f(x)>180. ? f(x)-360. : f(x)
 
 au = 1.49597870700e11  # m
 km = 1.e3  # m
@@ -23,11 +23,11 @@ set arrow from (T0-2400000),graph 0 rto 0,graph 1 nohead lt 0 front
 `awk '!/^#/{ print "set arrow from " $1 "-2400000,graph 0 rto 0,graph 1 nohead lt 0 front;"; }' Sky2.dat`
 
 set xl "JD - 2400000"
-set yl "a [km]"
+set yl "a [R_S]"
 #set xr [T0-2400000:T0-2400000+20.]
 set ytics format "%.5f"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):($3*au/km) not w l lt 2
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):($3*au/R_S) not w l lt 2
 
 set origin 0,0.33
 set yl "e []"
@@ -60,7 +60,7 @@ p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):(g($6)) not w d lt 2
 set origin 0,0.33
 set yl "varpi [deg]"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):(g(f($6+$7))) not w d lt 2
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):(g($6+$7)) not w d lt 2
 
 set origin 0,0.66
 set yl "lambda [deg]"
@@ -81,13 +81,13 @@ set size 1.0,0.33
 set origin 0,0
 
 set xl "JD - 2400000"
-set yl "a [km]"
+set yl "a [R_S]"
 
 set noarrow
 set arrow from (T0-2400000),graph 0 rto 0,graph 1 nohead lt 0 front
 `awk '!/^#/{ print "set arrow from " $1 "-2400000,graph 0 rto 0,graph 1 nohead lt 0 front;"; }' Sky3.dat`
  
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):($3*au/km) not w l lt 3
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):($3*au/R_S) not w l lt 3
 
 set origin 0,0.33
 set yl "e []"
@@ -115,12 +115,12 @@ set origin 0,0
 set xl "JD - 2400000"
 set yl "Omega [deg]"
 
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):6 not w d lt 3
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):(g($6)) not w d lt 3
 
 set origin 0,0.33
 set yl "varpi [deg]"
 
-p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):(f($6+$7)) not w d lt 3
+p "<awk '($2==-3)' xvpl2el.out" u ($1-2400000):(g($6+$7)) not w d lt 3
 
 set origin 0,0.66
 set yl "lambda [deg]"
@@ -171,12 +171,12 @@ set origin 0,0
 set xl "JD - 2400000"
 set yl "Omega [deg]"
 
-p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):6 not w d lt 4
+p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):(g($6)) not w d lt 4
 
 set origin 0,0.33
 set yl "varpi [deg]"
 
-p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):(f($6+$7)) not w d lt 4
+p "<awk '($2==-4)' xvpl2el.out" u ($1-2400000):(g($6+$7)) not w d lt 4
 
 set origin 0,0.66
 set yl "lambda [deg]"
