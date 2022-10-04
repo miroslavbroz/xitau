@@ -12,7 +12,7 @@ set xl "x [arcsec]"
 set yl "y [arcsec]"
 set size ratio -1
 
-tmp=0.05
+tmp=0.5
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zeroaxis
@@ -21,7 +21,7 @@ set ang rad
 load "T0.plt"
 
 #d_pc = x_param32
-d_pc = x_param33
+d_pc = x_param36
 f(x) = x*arcsec*(d_pc*pc)/au
 g(x) = x*au/(d_pc*pc)/arcsec
 

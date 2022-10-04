@@ -180,7 +180,8 @@ c                                        start again with half the step size
          h0=h0/2.d0
       enddo      ! idiv
 
-      write(*,*) ' ERROR (b_int): lack of convergence !!!! '
+      write(*,*) ' ERROR (bs_int): lack of convergence !!!! '
+      stop
 
 c
       end      !  bs_int
