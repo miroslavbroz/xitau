@@ -7,13 +7,14 @@ nm = 1.e-9  # m
 km = 1.e3  # m
 c = 299792458.  # m/s
 ang = 1.e-10/nm  # nm
-shift = 0.125
 shift = 0.25
+shift = 0.50
 
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
 #set xr [500:504]
+set yr [2.6:3.1]
 set ytics shift
 set mytics 1
 set grid ytics mytics
@@ -95,7 +96,7 @@ p \
 pa -1
 
 set term png small size 2048,1536
-set out "synthetic2.png"
+set out "synthetic2_ZOOM.png"
 rep
 
 q

@@ -22,6 +22,7 @@ load "T0.plt"
 
 #d_pc = x_param32
 d_pc = x_param36
+#d_pc = x_param48
 f(x) = x*arcsec*(d_pc*pc)/au
 g(x) = x*au/(d_pc*pc)/arcsec
 

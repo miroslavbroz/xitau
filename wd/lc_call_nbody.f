@@ -546,12 +546,14 @@ c
         endif
         if (KFF1.eq.1) then
           write(6,*) ' Primary component exceeds critical lobe'
+          stop
         endif
         if (kfo2.ne.0) then
           write(6,*) ' Secondary star exceeds outer contact surface'
         endif
         if (KFF2.eq.1) then
           write(6,*) ' Secondary component exceeds critical lobe'
+          stop
         endif
 c
 c compute absolute dimensions (mass, luminosity, radius, log g)
