@@ -6,8 +6,8 @@ au = 1.49597870700e11  # m, from IAU 2012
 
 load "T0.plt"
 
-P1 = x_param1
-jd0 = 2457733.83207
+P1 = x_param5
+jd0 = T0
 
 # Mayer et al., Eq. (1)
 #P1 = 5.998570
@@ -22,11 +22,11 @@ jd0 = 2457733.83207
 #jd0 = 2435589.3105465779
 
 # chi2.in, mean (adjusted)
-#P1 = 5.998680
-#jd0 = 2435589.3105465779
+P1 = 2.083218
+jd0 = 2459818.523000     
 
 frac(x) = x-int(x)
-g(x) = x < 0.5 ? x : x-1.0
+g(x) = x > 0.5 ? x-1.0 : x < -0.5 ? x+1.0 : x
 OMC(jd) = g(frac((jd-jd0)/P1))*P1
 OMCs(jd) = g(frac((jd-jd0-0.5*P1)/P1))*P1
 
@@ -49,12 +49,19 @@ set arrow from graph 0,first 0 rto graph 1,first 0 nohead lt 0 front
 set arrow from T0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
 set label "{/=12{/Helvetica-Oblique T}_0}" at T0-2400000,graph 1.035 center
 
-offset = 0.152
+P2 = x_param11
+P3 = x_param17
+set arrow from T0-2400000-P1,graph 0 rto 0,graph 1 nohead lc 'red'
+set arrow from T0-2400000-P2,graph 0 rto 0,graph 1 nohead lc 'green'
+set arrow from T0-2400000-P3,graph 0 rto 0,graph 1 nohead lc 'blue'
+
+offset = 0.0
 
 p \
   "<awk '($2==1)' minima.dat" u ($1-2400000):(OMC($1)) t "synthetic primary minima (no LITE)" w lp lc 'green' pt 1 ps 1,\
   "<awk '($2==1)' minima.dat" u ($1-2400000):($3+$4+offset) t "LITE" w lp lc '#00aa00' pt 1 ps 1,\
-  "Omc12.dat" u ($1-2400000):3 w p t "Mayer et al., Fig. 9" pt 4 lc 'gray',\
+  "<awk '($2==1)' minima.dat2" u ($1-2400000):($3+$4+offset) t "LITE" w l lc 'gray',\
+  "Omc12.dat" u ($1-2400000):3 w p t "Zasche et al., Tab. 5" pt 4 lc 'gray',\
 
 pa -1
 

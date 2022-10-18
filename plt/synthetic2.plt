@@ -9,6 +9,7 @@ c = 299792458.  # m/s
 ang = 1.e-10/nm  # nm
 shift = 0.125
 shift = 0.25
+shift = 0.5
 
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"

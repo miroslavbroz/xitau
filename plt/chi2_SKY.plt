@@ -21,7 +21,7 @@ set ang rad
 
 load "T0.plt"
 
-d_pc = x_param18
+d_pc = x_param22
 f(x) = x*arcsec*(d_pc*pc)/au
 g(x) = x/au
 

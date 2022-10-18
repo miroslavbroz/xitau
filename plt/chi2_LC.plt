@@ -42,7 +42,7 @@ p \
 
 pa -1
 
-set term png small size 1536,1024
+set term png small size 2048,1024
 set out "chi2_LC.png"
 rep
 

@@ -86,8 +86,8 @@ call "line.plt" "?" 4415
 call "line.plt" "?" 4447
 
 p \
-  "synthetic.dat" u ($2/nm):($3+shift*($4-1)) t "synthetic" w l lc 'gray',\
   "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lc 'gray' pt 1 ps 0,\
+  "synthetic.dat" u ($2/nm):($3+shift*($4-1)) t "synthetic" w l dt 2 lc 'black',\
   "<awk '($6==1) || (NF==0)' synthetic2.dat" u ($2/nm):(1+($3-1)*$4/$5+shift*($7-1)) t "1" w l lc 'orange',\
   "<awk '($6==2) || (NF==0)' synthetic2.dat" u ($2/nm):(1+($3-1)*$4/$5+shift*($7-1)) t "2" w l lt 2,\
   "<awk '($6==3) || (NF==0)' synthetic2.dat" u ($2/nm):(1+($3-1)*$4/$5+shift*($7-1)) t "3" w l lt 3,\
@@ -95,7 +95,7 @@ p \
 
 pa -1
 
-set term png small size 2048,1536
+set term png small size 2048,1024
 set out "synthetic2_ZOOM.png"
 rep
 

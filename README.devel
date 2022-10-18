@@ -1,4 +1,6 @@
 
+if no minima are detected, chi^2_TTV = 0; a penalty is missing
+
 model for *mutual* interactions due to C20?
 test of dotomega on LC
 a narrow range of lambda, for synthetic spectra

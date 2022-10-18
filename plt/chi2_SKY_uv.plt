@@ -24,7 +24,7 @@ set key left
 
 load "T0.plt"
 
-d_pc = x_param20
+d_pc = x_param22
 
 set cbl "ibod"
 set cbr [2:3]

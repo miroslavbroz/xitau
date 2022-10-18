@@ -33,7 +33,8 @@ load "T0.plt"
 
 #d_pc = x_param26
 #d_pc = x_param36
-d_pc = x_param29
+#d_pc = x_param29
+d_pc = x_param22
 f(x) = x*arcsec*(d_pc*pc)/au
 
 sp \

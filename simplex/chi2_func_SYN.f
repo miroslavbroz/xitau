@@ -187,7 +187,7 @@ c compute monochromatic "luminosity" at given lambda
 
 c a very detailed output of all intensities and luminosities...
 
-      if (debug_swift) then
+      if (debug) then
         open(unit=iub,file="synthetic2.dat",status="unknown")
         write(iub,*) "# t & lambda [m] & Int_lambda []",
      :    " & Lum_lambda [W m^-1] & Lum_tot [W m^-1] & ibod & dataset"

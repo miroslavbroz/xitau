@@ -3,15 +3,18 @@
 set colors classic
 #set term x11
 
+c = 3.e8  # m s^-1
+km = 1.e3  # m
 nm = 1.e-9  # m
 ang = 1.e-10/nm  # nm
 shift = 0.25
-shift = 0.125
+#shift = 0.125
 
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
 #tmp=5.; set xr [501.6-tmp:501.6+tmp]
+#set yr [0.60:1.05]
 set ytics shift
 set mytics 1
 set grid ytics mytics
@@ -23,6 +26,11 @@ set tmargin 2.0
 call "line.plt" "Halpha" 6562.81
 call "line.plt" "Hbeta"  4861
 call "line.plt" "Hgamma" 4341
+#call "line.plt" "+19"    (4341*(1+19.*km/c))
+call "line.plt" "-100"   (4341*(1-100.*km/c))
+call "line.plt" "+100"   (4341*(1+100.*km/c))
+call "line.plt" "-300"   (4341*(1-300.*km/c))
+call "line.plt" "+300"   (4341*(1+300.*km/c))
 call "line.plt" "Hdelta" 4102
 call "line.plt" "Hepsil" 3970
 call "line.plt" "HeI"    4009.258
@@ -76,19 +84,25 @@ call "line.plt" "DIB"    6284
 #call "line.plt" "FeIII"  4382.511  # weak
 
 # unknown l.
+call "line.plt" "?" 4304
 call "line.plt" "?" 4318
 call "line.plt" "?" 4350
 call "line.plt" "?" 4367
 call "line.plt" "?" 4379
 call "line.plt" "?" 4415
+call "line.plt" "?" 4437
 call "line.plt" "?" 4447
+
+x0=430.0
+#x0=475.0
+#x0=635.0
 
 p \
   "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lc 'orange',\
   "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lt 3 pt 1 ps 0,\
   "chi2_SYN.dat"  u ($2/nm):($3+shift*($5-1))   t "residua"  w l lt 1 lw 1,\
   "<awk '($NF+0>100)' chi2_SYN.dat" u ($2/nm):($3+shift*($5-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5,\
-  "<awk '($5!=l){ print; }{ l=$5; }' Spectra.dat" u (430.0):(1.0-0.05+shift*($5-1)):5 w labels left not
+  "<awk '($5!=l){ print; }{ l=$5; }' Spectra.dat" u (x0):(1.0-0.05+shift*($5-1)):5 w labels left not
 pa -1
 
 set term png small size 2048,1536

@@ -81,7 +81,7 @@ c find ALL synthetic minima of the eclipsing binary
      :    " -"
       endif
 
-      if ((m_TTV.gt.0).or.(debug_swift)) then
+      if ((m_TTV.gt.0).or.(debug)) then
         do i = 1, NOUT-1
           A(1) = rh(i,2,1)
           A(2) = rh(i,2,2)

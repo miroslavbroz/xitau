@@ -10,6 +10,7 @@ shift = 0.5
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
+set yr [:2.5]
 set ytics shift
 set grid ytics
 
