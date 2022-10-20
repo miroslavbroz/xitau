@@ -38,7 +38,6 @@ p \
   "<awk '($4==2) || (NF==0)' chi2_RV.dat" u ($1-2400000):2 not         w l lt 1 lw 3,\
   "<awk '($4==3) || (NF==0)' chi2_RV.dat" u ($1-2400000):2 not         w l lt 1 lw 3,\
   "<awk '($NF+0>100)' chi2_RV.dat" u ($1-2400000):2 t "chi^2 > 100" w p lt 1 pt 6 ps 1.5,\
-  "RV1.dat_GAMMA12_rejected" u ($1-2400000):2 t "systematics?" w p pt 2 ps 2 lc 'black'
 
 pa -1
 
@@ -48,4 +47,5 @@ rep
 
 q
 
+  "RV1.dat_GAMMA12_rejected" u ($1-2400000):2 t "systematics?" w p pt 2 ps 2 lc 'black'
 

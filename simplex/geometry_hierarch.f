@@ -23,7 +23,7 @@ c output
 c internal
       integer i, k, ialpha
       real*8 rj(NBODMAX,3), vj(NBODMAX,3)
-      real*8 msum, P, a, n, tmp
+      real*8 msum, tmp
 
 c convert to radians
       do i = 2, nbod
@@ -37,11 +37,8 @@ c compute Jacobian coordinates
       ialpha = -1
       do i = 2, nbod
         msum = msum + m(i)
-        P = elmts(i,1)
-        n = 2.d0*pi_/P
-        a = (msum / n**2)**(1.d0/3.d0)
         call orbel_el2xv(msum,ialpha,
-     :    a,elmts(i,2),elmts(i,3),
+     :    elmts(i,1),elmts(i,2),elmts(i,3),
      :    elmts(i,4),elmts(i,5),elmts(i,6),
      :    rj(i,1),rj(i,2),rj(i,3),
      :    vj(i,1),vj(i,2),vj(i,3))
@@ -55,10 +52,6 @@ c adjust coordinates (the elements were standard stellar-astronomy)
         vj(i,1) = -vj(i,2)
         vj(i,2) = tmp
         vj(i,3) = -vj(i,3)
-
-        if (debug_swift) then
-          write(*,*) '# a = ', a, ' au = ', a*au/R_S, ' R_S'
-        endif
       enddo
 
 c convert to barycentric frame

@@ -14,6 +14,11 @@ set logscale x
 set zeroaxis
 set key spacing 0.7
 
+set arrow from 436.,graph 0 rto 0,graph 1 nohead lt 0
+set arrow from 444.,graph 0 rto 0,graph 1 nohead lt 0
+set arrow from 545.,graph 0 rto 0,graph 1 nohead lt 0
+set arrow from 553.,graph 0 rto 0,graph 1 nohead lt 0
+
 p \
   "johnson.U" u ($1*ang):2 t "U"  w lp lt  4,\
   "johnson.B" u ($1*ang):2 t "B"  w lp lt  3,\
