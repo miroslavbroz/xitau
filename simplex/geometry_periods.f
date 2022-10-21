@@ -56,6 +56,10 @@ c adjust coordinates (the elements were standard stellar-astronomy)
         vj(i,1) = -vj(i,2)
         vj(i,2) = tmp
         vj(i,3) = -vj(i,3)
+
+        if (debug_swift) then
+          write(*,*) '# a = ', a, ' au = ', a*au/R_S, ' R_S'
+        endif
       enddo
 
 c convert to barycentric frame
