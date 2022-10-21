@@ -42,6 +42,10 @@ c output
 
         call geometry_equatorial(nbod, m, elmts, r, v)
 
+      else if (geometry.eq.7) then
+
+        call geometry_periods(nbod, m, elmts, r, v)
+
       else
         write(*,*) "geometries.f: Error unknown geometry = ",
      :    geometry

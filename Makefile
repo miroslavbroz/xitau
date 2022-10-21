@@ -113,6 +113,7 @@ obj = \
   simplex/geometry_hierarch2.o \
   simplex/geometry_twopairs.o \
   simplex/geometry_twopairs2.o \
+  simplex/geometry_periods.o \
   simplex/hec88.o \
   simplex/lum_func.o \
   simplex/luminosities.o \
