@@ -25,6 +25,7 @@ set key left
 load "T0.plt"
 
 d_pc = x_param22
+d_pc = x_param35
 
 set cbl "ibod"
 set cbr [2:3]
@@ -66,7 +67,7 @@ p \
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)) t "observ." w p lt 7 pt 1 ps 0.5,\
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left,\
   "<./ellipses.awk arcsec_AU.dat" u (f($1,$3)):(f($2,$3)) not w l lt 7,\
-  "<awk '(FNR>1){ print $0,ARGIND; }' nodes001.dat" u 2:3 t "shape" w d lc 'black',\
+  "<awk '(FNR>1){ print $0,ARGIND; }' nodes0001.dat" u 2:3 t "shape" w d lc 'black',\
   sprintf("<./ellipse2.awk %.6e %.6e %.6e %.6e", x3, y3, a3, b3) u 1:2 t "PSF (3-s.)" w l lc 'black' dt 2,\
   sprintf("<./ellipse2.awk %.6e %.6e %.6e %.6e", x1, y1, a1, a1) u 1:2 t "10 km" w l lc 'black',\
   "box.dat" u (x2-a2/2+a2*$1):(y2-b2/2+b2*$2) t "1 pixel" w l lc 'black',\

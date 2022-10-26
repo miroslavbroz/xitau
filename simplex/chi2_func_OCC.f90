@@ -37,11 +37,12 @@ double precision, parameter :: duration = 0.05d0  ! d
 
 ! internal variables
 integer, save :: i1st = 0
-integer, parameter :: iu = 21, iua=22, iub = 23, iuc = 24
+integer, parameter :: iu = 21, iua=22, iub = 23, iuc = 24, iud = 25
 integer :: i, j, k, l_, maxk
 integer :: j1, j2, j3, j4
 integer :: N_e, N_s, N_o
 integer :: last
+integer :: step
 double precision, dimension(OUTMAX) :: t_e, vardist, ecl, ecb
 double precision, dimension(OUTMAX) :: t_s, vardist_s, ecl_s, ecb_s
 double precision, dimension(OUTMAX) :: t_o, vardist_o, ecl_o, ecb_o
@@ -127,7 +128,7 @@ do i = 1, m_OCC
 
   maxk = OCCMAX2
   if (dataset(i).eq.last) maxk = 0
-  if (dataset(i).gt.0) maxk = 0  ! dbg
+!  if (dataset(i).gt.0) maxk = 0  ! dbg
   last = dataset(i)
 
   do j = 1, nbod
@@ -225,28 +226,40 @@ do i = 1, m_OCC
 
       call occult(t_nolite, r_EA, r_AO, e, axes, lambda, phi, has_solution)
 
+      if (debug) then
+        if (has_solution) then
+          write(iua,*) t_nolite, lambda/deg, phi/deg, j
+          call to_kml(lambda, phi, j)
+        else
+          write(iua,*) t_nolite, ' ?', ' ?', j
+        endif
+      endif
+
+! some variables to output
       if (has_solution) then
-        write(iua,*) t_nolite, lambda/deg, phi/deg, j
-        call to_kml(lambda, phi, j)
-      else
-        write(iua,*) t_nolite, ' ?', ' ?', j
+        if (t(i).ge.2459875.d0) then
+          open(unit=iud, file="variables2.tmp", access="append")
+          write(iud,*) t_nolite, lambda/deg, phi/deg, j
+          close(iud)
+        endif
       endif
 !
 ! fundamental plane
 !
       call fplane(r_EA, r_AO, r_EO, u, v, has_solution)
 
-      if (has_solution) then
+      if (debug.and.has_solution) then
         write(iub,*) t_nolite, u, v, j
       endif
 !
 ! shadow path
 !
-      if ((j.eq.1).and.(mod(k,10).eq.0)) then
+      step = 3
+      if ((j.eq.1).and.(mod(k,step).eq.0)) then
 
         call spath(t_nolite, lite, r_EA, r_AO, e, axes, l, b, silh_, has_solution)
 
-        if (has_solution) then
+        if (debug.and.has_solution) then
           do l_ = 1, size(silh_, 1)
             if (silh_(l_, 1).ne.NAN) then
               write(iuc,*) t_nolite, silh_(l_, :)/deg, j, dataset(i)
@@ -296,21 +309,25 @@ do i = 1, m_OCC
             chi_ = chi_/sigma_**2
             chi2 = chi2 + chi_
             n = n + 1
-         
-            write(iu,*) t(i), sigma(i), lambda_/deg, phi_/deg, alt(i), sigma_/deg, j, dataset(i), chi_
-            write(iu,*) t(i), sigma(i), lambda_obs(i)/deg, phi_obs(i)/deg, alt(i), sigma_/deg, j, dataset(i), chi_
-            write(iu,*)
-            write(iu,*)
+
+            if (debug) then
+              write(iu,*) t(i), sigma(i), lambda_/deg, phi_/deg, alt(i), sigma_/deg, j, dataset(i), chi_
+              write(iu,*) t(i), sigma(i), lambda_obs(i)/deg, phi_obs(i)/deg, alt(i), sigma_/deg, j, dataset(i), chi_
+              write(iu,*)
+              write(iu,*)
+            endif
           endif
         endif
       endif
 
     enddo  ! k, maxk
 
-    write(iua,*)
-    write(iua,*)
-    write(iub,*)
-    write(iub,*)
+    if (debug) then
+      write(iua,*)
+      write(iua,*)
+      write(iub,*)
+      write(iub,*)
+    endif
 
   enddo  ! j, nbod
 enddo  ! i, m_OCC
@@ -320,9 +337,9 @@ if (debug) then
   close(iua)
   close(iub)
   close(iuc)
-endif
 
-call write_kml('occultation.kml')
+  call write_kml('occultation.kml')
+endif
 
 return
 end subroutine chi2_func_OCC
