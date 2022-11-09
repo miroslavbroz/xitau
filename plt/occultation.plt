@@ -19,9 +19,9 @@ set hidden3d
 set key
 set nocolorbox
 set palette defined (\
-  0.0 '#00ff00',\
-  0.5 '#ff0000',\
-  1.0 '#ffaa00' \
+  0.0 '#ff6600',\
+  0.5 '#00ff00',\
+  1.0 '#0066ff' \
   )
 
 set parametric

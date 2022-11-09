@@ -6,7 +6,7 @@ f77 = gfortran
 f90 = gfortran
 cc = gcc
 
-opt = -O3 -pg -mcmodel=large
+opt = -O3 -pg -mcmodel=large -Jmod 
 
 lib = -L.
 
