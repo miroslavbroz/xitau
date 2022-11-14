@@ -13,7 +13,7 @@ use const_module
 implicit none
 double precision :: T, lambda
 
-planck = 2.d0*h*clight**2/lambda**5 / (exp(h*clight/(lambda*k_B*T))-1.d0)
+planck = 2.d0*h_P*clight**2/lambda**5 / (exp(h_P*clight/(lambda*k_B*T))-1.d0)
 
 return
 end function planck

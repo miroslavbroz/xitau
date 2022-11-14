@@ -15,7 +15,7 @@ double precision, parameter :: au = 1.49597870700d11  ! m, from IAU 2012
 double precision, parameter :: day = 86400.d0  ! s
 double precision, parameter :: pc = 648000.d0/pi*au  ! m, from IAU 2015
 
-double precision, parameter :: h = 6.62607015d-34  ! J s, from 2018 CODATA, exact
+double precision, parameter :: h_P = 6.62607015d-34  ! J s, from 2018 CODATA, exact
 double precision, parameter :: k_B = 1.380649d-23  ! J K^-1, from 2018 CODATA, exact
 
 !double precision, parameter :: M_S = 1.989d30  ! kg
