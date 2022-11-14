@@ -4,11 +4,11 @@
 
 f77 = gfortran
 f90 = gfortran
-cc = gcc
+cc = g++
 
 opt = -O3 -pg -mcmodel=large -Jmod 
 
-lib = -L.
+lib = -L. -lstdc++
 
 obj = \
   anal/anal_energy.o \
@@ -315,9 +315,32 @@ obj90 = \
   occult/fplane.o \
   occult/spath.o \
   occult/write_kml.o \
+  lc_polygon/polytype.o \
+  lc_polygon/input.o \
+  lc_polygon/boundingbox.o \
+  lc_polygon/clip.o \
+  lc_polygon/hapke.o \
+  lc_polygon/lambert.o \
+  lc_polygon/lommel.o \
+  lc_polygon/planck.o \
+  lc_polygon/read_input.o \
+  lc_polygon/surface.o \
+  lc_polygon/to_poly.o \
+  lc_polygon/to_three.o \
+  lc_polygon/uvw.o \
+  lc_polygon/write1.o \
+  lc_polygon/write_poly.o \
+  lc_polygon/centre_of_p.o \
+  lc_polygon/normal_of_p.o \
+  lc_polygon/shadowing_of_p.o \
+  lc_polygon/rotate_of_p.o \
+  lc_polygon/lc_polygon1.o \
   simplex/chi2_func_OCC.o \
+  simplex/chi2_func_LC2.o \
 
 objc = \
+  lc_polygon/clip_in_c.o \
+  clipper2/clipper.engine.o \
 
 inc = \
   swift.inc \
@@ -358,10 +381,11 @@ $(obj90) : %.o:%.f90 $(inc)
 $(obj) : %.o:%.f $(inc)
 	$(f77) $(opt) -c -o $@ $<
 
-$(objc) : %.o:%.c $(inc)
+$(objc) : %.o:%.cpp $(inc)
 	$(cc) $(opt) -c -o $@ $<
 
 clean : FORCE
+	rm -f mod/*.mod
 	rm -f $(obj) $(obj90) $(objc)
 
 FORCE :

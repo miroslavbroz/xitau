@@ -61,6 +61,8 @@ c functions
 
       save i1st, i2nd, i3rd,
      :  m_OBS, t_OBS, mag_OBS, sigma_mag_OBS, m_BIN, t_BIN
+
+      if (use_polygon) return
 c
 c read lightcurve data
 c
@@ -257,8 +259,8 @@ c
 c
 c approximate values of Kopal potential
 c
-          poth = omega_roche_approx(R_star(1)*R_S/(a*AU), rm, 1)  ! dbg
-          potc = omega_roche_approx(R_star(2)*R_S/(a*AU), 1.d0/rm, 2)  ! dbg
+          poth = omega_roche_approx(R_star(1)*R_S/(a*AU), rm, 1)
+          potc = omega_roche_approx(R_star(2)*R_S/(a*AU), 1.d0/rm, 2)
 
           varperiod = sqrt(4.d0*pi_**2*a**3/mu)
           distnorm = dist/a
@@ -282,11 +284,12 @@ c
             write(iu,*) t_BIN(i,k), mag(i,k), iband, gpha, xincl,
      :        vkm1(i,k), vkm2(i,k)
           endif
-        enddo
+
+        enddo  ! i
         if (debug) then
           write(iu,*)
         endif
-      enddo  ! nband
+      enddo  ! k
 
       if (debug) then
         close(iu)

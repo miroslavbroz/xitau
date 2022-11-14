@@ -24,8 +24,8 @@ set key left
 
 load "T0.plt"
 
-d_pc = x_param22
-d_pc = x_param35
+#d_pc = x_param22
+#d_pc = x_param35
 
 set cbl "ibod"
 set cbr [2:3]
@@ -35,20 +35,20 @@ set palette defined (\
   1.0 '#ffaa00' \
   )
 
-x1 = 0.0
-y1 = 0.0
-a1 = 5.*km/(d_pc*pc)/arcsec
-x2 = x1
-y2 = y1
-a2 = 3.63e-3*arcsec/arcsec
-b2 = a2
-x3 = x1
-y3 = y1
-a3 = 8*a2/2.
-b3 = a3
-print "a1 = ", a1, " arcsec (5 km)"
-print "a2 = ", a2, " arcsec (1 pixel)"
-print "a3 = ", a3, " arcsec (PSF)"
+#x1 = 0.0
+#y1 = 0.0
+#a1 = 5.*km/(d_pc*pc)/arcsec
+#x2 = x1
+#y2 = y1
+#a2 = 3.63e-3*arcsec/arcsec
+#b2 = a2
+#x3 = x1
+#y3 = y1
+#a3 = 8*a2/2.
+#b3 = a3
+#print "a1 = ", a1, " arcsec (5 km)"
+#print "a2 = ", a2, " arcsec (1 pixel)"
+#print "a3 = ", a3, " arcsec (PSF)"
 
 f(x,d) = x/d/arcsec
 

@@ -1,0 +1,90 @@
+
+! see also ../test_polygon25_tinytriangle/test_tinytriangle
+
+!write(*,*) 'phi1 = ', phi1(1)/deg
+!write(*,*) 'phi2 = ', phi2(1)/deg
+!write(*,*) 'phi3 = ', phi3(1)/deg
+
+    if (i.eq.1) then
+      facesall = faces1
+      nodesall = nodes1
+      dataset = [size(nodesall,1)]
+    else
+      facesall(:,1) = [facesall(:,1), faces1(:,1)]
+      write(*,*) 'facesall = ', facesall
+      facesall(:,2) = [facesall(:,2), faces1(:,2)]
+      facesall(:,3) = [facesall(:,3), faces1(:,3)]
+      nodesall(:,1) = [nodesall(:,1), nodes1(:,1)]
+      nodesall(:,2) = [nodesall(:,2), nodes1(:,2)]
+      nodesall(:,3) = [nodesall(:,3), nodes1(:,3)]
+      dataset = [dataset, size(nodesall,1)]
+    endif
+
+  enddo
+integer, save :: idebug = 0
+
+!Phi_lambda_cal = Phi_nu_cal*clight/lambda_eff**2
+
+! i.e., faster than poly_2 = poly_1
+subroutine c1(poly_2, poly_1)
+use polytype_module
+implicit none
+type(polystype), intent(out) :: poly_2
+type(polystype), intent(in) :: poly_1
+integer :: j, k
+poly_2%c = poly_1%c
+do j = 1, poly_1%c
+  k = poly_1%s(j)%c
+  poly_2%s(j)%c = k
+  poly_2%s(j)%p(1:k,:) = poly_1%s(j)%p(1:k,:)
+enddo
+end subroutine c1
+
+double precision, dimension(3) :: hatx, haty, hatz
+
+! old basis
+hatx = (/hatu(1), hatv(1), hatw(1)/)
+haty = (/hatu(2), hatv(2), hatw(2)/)
+hatz = (/hatu(3), hatv(3), hatw(3)/)
+
+      write(*,*) 'i = ', i, ' j = ', j, ' poly_k%c = ', poly_k%c
+
+  src/uvw.o \
+  src/clip.o \
+!do i = 1, size(polys2,1)
+!  counts = notnan(polys2(i,:,:))
+!enddo
+
+integer function notnan(poly)
+use nan_module
+implicit none
+double precision, dimension(:,:) :: poly
+integer :: i
+i = 1
+do while (poly(i,1).ne.NAN) i = i+1
+notnan = i
+return
+end function notnan
+
+use ieee_arithmetic, only: ieee_value, ieee_quiet_nan
+
+use ieee_arithmetic, only: ieee_is_nan
+
+t1 = ieee_value(1.0, ieee_signaling_nan)
+t2 = 1.0
+write(*,*) t1
+write(*,*) isnan(t1)
+write(*,*) .not.isnan(t1)
+write(*,*) ieee_is_nan(t1)
+write(*,*) .not.ieee_is_nan(t1)
+write(*,*) t2
+write(*,*) isnan(t2)
+write(*,*) .not.isnan(t2)
+write(*,*) ieee_is_nan(t2)
+write(*,*) .not.ieee_is_nan(t2)
+stop
+
+polys = ieee_value(1.d0, ieee_quiet_nan)
+
+
+

@@ -136,6 +136,7 @@ c light-time effect
           lite = 0.d0
         endif
         t_interp = t_AO(i) + lite
+!        write(*,*) 'lite = ', lite  ! dbg
 
 c axis rotation
         nodes_ = nodes
@@ -194,12 +195,12 @@ c shadowing (of faces)
         l = interp2(t_s(j-1), t_s(j), ecl_s(j-1), ecl_s(j), t_interp)
         b = interp(t_s(j-1), t_s(j), ecb_s(j-1), ecb_s(j), t_interp)
 
-c 2DO: check - sign!
-        n_ts = (/cos(l)*cos(b), sin(l)*cos(b), sin(b)/)  ! target-sun
+        n_ts = -(/cos(l)*cos(b), sin(l)*cos(b), sin(b)/)  ! target-sun
+
         call uvw(t_interp, ecl(i), ecb(i), n_ts(1), n_ts(2), n_ts(3),
      :    n_ts(1), n_ts(2), n_ts(3))
 
-        n_to = (/0.d0, 0.d0, 1.d0/)  ! target-observer
+        n_to = -(/0.d0, 0.d0, 1.d0/)  ! target-observer
 
         call normal(faces, nodes_, normals)
         call shadowing(normals, n_to, n_ts, masks)

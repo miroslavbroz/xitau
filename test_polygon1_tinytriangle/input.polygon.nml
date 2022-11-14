@@ -1,0 +1,16 @@
+&input
+
+f_node1 = 'sphere.1.node'
+f_face1 = 'sphere.1.face'
+
+f_node2 = 'sphere.1.node'
+f_face2 = 'sphere.1.face'
+
+unit2 = 0.1d0
+
+law = 'Lambert'
+
+debug = .true.
+
+/ ! end-of-input
+

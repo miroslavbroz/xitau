@@ -18,6 +18,12 @@ real*8 u, v, w
 
 call uvw1(t, l, b, hatu, hatv, hatw)
 
+write(*,*) 'l = ', l
+write(*,*) 'b = ', b
+write(*,*) 'hatu = ', hatu
+write(*,*) 'hatv = ', hatv
+write(*,*) 'hatw = ', hatw
+
 do i = 1, size(nodes,1)
   call uvw2(hatu, hatv, hatw, nodes(i,1), nodes(i,2), nodes(i,3), u, v, w)
   nodes(i,:) = (/u, v, w/)

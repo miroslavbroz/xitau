@@ -1,0 +1,1105 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 20.00      0.04     0.04    99140     0.00     0.00  clip_in_c
+ 15.00      0.07     0.03   918155     0.00     0.00  void std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >::_M_realloc_insert<Clipper2Lib::Point<double> >(__gnu_cxx::__normal_iterator<Clipper2Lib::Point<double>*, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > >, Clipper2Lib::Point<double>&&)
+ 10.00      0.09     0.02   595675     0.00     0.00  Clipper2Lib::ClipperBase::PopScanline(long&)
+ 10.00      0.11     0.02   198280     0.00     0.00  Clipper2Lib::ClipperBase::AddPaths(std::vector<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > >, std::allocator<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > > > > const&, Clipper2Lib::PathType, bool)
+ 10.00      0.13     0.02        2    10.00    10.00  swift_bs_xyzb_
+  5.00      0.14     0.01   394867     0.00     0.00  Clipper2Lib::ClipperBase::AddNewIntersectNode(Clipper2Lib::Active&, Clipper2Lib::Active&, long)
+  5.00      0.15     0.01   202558     0.00     0.00  void std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> >::_M_realloc_insert<Clipper2Lib::LocalMinima*>(__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, Clipper2Lib::LocalMinima*&&)
+  5.00      0.16     0.01   198280     0.00     0.00  Clipper2Lib::ClipperBase::DisposeAllOutRecs()
+  5.00      0.17     0.01   198280     0.00     0.00  void std::vector<Clipper2Lib::Vertex*, std::allocator<Clipper2Lib::Vertex*> >::_M_realloc_insert<Clipper2Lib::Vertex*&>(__gnu_cxx::__normal_iterator<Clipper2Lib::Vertex**, std::vector<Clipper2Lib::Vertex*, std::allocator<Clipper2Lib::Vertex*> > >, Clipper2Lib::Vertex*&)
+  5.00      0.18     0.01      204     0.05     0.05  __uvw_module_MOD_uvw
+  5.00      0.19     0.01      102     0.10     0.10  __to_poly_module_MOD_to_poly
+  5.00      0.20     0.01        1    10.00   200.00  chi2_func_
+  0.00      0.20     0.00   966432     0.00     0.00  Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)
+  0.00      0.20     0.00   496535     0.00     0.00  Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long)
+  0.00      0.20     0.00   397395     0.00     0.00  Clipper2Lib::ClipperBase::DoTopOfScanbeam(long)
+  0.00      0.20     0.00   300891     0.00     0.00  void std::vector<long, std::allocator<long> >::_M_realloc_insert<long const&>(__gnu_cxx::__normal_iterator<long*, std::vector<long, std::allocator<long> > >, long const&)
+  0.00      0.20     0.00   203231     0.00     0.00  Clipper2Lib::ClipperBase::InsertLeftEdge(Clipper2Lib::Active&)
+  0.00      0.20     0.00   203231     0.00     0.00  Clipper2Lib::ClipperBase::SetWindCountForClosedPathEdge(Clipper2Lib::Active&)
+  0.00      0.20     0.00   203231     0.00     0.00  Clipper2Lib::ClipperBase::DoMaxima(Clipper2Lib::Active&)
+  0.00      0.20     0.00   203231     0.00     0.00  Clipper2Lib::ClipperBase::IsContributingClosed(Clipper2Lib::Active const&) const
+  0.00      0.20     0.00   201499     0.00     0.00  void std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::_M_realloc_insert<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > const&>(__gnu_cxx::__normal_iterator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >*, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > > >, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > const&)
+  0.00      0.20     0.00   198280     0.00     0.00  Clipper2Lib::ClipperBase::CleanUp()
+  0.00      0.20     0.00   198280     0.00     0.00  std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::reserve(unsigned long)
+  0.00      0.20     0.00   105361     0.00     0.00  Clipper2Lib::ClipperBase::ValidateClosedPathEx(Clipper2Lib::OutPt*&)
+  0.00      0.20     0.00   105068     0.00     0.00  Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&)
+  0.00      0.20     0.00   105068     0.00     0.00  Clipper2Lib::ClipperBase::AddLocalMinPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&, bool)
+  0.00      0.20     0.00   104949     0.00     0.00  void std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> >::_M_realloc_insert<Clipper2Lib::OutRec* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::OutRec**, std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> > >, Clipper2Lib::OutRec* const&)
+  0.00      0.20     0.00   104102     0.00     0.00  Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*)
+  0.00      0.20     0.00   101646     0.00     0.00  Clipper2Lib::ClipperBase::FixSelfIntersects(Clipper2Lib::OutRec*)
+  0.00      0.20     0.00   101343     0.00     0.00  Clipper2Lib::BuildPathD(Clipper2Lib::OutPt*, bool, bool, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >&, double)
+  0.00      0.20     0.00   101340     0.00     0.00  void std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::emplace_back<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > >(std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >&&)
+  0.00      0.20     0.00    99140     0.00     0.00  Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool)
+  0.00      0.20     0.00    99140     0.00     0.00  Clipper2Lib::ClipperBase::ProcessJoinerList()
+  0.00      0.20     0.00    99140     0.00     0.00  Clipper2Lib::ClipperBase::Reset()
+  0.00      0.20     0.00    99140     0.00     0.00  Clipper2Lib::ClipperBase::~ClipperBase()
+  0.00      0.20     0.00    99140     0.00     0.00  Clipper2Lib::ClipperD::BuildPathsD(std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >&, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >*)
+  0.00      0.20     0.00    99140     0.00     0.00  void std::__introsort_loop<__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<Clipper2Lib::LocMinSorter> >(__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<Clipper2Lib::LocMinSorter>)
+  0.00      0.20     0.00    24756     0.00     0.00  __vector_product_module_MOD_vector_product
+  0.00      0.20     0.00    16386     0.00     0.00  lum_func_
+  0.00      0.20     0.00    16386     0.00     0.00  planck_
+  0.00      0.20     0.00    16320     0.00     0.00  __normalize_module_MOD_normalize
+  0.00      0.20     0.00    13290     0.00     0.00  Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&)
+  0.00      0.20     0.00     8067     0.00     0.00  Clipper2Lib::ClipperBase::ProcessIntersectList()
+  0.00      0.20     0.00     8067     0.00     0.00  void std::__insertion_sort<__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)> >(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)>)
+  0.00      0.20     0.00     8067     0.00     0.00  void std::__introsort_loop<__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)> >(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)>) [clone .constprop.0]
+  0.00      0.20     0.00     7796     0.00     0.00  void std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> >::_M_realloc_insert<Clipper2Lib::IntersectNode>(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, Clipper2Lib::IntersectNode&&)
+  0.00      0.20     0.00     7587     0.00     0.00  __lambert_module_MOD_f_lambert
+  0.00      0.20     0.00     4284     0.00     0.00  __getacc_bf2_module_MOD_getacc_bf2
+  0.00      0.20     0.00     4284     0.00     0.00  __getacc_mp2_module_MOD_getacc_mp2
+  0.00      0.20     0.00     4284     0.00     0.00  bs_der_
+  0.00      0.20     0.00     4284     0.00     0.00  getacc_oblat_
+  0.00      0.20     0.00     4284     0.00     0.00  getacc_ppn_
+  0.00      0.20     0.00     4284     0.00     0.00  getacc_tides2_
+  0.00      0.20     0.00     4284     0.00     0.00  getaccb_tides_
+  0.00      0.20     0.00     4284     0.00     0.00  tu4_getaccb_
+  0.00      0.20     0.00     4284     0.00     0.00  tu4_getaccb_tp_
+  0.00      0.20     0.00     3245     0.00     0.00  Clipper2Lib::ClipperBase::SafeDeleteOutPtJoiners(Clipper2Lib::OutPt*)
+  0.00      0.20     0.00     2649     0.00     0.00  Clipper2Lib::ClipperBase::JoinOutrecPaths(Clipper2Lib::Active&, Clipper2Lib::Active&)
+  0.00      0.20     0.00     1875     0.00     0.00  Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&)
+  0.00      0.20     0.00     1325     0.00     0.00  interp_
+  0.00      0.20     0.00     1319     0.00     0.00  Clipper2Lib::ClipperBase::AddTrialHorzJoin(Clipper2Lib::OutPt*)
+  0.00      0.20     0.00     1294     0.00     0.00  Clipper2Lib::ClipperBase::ConvertHorzTrialsToJoins()
+  0.00      0.20     0.00      767     0.00     0.00  Clipper2Lib::GetHorzMaximaPair(Clipper2Lib::Active const&, Clipper2Lib::Vertex const*)
+  0.00      0.20     0.00      669     0.00     0.00  Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*)
+  0.00      0.20     0.00      668     0.00     0.00  Clipper2Lib::ClipperBase::DeleteJoin(Clipper2Lib::Joiner*)
+  0.00      0.20     0.00      668     0.00     0.00  void std::vector<Clipper2Lib::Joiner*, std::allocator<Clipper2Lib::Joiner*> >::_M_realloc_insert<Clipper2Lib::Joiner* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::Joiner**, std::vector<Clipper2Lib::Joiner*, std::allocator<Clipper2Lib::Joiner*> > >, Clipper2Lib::Joiner* const&)
+  0.00      0.20     0.00      612     0.00     0.00  __uvw_module_MOD_uvw_
+  0.00      0.20     0.00      351     0.00     0.00  Clipper2Lib::ClipperBase::ProcessJoin(Clipper2Lib::Joiner*)
+  0.00      0.20     0.00      286     0.00     0.00  Clipper2Lib::CheckDisposeAdjacent(Clipper2Lib::OutPt*&, Clipper2Lib::OutPt const*, Clipper2Lib::OutRec&)
+  0.00      0.20     0.00      209     0.00     0.00  length_
+  0.00      0.20     0.00      205     0.00     0.00  distance_ab_c_
+  0.00      0.20     0.00      204     0.00     0.00  __boundingbox_module_MOD_boundingbox
+  0.00      0.20     0.00      204     0.00     0.74  __clip_module_MOD_clip
+  0.00      0.20     0.00      204     0.00     0.00  __planck_module_MOD_planck
+  0.00      0.20     0.00      204     0.00     0.00  __rotate_module_MOD_vaxis_rotate
+  0.00      0.20     0.00      204     0.00     0.00  __rotate_of_p_module_MOD_rot_z_nodes
+  0.00      0.20     0.00      204     0.00     0.00  __shadowing_of_p_module_MOD_mu
+  0.00      0.20     0.00      204     0.00     0.00  __to_three_module_MOD_to_three
+  0.00      0.20     0.00      204     0.00     0.00  bs_int_
+  0.00      0.20     0.00      204     0.00     0.00  bs_step_
+  0.00      0.20     0.00      204     0.00     0.00  interp2_
+  0.00      0.20     0.00      141     0.00     0.00  Clipper2Lib::ClipperBase::CompleteSplit(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*, Clipper2Lib::OutRec&)
+  0.00      0.20     0.00      107     0.00     0.00  eps_earth_
+  0.00      0.20     0.00      102     0.00     0.00  __centre_of_p_module_MOD_centre
+  0.00      0.20     0.00      102     0.00     0.00  __hapke_module_MOD_init_hapke
+  0.00      0.20     0.00      102     0.00     1.67  __lc_polygon1_module_MOD_lc_polygon1
+  0.00      0.20     0.00      102     0.00     0.00  __normal_of_p_module_MOD_normal
+  0.00      0.20     0.00      102     0.00     0.00  __rotate_of_p_module_MOD_rot_y_nodes
+  0.00      0.20     0.00      102     0.00     0.00  __shadowing_of_p_module_MOD_non
+  0.00      0.20     0.00      102     0.00     0.00  __surface_module_MOD_surface
+  0.00      0.20     0.00       30     0.00     0.00  Clipper2Lib::ClipperBase::DoSplitOp(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*)
+  0.00      0.20     0.00       30     0.00     0.00  Clipper2Lib::GetIntersectPoint(Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<double>&)
+  0.00      0.20     0.00       28     0.00     0.00  trapzd_
+  0.00      0.20     0.00       18     0.00     0.00  __write1_module_MOD_write1
+  0.00      0.20     0.00       15     0.00     0.00  __write_poly_module_MOD_write_poly
+  0.00      0.20     0.00       11     0.00     0.00  read_time_
+  0.00      0.20     0.00        9     0.00     0.00  __write_node_module_MOD_write_node
+  0.00      0.20     0.00        8     0.00     0.00  Clipper2Lib::ClipperBase::DeleteTrialHorzJoin(Clipper2Lib::OutPt*)
+  0.00      0.20     0.00        6     0.00     0.00  orbel_scget_
+  0.00      0.20     0.00        4     0.00     0.00  __rotate_module_MOD_rot_x
+  0.00      0.20     0.00        4     0.00     0.00  io_open_
+  0.00      0.20     0.00        3     0.00     0.00  __write_face_module_MOD_write_face
+  0.00      0.20     0.00        2     0.00     0.00  Clipper2Lib::CollinearSegsOverlap(Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&)
+  0.00      0.20     0.00        2     0.00     0.00  __read_face_module_MOD_read_face
+  0.00      0.20     0.00        2     0.00     0.00  __read_node_module_MOD_read_node
+  0.00      0.20     0.00        2     0.00     0.00  gammln_
+  0.00      0.20     0.00        2     0.00     0.00  gcf_
+  0.00      0.20     0.00        2     0.00     0.00  io_init_param_
+  0.00      0.20     0.00        2     0.00     0.00  merit_func_
+  0.00      0.20     0.00        2     0.00     0.00  qtrap_
+  0.00      0.20     0.00        2     0.00     0.00  read_ephemeris_
+  0.00      0.20     0.00        2     0.00     0.00  read_rv_
+  0.00      0.20     0.00        2     0.00     0.00  read_sky2_
+  0.00      0.20     0.00        2     0.00     0.00  read_sky_
+  0.00      0.20     0.00        2     0.00     0.00  read_synth_
+  0.00      0.20     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN11Clipper2Lib17GetIntersectPointERKNS_6ActiveES2_
+  0.00      0.20     0.00        1     0.00     0.00  _GLOBAL__sub_I_clip_in_c
+  0.00      0.20     0.00        1     0.00   170.00  __chi2_func_lc2_module_MOD_chi2_func_lc2
+  0.00      0.20     0.00        1     0.00     0.00  __chi2_func_occ_module_MOD_chi2_func_occ
+  0.00      0.20     0.00        1     0.00     0.00  __read_input_module_MOD_read_input
+  0.00      0.20     0.00        1     0.00     0.00  __write_kml_module_MOD_write_kml
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_ao_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_clo_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_ecl_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_lc_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_rv_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_sed_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_sky2_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_sky3_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_sky_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_syn_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_t3_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_ttv_
+  0.00      0.20     0.00        1     0.00     0.00  chi2_func_vis_
+  0.00      0.20     0.00        1     0.00     0.00  coord_j2b_
+  0.00      0.20     0.00        1     0.00     0.00  gammp_
+  0.00      0.20     0.00        1     0.00     0.00  gammq_
+  0.00      0.20     0.00        1     0.00     0.00  geometries_
+  0.00      0.20     0.00        1     0.00     0.00  geometry_hierarch2_
+  0.00      0.20     0.00        1     0.00     0.00  io_init_spin_
+  0.00      0.20     0.00        1     0.00     0.00  io_init_tides2_
+  0.00      0.20     0.00        1     0.00     0.00  io_init_tides_
+  0.00      0.20     0.00        1     0.00     0.00  kms_auday_
+  0.00      0.20     0.00        1     0.00     0.00  luminosities_
+  0.00      0.20     0.00        1     0.00     0.00  luminosity_planck_bandpass_
+  0.00      0.20     0.00        1     0.00     0.00  orbel_ehybrid_
+  0.00      0.20     0.00        1     0.00     0.00  orbel_el2xv_
+  0.00      0.20     0.00        1     0.00     0.00  orbel_esolmd_
+  0.00      0.20     0.00        1     0.00     0.00  quicksort_
+  0.00      0.20     0.00        1     0.00     0.00  read_ao_
+  0.00      0.20     0.00        1     0.00     0.00  read_clo_
+  0.00      0.20     0.00        1     0.00     0.00  read_dependent_
+  0.00      0.20     0.00        1     0.00     0.00  read_ecl_
+  0.00      0.20     0.00        1     0.00     0.00  read_lc_
+  0.00      0.20     0.00        1     0.00     0.00  read_occ_
+  0.00      0.20     0.00        1     0.00     0.00  read_sed_
+  0.00      0.20     0.00        1     0.00     0.00  read_syn_
+  0.00      0.20     0.00        1     0.00     0.00  read_time_all_
+  0.00      0.20     0.00        1     0.00     0.00  read_ttv_
+  0.00      0.20     0.00        1     0.00     0.00  read_vis_
+  0.00      0.20     0.00        1     0.00     0.00  spin_evolve_
+  0.00      0.20     0.00        1     0.00     0.00  util_version_
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 5.00% of 0.20 seconds
+
+index % time    self  children    called     name
+                0.01    0.19       1/1           MAIN__ [2]
+[1]    100.0    0.01    0.19       1         chi2_func_ [1]
+                0.00    0.17       1/1           __chi2_func_lc2_module_MOD_chi2_func_lc2 [4]
+                0.02    0.00       2/2           swift_bs_xyzb_ [10]
+                0.00    0.00       2/2           merit_func_ [44]
+                0.00    0.00       1/1           luminosity_planck_bandpass_ [74]
+                0.00    0.00       1/1           luminosities_ [73]
+                0.00    0.00       1/1           geometry_hierarch2_ [68]
+                0.00    0.00       1/1           geometries_ [67]
+                0.00    0.00       1/1           read_time_all_ [87]
+                0.00    0.00       1/1           kms_auday_ [72]
+                0.00    0.00       1/1           chi2_func_sky_ [59]
+                0.00    0.00       1/1           chi2_func_rv_ [55]
+                0.00    0.00       1/1           chi2_func_ttv_ [62]
+                0.00    0.00       1/1           chi2_func_ecl_ [53]
+                0.00    0.00       1/1           chi2_func_vis_ [63]
+                0.00    0.00       1/1           chi2_func_clo_ [52]
+                0.00    0.00       1/1           chi2_func_t3_ [61]
+                0.00    0.00       1/1           chi2_func_lc_ [54]
+                0.00    0.00       1/1           chi2_func_syn_ [60]
+                0.00    0.00       1/1           chi2_func_sed_ [56]
+                0.00    0.00       1/1           chi2_func_ao_ [51]
+                0.00    0.00       1/1           chi2_func_sky2_ [57]
+                0.00    0.00       1/1           chi2_func_sky3_ [58]
+                0.00    0.00       1/1           __chi2_func_occ_module_MOD_chi2_func_occ [314]
+                0.00    0.00       1/1           io_init_spin_ [69]
+                0.00    0.00       1/1           io_init_tides_ [71]
+                0.00    0.00       1/1           io_init_tides2_ [70]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]    100.0    0.00    0.20                 MAIN__ [2]
+                0.01    0.19       1/1           chi2_func_ [1]
+                0.00    0.00       1/1           util_version_ [91]
+                0.00    0.00       1/1           read_dependent_ [81]
+                0.00    0.00       1/1           gammp_ [65]
+                0.00    0.00       1/1           gammq_ [66]
+-----------------------------------------------
+                0.00    0.17     102/102         __chi2_func_lc2_module_MOD_chi2_func_lc2 [4]
+[3]     85.0    0.00    0.17     102         __lc_polygon1_module_MOD_lc_polygon1 [3]
+                0.00    0.15     204/204         __clip_module_MOD_clip [6]
+                0.01    0.00     204/204         __uvw_module_MOD_uvw [18]
+                0.01    0.00     102/102         __to_poly_module_MOD_to_poly [19]
+                0.00    0.00    7587/7587        __lambert_module_MOD_f_lambert [273]
+                0.00    0.00     612/612         __uvw_module_MOD_uvw_ [285]
+                0.00    0.00     204/204         __planck_module_MOD_planck [289]
+                0.00    0.00     204/204         __rotate_of_p_module_MOD_rot_z_nodes [291]
+                0.00    0.00     204/204         __shadowing_of_p_module_MOD_mu [292]
+                0.00    0.00     204/204         __to_three_module_MOD_to_three [293]
+                0.00    0.00     102/102         __hapke_module_MOD_init_hapke [296]
+                0.00    0.00     102/102         __rotate_of_p_module_MOD_rot_y_nodes [298]
+                0.00    0.00     102/102         __normal_of_p_module_MOD_normal [297]
+                0.00    0.00     102/102         __centre_of_p_module_MOD_centre [295]
+                0.00    0.00     102/102         __shadowing_of_p_module_MOD_non [299]
+                0.00    0.00     102/102         __surface_module_MOD_surface [300]
+                0.00    0.00      18/18          __write1_module_MOD_write1 [303]
+                0.00    0.00      15/15          __write_poly_module_MOD_write_poly [304]
+                0.00    0.00       9/9           __write_node_module_MOD_write_node [305]
+                0.00    0.00       3/3           __write_face_module_MOD_write_face [308]
+                0.00    0.00       2/2           __read_face_module_MOD_read_face [310]
+                0.00    0.00       2/2           __read_node_module_MOD_read_node [311]
+                0.00    0.00       1/1           __read_input_module_MOD_read_input [315]
+-----------------------------------------------
+                0.00    0.17       1/1           chi2_func_ [1]
+[4]     85.0    0.00    0.17       1         __chi2_func_lc2_module_MOD_chi2_func_lc2 [4]
+                0.00    0.17     102/102         __lc_polygon1_module_MOD_lc_polygon1 [3]
+                0.00    0.00    1121/1325        interp_ [30]
+                0.00    0.00     204/204         interp2_ [35]
+                0.00    0.00       2/2           read_ephemeris_ [46]
+                0.00    0.00       1/1           read_lc_ [83]
+-----------------------------------------------
+                0.04    0.11   99140/99140       __clip_module_MOD_clip [6]
+[5]     75.0    0.04    0.11   99140         clip_in_c [5]
+                0.02    0.02  198280/198280      Clipper2Lib::ClipperBase::AddPaths(std::vector<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > >, std::allocator<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > > > > const&, Clipper2Lib::PathType, bool) [7]
+                0.00    0.03   99140/99140       Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+                0.02    0.00  609747/918155      void std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >::_M_realloc_insert<Clipper2Lib::Point<double> >(__gnu_cxx::__normal_iterator<Clipper2Lib::Point<double>*, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > >, Clipper2Lib::Point<double>&&) [8]
+                0.00    0.01   99140/99140       Clipper2Lib::ClipperD::BuildPathsD(std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >&, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >*) [13]
+                0.01    0.00   99140/198280      Clipper2Lib::ClipperBase::DisposeAllOutRecs() [16]
+                0.00    0.01   99140/99140       Clipper2Lib::ClipperBase::~ClipperBase() [20]
+                0.00    0.00  201499/201499      void std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::_M_realloc_insert<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > const&>(__gnu_cxx::__normal_iterator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >*, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > > >, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > const&) [253]
+                0.00    0.00   99140/198280      Clipper2Lib::ClipperBase::CleanUp() [254]
+-----------------------------------------------
+                0.00    0.15     204/204         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[6]     75.0    0.00    0.15     204         __clip_module_MOD_clip [6]
+                0.04    0.11   99140/99140       clip_in_c [5]
+                0.00    0.00     204/204         __boundingbox_module_MOD_boundingbox [288]
+-----------------------------------------------
+                0.02    0.02  198280/198280      clip_in_c [5]
+[7]     20.0    0.02    0.02  198280         Clipper2Lib::ClipperBase::AddPaths(std::vector<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > >, std::allocator<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > > > > const&, Clipper2Lib::PathType, bool) [7]
+                0.01    0.00  202558/202558      void std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> >::_M_realloc_insert<Clipper2Lib::LocalMinima*>(__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, Clipper2Lib::LocalMinima*&&) [15]
+                0.01    0.00  198280/198280      void std::vector<Clipper2Lib::Vertex*, std::allocator<Clipper2Lib::Vertex*> >::_M_realloc_insert<Clipper2Lib::Vertex*&>(__gnu_cxx::__normal_iterator<Clipper2Lib::Vertex**, std::vector<Clipper2Lib::Vertex*, std::allocator<Clipper2Lib::Vertex*> > >, Clipper2Lib::Vertex*&) [17]
+-----------------------------------------------
+                0.01    0.00  308408/918155      Clipper2Lib::BuildPathD(Clipper2Lib::OutPt*, bool, bool, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >&, double) [12]
+                0.02    0.00  609747/918155      clip_in_c [5]
+[8]     15.0    0.03    0.00  918155         void std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >::_M_realloc_insert<Clipper2Lib::Point<double> >(__gnu_cxx::__normal_iterator<Clipper2Lib::Point<double>*, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > >, Clipper2Lib::Point<double>&&) [8]
+-----------------------------------------------
+                0.00    0.03   99140/99140       clip_in_c [5]
+[9]     15.0    0.00    0.03   99140         Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+                0.02    0.00  595675/595675      Clipper2Lib::ClipperBase::PopScanline(long&) [11]
+                0.01    0.00  394867/394867      Clipper2Lib::ClipperBase::AddNewIntersectNode(Clipper2Lib::Active&, Clipper2Lib::Active&, long) [14]
+                0.00    0.00  496535/496535      Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+                0.00    0.00  397395/397395      Clipper2Lib::ClipperBase::DoTopOfScanbeam(long) [247]
+                0.00    0.00   99140/99140       Clipper2Lib::ClipperBase::Reset() [264]
+                0.00    0.00   99140/99140       Clipper2Lib::ClipperBase::ProcessJoinerList() [263]
+                0.00    0.00    8067/8067        Clipper2Lib::ClipperBase::ProcessIntersectList() [269]
+                0.00    0.00    1875/1875        Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+                0.00    0.00    1294/1294        Clipper2Lib::ClipperBase::ConvertHorzTrialsToJoins() [280]
+-----------------------------------------------
+                0.02    0.00       2/2           chi2_func_ [1]
+[10]    10.0    0.02    0.00       2         swift_bs_xyzb_ [10]
+                0.00    0.00     204/204         bs_step_ [34]
+                0.00    0.00       2/2           io_init_param_ [43]
+                0.00    0.00       1/1           spin_evolve_ [90]
+-----------------------------------------------
+                0.02    0.00  595675/595675      Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+[11]    10.0    0.02    0.00  595675         Clipper2Lib::ClipperBase::PopScanline(long&) [11]
+                0.00    0.00  689956/966432      Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+-----------------------------------------------
+                0.00    0.01  101343/101343      Clipper2Lib::ClipperD::BuildPathsD(std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >&, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >*) [13]
+[12]     5.0    0.00    0.01  101343         Clipper2Lib::BuildPathD(Clipper2Lib::OutPt*, bool, bool, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >&, double) [12]
+                0.01    0.00  308408/918155      void std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >::_M_realloc_insert<Clipper2Lib::Point<double> >(__gnu_cxx::__normal_iterator<Clipper2Lib::Point<double>*, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > >, Clipper2Lib::Point<double>&&) [8]
+-----------------------------------------------
+                0.00    0.01   99140/99140       clip_in_c [5]
+[13]     5.0    0.00    0.01   99140         Clipper2Lib::ClipperD::BuildPathsD(std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >&, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >*) [13]
+                0.00    0.01  101343/101343      Clipper2Lib::BuildPathD(Clipper2Lib::OutPt*, bool, bool, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >&, double) [12]
+                0.00    0.00  198280/198280      std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::reserve(unsigned long) [255]
+                0.00    0.00  101340/101340      void std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::emplace_back<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > >(std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >&&) [262]
+-----------------------------------------------
+                0.01    0.00  394867/394867      Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+[14]     5.0    0.01    0.00  394867         Clipper2Lib::ClipperBase::AddNewIntersectNode(Clipper2Lib::Active&, Clipper2Lib::Active&, long) [14]
+                0.00    0.00    7796/7796        void std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> >::_M_realloc_insert<Clipper2Lib::IntersectNode>(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, Clipper2Lib::IntersectNode&&) [272]
+-----------------------------------------------
+                0.01    0.00  202558/202558      Clipper2Lib::ClipperBase::AddPaths(std::vector<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > >, std::allocator<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > > > > const&, Clipper2Lib::PathType, bool) [7]
+[15]     5.0    0.01    0.00  202558         void std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> >::_M_realloc_insert<Clipper2Lib::LocalMinima*>(__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, Clipper2Lib::LocalMinima*&&) [15]
+-----------------------------------------------
+                0.01    0.00   99140/198280      clip_in_c [5]
+                0.01    0.00   99140/198280      Clipper2Lib::ClipperBase::~ClipperBase() [20]
+[16]     5.0    0.01    0.00  198280         Clipper2Lib::ClipperBase::DisposeAllOutRecs() [16]
+-----------------------------------------------
+                0.01    0.00  198280/198280      Clipper2Lib::ClipperBase::AddPaths(std::vector<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > >, std::allocator<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > > > > const&, Clipper2Lib::PathType, bool) [7]
+[17]     5.0    0.01    0.00  198280         void std::vector<Clipper2Lib::Vertex*, std::allocator<Clipper2Lib::Vertex*> >::_M_realloc_insert<Clipper2Lib::Vertex*&>(__gnu_cxx::__normal_iterator<Clipper2Lib::Vertex**, std::vector<Clipper2Lib::Vertex*, std::allocator<Clipper2Lib::Vertex*> > >, Clipper2Lib::Vertex*&) [17]
+-----------------------------------------------
+                0.01    0.00     204/204         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[18]     5.0    0.01    0.00     204         __uvw_module_MOD_uvw [18]
+                0.00    0.00     204/24756       __vector_product_module_MOD_vector_product [266]
+                0.00    0.00     204/204         __rotate_module_MOD_vaxis_rotate [290]
+                0.00    0.00     102/107         eps_earth_ [36]
+-----------------------------------------------
+                0.01    0.00     102/102         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[19]     5.0    0.01    0.00     102         __to_poly_module_MOD_to_poly [19]
+-----------------------------------------------
+                0.00    0.01   99140/99140       clip_in_c [5]
+[20]     2.5    0.00    0.01   99140         Clipper2Lib::ClipperBase::~ClipperBase() [20]
+                0.01    0.00   99140/198280      Clipper2Lib::ClipperBase::DisposeAllOutRecs() [16]
+                0.00    0.00   99140/198280      Clipper2Lib::ClipperBase::CleanUp() [254]
+-----------------------------------------------
+                0.00    0.00   16386/16386       trapzd_ [37]
+[21]     0.0    0.00    0.00   16386         lum_func_ [21]
+                0.00    0.00   16386/16386       planck_ [22]
+-----------------------------------------------
+                0.00    0.00   16386/16386       lum_func_ [21]
+[22]     0.0    0.00    0.00   16386         planck_ [22]
+-----------------------------------------------
+                0.00    0.00    4284/4284        bs_int_ [33]
+[23]     0.0    0.00    0.00    4284         bs_der_ [23]
+                0.00    0.00    4284/4284        __getacc_mp2_module_MOD_getacc_mp2 [275]
+                0.00    0.00    4284/4284        tu4_getaccb_ [28]
+                0.00    0.00    4284/4284        tu4_getaccb_tp_ [29]
+-----------------------------------------------
+                0.00    0.00    4284/4284        tu4_getaccb_ [28]
+[24]     0.0    0.00    0.00    4284         getacc_oblat_ [24]
+-----------------------------------------------
+                0.00    0.00    4284/4284        tu4_getaccb_ [28]
+[25]     0.0    0.00    0.00    4284         getacc_ppn_ [25]
+-----------------------------------------------
+                0.00    0.00    4284/4284        tu4_getaccb_ [28]
+[26]     0.0    0.00    0.00    4284         getacc_tides2_ [26]
+-----------------------------------------------
+                0.00    0.00    4284/4284        tu4_getaccb_ [28]
+[27]     0.0    0.00    0.00    4284         getaccb_tides_ [27]
+-----------------------------------------------
+                0.00    0.00    4284/4284        bs_der_ [23]
+[28]     0.0    0.00    0.00    4284         tu4_getaccb_ [28]
+                0.00    0.00    4284/4284        getaccb_tides_ [27]
+                0.00    0.00    4284/4284        getacc_tides2_ [26]
+                0.00    0.00    4284/4284        getacc_oblat_ [24]
+                0.00    0.00    4284/4284        getacc_ppn_ [25]
+                0.00    0.00    4284/4284        __getacc_bf2_module_MOD_getacc_bf2 [274]
+-----------------------------------------------
+                0.00    0.00    4284/4284        bs_der_ [23]
+[29]     0.0    0.00    0.00    4284         tu4_getaccb_tp_ [29]
+-----------------------------------------------
+                0.00    0.00     204/1325        interp2_ [35]
+                0.00    0.00    1121/1325        __chi2_func_lc2_module_MOD_chi2_func_lc2 [4]
+[30]     0.0    0.00    0.00    1325         interp_ [30]
+-----------------------------------------------
+                0.00    0.00       1/209         io_init_tides2_ [70]
+                0.00    0.00       2/209         util_version_ [91]
+                0.00    0.00       4/209         read_ephemeris_ [46]
+                0.00    0.00     101/209         read_lc_ [83]
+                0.00    0.00     101/209         read_time_ [38]
+[31]     0.0    0.00    0.00     209         length_ [31]
+-----------------------------------------------
+                0.00    0.00     205/205         chi2_func_ttv_ [62]
+[32]     0.0    0.00    0.00     205         distance_ab_c_ [32]
+-----------------------------------------------
+                0.00    0.00     204/204         bs_step_ [34]
+[33]     0.0    0.00    0.00     204         bs_int_ [33]
+                0.00    0.00    4284/4284        bs_der_ [23]
+-----------------------------------------------
+                0.00    0.00     204/204         swift_bs_xyzb_ [10]
+[34]     0.0    0.00    0.00     204         bs_step_ [34]
+                0.00    0.00     204/204         bs_int_ [33]
+-----------------------------------------------
+                0.00    0.00     204/204         __chi2_func_lc2_module_MOD_chi2_func_lc2 [4]
+[35]     0.0    0.00    0.00     204         interp2_ [35]
+                0.00    0.00     204/1325        interp_ [30]
+-----------------------------------------------
+                0.00    0.00       1/107         __chi2_func_occ_module_MOD_chi2_func_occ [314]
+                0.00    0.00       4/107         read_ephemeris_ [46]
+                0.00    0.00     102/107         __uvw_module_MOD_uvw [18]
+[36]     0.0    0.00    0.00     107         eps_earth_ [36]
+-----------------------------------------------
+                0.00    0.00      28/28          qtrap_ [45]
+[37]     0.0    0.00    0.00      28         trapzd_ [37]
+                0.00    0.00   16386/16386       lum_func_ [21]
+-----------------------------------------------
+                0.00    0.00      11/11          read_time_all_ [87]
+[38]     0.0    0.00    0.00      11         read_time_ [38]
+                0.00    0.00     101/209         length_ [31]
+-----------------------------------------------
+                0.00    0.00       2/6           orbel_esolmd_ [77]
+                0.00    0.00       4/6           orbel_el2xv_ [76]
+[39]     0.0    0.00    0.00       6         orbel_scget_ [39]
+-----------------------------------------------
+                0.00    0.00       1/4           io_init_spin_ [69]
+                0.00    0.00       1/4           io_init_tides_ [71]
+                0.00    0.00       2/4           io_init_param_ [43]
+[40]     0.0    0.00    0.00       4         io_open_ [40]
+-----------------------------------------------
+                0.00    0.00       2/2           gcf_ [42]
+[41]     0.0    0.00    0.00       2         gammln_ [41]
+-----------------------------------------------
+                0.00    0.00       1/2           gammp_ [65]
+                0.00    0.00       1/2           gammq_ [66]
+[42]     0.0    0.00    0.00       2         gcf_ [42]
+                0.00    0.00       2/2           gammln_ [41]
+-----------------------------------------------
+                0.00    0.00       2/2           swift_bs_xyzb_ [10]
+[43]     0.0    0.00    0.00       2         io_init_param_ [43]
+                0.00    0.00       2/4           io_open_ [40]
+-----------------------------------------------
+                0.00    0.00       2/2           chi2_func_ [1]
+[44]     0.0    0.00    0.00       2         merit_func_ [44]
+-----------------------------------------------
+                0.00    0.00       2/2           luminosity_planck_bandpass_ [74]
+[45]     0.0    0.00    0.00       2         qtrap_ [45]
+                0.00    0.00      28/28          trapzd_ [37]
+-----------------------------------------------
+                0.00    0.00       2/2           __chi2_func_lc2_module_MOD_chi2_func_lc2 [4]
+[46]     0.0    0.00    0.00       2         read_ephemeris_ [46]
+                0.00    0.00       4/209         length_ [31]
+                0.00    0.00       4/107         eps_earth_ [36]
+                0.00    0.00       4/4           __rotate_module_MOD_rot_x [307]
+-----------------------------------------------
+                0.00    0.00       2/2           chi2_func_rv_ [55]
+[47]     0.0    0.00    0.00       2         read_rv_ [47]
+-----------------------------------------------
+                0.00    0.00       1/2           chi2_func_sky2_ [57]
+                0.00    0.00       1/2           chi2_func_sky3_ [58]
+[48]     0.0    0.00    0.00       2         read_sky2_ [48]
+-----------------------------------------------
+                0.00    0.00       2/2           chi2_func_sky_ [59]
+[49]     0.0    0.00    0.00       2         read_sky_ [49]
+-----------------------------------------------
+                0.00    0.00       2/2           chi2_func_syn_ [60]
+[50]     0.0    0.00    0.00       2         read_synth_ [50]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[51]     0.0    0.00    0.00       1         chi2_func_ao_ [51]
+                0.00    0.00       1/1           read_ao_ [79]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[52]     0.0    0.00    0.00       1         chi2_func_clo_ [52]
+                0.00    0.00       1/1           read_clo_ [80]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[53]     0.0    0.00    0.00       1         chi2_func_ecl_ [53]
+                0.00    0.00       1/1           read_ecl_ [82]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[54]     0.0    0.00    0.00       1         chi2_func_lc_ [54]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[55]     0.0    0.00    0.00       1         chi2_func_rv_ [55]
+                0.00    0.00       2/2           read_rv_ [47]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[56]     0.0    0.00    0.00       1         chi2_func_sed_ [56]
+                0.00    0.00       1/1           read_sed_ [85]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[57]     0.0    0.00    0.00       1         chi2_func_sky2_ [57]
+                0.00    0.00       1/2           read_sky2_ [48]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[58]     0.0    0.00    0.00       1         chi2_func_sky3_ [58]
+                0.00    0.00       1/2           read_sky2_ [48]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[59]     0.0    0.00    0.00       1         chi2_func_sky_ [59]
+                0.00    0.00       2/2           read_sky_ [49]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[60]     0.0    0.00    0.00       1         chi2_func_syn_ [60]
+                0.00    0.00       2/2           read_synth_ [50]
+                0.00    0.00       1/1           read_syn_ [86]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[61]     0.0    0.00    0.00       1         chi2_func_t3_ [61]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[62]     0.0    0.00    0.00       1         chi2_func_ttv_ [62]
+                0.00    0.00     205/205         distance_ab_c_ [32]
+                0.00    0.00       1/1           read_ttv_ [88]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[63]     0.0    0.00    0.00       1         chi2_func_vis_ [63]
+                0.00    0.00       1/1           read_vis_ [89]
+-----------------------------------------------
+                0.00    0.00       1/1           geometry_hierarch2_ [68]
+[64]     0.0    0.00    0.00       1         coord_j2b_ [64]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [2]
+[65]     0.0    0.00    0.00       1         gammp_ [65]
+                0.00    0.00       1/2           gcf_ [42]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [2]
+[66]     0.0    0.00    0.00       1         gammq_ [66]
+                0.00    0.00       1/2           gcf_ [42]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[67]     0.0    0.00    0.00       1         geometries_ [67]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[68]     0.0    0.00    0.00       1         geometry_hierarch2_ [68]
+                0.00    0.00       1/1           orbel_el2xv_ [76]
+                0.00    0.00       1/1           coord_j2b_ [64]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[69]     0.0    0.00    0.00       1         io_init_spin_ [69]
+                0.00    0.00       1/4           io_open_ [40]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[70]     0.0    0.00    0.00       1         io_init_tides2_ [70]
+                0.00    0.00       1/209         length_ [31]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[71]     0.0    0.00    0.00       1         io_init_tides_ [71]
+                0.00    0.00       1/4           io_open_ [40]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[72]     0.0    0.00    0.00       1         kms_auday_ [72]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[73]     0.0    0.00    0.00       1         luminosities_ [73]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[74]     0.0    0.00    0.00       1         luminosity_planck_bandpass_ [74]
+                0.00    0.00       2/2           qtrap_ [45]
+-----------------------------------------------
+                0.00    0.00       1/1           orbel_el2xv_ [76]
+[75]     0.0    0.00    0.00       1         orbel_ehybrid_ [75]
+-----------------------------------------------
+                0.00    0.00       1/1           geometry_hierarch2_ [68]
+[76]     0.0    0.00    0.00       1         orbel_el2xv_ [76]
+                0.00    0.00       4/6           orbel_scget_ [39]
+                0.00    0.00       1/1           orbel_esolmd_ [77]
+                0.00    0.00       1/1           orbel_ehybrid_ [75]
+-----------------------------------------------
+                0.00    0.00       1/1           orbel_el2xv_ [76]
+[77]     0.0    0.00    0.00       1         orbel_esolmd_ [77]
+                0.00    0.00       2/6           orbel_scget_ [39]
+-----------------------------------------------
+                0.00    0.00       1/1           read_time_all_ [87]
+[78]     0.0    0.00    0.00       1         quicksort_ [78]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ao_ [51]
+[79]     0.0    0.00    0.00       1         read_ao_ [79]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_clo_ [52]
+[80]     0.0    0.00    0.00       1         read_clo_ [80]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [2]
+[81]     0.0    0.00    0.00       1         read_dependent_ [81]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ecl_ [53]
+[82]     0.0    0.00    0.00       1         read_ecl_ [82]
+-----------------------------------------------
+                0.00    0.00       1/1           __chi2_func_lc2_module_MOD_chi2_func_lc2 [4]
+[83]     0.0    0.00    0.00       1         read_lc_ [83]
+                0.00    0.00     101/209         length_ [31]
+-----------------------------------------------
+                0.00    0.00       1/1           __chi2_func_occ_module_MOD_chi2_func_occ [314]
+[84]     0.0    0.00    0.00       1         read_occ_ [84]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_sed_ [56]
+[85]     0.0    0.00    0.00       1         read_sed_ [85]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_syn_ [60]
+[86]     0.0    0.00    0.00       1         read_syn_ [86]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[87]     0.0    0.00    0.00       1         read_time_all_ [87]
+                0.00    0.00      11/11          read_time_ [38]
+                0.00    0.00       1/1           quicksort_ [78]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ttv_ [62]
+[88]     0.0    0.00    0.00       1         read_ttv_ [88]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_vis_ [63]
+[89]     0.0    0.00    0.00       1         read_vis_ [89]
+-----------------------------------------------
+                0.00    0.00       1/1           swift_bs_xyzb_ [10]
+[90]     0.0    0.00    0.00       1         spin_evolve_ [90]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [2]
+[91]     0.0    0.00    0.00       1         util_version_ [91]
+                0.00    0.00       2/209         length_ [31]
+-----------------------------------------------
+                0.00    0.00    1204/966432      Clipper2Lib::ClipperBase::ProcessIntersectList() [269]
+                0.00    0.00    2364/966432      Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+                0.00    0.00    5647/966432      void std::__insertion_sort<__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)> >(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)>) [270]
+                0.00    0.00    6598/966432      Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [268]
+                0.00    0.00   23129/966432      Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+                0.00    0.00   26964/966432      Clipper2Lib::ClipperBase::InsertLeftEdge(Clipper2Lib::Active&) [249]
+                0.00    0.00   99140/966432      Clipper2Lib::ClipperBase::Reset() [264]
+                0.00    0.00  111430/966432      Clipper2Lib::ClipperBase::DoTopOfScanbeam(long) [247]
+                0.00    0.00  689956/966432      Clipper2Lib::ClipperBase::PopScanline(long&) [11]
+[245]    0.0    0.00    0.00  966432         Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+-----------------------------------------------
+                0.00    0.00  496535/496535      Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+[246]    0.0    0.00    0.00  496535         Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+                0.00    0.00  203231/203231      Clipper2Lib::ClipperBase::InsertLeftEdge(Clipper2Lib::Active&) [249]
+                0.00    0.00  203231/203231      Clipper2Lib::ClipperBase::SetWindCountForClosedPathEdge(Clipper2Lib::Active&) [250]
+                0.00    0.00  203231/203231      Clipper2Lib::ClipperBase::IsContributingClosed(Clipper2Lib::Active const&) const [252]
+                0.00    0.00  101927/105068      Clipper2Lib::ClipperBase::AddLocalMinPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&, bool) [258]
+                0.00    0.00   98105/300891      void std::vector<long, std::allocator<long> >::_M_realloc_insert<long const&>(__gnu_cxx::__normal_iterator<long*, std::vector<long, std::allocator<long> > >, long const&) [248]
+                0.00    0.00   23129/966432      Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+                0.00    0.00    1068/13290       Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [268]
+                0.00    0.00     347/105068      Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [257]
+                0.00    0.00      42/669         Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [282]
+-----------------------------------------------
+                0.00    0.00  397395/397395      Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+[247]    0.0    0.00    0.00  397395         Clipper2Lib::ClipperBase::DoTopOfScanbeam(long) [247]
+                0.00    0.00  203231/203231      Clipper2Lib::ClipperBase::DoMaxima(Clipper2Lib::Active&) [251]
+                0.00    0.00  111430/966432      Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+                0.00    0.00      99/669         Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [282]
+-----------------------------------------------
+                0.00    0.00     228/300891      Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+                0.00    0.00   98105/300891      Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+                0.00    0.00  202558/300891      Clipper2Lib::ClipperBase::Reset() [264]
+[248]    0.0    0.00    0.00  300891         void std::vector<long, std::allocator<long> >::_M_realloc_insert<long const&>(__gnu_cxx::__normal_iterator<long*, std::vector<long, std::allocator<long> > >, long const&) [248]
+-----------------------------------------------
+                0.00    0.00  203231/203231      Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+[249]    0.0    0.00    0.00  203231         Clipper2Lib::ClipperBase::InsertLeftEdge(Clipper2Lib::Active&) [249]
+                0.00    0.00   26964/966432      Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+-----------------------------------------------
+                0.00    0.00  203231/203231      Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+[250]    0.0    0.00    0.00  203231         Clipper2Lib::ClipperBase::SetWindCountForClosedPathEdge(Clipper2Lib::Active&) [250]
+-----------------------------------------------
+                0.00    0.00  203231/203231      Clipper2Lib::ClipperBase::DoTopOfScanbeam(long) [247]
+[251]    0.0    0.00    0.00  203231         Clipper2Lib::ClipperBase::DoMaxima(Clipper2Lib::Active&) [251]
+                0.00    0.00  101370/105068      Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [257]
+                0.00    0.00    1232/13290       Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [268]
+                0.00    0.00     372/105068      Clipper2Lib::ClipperBase::AddLocalMinPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&, bool) [258]
+-----------------------------------------------
+                0.00    0.00  203231/203231      Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+[252]    0.0    0.00    0.00  203231         Clipper2Lib::ClipperBase::IsContributingClosed(Clipper2Lib::Active const&) const [252]
+-----------------------------------------------
+                0.00    0.00  201499/201499      clip_in_c [5]
+[253]    0.0    0.00    0.00  201499         void std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::_M_realloc_insert<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > const&>(__gnu_cxx::__normal_iterator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >*, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > > >, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > const&) [253]
+-----------------------------------------------
+                0.00    0.00   99140/198280      clip_in_c [5]
+                0.00    0.00   99140/198280      Clipper2Lib::ClipperBase::~ClipperBase() [20]
+[254]    0.0    0.00    0.00  198280         Clipper2Lib::ClipperBase::CleanUp() [254]
+-----------------------------------------------
+                0.00    0.00  198280/198280      Clipper2Lib::ClipperD::BuildPathsD(std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >&, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >*) [13]
+[255]    0.0    0.00    0.00  198280         std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::reserve(unsigned long) [255]
+-----------------------------------------------
+                0.00    0.00  105361/105361      Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*) [260]
+[256]    0.0    0.00    0.00  105361         Clipper2Lib::ClipperBase::ValidateClosedPathEx(Clipper2Lib::OutPt*&) [256]
+                0.00    0.00    2993/3245        Clipper2Lib::ClipperBase::SafeDeleteOutPtJoiners(Clipper2Lib::OutPt*) [276]
+-----------------------------------------------
+                0.00    0.00      41/105068      Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [268]
+                0.00    0.00     347/105068      Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+                0.00    0.00     503/105068      Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+                0.00    0.00    2807/105068      Clipper2Lib::ClipperBase::ProcessIntersectList() [269]
+                0.00    0.00  101370/105068      Clipper2Lib::ClipperBase::DoMaxima(Clipper2Lib::Active&) [251]
+[257]    0.0    0.00    0.00  105068         Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [257]
+                0.00    0.00  102419/104102      Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*) [260]
+                0.00    0.00    2649/2649        Clipper2Lib::ClipperBase::JoinOutrecPaths(Clipper2Lib::Active&, Clipper2Lib::Active&) [277]
+-----------------------------------------------
+                0.00    0.00       8/105068      Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+                0.00    0.00      41/105068      Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [268]
+                0.00    0.00     372/105068      Clipper2Lib::ClipperBase::DoMaxima(Clipper2Lib::Active&) [251]
+                0.00    0.00    2720/105068      Clipper2Lib::ClipperBase::ProcessIntersectList() [269]
+                0.00    0.00  101927/105068      Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+[258]    0.0    0.00    0.00  105068         Clipper2Lib::ClipperBase::AddLocalMinPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&, bool) [258]
+                0.00    0.00  104911/104949      void std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> >::_M_realloc_insert<Clipper2Lib::OutRec* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::OutRec**, std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> > >, Clipper2Lib::OutRec* const&) [259]
+-----------------------------------------------
+                0.00    0.00      17/104949      Clipper2Lib::ClipperBase::CompleteSplit(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*, Clipper2Lib::OutRec&) [294]
+                0.00    0.00      21/104949      Clipper2Lib::ClipperBase::DoSplitOp(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [301]
+                0.00    0.00  104911/104949      Clipper2Lib::ClipperBase::AddLocalMinPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&, bool) [258]
+[259]    0.0    0.00    0.00  104949         void std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> >::_M_realloc_insert<Clipper2Lib::OutRec* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::OutRec**, std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> > >, Clipper2Lib::OutRec* const&) [259]
+-----------------------------------------------
+                0.00    0.00       1/104102      Clipper2Lib::ClipperBase::ProcessJoin(Clipper2Lib::Joiner*) [286]
+                0.00    0.00      29/104102      Clipper2Lib::ClipperBase::CompleteSplit(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*, Clipper2Lib::OutRec&) [294]
+                0.00    0.00     351/104102      Clipper2Lib::ClipperBase::ProcessJoinerList() [263]
+                0.00    0.00    1302/104102      Clipper2Lib::ClipperBase::ConvertHorzTrialsToJoins() [280]
+                0.00    0.00  102419/104102      Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [257]
+[260]    0.0    0.00    0.00  104102         Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*) [260]
+                0.00    0.00  105361/105361      Clipper2Lib::ClipperBase::ValidateClosedPathEx(Clipper2Lib::OutPt*&) [256]
+                0.00    0.00  101646/101646      Clipper2Lib::ClipperBase::FixSelfIntersects(Clipper2Lib::OutRec*) [261]
+-----------------------------------------------
+                0.00    0.00  101646/101646      Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*) [260]
+[261]    0.0    0.00    0.00  101646         Clipper2Lib::ClipperBase::FixSelfIntersects(Clipper2Lib::OutRec*) [261]
+                0.00    0.00      30/30          Clipper2Lib::ClipperBase::DoSplitOp(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [301]
+-----------------------------------------------
+                0.00    0.00  101340/101340      Clipper2Lib::ClipperD::BuildPathsD(std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >&, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >*) [13]
+[262]    0.0    0.00    0.00  101340         void std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::emplace_back<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > >(std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >&&) [262]
+-----------------------------------------------
+                0.00    0.00   99140/99140       Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+[263]    0.0    0.00    0.00   99140         Clipper2Lib::ClipperBase::ProcessJoinerList() [263]
+                0.00    0.00     351/351         Clipper2Lib::ClipperBase::ProcessJoin(Clipper2Lib::Joiner*) [286]
+                0.00    0.00     351/104102      Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*) [260]
+-----------------------------------------------
+                0.00    0.00   99140/99140       Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+[264]    0.0    0.00    0.00   99140         Clipper2Lib::ClipperBase::Reset() [264]
+                0.00    0.00  202558/300891      void std::vector<long, std::allocator<long> >::_M_realloc_insert<long const&>(__gnu_cxx::__normal_iterator<long*, std::vector<long, std::allocator<long> > >, long const&) [248]
+                0.00    0.00   99140/99140       void std::__introsort_loop<__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<Clipper2Lib::LocMinSorter> >(__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<Clipper2Lib::LocMinSorter>) [265]
+                0.00    0.00   99140/966432      Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+-----------------------------------------------
+                0.00    0.00   99140/99140       Clipper2Lib::ClipperBase::Reset() [264]
+[265]    0.0    0.00    0.00   99140         void std::__introsort_loop<__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<Clipper2Lib::LocMinSorter> >(__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<Clipper2Lib::LocMinSorter>) [265]
+-----------------------------------------------
+                0.00    0.00     204/24756       __uvw_module_MOD_uvw [18]
+                0.00    0.00    8232/24756       __surface_module_MOD_surface [300]
+                0.00    0.00   16320/24756       __normal_of_p_module_MOD_normal [297]
+[266]    0.0    0.00    0.00   24756         __vector_product_module_MOD_vector_product [266]
+-----------------------------------------------
+                0.00    0.00   16320/16320       __normal_of_p_module_MOD_normal [297]
+[267]    0.0    0.00    0.00   16320         __normalize_module_MOD_normalize [267]
+-----------------------------------------------
+                0.00    0.00      58/13290       Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+                0.00    0.00    1068/13290       Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+                0.00    0.00    1232/13290       Clipper2Lib::ClipperBase::DoMaxima(Clipper2Lib::Active&) [251]
+                0.00    0.00   10932/13290       Clipper2Lib::ClipperBase::ProcessIntersectList() [269]
+[268]    0.0    0.00    0.00   13290         Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [268]
+                0.00    0.00    6598/966432      Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+                0.00    0.00      41/105068      Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [257]
+                0.00    0.00      41/105068      Clipper2Lib::ClipperBase::AddLocalMinPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&, bool) [258]
+                0.00    0.00      12/669         Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [282]
+-----------------------------------------------
+                0.00    0.00    8067/8067        Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+[269]    0.0    0.00    0.00    8067         Clipper2Lib::ClipperBase::ProcessIntersectList() [269]
+                0.00    0.00   10932/13290       Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [268]
+                0.00    0.00    8067/8067        void std::__introsort_loop<__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)> >(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)>) [clone .constprop.0] [271]
+                0.00    0.00    8067/8067        void std::__insertion_sort<__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)> >(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)>) [270]
+                0.00    0.00    2807/105068      Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [257]
+                0.00    0.00    2720/105068      Clipper2Lib::ClipperBase::AddLocalMinPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&, bool) [258]
+                0.00    0.00    1204/966432      Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+                0.00    0.00     512/669         Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [282]
+-----------------------------------------------
+                0.00    0.00    8067/8067        Clipper2Lib::ClipperBase::ProcessIntersectList() [269]
+[270]    0.0    0.00    0.00    8067         void std::__insertion_sort<__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)> >(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)>) [270]
+                0.00    0.00    5647/966432      Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+-----------------------------------------------
+                0.00    0.00    8067/8067        Clipper2Lib::ClipperBase::ProcessIntersectList() [269]
+[271]    0.0    0.00    0.00    8067         void std::__introsort_loop<__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)> >(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)>) [clone .constprop.0] [271]
+-----------------------------------------------
+                0.00    0.00    7796/7796        Clipper2Lib::ClipperBase::AddNewIntersectNode(Clipper2Lib::Active&, Clipper2Lib::Active&, long) [14]
+[272]    0.0    0.00    0.00    7796         void std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> >::_M_realloc_insert<Clipper2Lib::IntersectNode>(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, Clipper2Lib::IntersectNode&&) [272]
+-----------------------------------------------
+                0.00    0.00    7587/7587        __lc_polygon1_module_MOD_lc_polygon1 [3]
+[273]    0.0    0.00    0.00    7587         __lambert_module_MOD_f_lambert [273]
+-----------------------------------------------
+                0.00    0.00    4284/4284        tu4_getaccb_ [28]
+[274]    0.0    0.00    0.00    4284         __getacc_bf2_module_MOD_getacc_bf2 [274]
+-----------------------------------------------
+                0.00    0.00    4284/4284        bs_der_ [23]
+[275]    0.0    0.00    0.00    4284         __getacc_mp2_module_MOD_getacc_mp2 [275]
+-----------------------------------------------
+                0.00    0.00      60/3245        Clipper2Lib::ClipperBase::DoSplitOp(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [301]
+                0.00    0.00     192/3245        Clipper2Lib::ClipperBase::CompleteSplit(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*, Clipper2Lib::OutRec&) [294]
+                0.00    0.00    2993/3245        Clipper2Lib::ClipperBase::ValidateClosedPathEx(Clipper2Lib::OutPt*&) [256]
+[276]    0.0    0.00    0.00    3245         Clipper2Lib::ClipperBase::SafeDeleteOutPtJoiners(Clipper2Lib::OutPt*) [276]
+                0.00    0.00     317/668         Clipper2Lib::ClipperBase::DeleteJoin(Clipper2Lib::Joiner*) [283]
+                0.00    0.00       8/8           Clipper2Lib::ClipperBase::DeleteTrialHorzJoin(Clipper2Lib::OutPt*) [306]
+-----------------------------------------------
+                0.00    0.00    2649/2649        Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [257]
+[277]    0.0    0.00    0.00    2649         Clipper2Lib::ClipperBase::JoinOutrecPaths(Clipper2Lib::Active&, Clipper2Lib::Active&) [277]
+-----------------------------------------------
+                0.00    0.00    1875/1875        Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+[278]    0.0    0.00    0.00    1875         Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+                0.00    0.00    2364/966432      Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [245]
+                0.00    0.00    1319/1319        Clipper2Lib::ClipperBase::AddTrialHorzJoin(Clipper2Lib::OutPt*) [279]
+                0.00    0.00     767/767         Clipper2Lib::GetHorzMaximaPair(Clipper2Lib::Active const&, Clipper2Lib::Vertex const*) [281]
+                0.00    0.00     503/105068      Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [257]
+                0.00    0.00     228/300891      void std::vector<long, std::allocator<long> >::_M_realloc_insert<long const&>(__gnu_cxx::__normal_iterator<long*, std::vector<long, std::allocator<long> > >, long const&) [248]
+                0.00    0.00      58/13290       Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [268]
+                0.00    0.00       8/105068      Clipper2Lib::ClipperBase::AddLocalMinPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&, bool) [258]
+                0.00    0.00       3/669         Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [282]
+-----------------------------------------------
+                0.00    0.00    1319/1319        Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+[279]    0.0    0.00    0.00    1319         Clipper2Lib::ClipperBase::AddTrialHorzJoin(Clipper2Lib::OutPt*) [279]
+-----------------------------------------------
+                0.00    0.00    1294/1294        Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [9]
+[280]    0.0    0.00    0.00    1294         Clipper2Lib::ClipperBase::ConvertHorzTrialsToJoins() [280]
+                0.00    0.00    1302/104102      Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*) [260]
+                0.00    0.00       1/669         Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [282]
+-----------------------------------------------
+                0.00    0.00     767/767         Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+[281]    0.0    0.00    0.00     767         Clipper2Lib::GetHorzMaximaPair(Clipper2Lib::Active const&, Clipper2Lib::Vertex const*) [281]
+-----------------------------------------------
+                0.00    0.00       1/669         Clipper2Lib::ClipperBase::ConvertHorzTrialsToJoins() [280]
+                0.00    0.00       3/669         Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [278]
+                0.00    0.00      12/669         Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [268]
+                0.00    0.00      42/669         Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [246]
+                0.00    0.00      99/669         Clipper2Lib::ClipperBase::DoTopOfScanbeam(long) [247]
+                0.00    0.00     512/669         Clipper2Lib::ClipperBase::ProcessIntersectList() [269]
+[282]    0.0    0.00    0.00     669         Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [282]
+                0.00    0.00     668/668         void std::vector<Clipper2Lib::Joiner*, std::allocator<Clipper2Lib::Joiner*> >::_M_realloc_insert<Clipper2Lib::Joiner* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::Joiner**, std::vector<Clipper2Lib::Joiner*, std::allocator<Clipper2Lib::Joiner*> > >, Clipper2Lib::Joiner* const&) [284]
+-----------------------------------------------
+                0.00    0.00     317/668         Clipper2Lib::ClipperBase::SafeDeleteOutPtJoiners(Clipper2Lib::OutPt*) [276]
+                0.00    0.00     351/668         Clipper2Lib::ClipperBase::ProcessJoin(Clipper2Lib::Joiner*) [286]
+[283]    0.0    0.00    0.00     668         Clipper2Lib::ClipperBase::DeleteJoin(Clipper2Lib::Joiner*) [283]
+-----------------------------------------------
+                0.00    0.00     668/668         Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [282]
+[284]    0.0    0.00    0.00     668         void std::vector<Clipper2Lib::Joiner*, std::allocator<Clipper2Lib::Joiner*> >::_M_realloc_insert<Clipper2Lib::Joiner* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::Joiner**, std::vector<Clipper2Lib::Joiner*, std::allocator<Clipper2Lib::Joiner*> > >, Clipper2Lib::Joiner* const&) [284]
+-----------------------------------------------
+                0.00    0.00     612/612         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[285]    0.0    0.00    0.00     612         __uvw_module_MOD_uvw_ [285]
+-----------------------------------------------
+                0.00    0.00     351/351         Clipper2Lib::ClipperBase::ProcessJoinerList() [263]
+[286]    0.0    0.00    0.00     351         Clipper2Lib::ClipperBase::ProcessJoin(Clipper2Lib::Joiner*) [286]
+                0.00    0.00     351/668         Clipper2Lib::ClipperBase::DeleteJoin(Clipper2Lib::Joiner*) [283]
+                0.00    0.00     286/286         Clipper2Lib::CheckDisposeAdjacent(Clipper2Lib::OutPt*&, Clipper2Lib::OutPt const*, Clipper2Lib::OutRec&) [287]
+                0.00    0.00     141/141         Clipper2Lib::ClipperBase::CompleteSplit(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*, Clipper2Lib::OutRec&) [294]
+                0.00    0.00       2/2           Clipper2Lib::CollinearSegsOverlap(Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&) [309]
+                0.00    0.00       1/104102      Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*) [260]
+-----------------------------------------------
+                0.00    0.00     286/286         Clipper2Lib::ClipperBase::ProcessJoin(Clipper2Lib::Joiner*) [286]
+[287]    0.0    0.00    0.00     286         Clipper2Lib::CheckDisposeAdjacent(Clipper2Lib::OutPt*&, Clipper2Lib::OutPt const*, Clipper2Lib::OutRec&) [287]
+-----------------------------------------------
+                0.00    0.00     204/204         __clip_module_MOD_clip [6]
+[288]    0.0    0.00    0.00     204         __boundingbox_module_MOD_boundingbox [288]
+-----------------------------------------------
+                0.00    0.00     204/204         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[289]    0.0    0.00    0.00     204         __planck_module_MOD_planck [289]
+-----------------------------------------------
+                0.00    0.00     204/204         __uvw_module_MOD_uvw [18]
+[290]    0.0    0.00    0.00     204         __rotate_module_MOD_vaxis_rotate [290]
+-----------------------------------------------
+                0.00    0.00     204/204         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[291]    0.0    0.00    0.00     204         __rotate_of_p_module_MOD_rot_z_nodes [291]
+-----------------------------------------------
+                0.00    0.00     204/204         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[292]    0.0    0.00    0.00     204         __shadowing_of_p_module_MOD_mu [292]
+-----------------------------------------------
+                0.00    0.00     204/204         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[293]    0.0    0.00    0.00     204         __to_three_module_MOD_to_three [293]
+-----------------------------------------------
+                0.00    0.00     141/141         Clipper2Lib::ClipperBase::ProcessJoin(Clipper2Lib::Joiner*) [286]
+[294]    0.0    0.00    0.00     141         Clipper2Lib::ClipperBase::CompleteSplit(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*, Clipper2Lib::OutRec&) [294]
+                0.00    0.00     192/3245        Clipper2Lib::ClipperBase::SafeDeleteOutPtJoiners(Clipper2Lib::OutPt*) [276]
+                0.00    0.00      29/104102      Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*) [260]
+                0.00    0.00      17/104949      void std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> >::_M_realloc_insert<Clipper2Lib::OutRec* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::OutRec**, std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> > >, Clipper2Lib::OutRec* const&) [259]
+-----------------------------------------------
+                0.00    0.00     102/102         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[295]    0.0    0.00    0.00     102         __centre_of_p_module_MOD_centre [295]
+-----------------------------------------------
+                0.00    0.00     102/102         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[296]    0.0    0.00    0.00     102         __hapke_module_MOD_init_hapke [296]
+-----------------------------------------------
+                0.00    0.00     102/102         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[297]    0.0    0.00    0.00     102         __normal_of_p_module_MOD_normal [297]
+                0.00    0.00   16320/24756       __vector_product_module_MOD_vector_product [266]
+                0.00    0.00   16320/16320       __normalize_module_MOD_normalize [267]
+-----------------------------------------------
+                0.00    0.00     102/102         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[298]    0.0    0.00    0.00     102         __rotate_of_p_module_MOD_rot_y_nodes [298]
+-----------------------------------------------
+                0.00    0.00     102/102         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[299]    0.0    0.00    0.00     102         __shadowing_of_p_module_MOD_non [299]
+-----------------------------------------------
+                0.00    0.00     102/102         __lc_polygon1_module_MOD_lc_polygon1 [3]
+[300]    0.0    0.00    0.00     102         __surface_module_MOD_surface [300]
+                0.00    0.00    8232/24756       __vector_product_module_MOD_vector_product [266]
+-----------------------------------------------
+                0.00    0.00      30/30          Clipper2Lib::ClipperBase::FixSelfIntersects(Clipper2Lib::OutRec*) [261]
+[301]    0.0    0.00    0.00      30         Clipper2Lib::ClipperBase::DoSplitOp(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [301]
+                0.00    0.00      60/3245        Clipper2Lib::ClipperBase::SafeDeleteOutPtJoiners(Clipper2Lib::OutPt*) [276]
+                0.00    0.00      30/30          Clipper2Lib::GetIntersectPoint(Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<double>&) [302]
+                0.00    0.00      21/104949      void std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> >::_M_realloc_insert<Clipper2Lib::OutRec* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::OutRec**, std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> > >, Clipper2Lib::OutRec* const&) [259]
+-----------------------------------------------
+                0.00    0.00      30/30          Clipper2Lib::ClipperBase::DoSplitOp(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [301]
+[302]    0.0    0.00    0.00      30         Clipper2Lib::GetIntersectPoint(Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<double>&) [302]
+-----------------------------------------------
+                0.00    0.00      18/18          __lc_polygon1_module_MOD_lc_polygon1 [3]
+[303]    0.0    0.00    0.00      18         __write1_module_MOD_write1 [303]
+-----------------------------------------------
+                0.00    0.00      15/15          __lc_polygon1_module_MOD_lc_polygon1 [3]
+[304]    0.0    0.00    0.00      15         __write_poly_module_MOD_write_poly [304]
+-----------------------------------------------
+                0.00    0.00       9/9           __lc_polygon1_module_MOD_lc_polygon1 [3]
+[305]    0.0    0.00    0.00       9         __write_node_module_MOD_write_node [305]
+-----------------------------------------------
+                0.00    0.00       8/8           Clipper2Lib::ClipperBase::SafeDeleteOutPtJoiners(Clipper2Lib::OutPt*) [276]
+[306]    0.0    0.00    0.00       8         Clipper2Lib::ClipperBase::DeleteTrialHorzJoin(Clipper2Lib::OutPt*) [306]
+-----------------------------------------------
+                0.00    0.00       4/4           read_ephemeris_ [46]
+[307]    0.0    0.00    0.00       4         __rotate_module_MOD_rot_x [307]
+-----------------------------------------------
+                0.00    0.00       3/3           __lc_polygon1_module_MOD_lc_polygon1 [3]
+[308]    0.0    0.00    0.00       3         __write_face_module_MOD_write_face [308]
+-----------------------------------------------
+                0.00    0.00       2/2           Clipper2Lib::ClipperBase::ProcessJoin(Clipper2Lib::Joiner*) [286]
+[309]    0.0    0.00    0.00       2         Clipper2Lib::CollinearSegsOverlap(Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&) [309]
+-----------------------------------------------
+                0.00    0.00       2/2           __lc_polygon1_module_MOD_lc_polygon1 [3]
+[310]    0.0    0.00    0.00       2         __read_face_module_MOD_read_face [310]
+-----------------------------------------------
+                0.00    0.00       2/2           __lc_polygon1_module_MOD_lc_polygon1 [3]
+[311]    0.0    0.00    0.00       2         __read_node_module_MOD_read_node [311]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [407]
+[312]    0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN11Clipper2Lib17GetIntersectPointERKNS_6ActiveES2_ [312]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [407]
+[313]    0.0    0.00    0.00       1         _GLOBAL__sub_I_clip_in_c [313]
+-----------------------------------------------
+                0.00    0.00       1/1           chi2_func_ [1]
+[314]    0.0    0.00    0.00       1         __chi2_func_occ_module_MOD_chi2_func_occ [314]
+                0.00    0.00       1/107         eps_earth_ [36]
+                0.00    0.00       1/1           read_occ_ [84]
+                0.00    0.00       1/1           __write_kml_module_MOD_write_kml [316]
+-----------------------------------------------
+                0.00    0.00       1/1           __lc_polygon1_module_MOD_lc_polygon1 [3]
+[315]    0.0    0.00    0.00       1         __read_input_module_MOD_read_input [315]
+-----------------------------------------------
+                0.00    0.00       1/1           __chi2_func_occ_module_MOD_chi2_func_occ [314]
+[316]    0.0    0.00    0.00       1         __write_kml_module_MOD_write_kml [316]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+ [312] _GLOBAL__sub_I__ZN11Clipper2Lib17GetIntersectPointERKNS_6ActiveES2_ [265] void std::__introsort_loop<__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<Clipper2Lib::LocMinSorter> >(__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<Clipper2Lib::LocMinSorter>) [36] eps_earth_
+ [313] _GLOBAL__sub_I_clip_in_c [288] __boundingbox_module_MOD_boundingbox [41] gammln_
+  [12] Clipper2Lib::BuildPathD(Clipper2Lib::OutPt*, bool, bool, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >&, double) [295] __centre_of_p_module_MOD_centre [65] gammp_
+ [283] Clipper2Lib::ClipperBase::DeleteJoin(Clipper2Lib::Joiner*) [4] __chi2_func_lc2_module_MOD_chi2_func_lc2 [66] gammq_
+  [11] Clipper2Lib::ClipperBase::PopScanline(long&) [314] __chi2_func_occ_module_MOD_chi2_func_occ [42] gcf_
+ [286] Clipper2Lib::ClipperBase::ProcessJoin(Clipper2Lib::Joiner*) [6] __clip_module_MOD_clip [67] geometries_
+ [278] Clipper2Lib::ClipperBase::DoHorizontal(Clipper2Lib::Active&) [274] __getacc_bf2_module_MOD_getacc_bf2 [68] geometry_hierarch2_
+ [294] Clipper2Lib::ClipperBase::CompleteSplit(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*, Clipper2Lib::OutRec&) [275] __getacc_mp2_module_MOD_getacc_mp2 [24] getacc_oblat_
+ [260] Clipper2Lib::ClipperBase::CleanCollinear(Clipper2Lib::OutRec*) [296] __hapke_module_MOD_init_hapke [25] getacc_ppn_
+ [249] Clipper2Lib::ClipperBase::InsertLeftEdge(Clipper2Lib::Active&) [273] __lambert_module_MOD_f_lambert [26] getacc_tides2_
+ [268] Clipper2Lib::ClipperBase::IntersectEdges(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [3] __lc_polygon1_module_MOD_lc_polygon1 [27] getaccb_tides_
+ [257] Clipper2Lib::ClipperBase::AddLocalMaxPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&) [297] __normal_of_p_module_MOD_normal [35] interp2_
+ [258] Clipper2Lib::ClipperBase::AddLocalMinPoly(Clipper2Lib::Active&, Clipper2Lib::Active&, Clipper2Lib::Point<long> const&, bool) [267] __normalize_module_MOD_normalize [30] interp_
+ [247] Clipper2Lib::ClipperBase::DoTopOfScanbeam(long) [289] __planck_module_MOD_planck [43] io_init_param_
+   [9] Clipper2Lib::ClipperBase::ExecuteInternal(Clipper2Lib::ClipType, Clipper2Lib::FillRule, bool) [310] __read_face_module_MOD_read_face [69] io_init_spin_
+ [277] Clipper2Lib::ClipperBase::JoinOutrecPaths(Clipper2Lib::Active&, Clipper2Lib::Active&) [315] __read_input_module_MOD_read_input [70] io_init_tides2_
+ [279] Clipper2Lib::ClipperBase::AddTrialHorzJoin(Clipper2Lib::OutPt*) [311] __read_node_module_MOD_read_node [71] io_init_tides_
+  [16] Clipper2Lib::ClipperBase::DisposeAllOutRecs() [307] __rotate_module_MOD_rot_x [40] io_open_
+ [261] Clipper2Lib::ClipperBase::FixSelfIntersects(Clipper2Lib::OutRec*) [290] __rotate_module_MOD_vaxis_rotate [72] kms_auday_
+ [263] Clipper2Lib::ClipperBase::ProcessJoinerList() [298] __rotate_of_p_module_MOD_rot_y_nodes [31] length_
+  [14] Clipper2Lib::ClipperBase::AddNewIntersectNode(Clipper2Lib::Active&, Clipper2Lib::Active&, long) [291] __rotate_of_p_module_MOD_rot_z_nodes [21] lum_func_
+ [306] Clipper2Lib::ClipperBase::DeleteTrialHorzJoin(Clipper2Lib::OutPt*) [292] __shadowing_of_p_module_MOD_mu [73] luminosities_
+ [269] Clipper2Lib::ClipperBase::ProcessIntersectList() [299] __shadowing_of_p_module_MOD_non [74] luminosity_planck_bandpass_
+ [256] Clipper2Lib::ClipperBase::ValidateClosedPathEx(Clipper2Lib::OutPt*&) [300] __surface_module_MOD_surface [44] merit_func_
+ [276] Clipper2Lib::ClipperBase::SafeDeleteOutPtJoiners(Clipper2Lib::OutPt*) [19] __to_poly_module_MOD_to_poly [75] orbel_ehybrid_
+ [280] Clipper2Lib::ClipperBase::ConvertHorzTrialsToJoins() [293] __to_three_module_MOD_to_three [76] orbel_el2xv_
+ [246] Clipper2Lib::ClipperBase::InsertLocalMinimaIntoAEL(long) [18] __uvw_module_MOD_uvw [77] orbel_esolmd_
+ [250] Clipper2Lib::ClipperBase::SetWindCountForClosedPathEdge(Clipper2Lib::Active&) [285] __uvw_module_MOD_uvw_ [39] orbel_scget_
+ [264] Clipper2Lib::ClipperBase::Reset() [266] __vector_product_module_MOD_vector_product [22] planck_
+ [282] Clipper2Lib::ClipperBase::AddJoin(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [303] __write1_module_MOD_write1 [45] qtrap_
+ [254] Clipper2Lib::ClipperBase::CleanUp() [308] __write_face_module_MOD_write_face [78] quicksort_
+   [7] Clipper2Lib::ClipperBase::AddPaths(std::vector<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > >, std::allocator<std::vector<Clipper2Lib::Point<long>, std::allocator<Clipper2Lib::Point<long> > > > > const&, Clipper2Lib::PathType, bool) [316] __write_kml_module_MOD_write_kml [79] read_ao_
+ [251] Clipper2Lib::ClipperBase::DoMaxima(Clipper2Lib::Active&) [305] __write_node_module_MOD_write_node [80] read_clo_
+ [301] Clipper2Lib::ClipperBase::DoSplitOp(Clipper2Lib::OutPt*, Clipper2Lib::OutPt*) [304] __write_poly_module_MOD_write_poly [81] read_dependent_
+  [20] Clipper2Lib::ClipperBase::~ClipperBase() [23] bs_der_ [82] read_ecl_
+ [281] Clipper2Lib::GetHorzMaximaPair(Clipper2Lib::Active const&, Clipper2Lib::Vertex const*) [33] bs_int_ [46] read_ephemeris_
+ [302] Clipper2Lib::GetIntersectPoint(Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<double>&) [34] bs_step_ [83] read_lc_
+ [245] Clipper2Lib::IntersectListSort(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&) [1] chi2_func_ [84] read_occ_
+ [287] Clipper2Lib::CheckDisposeAdjacent(Clipper2Lib::OutPt*&, Clipper2Lib::OutPt const*, Clipper2Lib::OutRec&) [51] chi2_func_ao_ [47] read_rv_
+ [309] Clipper2Lib::CollinearSegsOverlap(Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&, Clipper2Lib::Point<long> const&) [52] chi2_func_clo_ [85] read_sed_
+  [13] Clipper2Lib::ClipperD::BuildPathsD(std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >&, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >*) [53] chi2_func_ecl_ [48] read_sky2_
+ [252] Clipper2Lib::ClipperBase::IsContributingClosed(Clipper2Lib::Active const&) const [54] chi2_func_lc_ [49] read_sky_
+ [272] void std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> >::_M_realloc_insert<Clipper2Lib::IntersectNode>(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, Clipper2Lib::IntersectNode&&) [55] chi2_func_rv_ [86] read_syn_
+   [8] void std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >::_M_realloc_insert<Clipper2Lib::Point<double> >(__gnu_cxx::__normal_iterator<Clipper2Lib::Point<double>*, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > >, Clipper2Lib::Point<double>&&) [56] chi2_func_sed_ [50] read_synth_
+  [15] void std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> >::_M_realloc_insert<Clipper2Lib::LocalMinima*>(__gnu_cxx::__normal_iterator<Clipper2Lib::LocalMinima**, std::vector<Clipper2Lib::LocalMinima*, std::allocator<Clipper2Lib::LocalMinima*> > >, Clipper2Lib::LocalMinima*&&) [57] chi2_func_sky2_ [38] read_time_
+ [284] void std::vector<Clipper2Lib::Joiner*, std::allocator<Clipper2Lib::Joiner*> >::_M_realloc_insert<Clipper2Lib::Joiner* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::Joiner**, std::vector<Clipper2Lib::Joiner*, std::allocator<Clipper2Lib::Joiner*> > >, Clipper2Lib::Joiner* const&) [58] chi2_func_sky3_ [87] read_time_all_
+ [259] void std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> >::_M_realloc_insert<Clipper2Lib::OutRec* const&>(__gnu_cxx::__normal_iterator<Clipper2Lib::OutRec**, std::vector<Clipper2Lib::OutRec*, std::allocator<Clipper2Lib::OutRec*> > >, Clipper2Lib::OutRec* const&) [59] chi2_func_sky_ [88] read_ttv_
+  [17] void std::vector<Clipper2Lib::Vertex*, std::allocator<Clipper2Lib::Vertex*> >::_M_realloc_insert<Clipper2Lib::Vertex*&>(__gnu_cxx::__normal_iterator<Clipper2Lib::Vertex**, std::vector<Clipper2Lib::Vertex*, std::allocator<Clipper2Lib::Vertex*> > >, Clipper2Lib::Vertex*&) [60] chi2_func_syn_ [89] read_vis_
+ [262] void std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::emplace_back<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > >(std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >&&) [61] chi2_func_t3_ [90] spin_evolve_
+ [253] void std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::_M_realloc_insert<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > const&>(__gnu_cxx::__normal_iterator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >*, std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > > >, std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > const&) [62] chi2_func_ttv_ [10] swift_bs_xyzb_
+ [255] std::vector<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > >, std::allocator<std::vector<Clipper2Lib::Point<double>, std::allocator<Clipper2Lib::Point<double> > > > >::reserve(unsigned long) [63] chi2_func_vis_ [37] trapzd_
+ [248] void std::vector<long, std::allocator<long> >::_M_realloc_insert<long const&>(__gnu_cxx::__normal_iterator<long*, std::vector<long, std::allocator<long> > >, long const&) [5] clip_in_c [28] tu4_getaccb_
+ [270] void std::__insertion_sort<__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)> >(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)>) [64] coord_j2b_ [29] tu4_getaccb_tp_
+ [271] void std::__introsort_loop<__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)> >(__gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, __gnu_cxx::__normal_iterator<Clipper2Lib::IntersectNode*, std::vector<Clipper2Lib::IntersectNode, std::allocator<Clipper2Lib::IntersectNode> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<bool (*)(Clipper2Lib::IntersectNode const&, Clipper2Lib::IntersectNode const&)>) [clone .constprop.0] [32] distance_ab_c_ [91] util_version_

@@ -5,6 +5,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Feb 18th 2022
       real*8 function chi2_func(x)
 
       use chi2_func_OCC_module
+      use chi2_func_LC2_module
 
       include '../swift.inc'
       include '../misc/const.inc'
@@ -470,12 +471,13 @@ c   4. eclipse durations
 c   5. interferometric visibilities
 c   6. interferometric closure phases
 c   7. interferometric triple product amplitude
-c   8. light curve
+c   8. light curve (Wilson-Devinney)
 c   9. synthetic spectra
 c  10. spectral-energy distribution
 c  11. adaptive optics data
 c  12. differential astrometry
 c  13. angular velocity
+c  14. light curve (u. lc_polygon algorithm)
 c
       call chi2_func_SKY(NOUT, tout, rh, rp, rp3, chi2_SKY, n_SKY)
 
@@ -505,6 +507,8 @@ c
       call chi2_func_SKY3(NOUT, tout, rh, vh, chi2_SKY3, n_SKY3)
 
       call chi2_func_OCC(NOUT, tout, rh, chi2_OCC, n_OCC)
+
+      call chi2_func_LC2(NOUT, tout, rh, vh, chi2_LC, n_LC)
 
 c-----------------------------------------------------------------------
 c
