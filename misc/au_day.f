@@ -4,7 +4,7 @@
       include 'const.inc'
       real*8 x
 
-      au_day = x*AU / (day*c)
+      au_day = x*AU / (day*clight)
       return
       end
 

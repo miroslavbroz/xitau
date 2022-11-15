@@ -1,6 +1,6 @@
 ! chi2.inc
 ! Include file for chi2 subroutines.
-! Miroslav Broz (miroslav.broz@email.cz), Sep 22nd 2020
+! Miroslav Broz (miroslav.broz@email.cz), Nov 14th 2022
 
       integer ndim, nparam
       integer n_SKY, n_TTV, n_RV, n_ECL, n_VIS, n_CLO,                  &
@@ -18,18 +18,22 @@
       integer nbod, nband
       integer iband_LC(BANDMAX)
       integer geometry
-      real*8 T0, d_pc
+      real*8 T0
       real*8 R_star(NBODMAX), T_eff(NBODMAX), Lum(NBODMAX)
+      real*8 log_g(NBODMAX), v_rot(NBODMAX), P_rot(NBODMAX)
+      real*8 metal(NBODMAX)
+      real*8 Delta_t(NBODMAX)
+      real*8 C20(NBODMAX)
+      real*8 pole_l(NBODMAX), pole_b(NBODMAX)
+      real*8 phi0(NBODMAX)
+      real*8 zero(BANDMAX)
+      real*8 d_pc
+
       real*8 m_min(NBODMAX), m_max(NBODMAX)
       real*8 lightcurve_timestep, approx_eclipse_duration
       real*8 lambda1, lambda2, lambda3, lambda4
-      real*8 zero(BANDMAX)
-      real*8 log_g(NBODMAX), v_rot(NBODMAX), metal(NBODMAX)
       real*8 pyterpol_Delta(4)
       real*8 silh_factor
-      real*8 pole_l_, pole_b_
-      real*8 Delta_t_(NBODMAX)
-      real*8 C20(NBODMAX)
       real*8 eps_BS
 
       character*80 file_SKY(NBODMAX), file_TTV, file_RV(NBODMAX),       &
@@ -40,7 +44,7 @@
       logical use_planck, use_filters, use_limbdark, use_pyterpol
       logical use_hec88(NBODMAX)
       logical use_vardist, use_varpole, use_multipole, use_bruteforce
-      logical use_ppn
+      logical use_oblat, use_tides, use_tides2, use_ppn
       logical use_polygon
       logical is_forward
       logical debug, debug_swift
@@ -52,16 +56,21 @@
      &  w_SKY, w_TTV, w_RV, w_ECL, w_VIS, w_CLO,                        &
      &  w_T3, w_LC, w_SYN, w_SED, w_AO, w_SKY2, w_SKY3, w_OCC,          &
      &  x_param, variable, lns,                                         &
-     &  T0, d_pc, R_star, T_eff, Lum, m_min, m_max,                     &
+     &  T0,                                                             &
+     &  R_star, T_eff, Lum,                                             &
+     &  log_g, v_rot, P_rot,                                            &
+     &  metal,                                                          &
+     &  Delta_t,                                                        &
+     &  C20,                                                            &
+     &  pole_l, pole_b,                                                 &
+     &  phi0,                                                           &
+     &  zero,                                                           &
+     &  d_pc,                                                           &
+     &  m_min, m_max,                                                   &
      &  lightcurve_timestep, approx_eclipse_duration,                   &
      &  lambda1, lambda2, lambda3, lambda4,                             &
-     &  zero,                                                           &
-     &  log_g, v_rot, metal,                                            &
      &  pyterpol_Delta,                                                 &
      &  silh_factor,                                                    &
-     &  pole_l_, pole_b_,                                               &
-     &  Delta_t_,                                                       &
-     &  C20,                                                            &
      &  eps_BS,                                                         &
      &  file_SKY, file_TTV, file_RV, file_ECL, file_VIS, file_CLO,      &
      &  file_LC, file_SYN, file_synth, file_SED, file_absol, file_AO,   &
@@ -72,7 +81,7 @@
      &  use_planck, use_filters, use_limbdark, use_pyterpol,            &
      &  use_hec88,                                                      &
      &  use_vardist, use_varpole, use_multipole, use_bruteforce,        &
-     &  use_ppn,                                                        &
+     &  use_oblat, use_tides, use_tides2, use_ppn,                      &
      &  use_polygon,                                                    &
      &  is_forward,                                                     &
      &  debug, debug_swift

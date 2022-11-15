@@ -254,7 +254,7 @@ c      write(*,*) '# potc = ', potc
 c      write(*,*) '# hlum = ', hlum, ' // hot component luminosity'
 c      write(*,*) '# clum = ', clum, ' // cold component luminosity'
 c      write(*,*) '# el3 = ', el3, ' // third-light flux'
-c      write(*,*) '# el3*4*pi = ', el3*4.d0*pi
+c      write(*,*) '# el3*4*pi_ = ', el3*4.d0*pi_
 
       stop
 

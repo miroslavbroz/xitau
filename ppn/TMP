@@ -1,0 +1,17 @@
+
+      include "../bs/bs.inc"
+
+      if (i1st.eq.0) then
+        open(unit=25, file="acc.out", status="unknown")
+        last = 0.d0
+        i1st = 1
+      endif
+
+            if ((i.eq.3).and.(j.eq.4).and.(time_from_bs_step.ne.last))
+     :        then
+              write(25,*) time_from_bs_step, i, j, ax, ay, az
+            endif
+
+      last = time_from_bs_step
+
+

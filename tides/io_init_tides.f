@@ -42,14 +42,13 @@ c  read input parameters
       endif
 
       do i = 1, npl
-        read(7,*) capR(i), k_2(i), Delta_t(i), MoI(i)
+        read(7,*) capR(i), k_2(i), Delta_t_(i), MoI(i)
       enddo
 
       read(7,*) dtspin
       read(7,*) dtspinout
       read(7,10) outspinfile
 10    format(a)
-      read(7,*) use_tides
       read(7,*) debug_spin
       
       close(unit = 7)
@@ -58,7 +57,7 @@ c  read input parameters
 c unit conversion
       do i = 1, npl
         capR(i) = capR(i) * 1.d3/AU  ! km -> AU
-        Delta_t(i) = Delta_t(i)/day  ! sec -> day
+        Delta_t_(i) = Delta_t_(i)/day  ! sec -> day
         MoI(i) = MoI(i) * day**2/(AU**5)  ! kg m^2 -> AU^3/day^2 AU^2
       enddo
 

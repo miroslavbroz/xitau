@@ -40,6 +40,7 @@ c k_L = -C20 (n0/Omega_rot)^2
 c koef2 = 0.5 k_L Omega_rot^2
 c acc = koef2 R_body^5 / rij^5
 
+c from dependent.inc
       do i = 1, nbod
         R_body(i) = R_star(i)*R_S/AU
         koef2(i) = -0.5d0*C20(i)*mass(i)*R_body(i)**2

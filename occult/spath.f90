@@ -34,7 +34,7 @@ logical, intent(out) :: has_solution
 
 ! bruteforce.in
 character(len=255) :: f_elem, f_face, f_node
-double precision, save :: rho, unit, P, Tmin, pole_l, pole_b, phi0
+double precision, save :: rho, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_
 
 integer, dimension(:,:), pointer, save :: faces
 double precision, dimension(:,:), pointer, save :: nodes, nodes_
@@ -54,7 +54,7 @@ if (i1st.eq.0) then
 !
 ! read shape model
 !
-  call read_bruteforce('bruteforce.in', f_elem, f_face, f_node, rho, unit, P, Tmin, pole_l, pole_b, phi0)
+  call read_bruteforce('bruteforce.in', f_elem, f_face, f_node, rho, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_)
 
   call read_face(f_face, faces)
   call read_node(f_node, nodes)
@@ -72,18 +72,21 @@ if (i1st.eq.0) then
   i1st = 1
 endif
 
+! from dependent.inc
+pole_l_ = pole_l(1)
+pole_b_ = pole_b(1)
+phi0_ = phi0(1)
+P_rot_ = P_rot(1)
+
 ! axis rotation
 nodes_ = nodes
 t_lite = t_nolite + lite
-phi1 = 2.d0*pi*(t_lite-Tmin)/P + phi0
+phi1 = 2.d0*pi*(t_lite-Tmin)/P_rot_ + phi0_
 call rot_z_nodes(nodes_, phi1)
 
 ! pole direction
-pole_l = pole_l_
-pole_b = pole_b_
-
-phi2 = pi/2.d0-pole_b
-phi3 = pole_l
+phi2 = pi/2.d0-pole_b_
+phi3 = pole_l_
 call rot_y_nodes(nodes_, phi2)
 call rot_z_nodes(nodes_, phi3)
 

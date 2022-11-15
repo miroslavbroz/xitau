@@ -18,7 +18,7 @@ c   Version of January 8, 2003
       kompcom=komp
       IQ=(KOMP-1)*(N1+1)
       IS=(KOMP-1)*MMSAVE(IQ)
-      PI=3.141592653589793d0
+      PI=dacos(-1.d0)
       PIH=.5d0*PI
       TPOLE=10000.d0*TPOLL
       cmp=dfloat(komp-1)

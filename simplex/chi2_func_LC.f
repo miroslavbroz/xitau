@@ -9,9 +9,9 @@ c Miroslav Broz (miroslav.broz@email.cz), Apr 20th 2016
 
       implicit none
       include '../misc/const.inc'
+      include '../filters/filters.inc'
       include 'simplex.inc'
       include 'dependent.inc'
-      include 'filters.inc'
 c input
       integer NOUT, NOUT2
       real*8 m(NBODMAX)

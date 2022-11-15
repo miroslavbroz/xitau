@@ -28,7 +28,7 @@ double precision, dimension(nbod_) :: axb, ayb, azb
 double precision :: time
 
 character(len=255) :: f_elem, f_face, f_node
-double precision :: capm, unit, P, Tmin, pole_l, pole_b, phi0
+double precision, save :: capm, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_
 
 integer, save :: i1st
 data i1st /0/
@@ -50,7 +50,7 @@ if (.not.use_bruteforce) return
 if (i1st.eq.0) then
 
   ! read parameters
-  call read_bruteforce('bruteforce.in', f_elem, f_face, f_node, capm, unit, P, Tmin, pole_l, pole_b, phi0)
+  call read_bruteforce('bruteforce.in', f_elem, f_face, f_node, capm, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_)
 
   ! input files
   call read_elem(f_elem, elems)
@@ -92,19 +92,20 @@ else
   time_ = T0-time
 endif
 
-!if (use_varpole) then
-  pole_l = pole_l_
-  pole_b = pole_b_
-!endif
+! from dependent.inc
+pole_l_ = pole_l(1)
+pole_b_ = pole_b(1)
+phi0_ = phi0(1)
+P_rot_ = P_rot(1)
 
 ! axis rotation
 coms_ = coms
-phi1 = 2.d0*pi*(time-Tmin)/P + phi0
+phi1 = 2.d0*pi*(time-Tmin)/P_rot_ + phi0_
 call rot_z_nodes(coms_, phi1)
 
 ! pole direction
-phi2 = pi/2.d0-pole_b
-phi3 = pole_l
+phi2 = pi/2.d0-pole_b_
+phi3 = pole_l_
 call rot_y_nodes(coms_, phi2)
 call rot_z_nodes(coms_, phi3)
 

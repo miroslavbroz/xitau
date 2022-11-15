@@ -173,7 +173,7 @@ c
       common /cld/ acm,opsf_
       common /ardot/ dperdt_,hjd,hjd0_,perr
       common /prof2/ du1,du2,du3,du4,binw1,binw2,sc1,sc2,sl1,sl2,
-     $  clight
+     $  clightcm
       common /inprof/ in1min,in1max,in2min,in2max,mpage_,nl1,nl2
       common /ipro/ nbins,nl,inmax,inmin,nf1,nf2
       COMMON /NSPT/ NSP1,NSP2
@@ -319,7 +319,7 @@ c
           write(*,*) '# yh     = ', yh
           write(*,*) '# yc     = ', yc
           write(*,*) '# EL3    = ', EL3, ' (flux)'
-          write(*,*) '# Lum3   = ', EL3*4.d0*pi, ' (luminosity)'
+          write(*,*) '# Lum3   = ', EL3*4.d0*pi_, ' (luminosity)'
           write(*,*) '# opsf   = ', opsf
           write(*,*) '# ZERO   = ', ZERO, ' mag'
           write(*,*) '# FACTOR = ', FACTOR
@@ -337,7 +337,7 @@ c
 c        clight=2.99792458d5  ! i.e., ERRONEOUS VALUE!!
 c        rsuncm=6.960d10
 c        en0=6.0254d23
-        clight=c*1.d2  ! cm s^-1
+        clightcm=clight*1.d2  ! cm s^-1
         rsuncm=R_S*1.d2  ! cm
         en0=6.02214076d23  ! mol^-1, Avogadro constant; CODATA 2018, exact
 

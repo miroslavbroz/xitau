@@ -55,7 +55,7 @@ double precision :: ra, de, dra, dde, ra_S, de_S
 double precision :: eps0
 double precision :: lambda, phi
 double precision :: lambda_, phi_
-double precision :: lambda0, phi0
+double precision :: lambda_s, phi_s
 double precision :: lite, t_lite, t_nolite
 double precision :: u, v, w
 double precision :: xh_interp, yh_interp, zh_interp
@@ -301,10 +301,10 @@ do i = 1, m_OCC
  
 ! uncertainty
           call occult(t_nolite, r_EA, r_AO, e, axes, lambda, phi, has_solution)
-          call occult(t_nolite+sigma(i), r_EA, r_AO, e, axes, lambda0, phi0, has_solution_)
+          call occult(t_nolite+sigma(i), r_EA, r_AO, e, axes, lambda_s, phi_s, has_solution_)
          
           if (has_solution.and.has_solution_) then
-            sigma_ = great_circle(lambda, phi, lambda0, phi0)
+            sigma_ = great_circle(lambda, phi, lambda_s, phi_s)
          
             chi_ = chi_/sigma_**2
             chi2 = chi2 + chi_

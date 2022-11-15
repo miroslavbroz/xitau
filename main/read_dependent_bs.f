@@ -15,6 +15,15 @@ c Miroslav Broz (miroslav.broz@email.cz), Feb 12th 2022
       read(*,*,err=990,end=990) use_bruteforce
       write(*,*) "# use_bruteforce = ", use_bruteforce
 
+      read(*,*,err=990,end=990) use_oblat
+      write(*,*) "# use_oblat = ", use_oblat
+
+      read(*,*,err=990,end=990) use_tides
+      write(*,*) "# use_tides = ", use_tides
+
+      read(*,*,err=990,end=990) use_tides2
+      write(*,*) "# use_tides2 = ", use_tides2
+
       read(*,*,err=990,end=990) use_ppn
       write(*,*) "# use_ppn = ", use_ppn
 

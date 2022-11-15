@@ -44,7 +44,7 @@ c internal
 
       beta = 1.d0
       gama = 1.d0
-      c_ = 1.d0/(c/AU*day)**2
+      c_ = 1.d0/(clight/AU*day)**2
 
       do i = 1, nbod
         do j = 1, nbod

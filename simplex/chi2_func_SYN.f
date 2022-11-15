@@ -142,7 +142,7 @@ c linear interpolation of integrated data to a given position in time
 
 c interpolate intensities to observed lambda using Hermite cubic spline
 
-              lambda_interp = lambda_OBS(i) * (1.d0 - vzb_interp/c)  ! Doppler shift
+              lambda_interp = lambda_OBS(i)*(1.d0 - vzb_interp/clight)  ! Doppler shift
 
               if ((i.eq.1).or.(lambda_OBS(i).lt.lambda_OBS(i-1))) then
                 l = 3

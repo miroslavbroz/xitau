@@ -98,7 +98,7 @@ c
       common /cld/ acm,opsf_
       common /ardot/ dperdt_,hjd,hjd0_,perr
       common /prof2/ du1,du2,du3,du4,binw1,binw2,sc1,sc2,sl1,sl2,
-     $  clight
+     $  clightcm
       common /inprof/ in1min,in1max,in2min,in2max,mpage_,nl1,nl2
       common /ipro/ nbins,nl,inmax,inmin,nf1,nf2
       COMMON /NSPT/ NSP1,NSP2
@@ -215,7 +215,7 @@ c
           write(*,*) '# yh     = ', yh
           write(*,*) '# yc     = ', yc
           write(*,*) '# EL3    = ', EL3, ' (flux)'
-          write(*,*) '# Lum3   = ', EL3*4.d0*pi, ' (luminosity)'
+          write(*,*) '# Lum3   = ', EL3*4.d0*pi_, ' (luminosity)'
           write(*,*) '# opsf   = ', opsf
           write(*,*) '# ZERO   = ', ZERO, ' mag'
           write(*,*) '# FACTOR = ', FACTOR
@@ -228,7 +228,7 @@ c
         ot=1.d0/3.d0
         KH=17
         pi=dacos(-1.d0)
-        clight=2.99792458d5
+        clightcm=2.99792458d5
         en0=6.0254d23
         rsuncm=6.960d10
 

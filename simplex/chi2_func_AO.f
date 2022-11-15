@@ -40,7 +40,8 @@ c observational data
 
 c internal variables
       character(len=255) :: f_elem, f_face, f_node
-      double precision, save :: rho, unit, P, Tmin, pole_l, pole_b, phi0
+      double precision, save :: rho, unit, P_rot_, Tmin, pole_l_,
+     :  pole_b_, phi0_
 
       integer, dimension(:,:), pointer, save :: faces
       double precision, dimension(:,:), pointer, save :: nodes
@@ -91,7 +92,7 @@ c
 c read shape model
 c
           call read_bruteforce('bruteforce.in', f_elem, f_face, f_node,
-     :      rho, unit, P, Tmin, pole_l, pole_b, phi0)
+     :      rho, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_)
 
           call read_face(f_face, faces)
           call read_node(f_node, nodes)
@@ -131,24 +132,27 @@ c
 
 c light-time effect
         if (use_vardist) then
-          lite = -vardist(i)/c * AU/day 
+          lite = -vardist(i)/clight * AU/day 
         else
           lite = 0.d0
         endif
         t_interp = t_AO(i) + lite
 !        write(*,*) 'lite = ', lite  ! dbg
 
+c from dependent.inc
+        pole_l_ = pole_l(1)
+        pole_b_ = pole_b(1)
+        phi0_ = phi0(1)
+        P_rot_ = P_rot(1)
+
 c axis rotation
         nodes_ = nodes
-        phi1 = 2.d0*pi_*(t_interp-Tmin)/P + phi0
+        phi1 = 2.d0*pi_*(t_interp-Tmin)/P_rot_ + phi0_
         call rot_z_nodes(nodes_, phi1)
 
 c pole direction
-        pole_l = pole_l_
-        pole_b = pole_b_
-
-        phi2 = pi_/2.d0-pole_b
-        phi3 = pole_l
+        phi2 = pi_/2.d0-pole_b_
+        phi3 = pole_l_
         call rot_y_nodes(nodes_, phi2)
         call rot_z_nodes(nodes_, phi3)
 

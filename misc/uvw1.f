@@ -9,9 +9,9 @@ c Reference: Broz & Wolf (2017), Astronomicka mereni, p. 168
       use rotate_module
 
       implicit none
-      include '../misc/const.inc'
-      include 'simplex.inc'
-      include 'dependent.inc'
+      include 'const.inc'
+      include '../simplex/simplex.inc'
+      include '../simplex/dependent.inc'
 
       real*8 t, l, b
       real*8 hatu(3), hatv(3), hatw(3)

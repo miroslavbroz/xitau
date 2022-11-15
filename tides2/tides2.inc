@@ -12,10 +12,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Sep 2nd 2020
 
       real*8 external_mass
 
-      logical use_tides2, use_oblat
-
       common /tides2/ k_L, Omega_rot, R_body,
      :  koef1, koef2, R_body5,
-     :  external_mass,
-     :  use_tides2, use_oblat
+     :  external_mass
 

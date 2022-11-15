@@ -39,15 +39,16 @@ c temporary
           mean_motion = sqrt((mass(1)+mass(i))/r**3)
         endif
 
-        delta = (omega(i)-mean_motion)*Delta_t(i)
-c        Q = 3.d0/(2.d0*abs(omega(i)-mean_motion)*k_2(i)*Delta_t(i))  ! unknown reference?!
-        Q = 1.d0/(2.d0*Delta_t(i)*abs(omega(i)-mean_motion))  ! Efroimsky & Lainey (2007)
+        delta = (omega(i)-mean_motion)*Delta_t_(i)
+        Q = 1.d0/(2.d0*Delta_t_(i)*abs(omega(i)-mean_motion))  ! Efroimsky & Lainey (2007)
 
         write(*,*) -i, r, mean_motion, omega(i), k_2(i),
-     :    Delta_t(i)*day, delta*degrad, Q
+     :    Delta_t_(i)*day, delta*degrad, Q
       enddo
 
       return
       end
+
+c        Q = 3.d0/(2.d0*abs(omega(i)-mean_motion)*k_2(i)*Delta_t(i))  ! unknown reference?!
 
 

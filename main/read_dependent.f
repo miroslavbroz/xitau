@@ -5,9 +5,9 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
       subroutine read_dependent()
 
       implicit none
+      include "../filters/filters.inc"
       include "../simplex/simplex.inc"
       include "../simplex/dependent.inc"
-      include "../simplex/filters.inc"
 
       integer i
 
@@ -196,6 +196,15 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
      :    " and use_bruteforce = ", use_bruteforce
         stop
       endif
+
+      read(*,*,err=990,end=990) use_oblat
+      write(*,*) "# use_oblat = ", use_oblat
+
+      read(*,*,err=990,end=990) use_tides
+      write(*,*) "# use_tides = ", use_tides
+
+      read(*,*,err=990,end=990) use_tides2
+      write(*,*) "# use_tides2 = ", use_tides2
 
       read(*,*,err=990,end=990) use_ppn
       write(*,*) "# use_ppn = ", use_ppn

@@ -12,12 +12,12 @@ character(len=255) :: f_node1, f_node2, f_face1, f_face2
 double precision :: unit1 = 1.d0  ! m
 double precision :: unit2 = 1.d0  ! m
 
-integer, parameter :: NBOD = 2
-double precision, dimension(NBOD) :: pole_l = (/0.d0, 0.d0/)         ! rad
-double precision, dimension(NBOD) :: pole_b = 0.5*pi*(/1.d0, 1.d0/)  ! rad
-double precision, dimension(NBOD) :: Prot = (/1.d0, 1.d0/)           ! d
-double precision, dimension(NBOD) :: Tmin = (/0.d0, 0.d0/)           ! d
-double precision, dimension(NBOD) :: phi0 = (/0.d0, 0.d0/)           ! rad
+double precision, dimension(2) :: pole_l_ = (/0.d0, 0.d0/)         ! rad
+double precision, dimension(2) :: pole_b_ = 0.5*pi*(/1.d0, 1.d0/)  ! rad
+double precision, dimension(2) :: phi0_ = (/0.d0, 0.d0/)           ! rad
+double precision, dimension(2) :: P_rot_ = (/1.d0, 1.d0/)           ! d
+double precision, dimension(2) :: Tmin = (/0.d0, 0.d0/)           ! d
+double precision, dimension(2) :: R_body = (/1.d0, 1.d0/)           ! m
 
 double precision :: T_star = 5770.d0  ! K
 double precision :: T_eq = 300.d0  ! K
@@ -33,7 +33,7 @@ double precision :: bartheta = 0.0d0  ! average slope, macroscopic roughness; ra
 logical :: use_shadowing = .true.
 logical :: use_scattering = .false.
 logical :: use_thermal = .false.
-logical :: debug = .false.
+logical :: debug_polygon = .false.
 
 ! common
 double precision :: Phi_lambda, Phi_V_cal, Phi_nu_cal, f_L
@@ -46,11 +46,12 @@ namelist /input/ &
   f_face2, &
   unit1, &
   unit2, &
-  pole_l, &
-  pole_b, &
-  Prot, &
+  pole_l_, &
+  pole_b_, &
+  phi0_, &
+  P_rot_, &
   Tmin, &
-  phi0, &
+  R_body, &
   T_star, &
   T_eq, &
   A_w, &
@@ -62,7 +63,7 @@ namelist /input/ &
   use_shadowing, &
   use_scattering, &
   use_thermal, &
-  debug
+  debug_polygon
 
 abstract interface
   double precision function f_func(f_L, mu_i, mu_e, alpha)

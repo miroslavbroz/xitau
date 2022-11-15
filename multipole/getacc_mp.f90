@@ -26,7 +26,7 @@ double precision :: time
 integer, parameter :: npole = 10
 integer, save :: maxl
 double precision, dimension(0:npole,0:npole), save :: Clm, Slm
-double precision, save :: capm, capr, P, Tmin, pole_l, pole_b, phi0
+double precision, save :: capm, capr, P_rot_, Tmin, pole_l_, pole_b_, phi0_
 
 integer, save :: i1st
 data i1st /0/
@@ -41,7 +41,7 @@ if (.not.use_multipole) return
 if (i1st.eq.0) then
 
   ! read parameters
-  call read_multipole('multipole.in', Clm, Slm, capm, capr, P, Tmin, pole_l, pole_b, phi0, maxl)
+  call read_multipole('multipole.in', Clm, Slm, capm, capr, P_rot_, Tmin, pole_l_, pole_b_, phi0_, maxl)
 
   i1st = 1
 endif
@@ -56,14 +56,15 @@ else
   time_ = T0-time
 endif
 
-!if (use_varpole) then
-  pole_l = pole_l_
-  pole_b = pole_b_
-!endif
+! from dependent.inc
+pole_l_ = pole_l(1)
+pole_b_ = pole_b(1)
+phi0_ = phi0(1)
+P_rot_ = P_rot(1)
 
-phi1 = -2.d0*pi*(time_-Tmin)/P - phi0
-phi2 = -(pi/2.d0-pole_b)
-phi3 = -pole_l
+phi1 = -2.d0*pi*(time_-Tmin)/P_rot_ - phi0_
+phi2 = -(pi/2.d0-pole_b_)
+phi3 = -pole_l_
 
 !write(*,*) 'phi1 = ', phi1
 !write(*,*) 'phi2 = ', phi2

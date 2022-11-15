@@ -40,7 +40,7 @@ c   Version of October 18, 2004
       common /flvar/ du2,du3,du4,du5,du6,du7,du8,du9,du10,du11,
      $du12,du13,du14,du15,du16,du17,vunit,vfvu,du20,qfacd
       common /prof2/ vo1,vo2,ff1,ff2,binw1,binw2,sc1,sc2,sl1,sl2,
-     $clight
+     $clightcm
       common /cld/ acm,opsf
       common /inprof/ in1min,in1max,in2min,in2max,mpage,nl1,nl2
       common /setest/ sefac
@@ -758,7 +758,7 @@ c save fluxes
       delv1(i)=delv1(i)/count1(i)
       goto 2919
  2918 delv1(i)=binw1*(dfloat(i)-binc1)
- 2919 vdc=delv1(i)/clight
+ 2919 vdc=delv1(i)/clightcm
       vfc=dsqrt((1.d0+vdc)/(1.d0-vdc))
       delwl1(i)=wl*(vfc-1.d0)
       wl1(i)=wl*vfc
@@ -771,7 +771,7 @@ c save fluxes
       delv2(i)=delv2(i)/count2(i)
       goto 2920
  2917 delv2(i)=binw2*(dfloat(i)-binc2)
- 2920 vdc=delv2(i)/clight
+ 2920 vdc=delv2(i)/clightcm
       vfc=dsqrt((1.d0+vdc)/(1.d0-vdc))
       delwl2(i)=wl*(vfc-1.d0)
       wl2(i)=wl*vfc

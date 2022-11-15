@@ -131,7 +131,7 @@ c
 c light-time effect
 
           if (use_vardist) then
-            lite = -vardist(i,k)/c * AU/day 
+            lite = -vardist(i,k)/clight * AU/day 
           else
             lite = 0.d0
           endif

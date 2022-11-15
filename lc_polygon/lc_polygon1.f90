@@ -65,7 +65,7 @@ module lc_polygon1_module
 
 contains
 
-subroutine lc_polygon1(time, r, R_star, s, o, d1, d2, lambda_eff, Delta_eff, Phi_lambda_cal, V0)
+subroutine lc_polygon1(time, r, s, o, d1, d2, lambda_eff, Delta_eff, Phi_lambda_cal, V0)
 
 use polytype_module
 use const_module
@@ -89,10 +89,11 @@ use centre_of_p_module
 use shadowing_of_p_module
 use rotate_of_p_module
 
-implicit none
+include '../simplex/simplex.inc'
+include '../simplex/dependent.inc'
+
 double precision, intent(in) :: time
 double precision, dimension(:,:), intent(in) :: r
-double precision, dimension(:), intent(in) :: R_star
 double precision, dimension(3), intent(in) :: s, o
 double precision, intent(in) :: d1, d2
 double precision, intent(in) :: lambda_eff, Delta_eff, Phi_lambda_cal
@@ -190,6 +191,13 @@ endif  ! i1st
 
 call cpu_time(t1)
 
+! from dependent.inc
+pole_l_ = pole_l(1:2)
+pole_b_ = pole_b(1:2)
+phi0_ = phi0(1:2)
+P_rot_ = P_rot(1:2)
+R_body = R_star(1:2)*R_S
+
 ! stellar surface
 B_lambda = planck(T_star, lambda_eff)
 Phi_lambda = pi*B_lambda                ! over omega, half-space, cosine
@@ -198,7 +206,7 @@ P_lambda = 4.d0*pi * J_lambda           ! over omega, full-space
 P_lambda = 4.d0*pi*R_S**2 * Phi_lambda  ! over S
 P_V = Delta_eff*P_lambda                 ! over lambda
 
-if (debug) then
+if (debug_polygon) then
   write(*,*) '# at stellar surface:'
   write(*,*) 'T_star = ', T_star, ' K'
   write(*,*) 'lambda_eff = ', lambda_eff, ' m'
@@ -226,7 +234,7 @@ call init_hapke(alpha)
 B_thermal = planck(T_eq, lambda_eff)
 Phi_thermal = pi*B_thermal
 
-if (debug) then
+if (debug_polygon) then
   write(*,*) '# at asteroid surface:'
   write(*,*) 'd1 = ', d1/au, ' au'
   write(*,*) 'Phi_lambda = ', Phi_lambda, ' W m^-2 m^-1'
@@ -250,7 +258,7 @@ omega = 1.d0/(d2**2)  ! sr
 Phi_nu_cal = Phi_lambda_cal*lambda_eff**2/clight
 Phi_V_cal = Delta_eff*Phi_lambda_cal
 
-if (debug) then
+if (debug_polygon) then
   write(*,*) '# at observer location:'
   write(*,*) 'd2 = ', d2/au, ' au'
   write(*,*) 'omega = ', omega, ' sr'
@@ -266,9 +274,9 @@ nodes = orignodes
 ! axis rotation
 do i = 1, size(nodes,1)
   j = dataset(i)
-  phi1(i) = 2.d0*pi*(time-Tmin(j))/Prot(j) + phi0(j)
-  phi2(i) = pi/2.d0-pole_b(j)
-  phi3(i) = pole_l(j)
+  phi1(i) = 2.d0*pi*(time-Tmin(j))/P_rot_(j) + phi0_(j)
+  phi2(i) = pi/2.d0-pole_b_(j)
+  phi3(i) = pole_l_(j)
 enddo
 call rot_z_nodes(nodes, phi1)
 
@@ -334,7 +342,7 @@ include 'integrate_over_S.inc'
 Phi_V = Delta_eff*omega*tot
 V0 = 0.d0 - 2.5d0*log10(Phi_V/Phi_V_cal)
 
-if (debug) then
+if (debug_polygon) then
   write(*,*) 'Phi_V = ', Phi_V, ' W m^-2'
   write(*,*) 'V0 = ', V0, ' mag'
 endif
@@ -343,7 +351,7 @@ call cpu_time(t2)
 write(*,*) 'cpu_time = ', t2-t1, ' s'  ! dbg
 
 ! debugging
-if (debug) then
+if (debug_polygon) then
   no = no+1
 !  if ((no.eq.78).or.(no.eq.79)) then
 !  if ((no.eq.1).or.(no.eq.2).or.(no.eq.3)) then

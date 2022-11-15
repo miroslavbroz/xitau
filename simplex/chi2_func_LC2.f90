@@ -12,9 +12,9 @@ use const_module
 use lc_polygon1_module
 
 implicit none
+include '../filters/filters.inc'
 include 'simplex.inc'
 include 'dependent.inc'
-include 'filters.inc'
 
 integer, intent(in) :: NOUT
 double precision, dimension(OUTMAX), intent(in) :: tout
@@ -187,7 +187,7 @@ do k = 1, nband
 !
 ! compute magnitude with the lc_polygon code (SI units)
 !
-    call lc_polygon1(t_interp, r_interp*au, R_star*R_S, n_ts, n_to, d_ts*au, d_to*au, &
+    call lc_polygon1(t_interp, r_interp*au, n_ts, n_to, d_ts*au, d_to*au, &
       lambda_eff(iband), band_eff(iband), calib(iband), mag(i,k))
 
     mag(i,k) = mag(i,k) + zero(k)

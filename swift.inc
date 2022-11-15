@@ -48,7 +48,7 @@ c...    A small number
 
 c...    trig stuff
 	real*8 PI,TWOPI,PIBY2,DEGRAD
-	parameter (PI = 3.14159265358979D0)
+        parameter(PI = 4.d0*atan(1.d0))
 	parameter (TWOPI = 2.0D0 * PI)
 	parameter (PIBY2 = PI/2.0D0)
 	parameter (DEGRAD = 180.0D0 / PI)

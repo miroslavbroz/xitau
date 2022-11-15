@@ -8,7 +8,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 24th 2016
 
       real*8 T, lambda
 
-      planck = 2.d0*h*c**2/lambda**5 / (exp(h*c/(lambda*k_B*T))-1.d0)
+      planck = 2.d0*h_P*clight**2/lambda**5
+     :  / (exp(h_P*clight/(lambda*k_B*T))-1.d0)
 
       return
       end

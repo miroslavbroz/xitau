@@ -56,6 +56,12 @@ obj = \
   misc/srtidx.o \
   misc/trapzd.o \
   misc/vproduct.o \
+  misc/omega_kopal.o \
+  misc/omega_kopal_approx.o \
+  misc/planck.o \
+  misc/uvw.o \
+  misc/uvw1.o \
+  misc/uvw2.o \
   mvs/drift/drift_dan.o \
   mvs/drift/drift_kepmd.o \
   mvs/drift/drift_kepu.o \
@@ -121,9 +127,6 @@ obj = \
   simplex/luminosity_synthetic_bandpass.o \
   simplex/luminosity_synthetic_filters.o \
   simplex/merit_func.o \
-  simplex/omega_kopal.o \
-  simplex/omega_kopal_approx.o \
-  simplex/planck.o \
   simplex/read_AO.o \
   simplex/read_CLO.o \
   simplex/read_ECL.o \
@@ -142,9 +145,6 @@ obj = \
   simplex/read_time.o \
   simplex/read_time_all.o \
   simplex/swift_bs_xyzb.o \
-  simplex/uvw.o \
-  simplex/uvw1.o \
-  simplex/uvw2.o \
   simplex/write_poles.o \
   simplex/write_uvw.o \
   subplex/calcc.o \
@@ -345,16 +345,18 @@ objc = \
 inc = \
   swift.inc \
   version.inc \
+  filters/filters.inc \
   limcof/limcof.inc \
   misc/const.inc \
   simplex/dependent.inc \
-  simplex/filters.inc \
   simplex/simplex.inc \
   simplex/cb_absol.inc \
   simplex/cb_itmax.inc \
   simplex/cb_limb.inc \
   simplex/cb_t3amp.inc \
+  tides/spin.inc \
   tides/tides.inc \
+  tides2/tides2.inc \
   wd/lc.inc \
   subplex/usubc.inc \
 

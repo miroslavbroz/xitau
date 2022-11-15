@@ -83,7 +83,7 @@ c compute tidal accelerations
                 omega_vec(2) = omega(i)*s(2,i)
                 omega_vec(3) = omega(i)*s(3,i)
               
-                call mignard(mass(j), capR(i), k_2(i), sgn*Delta_t(i),
+                call mignard(mass(j), capR(i), k_2(i), sgn*Delta_t_(i),
      :            r, v, r_dash, omega_vec, a)
             
                 call mignard_torque(mass(k), r_dash, a, T)

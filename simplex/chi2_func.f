@@ -93,26 +93,43 @@ c      enddo
       enddo
       do i = 1, nbod
         j = j+1
-c        R_star(i) = x_param(j)
-        log_g(i) = x_param(j)
+        R_star(i) = x_param(j)
       enddo
+c      do i = 1, nbod
+c        j = j+1
+c        log_g(i) = x_param(j)
+c      enddo
+c      do i = 1, nbod
+c        j = j+1
+c        v_rot(i) = x_param(j)
+c      enddo
       do i = 1, nbod
         j = j+1
-        v_rot(i) = x_param(j)
+        P_rot(i) = x_param(j)
       enddo
       do i = 1, nbod
         j = j+1
         metal(i) = x_param(j)
       enddo
-
       do i = 1, nbod
         j = j+1
-        Delta_t_(i) = x_param(j)/day
+        Delta_t(i) = x_param(j)/day
       enddo
-
       do i = 1, nbod
         j = j+1
         C20(i) = x_param(j)
+      enddo
+      do i = 1, nbod
+        j = j+1
+        pole_l(i) = x_param(j)*deg
+      enddo
+      do i = 1, nbod
+        j = j+1
+        pole_b(i) = x_param(j)*deg
+      enddo
+      do i = 1, nbod
+        j = j+1
+        phi0(i) = x_param(j)*deg
       enddo
 
       do i = 1, nband
@@ -124,11 +141,6 @@ c        R_star(i) = x_param(j)
       gamma = x_param(j)
       j = j+1
       d_pc = x_param(j)
-
-      j = j+1
-      pole_l_ = x_param(j)*deg
-      j = j+1
-      pole_b_ = x_param(j)*deg
 
       if (j.ne.nparam) then
         write(*,*) "chi2_func.f: Error number of parameters is ", j,
@@ -160,32 +172,56 @@ c constrain orbital inclinations and nodes by pole (equator) of 1
 c
       if (use_varpole) then
         do i = 2, nbod
-          elmts(i,3) = 90.d0-pole_b_/deg
-          elmts(i,4) = 180.d0+pole_l_/deg
+          elmts(i,3) = 90.d0-pole_b(1)/deg
+          elmts(i,4) = 180.d0+pole_l(1)/deg
         enddo
       endif
 c
-c compute log g [cgs] for synthetic spectra and limb darkening
-c
-c      do i = 1, nbod
-c        log_g(i) = log10(m(i)*AU**3/day**2/(R_star(i)*R_S)**2*100.d0)
-c      enddo
-c
-c      if (debug_swift) then
-c        do i = 1, nbod
-c          write(*,*) '# log_g(', i, ') = ', log_g(i)
-c        enddo
-c      endif
-c
-c compute R_star (for eclipses and visibilities)
+c compute log g [cgs] from m, R_star
 c
       do i = 1, nbod
-        R_star(i) = sqrt(m(i)*AU**3/day**2/(10.d0**log_g(i)/100.d0))/R_S
+        log_g(i) = log10(m(i)*AU**3/day**2/(R_star(i)*R_S)**2*100.d0)
       enddo
 
       if (debug_swift) then
         do i = 1, nbod
-          write(*,*) '# R_star(', i, ') = ', R_star(i), ' R_S'
+          write(*,*) '# log_g(', i, ') = ', log_g(i)
+        enddo
+      endif
+c
+c compute R_star [R_S] from m, log_g
+c
+c      do i = 1, nbod
+c        R_star(i) = sqrt(m(i)*AU**3/day**2/(10.d0**log_g(i)/100.d0))/R_S
+c      enddo
+c
+c      if (debug_swift) then
+c        do i = 1, nbod
+c          write(*,*) '# R_star(', i, ') = ', R_star(i), ' R_S'
+c        enddo
+c      endif
+c
+c compute P_rot [d] from R_star, v_rot
+c
+c      do i = 1, nbod
+c        P_rot(i) = R_star(i)*R_S/(v_rot(i)*1.d3)/day
+c      enddo
+c
+c      if (debug_swift) then
+c        do i = 1, nbod
+c          write(*,*) '# P_rot(', i, ') = ', P_rot(i), ' d'
+c        enddo
+c      endif
+c
+c compute v_rot [km/s] from R_star, P_rot
+c
+      do i = 1, nbod
+        v_rot(i) = R_star(i)*R_S/(P_rot(i)*day)/1.d3
+      enddo
+
+      if (debug_swift) then
+        do i = 1, nbod
+          write(*,*) '# v_rot(', i, ') = ', v_rot(i), ' km/s'
         enddo
       endif
 c
@@ -209,8 +245,8 @@ c
 c
 c compute luminosities (for photocentre computations)
 c
-      lambda_eff = 550.d-9
-      band_eff = 88.d-9
+      lambda_eff = 545.d-9  ! m
+      band_eff = 85.d-9  ! m
 
       call luminosities(T_eff, R_star, nbod, lambda_eff, band_eff,
      :  Lum, Lumtot, use_planck)
@@ -254,17 +290,14 @@ c save values from spin.in
       endif
 
 c modify values from spin.in, tides.in
-      s0(1,1) = cos(pole_l_)*cos(pole_b_)
-      s0(1,2) = sin(pole_l_)*cos(pole_b_)
-      s0(1,3) = sin(pole_b_)
       do i = 1, nbod
-        do j = 1, 3
-          s0(i,j) = s0(1,j)
-        enddo
+        s0(i,1) = cos(pole_l(i))*cos(pole_b(i))
+        s0(i,2) = sin(pole_l(i))*cos(pole_b(i))
+        s0(i,3) = sin(pole_b(i))
       enddo
 
       do i = 1, nbod
-        Delta_t(i) = Delta_t_(i)
+        Delta_t_(i) = Delta_t(i)
       enddo
 
 c-----------------------------------------------------------------------
@@ -512,7 +545,7 @@ c
 
 c-----------------------------------------------------------------------
 c
-c add an artificial term to constrain the masses!
+c add an artificial term to constrain the masses
 c
       chi2_MASS = 0.d0
       do i = 1, nbod
