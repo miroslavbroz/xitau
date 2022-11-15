@@ -14,7 +14,7 @@ do i = 1, size(surf,1)
     I_lambda(i) = 0.d0
     cycle
   endif
-  f(i) = f_ptr(f_L, mu_i(i), mu_e(i), alpha)
+  f(i) = f_ptr(f_L(i), mu_i(i), mu_e(i), alpha)
   Phi_i(i) = Phi_lambda*mu_i(i)
   I_lambda(i) = f(i)*Phi_i(i)
   Phi_e(i) = I_lambda(i)*mu_e(i)

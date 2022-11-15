@@ -46,9 +46,9 @@ write(*,*) 'phi0_ = ', phi0_/deg, ' deg'
 write(*,*) 'P_rot = ', P_rot_, ' d'
 write(*,*) 'Tmin = ', Tmin, ' d'
 write(*,*) 'R_body = ', R_body, ' m'
+write(*,*) 'A_w = ', A_w
 write(*,*) 'T_star = ', T_star, ' K'
 write(*,*) 'T_eq = ', T_eq, ' K'
-write(*,*) 'A_w = ', A_w
 write(*,*) 'B0 = ', B0
 write(*,*) 'minh = ', minh
 write(*,*) 'ming = ', ming
@@ -63,6 +63,7 @@ write(*,*) 'Warning: pole_b_ will be overwritten by pole_b!'
 write(*,*) 'Warning: phi0_ will be overwritten by phi0!'
 write(*,*) 'Warning: P_rot_ will be overwritten by P_rot!'
 write(*,*) 'Warning: R_body will be overwritten by R_star!'
+write(*,*) 'Warning: A_w will be overwritten by albedo!'
 
 if (law(1:2).eq.'La') then
   f_ptr => f_lambert

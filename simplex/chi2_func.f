@@ -131,6 +131,10 @@ c      enddo
         j = j+1
         phi0(i) = x_param(j)*deg
       enddo
+      do i = 1, nbod
+        j = j+1
+        albedo(i) = x_param(j)
+      enddo
 
       do i = 1, nband
         j = j+1

@@ -17,7 +17,7 @@
 ! J_lambda       .. monochromatic luminosity (ces. zarivost), W sr^-1 m^-1
 ! P_lambda       .. monochromatic power, W m^-1
 ! P_V            .. passband power, W
-! V0             .. brigtness, mag
+! V0             .. brightness, mag
 ! mu_i           .. directional cosine, incoming, cos(theta)
 ! mu_e           .. directional cosine, outgoing
 ! alpha          .. phase angle, sun-target-observer
@@ -46,7 +46,7 @@
 ! centres        .. centres of polygons, m
 ! surf           .. surface of polygons, m^2
 ! vols           .. volumes of tetrahedra, m^3
-! capR           .. radius, m
+! capR           .. radius, volume-equivalent, m
 ! capS           .. surface area, m^2
 ! capV           .. volume, m^3
 ! s              .. target->sun unitvector
@@ -60,6 +60,8 @@
 ! phi1           .. z-rotation
 ! phi2           .. x-rotation
 ! phi3           .. z-rotation
+! dataset        .. nodes identification
+! dataset_       .. faces identification
 
 module lc_polygon1_module
 
@@ -105,7 +107,7 @@ type(polystype), dimension(:), pointer, save :: polys1, polys2, polys3, polys4, 
 
 double precision, dimension(:,:), pointer, save :: normals, centres
 double precision, dimension(:), pointer, save :: surf
-double precision, dimension(:), pointer, save :: mu_i, mu_e, f, Phi_i, Phi_e
+double precision, dimension(:), pointer, save :: mu_i, mu_e, f, f_L, Phi_i, Phi_e
 double precision, dimension(:), pointer, save :: I_lambda
 
 ! internal variables
@@ -119,7 +121,7 @@ double precision :: tot, tmp
 double precision :: t1, t2
 character(len=80) :: str
 
-integer, dimension(:), pointer, save :: dataset
+integer, dimension(:), pointer, save :: dataset, dataset_
 integer, dimension(:,:), pointer, save :: faces1, faces2
 double precision, dimension(:,:), pointer, save :: nodes1, nodes2
 double precision, dimension(:), pointer, save :: phi1, phi2, phi3
@@ -141,6 +143,7 @@ if (i1st.eq.0) then
   allocate(nodes(size(nodes1,1)+size(nodes2,1), size(nodes1,2))) 
   allocate(faces(size(faces1,1)+size(faces2,1), size(faces1,2))) 
   allocate(dataset(size(nodes,1)))
+  allocate(dataset_(size(faces,1)))
 
   ! units
   nodes1 = unit1*nodes1
@@ -157,10 +160,12 @@ if (i1st.eq.0) then
   enddo
   do j = 1, size(faces1,1)
     faces(j,:) = faces1(j,:)
+    dataset_(j) = 1
   enddo
   do j = 1, size(faces2,1)
     k = j+size(faces1,1)
     faces(k,:) = faces2(j,:) + size(nodes1,1)
+    dataset_(k) = 2
   enddo
 
   ! allocation
@@ -180,6 +185,7 @@ if (i1st.eq.0) then
   allocate(mu_e(size(polys1,1)))
   allocate(surf(size(polys1,1)))
   allocate(f(size(polys1,1)))
+  allocate(f_L(size(polys1,1)))
   allocate(Phi_i(size(polys1,1)))
   allocate(Phi_e(size(polys1,1)))
   allocate(I_lambda(size(polys1,1)))
@@ -197,6 +203,7 @@ pole_b_ = pole_b(1:2)
 phi0_ = phi0(1:2)
 P_rot_ = P_rot(1:2)
 R_body = R_star(1:2)*R_S
+A_w = albedo(1:2)
 
 ! stellar surface
 B_lambda = planck(T_star, lambda_eff)
@@ -223,10 +230,14 @@ endif
 Phi_lambda = P_lambda/(4.d0*pi*d1**2)
 Phi_V = Phi_lambda*Delta_eff
 
-f_L = A_w/(4.d0*pi)  ! sr^-1
-A_hL = pi*f_L
-A_gL = 2.d0/3.d0*pi*f_L
-A_BL = pi*f_L
+do i = 1, size(f_L,1)
+  j = dataset_(i)
+  f_L(i) = A_w(j)/(4.d0*pi)
+enddo
+
+A_hL = pi*f_L(1)
+A_gL = 2.d0/3.d0*pi*f_L(1)
+A_BL = pi*f_L(1)
 
 alpha = acos(dot_product(s,o))
 call init_hapke(alpha)
@@ -239,8 +250,7 @@ if (debug_polygon) then
   write(*,*) 'd1 = ', d1/au, ' au'
   write(*,*) 'Phi_lambda = ', Phi_lambda, ' W m^-2 m^-1'
   write(*,*) 'Phi_V = ', Phi_V, ' W m^-2'
-  write(*,*) 'f_L = ', f_L, ' sr^-1'
-  write(*,*) 'A_w = ', A_w
+  write(*,*) 'f_L = ', f_L(1), ' sr^-1'
   write(*,*) 'A_hL = ', A_hL
   write(*,*) 'A_gL = ', A_gL
   write(*,*) 'A_BL = ', A_BL
@@ -369,6 +379,7 @@ if (debug_polygon) then
     call write_poly("output.poly5." // trim(str), polys5)
 
     call write1("output.f." // trim(str), f)
+    call write1("output.f_L." // trim(str), f_L)
     call write1("output.mu_i." // trim(str), mu_i)
     call write1("output.Phi_i." // trim(str), Phi_i)
     call write1("output.Phi_e." // trim(str), Phi_e)

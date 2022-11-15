@@ -26,19 +26,22 @@
 
 module hapke_module
 
-double precision :: B, P, r0
+double precision :: B, P
 
 contains
 
 double precision function f_hapke(f_L, mu_i, mu_e, alpha)
 
+use const_module
+
 implicit none
 double precision, intent(in) :: f_L, mu_i, mu_e, alpha
-double precision :: tmp
+double precision :: A_w, tmp
 
 tmp = mu_i+mu_e
 if (tmp.ne.0.d0) then
-  f_hapke = f_L/tmp * ((1.d0+B)*P + H(mu_i)*H(mu_e) - 1.d0)  ! Eq. (2.16)
+  A_w = 4.d0*pi*f_L
+  f_hapke = f_L/tmp * ((1.d0+B)*P + H(mu_i,A_w)*H(mu_e,A_w) - 1.d0)  ! Eq. (2.16)
 else
   f_hapke = 0.d0
 endif
@@ -48,13 +51,14 @@ end function f_hapke
 
 ! Note: in Broz & Solc (2013), a bracket in H(mu) is missing!
 
-double precision function H(mu)
-
-use input_module, only : A_w
+double precision function H(mu, A_w)
 
 implicit none
-double precision, intent(in) :: mu
+double precision, intent(in) :: mu, A_w
+double precision :: gamma, r0
 
+gamma = sqrt(1.d0-A_w)                                                          ! Eq. (2.19)
+r0 = (1.d0-gamma)/(1.d0+gamma)                                                  ! Eq. (2.18)
 H = (1.d0 - A_w*mu*(r0 + (1.d0-2.d0*r0*mu)/2.d0 * log((1.d0+mu)/mu)))**(-1.d0)  ! Eq. (2.17)
 
 return
@@ -69,11 +73,9 @@ double precision, intent(in) :: alpha
 
 B = B0/(1.d0+1.d0/minh*tan(alpha/2.d0))  ! Eq. (2.26)
 P = (1.d0-ming**2)/(1.d0 + 2.d0*ming*cos(alpha) + ming**2)**(3.d0/2.d0)  ! Eq. (2.13)
-r0 = (1.d0-sqrt(1.d0-A_w))/(1.d0+sqrt(1.d0-A_w))  ! Eq. (2.18)
 
 !write(*,*) 'B = ', B 
 !write(*,*) 'P = ', P 
-!write(*,*) 'r0 = ', r0 
 !write(*,*) ''
 
 end subroutine init_hapke

@@ -26,6 +26,7 @@
       real*8 C20(NBODMAX)
       real*8 pole_l(NBODMAX), pole_b(NBODMAX)
       real*8 phi0(NBODMAX)
+      real*8 albedo(NBODMAX)
       real*8 zero(BANDMAX)
       real*8 d_pc
 
@@ -64,6 +65,7 @@
      &  C20,                                                            &
      &  pole_l, pole_b,                                                 &
      &  phi0,                                                           &
+     &  albedo,                                                         &
      &  zero,                                                           &
      &  d_pc,                                                           &
      &  m_min, m_max,                                                   &

@@ -15,13 +15,13 @@ double precision :: unit2 = 1.d0  ! m
 double precision, dimension(2) :: pole_l_ = (/0.d0, 0.d0/)         ! rad
 double precision, dimension(2) :: pole_b_ = 0.5*pi*(/1.d0, 1.d0/)  ! rad
 double precision, dimension(2) :: phi0_ = (/0.d0, 0.d0/)           ! rad
-double precision, dimension(2) :: P_rot_ = (/1.d0, 1.d0/)           ! d
-double precision, dimension(2) :: Tmin = (/0.d0, 0.d0/)           ! d
-double precision, dimension(2) :: R_body = (/1.d0, 1.d0/)           ! m
+double precision, dimension(2) :: P_rot_ = (/1.d0, 1.d0/)          ! d
+double precision, dimension(2) :: Tmin = (/0.d0, 0.d0/)            ! d
+double precision, dimension(2) :: R_body = (/1.d0, 1.d0/)          ! m
+double precision, dimension(2) :: A_w = (/1.d0, 1.d0/)             ! 1
 
 double precision :: T_star = 5770.d0  ! K
 double precision :: T_eq = 300.d0  ! K
-double precision :: A_w = 1.d0
 character(len=16) :: law = 'Lambert'
 
 ! cf. hapke.f90
@@ -36,7 +36,7 @@ logical :: use_thermal = .false.
 logical :: debug_polygon = .false.
 
 ! common
-double precision :: Phi_lambda, Phi_V_cal, Phi_nu_cal, f_L
+double precision :: Phi_lambda, Phi_V_cal, Phi_nu_cal
 double precision, dimension(3) :: o_, o__, s_, s__
 
 namelist /input/ &
@@ -52,9 +52,9 @@ namelist /input/ &
   P_rot_, &
   Tmin, &
   R_body, &
+  A_w, &
   T_star, &
   T_eq, &
-  A_w, &
   law, &
   B0, &
   minh, &
