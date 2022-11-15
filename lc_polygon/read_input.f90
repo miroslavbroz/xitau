@@ -33,37 +33,36 @@ pole_b_ = pole_b_*deg
 phi0_ = phi0_*deg
 
 ! output
-write(*,*) '# input parameters:'
-write(*,*) 'f_node1 = ', trim(f_node1)
-write(*,*) 'f_face1 = ', trim(f_face1)
-write(*,*) 'f_node2 = ', trim(f_node2)
-write(*,*) 'f_face2 = ', trim(f_face2)
-write(*,*) 'unit1 = ', unit1, ' m'
-write(*,*) 'unit2 = ', unit2, ' m'
-write(*,*) 'pole_l_ = ', pole_l_/deg, ' deg'
-write(*,*) 'pole_b_ = ', pole_b_/deg, ' deg'
-write(*,*) 'phi0_ = ', phi0_/deg, ' deg'
-write(*,*) 'P_rot = ', P_rot_, ' d'
-write(*,*) 'Tmin = ', Tmin, ' d'
-write(*,*) 'R_body = ', R_body, ' m'
-write(*,*) 'A_w = ', A_w
-write(*,*) 'T_star = ', T_star, ' K'
-write(*,*) 'T_eq = ', T_eq, ' K'
-write(*,*) 'B0 = ', B0
-write(*,*) 'minh = ', minh
-write(*,*) 'ming = ', ming
-write(*,*) 'bartheta = ', bartheta
-write(*,*) 'use_shadowing = ', use_shadowing
-write(*,*) 'use_scattering = ', use_scattering
-write(*,*) 'use_thermal = ', use_thermal
-write(*,*) 'debug_polygon = ', debug_polygon
+write(*,*) '# f_node1 = ', trim(f_node1)
+write(*,*) '# f_face1 = ', trim(f_face1)
+write(*,*) '# f_node2 = ', trim(f_node2)
+write(*,*) '# f_face2 = ', trim(f_face2)
+write(*,*) '# unit1 = ', unit1, ' m'
+write(*,*) '# unit2 = ', unit2, ' m'
+write(*,*) '# pole_l_ = ', pole_l_/deg, ' deg'
+write(*,*) '# pole_b_ = ', pole_b_/deg, ' deg'
+write(*,*) '# phi0_ = ', phi0_/deg, ' deg'
+write(*,*) '# P_rot = ', P_rot_, ' d'
+write(*,*) '# Tmin = ', Tmin, ' d'
+write(*,*) '# R_body = ', R_body, ' m'
+write(*,*) '# A_w = ', A_w
+write(*,*) '# T_star = ', T_star, ' K'
+write(*,*) '# T_eq = ', T_eq, ' K'
+write(*,*) '# B0 = ', B0
+write(*,*) '# minh = ', minh
+write(*,*) '# ming = ', ming
+write(*,*) '# bartheta = ', bartheta
+write(*,*) '# use_shadowing = ', use_shadowing
+write(*,*) '# use_scattering = ', use_scattering
+write(*,*) '# use_thermal = ', use_thermal
+write(*,*) '# debug_polygon = ', debug_polygon
 
-write(*,*) 'Warning: pole_l_ will be overwritten by pole_l!'
-write(*,*) 'Warning: pole_b_ will be overwritten by pole_b!'
-write(*,*) 'Warning: phi0_ will be overwritten by phi0!'
-write(*,*) 'Warning: P_rot_ will be overwritten by P_rot!'
-write(*,*) 'Warning: R_body will be overwritten by R_star!'
-write(*,*) 'Warning: A_w will be overwritten by albedo!'
+write(*,*) '# Warning: pole_l_ will be overwritten by pole_l!'
+write(*,*) '# Warning: pole_b_ will be overwritten by pole_b!'
+write(*,*) '# Warning: phi0_ will be overwritten by phi0!'
+write(*,*) '# Warning: P_rot_ will be overwritten by P_rot!'
+write(*,*) '# Warning: R_body will be overwritten by R_star!'
+write(*,*) '# Warning: A_w will be overwritten by albedo!'
 
 if (law(1:2).eq.'La') then
   f_ptr => f_lambert

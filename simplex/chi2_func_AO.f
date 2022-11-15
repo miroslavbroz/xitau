@@ -216,7 +216,6 @@ c synthetic silhouette
      :    vardist(i), dataset(i))
 
 c observed silhouette
-        write(*,*) 'file_OBS(', i, ') = ', file_OBS(i)
         call read_pnm(file_OBS(i), pnm)
         c_ = 0.d0
         call silhouette2(pnm, silh_factor, c_/pixel_scale(i), silh_OBS)

@@ -170,7 +170,7 @@ do k = 1, nband
     endif
     t_interp = t_BIN(i,k) + lite
 
-    write(*,*) 't_BIN = ', t_BIN(i,k), ' lite = ', lite  ! dbg
+!    write(*,*) 't_BIN = ', t_BIN(i,k), ' lite = ', lite  ! dbg
 
     do while ((j1.lt.NOUT).and.(tout(j1).le.t_interp))
       j1 = j1 + 1

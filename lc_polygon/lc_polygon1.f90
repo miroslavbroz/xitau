@@ -202,7 +202,7 @@ pole_l_ = pole_l(1:2)
 pole_b_ = pole_b(1:2)
 phi0_ = phi0(1:2)
 P_rot_ = P_rot(1:2)
-R_body = R_star(1:2)*R_S
+R_body = R_star(1:2)
 A_w = albedo(1:2)
 
 ! stellar surface
@@ -254,6 +254,7 @@ if (debug_polygon) then
   write(*,*) 'A_hL = ', A_hL
   write(*,*) 'A_gL = ', A_gL
   write(*,*) 'A_BL = ', A_BL
+  write(*,*) 'alpha = ', alpha/deg, ' deg'
   write(*,*) ''
   write(*,*) 'T_eq = ', T_eq, ' K'
   write(*,*) 'B_thermal = ', B_thermal, ' W m^-2 sr^-1 m^-1'
@@ -280,6 +281,10 @@ endif
 
 ! scaling
 nodes = orignodes
+do i = 1, size(nodes,1)
+  j = dataset(i)
+  nodes(i,:) = R_body(j)*nodes(i,:)
+enddo
 
 ! axis rotation
 do i = 1, size(nodes,1)
