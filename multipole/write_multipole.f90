@@ -3,7 +3,7 @@ module write_multipole_module
 
 contains
 
-subroutine write_multipole(f, Clm, Slm, capm, capr, P, Tmin, pole_l, pole_b)
+subroutine write_multipole(f, Clm, Slm, capm, capr, P, Tmin, pole_l, pole_b, phi0, maxl)
 
 use const_module
 
@@ -11,7 +11,8 @@ implicit none
 
 character(*) :: f
 double precision, dimension(0:,0:) :: Clm, Slm
-double precision :: capm, capr, P, Tmin, pole_l, pole_b
+double precision :: capm, capr, P, Tmin, pole_l, pole_b, phi0
+integer :: maxl
 
 integer :: iu, ierr
 integer :: l, m
@@ -35,9 +36,11 @@ enddo
 write(10,*,err=900) capm, '  ! M [kg]'
 write(10,*,err=900) capr, '  ! R [m]'
 write(10,*,err=900) P/day, '  ! P [day]'
-write(10,*,err=900) Tmin, '  ! Tmin [JD]'
+write(10,*,err=900) Tmin, '  ! Tmin [JD]; TDB (not UTC)'
 write(10,*,err=900) pole_l/deg, '  ! pole_l [deg]'
 write(10,*,err=900) pole_b/deg, '  ! pole_b [deg]'
+write(10,*,err=900) phi0/deg, '  ! phi0 [deg]'
+write(10,*,err=900) maxl, '  ! maxl'
 
 close(unit=10, iostat=ierr)
 if (ierr.ne.0) then
@@ -46,7 +49,7 @@ endif
 
 return
 
-900 write(*,'(a,a)') '# Error: writing file ', f
+900 write(*,'(a,a,a)') '# Error: writing file "', trim(f), '".'
 stop
 
 end subroutine write_multipole

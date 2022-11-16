@@ -360,7 +360,7 @@ inc = \
   wd/lc.inc \
   subplex/usubc.inc \
 
-all: main/chi2 main/simplex main/simann main/subplex main/swift_bs
+all: main/chi2 main/simplex main/simann main/subplex main/swift_bs main/map
 
 main/chi2: main/chi2.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
@@ -375,6 +375,9 @@ main/subplex: main/subplex.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 main/swift_bs: main/swift_bs.f $(obj90) $(obj) $(objc) $(inc)
+	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
+
+main/map: main/map.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 $(obj90) : %.o:%.f90 $(inc)

@@ -29,7 +29,7 @@ set key right
 
 p \
   "chi2_LC2.dat"    u (phase($1)):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
-  "<awk '($1-l>0.01){ print s; }{ print; l=$1; }' Lc.dat"         u (phase($1)):2:3 w p lt 3 t "observed",\
+  "Lc.dat"         u (phase($1)):2:3 w err lt 3 pt 1 ps 0.5 t "observed",\
   "Lc_U.dat"       u (phase($1)):($2+(5-band)*shift):3 t "U" w err lt 4 pt 1 ps 0.5,\
   "Lc_B.dat"       u (phase($1)):($2+(6-band)*shift):3 t "B" w err lt 5 pt 1 ps 0.5,\
   "Lc_V.dat"       u (phase($1)):($2+(7-band)*shift):3 t "V" w err lt 2 pt 1 ps 0.5,\
@@ -43,7 +43,7 @@ rep
 
 q
 
-  "Lc.dat"         u (phase($1)):2:3 w err lt 3 pt 1 ps 0.5 t "observed",\
+  "Lc.dat"         u (phase($1)):2:3 w p lt 3 t "observed",\
   "<awk '($1-l>0.01){ print s; }{ print; l=$1; }' Lc_tess.dat"    u (phase($1)):2:3 w p lt 3 not,\
 
 f(flux, calibration_flux) = -2.5*log10(flux/calibration_flux)

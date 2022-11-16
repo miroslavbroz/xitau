@@ -29,9 +29,11 @@ obj = \
 	normalize.o \
 	normal.o \
 	write_multipole.o \
+	write_bruteforce.o \
 	write_elem.o \
 	write_face.o \
 	write_node.o \
+	srtidx.o \
         getacc_bf.o \
         getacc_bf2.o \
         getacc_mp.o \
@@ -55,6 +57,7 @@ $(obj): %.o:%.f90
 	$(f90) $(opt) -c -o $@ $<
 
 clean:
+	rm -f *.mod
 	rm $(obj)
 
 

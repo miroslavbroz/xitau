@@ -19,9 +19,11 @@ use centre_module
 use rotate_module
 use jacobi_module
 use write_multipole_module
+use write_bruteforce_module
 use write_elem_module
 use write_face_module
 use write_node_module
+use srtidx_module
 
 implicit none
 
@@ -31,12 +33,13 @@ integer, parameter :: neval = 1000
 
 ! variables
 character(len=255) :: f_elem, f_face, f_node
-double precision :: rho, unit, P, Tmin, pole_l, pole_b
+double precision :: rho, unit, P, Tmin, pole_l, pole_b, phi0
 double precision, dimension(3) :: r
+integer :: maxl
 
 integer :: l, m, j
 integer :: nrot
-double precision :: V, S, capr, capm, tmp, capr_, rho_
+double precision :: V, S, capr, capm, tmp, capr_, rho_, capm_, vkepl, vesc
 double precision :: A, B, C, D, E, F
 double precision :: C10, C11, S11
 double precision :: J2, C20, C22, C21, S21, S22
@@ -45,9 +48,10 @@ double precision :: alpha, beta, gamma, absL
 real :: t1, t2
 double precision, dimension(3) :: T, a_g
 double precision, dimension(6) :: I
-double precision, dimension(3) :: omega, L_, elambda
-double precision, dimension(3,3) :: I_, evector
+double precision, dimension(3) :: omega, L_, elambda, elambda_, r1
+double precision, dimension(3,3) :: I_, evector, evector_
 double precision, dimension(0:npole,0:npole) :: Clm, Slm
+integer, dimension(3) :: id
 integer, dimension(:,:), pointer :: elems, faces
 double precision, dimension(:,:), pointer :: nodes
 double precision, dimension(:), pointer :: vols, surf
@@ -64,12 +68,15 @@ read(*,*) P
 read(*,*) Tmin
 read(*,*) pole_l
 read(*,*) pole_b
+read(*,*) phi0
+read(*,*) maxl
 
 ! unit conversion
 r = r*unit
 P = P*day
 pole_l = pole_l*deg
 pole_b = pole_b*deg
+phi0 = phi0*deg
 
 ! write parameters
 write(*,*) 'f_elem = ', trim(f_elem)
@@ -82,6 +89,8 @@ write(*,*) 'P = ', P/day, ' day'
 write(*,*) 'Tmin = ', Tmin, ' JD'
 write(*,*) 'pole_l = ', pole_l/deg, ' deg'
 write(*,*) 'pole_b = ', pole_b/deg, ' deg'
+write(*,*) 'phi0 = ', phi0/deg, ' deg'
+write(*,*) 'maxl = ', maxl
 write(*,*)
 
 ! input files
@@ -104,11 +113,16 @@ nodes = nodes*unit
 V = volume(elems, nodes, vols)
 capr = (V/(4.d0/3.d0*pi))**(1.d0/3.d0)
 capm = V * rho
+vkepl = sqrt(G*capm/capr)
+vesc = sqrt(2.d0)*vkepl
 
 write(*,*) 'V = ', V, ' m^3'
-write(*,*) 'R = ', capr, ' m = ', capr/unit, ' [unit]'
+write(*,*) 'R = ', capr, ' m = ', capr/unit, ' [unit]; volume-equivalent'
 write(*,*) '2R = ', 2.d0*capr, ' m = ', 2.d0*capr/unit, ' [unit]'
 write(*,*) 'M = ', capm, ' kg'
+write(*,*) 'vkepl = ', vkepl, ' m s^-1'
+write(*,*) 'vesc = ', vesc, ' m s^-1'
+write(*,*)
 
 rho_ = 4.64d18/V
 capr_ = (4.64d18/rho/(4.d0/3.d0*pi))**(1.d0/3.d0)
@@ -123,7 +137,7 @@ S = surface(faces, nodes, surf)
 capr_ = sqrt(S/(4.d0*pi))
 
 write(*,*) 'S = ', S, ' m^2'
-write(*,*) 'R_ = ', capr_, ' m = ', capr_/capr, " R"
+write(*,*) 'R_ = ', capr_, ' m = ', capr_/capr, " R; surface-equivalent"
 write(*,*)
 
 ! centre of mass
@@ -196,11 +210,37 @@ write(*,*) 'evector(2) = ', evector(2,:)
 write(*,*) 'evector(3) = ', evector(3,:)
 write(*,*) 'nrot = ', nrot
 
-! rotate to align w. moment of inertia
-call rotate_diagonal(nodes, evector)
-write(*,*) 'rotated to m.o.i.'
+call srtidx(elambda, id)
+do j = 1, 3
+  elambda_(j) = elambda(id(j))
+  evector_(j,:) = evector(id(j),:)
+enddo
+
+alpha = acos(dot_product(evector_(1,:), [1.d0, 0.d0, 0.d0]))
+beta  = acos(dot_product(evector_(2,:), [0.d0, 1.d0, 0.d0]))
+gamma = acos(dot_product(evector_(3,:), [0.d0, 0.d0, 1.d0]))
+phi0 = phi0 + alpha
+write(*,*) 'alpha = ', alpha/deg, ' deg'
+write(*,*) 'beta  = ', beta/deg, ' deg'
+write(*,*) 'gamma = ', gamma/deg, ' deg'
+write(*,*) 'phi0 = ', phi0/deg, ' deg'
 write(*,*)
 
+! rotate to align w. moment of inertia
+!call rotate_diagonal(nodes, evector_)
+!do j = 1, size(evector_,1)
+!  r1(j) = dot_product(r0, evector_(j,:))
+!enddo
+!r0 = r1
+
+! a simpler vers. (too keep orientation of AO!)
+call rot_z_nodes(nodes, -alpha)
+!r0 = rot_z(r0, cos(-alpha), sin(-alpha))
+
+write(*,*) 'rotated to m.o.i. (about \hat z), incl. density profile'
+write(*,*)
+
+! again to verify
 call centre(elems, nodes, coms)
 I = inertia(vols, coms) * rho
 A = I(1)
@@ -216,6 +256,23 @@ write(*,*) 'C = ', C, ' kg m^2'
 write(*,*) 'D = Iyz = ', D, ' kg m^2'
 write(*,*) 'E = Ixz = ', E, ' kg m^2'
 write(*,*) 'F = Ixy = ', F, ' kg m^2'
+write(*,*)
+
+call jacobi(I_, elambda, evector, nrot)
+
+write(*,*) 'elambda = ', elambda
+write(*,*) 'evector(1) = ', evector(1,:)
+write(*,*) 'evector(2) = ', evector(2,:)
+write(*,*) 'evector(3) = ', evector(3,:)
+write(*,*) 'nrot = ', nrot
+
+alpha = acos(dot_product(evector(1,:), [1.d0, 0.d0, 0.d0]))
+beta  = acos(dot_product(evector(2,:), [0.d0, 1.d0, 0.d0]))
+gamma = acos(dot_product(evector(3,:), [0.d0, 0.d0, 1.d0]))
+
+write(*,*) 'alpha = ', alpha/deg, ' deg'
+write(*,*) 'beta  = ', beta/deg, ' deg'
+write(*,*) 'gamma = ', gamma/deg, ' deg'
 write(*,*)
 
 ! relation to multipoles (see Sidlichovsky notes)
@@ -281,7 +338,15 @@ do l = 0, size(Clm,1)-1
   write(*,*)
 enddo
 
-call write_multipole('multipole.in', Clm, Slm, capm, capr, P, Tmin, pole_l, pole_b)
+call write_multipole('multipole.in', Clm, Slm, capm, capr, P, Tmin, pole_l, pole_b, phi0, maxl)
+
+! write transformed mesh
+nodes = nodes/unit
+call write_elem('output.ele', elems)
+call write_face('output.face', faces)
+call write_node('output.node', nodes)
+
+call write_bruteforce('bruteforce.in', 'output.ele', 'output.face', 'output.node', capm, unit, P, Tmin, pole_l, pole_b, phi0)
 
 ! potential
 call cpu_time(t1)
@@ -336,12 +401,6 @@ do l = 0, npole
   write(*,*) 'a_g = ', a_g, ' m s^-2 (multipole, ', l, '); cpu_time = ', t2-t1, ' s'
 enddo
 write(*,*)
-
-! write transformed mesh
-nodes = nodes/unit
-call write_elem('output.ele', elems)
-call write_face('output.face', faces)
-call write_node('output.node', nodes)
 
 stop
 end
