@@ -63,6 +63,8 @@ do i = 1, size(polys2,1)
 enddo
 !$omp end parallel do
 
+deallocate(boxes)
+
 end subroutine clip
 
 end module clip_module
