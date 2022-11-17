@@ -4,6 +4,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Feb 18th 2022
 
       real*8 function chi2_func(x)
 
+      use chi2_func_AO_module
       use chi2_func_OCC_module
       use chi2_func_LC2_module
 

@@ -96,7 +96,6 @@ obj = \
   simplex/bessj1.o \
   simplex/bessj32.o \
   simplex/chi2_func.o \
-  simplex/chi2_func_AO.o \
   simplex/chi2_func_CLO.o \
   simplex/chi2_func_ECL.o \
   simplex/chi2_func_LC.o \
@@ -335,6 +334,7 @@ obj90 = \
   lc_polygon/shadowing_of_p.o \
   lc_polygon/rotate_of_p.o \
   lc_polygon/lc_polygon1.o \
+  simplex/chi2_func_AO.o \
   simplex/chi2_func_OCC.o \
   simplex/chi2_func_LC2.o \
 
