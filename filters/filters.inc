@@ -4,7 +4,7 @@
 
 ! photometric bands
       integer WDBANDS
-      parameter (WDBANDS=68)
+      parameter (WDBANDS=69)
       character*12 filters(WDBANDS)
       real*8 lambda_eff(WDBANDS), band_eff(WDBANDS), calib(WDBANDS)
 
@@ -80,7 +80,8 @@
      &  'STEREO HI-1A',                                                 &
      &  'STEREO HI-1B',                                                 &
      &  'STEREO HI-1B',                                                 &
-     &  'SMEI'                                                          &
+     &  'SMEI',                                                         &
+     &  'Gaia G'                                                        &
      &  /
 
       data lambda_eff /                                                 &
@@ -151,7 +152,8 @@
      &   690.d-9,                                                       &
      &   690.d-9,                                                       &
      &   690.d-9,                                                       &
-     &   700.d-9                                                        &
+     &   700.d-9,                                                       &
+     &   640.5d-9                                                       &  ! Gaia
      &  /       
 
       data band_eff /                                                   &
@@ -222,7 +224,8 @@
      &     0.d-9,                                                       &
      &     0.d-9,                                                       &
      &     0.d-9,                                                       &
-     &     0.d-9                                                        &
+     &     0.d-9,                                                       &
+     &   455.0d-9                                                       &  ! Gaia
      &  /
 
 ! flux calibrations F_lambda [in J s^−1 m^-2 m^-1] for a star with 0.0 magnitude;
@@ -297,6 +300,7 @@
      &  0.0d0,                                                          &
      &  0.0d0,                                                          &
      &  0.0d0,                                                          &
-     &  0.0d0                                                           &
+     &  0.0d0,                                                          &
+     &  0.0530949d0                                                     &  ! Gaia
      &  /
 

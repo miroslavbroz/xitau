@@ -37,6 +37,7 @@ integer :: i, j, k, j1, j2
 integer :: iband
 integer, dimension(BANDMAX), save :: m_BIN
 double precision, dimension(OBSMAX,BANDMAX), save :: t_BIN, mag
+integer, dimension(OBSMAX,BANDMAX), save :: i_BIN
 double precision, dimension(NBODMAX,3) :: r_interp
 double precision, dimension(3) :: n_to, n_ts
 double precision :: d_to, d_ts
@@ -76,16 +77,20 @@ if (i1st.eq.0) then
     if (m_OBS(k).ge.1) then
       j = 1
       t_BIN(j,k) = t_OBS(1,k)-eps
+      i_BIN(j,k) = 1
  
       do i = 2, m_OBS(k)
         if (t_OBS(i,k)-t_BIN(j,k) > lightcurve_timestep) then
           j = j + 1
           t_BIN(j,k) = t_OBS(i,k)
+          i_BIN(j,k) = i
         endif
       enddo
  
+      i = m_OBS(k)
       j = j + 1
-      t_BIN(j,k) = t_OBS(m_OBS(k),k)+eps
+      t_BIN(j,k) = t_OBS(i,k)+eps
+      i_BIN(j,k) = i
       m_BIN(k) = j
     else
       m_BIN(k) = 0
@@ -105,7 +110,7 @@ endif  ! i1st
 
 if (debug) then
   open(unit=iu, file="lightcurve2.dat", status="unknown")
-  write(iu,*) "# JD & magnitude & iband"
+  write(iu,*) "# JD & magnitude & iband & lite"
 endif
 
 do k = 1, nband
@@ -137,9 +142,10 @@ do k = 1, nband
 !
 ! target-observer
 !
-    l = ecl(i,k)
-    b = ecb(i,k)
-    d_to = vardist(i,k)
+    j = i_BIN(i,k)
+    l = ecl(j,k)
+    b = ecb(j,k)
+    d_to = vardist(j,k)
 
     n_to = -(/cos(l)*cos(b), sin(l)*cos(b), sin(b)/)
 !
@@ -165,8 +171,6 @@ do k = 1, nband
       lite = 0.d0
     endif
     t_interp = t_BIN(i,k) + lite
-
-!    write(*,*) 't_BIN = ', t_BIN(i,k), ' lite = ', lite  ! dbg
 
     do while ((j1.lt.NOUT).and.(tout(j1).le.t_interp))
       j1 = j1 + 1
