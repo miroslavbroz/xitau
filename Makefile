@@ -126,11 +126,9 @@ obj = \
   simplex/luminosity_synthetic_bandpass.o \
   simplex/luminosity_synthetic_filters.o \
   simplex/merit_func.o \
-  simplex/read_AO.o \
   simplex/read_CLO.o \
   simplex/read_ECL.o \
   simplex/read_LC.o \
-  simplex/read_OCC.o \
   simplex/read_RV.o \
   simplex/read_SED.o \
   simplex/read_SKY.o \
@@ -334,6 +332,9 @@ obj90 = \
   lc_polygon/shadowing_of_p.o \
   lc_polygon/rotate_of_p.o \
   lc_polygon/lc_polygon1.o \
+  simplex/read_AO.o \
+  simplex/read_LC2.o \
+  simplex/read_OCC.o \
   simplex/chi2_func_AO.o \
   simplex/chi2_func_OCC.o \
   simplex/chi2_func_LC2.o \

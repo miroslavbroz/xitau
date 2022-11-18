@@ -1,4 +1,6 @@
 
+    call read_ephemeris("ephemeris_E.dat", N_e, t_e, vardist, ecl, ecb)
+
 !        n_ts = (/cos(l)*cos(b), sin(l)*cos(b), sin(b)/)  ! target-sun
 !        n_to = (/0.d0, 0.d0, 1.d0/)  ! target-observer
 

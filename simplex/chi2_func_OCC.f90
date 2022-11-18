@@ -12,6 +12,7 @@ use const_module
 use normalize_module
 use rotate_module
 use paralax_module
+use read_occ_module
 use write_kml_module
 use fplane_module
 use spath_module

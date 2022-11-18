@@ -9,6 +9,7 @@ contains
 subroutine chi2_func_AO(chi2, n)
 
 use const_module
+use read_AO_module
 use read_face_module
 use read_node_module
 use read_bruteforce_module
@@ -29,22 +30,21 @@ include 'dependent.inc'
 ! input
 
 ! output
-real*8 chi2
-integer n
+double precision, intent(out) :: chi2
+integer, intent(out) :: n
 
 ! observational data
-integer m_AO
-integer dataset(AOMAX)
-real*8 t_AO(AOMAX),sigma(AOMAX),pixel_scale(AOMAX)
-real*8 vardist(AOMAX),ecl(AOMAX),ecb(AOMAX)
-character*255 file_OBS(AOMAX)
+integer, save :: m_AO = 0
+integer, dimension(AOMAX), save :: dataset
+double precision, dimension(AOMAX), save :: t_AO, sigma, pixel_scale, vardist, ecl, ecb
+character(len=255), dimension(AOMAX), save :: file_OBS
 
-integer N_s
-real*8 t_s(OUTMAX),vardist_s(OUTMAX),ecl_s(OUTMAX),ecb_s(OUTMAX)
+integer, save :: N_s
+double precision, dimension(OUTMAX), save :: t_s, vardist_s, ecl_s, ecb_s
 
 ! internal variables
 character(len=255) :: f_elem, f_face, f_node
-double precision, save :: rho, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_
+double precision, save :: rho, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_, R_body
 
 integer, dimension(:,:), pointer, save :: faces
 double precision, dimension(:,:), pointer, save :: nodes
@@ -56,21 +56,16 @@ logical, dimension(:), pointer, save :: masks
 double precision, dimension(2) :: c_
 double precision, dimension(3) :: n_to, n_ts
 
-integer i,j,k,iu,iub,i1st
-real*8 phi1,phi2,phi3,tmp,phase,dx,dy
-real*8 t_interp,lite
-real*8 l,b
-real*8 chi2_
-character*80 str,str_
+integer :: i, k
+integer, save :: j, i1st = 0, iu = 20, iub = 25
+double precision :: phi1, phi2, phi3, tmp, phase, dx, dy
+double precision :: t_interp, lite
+double precision :: l, b
+double precision :: chi2_
+character(len=80) :: str, str_
 
 ! functions
-real*8 nula2pi,interp,interp2
-
-data i1st /0/
-data m_AO /0/
-data iu,iub /20,25/
-
-save i1st, j, m_AO, t_AO, sigma, pixel_scale, vardist, ecl, ecb, dataset, file_OBS, N_s, t_s, vardist_s, ecl_s, ecb_s
+double precision, external :: nula2pi, interp, interp2
 
 !-----------------------------------------------------------------------
 !
@@ -141,15 +136,18 @@ do i = 1, m_AO
   pole_b_ = pole_b(1)
   phi0_ = phi0(1)
   P_rot_ = P_rot(1)
+  R_body = R_star(1)
+
+! scaling
+  nodes_ = R_body*nodes
 
 ! axis rotation
-  nodes_ = nodes
   phi1 = 2.d0*pi*(t_interp-Tmin)/P_rot_ + phi0_
+  phi2 = pi/2.d0-pole_b_
+  phi3 = pole_l_
   call rot_z_nodes(nodes_, phi1)
 
 ! pole direction
-  phi2 = pi/2.d0-pole_b_
-  phi3 = pole_l_
   call rot_y_nodes(nodes_, phi2)
   call rot_z_nodes(nodes_, phi3)
 
@@ -157,7 +155,7 @@ do i = 1, m_AO
   if (debug_swift) then
     write(str,'(i4.4)') i
     str = 'nodes' // trim(str) // '.ecl'
-!  call write_node(str, nodes_)
+!    call write_node(str, nodes_)
   endif
 
 ! sky-plane projection

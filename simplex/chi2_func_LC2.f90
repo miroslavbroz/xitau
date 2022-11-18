@@ -9,6 +9,7 @@ contains
 subroutine chi2_func_LC2(NOUT, tout, rh, vh, chi2, n)
 
 use const_module
+use read_LC2_module
 use lc_polygon1_module
 
 implicit none
@@ -25,13 +26,14 @@ integer, intent(out) :: n
 ! observational data
 integer, dimension(BANDMAX), save :: m_OBS
 double precision, dimension(OBSMAX,BANDMAX), save :: t_OBS, mag_OBS, sigma_mag_OBS
+double precision, dimension(OBSMAX,BANDMAX), save :: vardist, ecl, ecb
+integer, dimension(OBSMAX,BANDMAX), save :: dataset
 
-integer, save :: N_e, N_s
-double precision, dimension(OUTMAX), save :: t_e, vardist, ecl, ecb
+integer, save :: N_s
 double precision, dimension(OUTMAX), save :: t_s, vardist_s, ecl_s, ecb_s
 
 ! internal variables
-integer :: i, j, k, j1, j2, j3
+integer :: i, j, k, j1, j2
 integer :: iband
 integer, dimension(BANDMAX), save :: m_BIN
 double precision, dimension(OBSMAX,BANDMAX), save :: t_BIN, mag
@@ -56,9 +58,9 @@ if (i1st.eq.0) then
 
   do k = 1, nband
 
-    call read_LC(file_LC(k), m_OBS(k), t_OBS(1,k), mag_OBS(1,k), sigma_mag_OBS(1,k))
+    call read_LC2(file_LC(k), m_OBS(k), t_OBS(1,k), mag_OBS(1,k), sigma_mag_OBS(1,k), &
+      vardist(1,k), ecl(1,k), ecb(1,k), dataset(1,k))
 
-    call read_ephemeris("ephemeris_E.dat", N_e, t_e, vardist, ecl, ecb)
     call read_ephemeris("ephemeris_S.dat", N_s, t_s, vardist_s, ecl_s, ecb_s)
 
     if (debug) then
@@ -125,39 +127,33 @@ do k = 1, nband
   iband = iband_LC(k)
   j1 = 2
   j2 = 2
-  j3 = 2
 
   do i = 1, m_BIN(k)
 
-! 2DO missing lite for the Earth geometry! iterations?
 ! 2DO missing lite for the Sun geometry! iterations?
 ! alternatively, use vardist's associated to observations;
 ! nevertheless, we do include lite for bodies 1, 2, 3!
 
 !
-! target-observer (interpolated)
+! target-observer
 !
-    t_interp = t_BIN(i,k)
-
-    do while ((j2.lt.N_e).and.(t_e(j2).le.t_interp))
-      j2 = j2+1
-    enddo
-
-    l = interp2(t_e(j2-1), t_e(j2), ecl(j2-1), ecl(j2), t_interp)
-    b = interp(t_e(j2-1), t_e(j2), ecb(j2-1), ecb(j2), t_interp)
-    d_to = interp(t_e(j2-1), t_e(j2), vardist(j2-1), vardist(j2), t_interp)
+    l = ecl(i,k)
+    b = ecb(i,k)
+    d_to = vardist(i,k)
 
     n_to = -(/cos(l)*cos(b), sin(l)*cos(b), sin(b)/)
 !
 ! target-sun (interpolated)
 !
-    do while ((j3.lt.N_s).and.(t_s(j3).le.t_interp))
-      j3 = j3+1
+    t_interp = t_BIN(i,k)
+
+    do while ((j2.lt.N_s).and.(t_s(j2).le.t_interp))
+      j2 = j2+1
     enddo
 
-    l = interp2(t_s(j3-1), t_s(j3), ecl_s(j3-1), ecl_s(j3), t_interp)
-    b = interp(t_s(j3-1), t_s(j3), ecb_s(j3-1), ecb_s(j3), t_interp)
-    d_ts = interp(t_s(j3-1), t_s(j3), vardist_s(j3-1), vardist_s(j3), t_interp)
+    l = interp2(t_s(j2-1), t_s(j2), ecl_s(j2-1), ecl_s(j2), t_interp)
+    b = interp(t_s(j2-1), t_s(j2), ecb_s(j2-1), ecb_s(j2), t_interp)
+    d_ts = interp(t_s(j2-1), t_s(j2), vardist_s(j2-1), vardist_s(j2), t_interp)
 
     n_ts = -(/cos(l)*cos(b), sin(l)*cos(b), sin(b)/)
 !
