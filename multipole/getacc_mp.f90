@@ -61,6 +61,7 @@ pole_l_ = pole_l(1)
 pole_b_ = pole_b(1)
 phi0_ = phi0(1)
 P_rot_ = P_rot(1)
+Clm(2,0) = C20(1)
 
 phi1 = -2.d0*pi*(time_-Tmin)/P_rot_ - phi0_
 phi2 = -(pi/2.d0-pole_b_)

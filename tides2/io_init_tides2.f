@@ -52,8 +52,6 @@ c functions
         write(*,*) "# Omega_rot(", i, ") = ", Omega_rot(i), " rad/day"
         write(*,*) "# R_body(", i, ") = ", R_body(i), " AU = ",
      :    R_body(i)*AU/R_S, " R_S"
-        write(*,*) "# Warning: k_L will be overwritten by C20!"
-        write(*,*) "# Warning: R_body will be overwritten by R_star!"
 
         koef1(i) = 3.0d0*k_L(i)
         koef2(i) = 0.5d0*k_L(i)*Omega_rot(i)**2
@@ -65,6 +63,9 @@ c functions
       write(*,*) "# external_mass = ", external_mass/GM_S, " M_S"
 
       close(iu)
+
+      write(*,*) "# Warning: k_L will be overwritten by C20!"
+      write(*,*) "# Warning: R_body will be overwritten by R_star!"
 
       return
 
