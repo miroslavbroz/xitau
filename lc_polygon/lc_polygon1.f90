@@ -24,7 +24,7 @@
 ! omega          .. solid angle, sr
 ! lambda_eff     .. effective wavelength, m
 ! Delta_eff      .. effective pasband, m
-! f              .. bi-directional distribution function, 1
+! f              .. bi-directional distribution function, sr^-1
 ! f_L            .. Lambert law
 ! f_g            .. geometric law
 ! f_LS           .. Lommel-Seeliger law

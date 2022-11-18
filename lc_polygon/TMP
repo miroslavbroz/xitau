@@ -1,4 +1,22 @@
 
+
+
+double precision function E1(x)
+implicit none
+double precision, intent(in) :: x
+E1 = exp(-2.d0/(pi*tanbartheta*tan(x)))
+return
+end function E1
+
+
+double precision function E2(x)
+implicit none
+double precision, intent(in) :: x
+E2 = exp(-1.d0/(pi*tanbartheta**2*(tan(x))**2))
+return
+end function E2
+!cosalpha = cosi*cose + sini*sine*cospsi
+
 ! see also ../test_polygon25_tinytriangle/test_tinytriangle
 
 !write(*,*) 'phi1 = ', phi1(1)/deg
