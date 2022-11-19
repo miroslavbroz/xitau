@@ -153,7 +153,7 @@
      &   690.d-9,                                                       &
      &   690.d-9,                                                       &
      &   700.d-9,                                                       &
-     &   640.5d-9                                                       &  ! Gaia
+     &   639.02d-9                                                      &  ! Gaia
      &  /       
 
       data band_eff /                                                   &
@@ -225,7 +225,7 @@
      &     0.d-9,                                                       &
      &     0.d-9,                                                       &
      &     0.d-9,                                                       &
-     &   455.0d-9                                                       &  ! Gaia
+     &   317.32d-9                                                      &  ! Gaia
      &  /
 
 ! flux calibrations F_lambda [in J s^−1 m^-2 m^-1] for a star with 0.0 magnitude;
@@ -301,6 +301,6 @@
      &  0.0d0,                                                          &
      &  0.0d0,                                                          &
      &  0.0d0,                                                          &
-     &  0.0530949d0                                                     &  ! Gaia
+     &  0.0184503582426421d0                                            &  ! Gaia; see vypocty3_gaia.plt
      &  /
 

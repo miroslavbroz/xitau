@@ -58,12 +58,14 @@ n = i
 
 if (use_vardist) then
   str = filename(1:length(filename)-4) // '.eph'
+  write(*,*) "# read_LC2.f: Ephemeris file '", trim(str), "'."
+
   call read_ephemeris(str, i, t_, vardist, l, b)
-endif
-if (i.ne.n) then
-  write(*,*) n
-  write(*,*) "read_LC2.f: Error number of ephemerides .ne. ", n
-  stop
+
+  if (i.ne.n) then
+    write(*,*) "read_LC2.f: Error number of ephemerides ", i, ".ne.", n
+    stop
+  endif
 endif
 
 return

@@ -31,6 +31,7 @@ close(10)
 pole_l_ = pole_l_*deg
 pole_b_ = pole_b_*deg
 phi0_ = phi0_*deg
+bartheta = bartheta*deg
 
 ! output
 write(*,*) '# f_node1 = ', trim(f_node1)
@@ -51,7 +52,7 @@ write(*,*) '# T_eq = ', T_eq, ' K'
 write(*,*) '# B0 = ', B0
 write(*,*) '# minh = ', minh
 write(*,*) '# ming = ', ming
-write(*,*) '# bartheta = ', bartheta
+write(*,*) '# bartheta = ', bartheta/deg, ' deg'
 write(*,*) '# use_shadowing = ', use_shadowing
 write(*,*) '# use_scattering = ', use_scattering
 write(*,*) '# use_thermal = ', use_thermal

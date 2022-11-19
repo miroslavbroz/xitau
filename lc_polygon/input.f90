@@ -28,7 +28,7 @@ character(len=16) :: law = 'Lambert'
 double precision :: B0 = 0.0d0       ! opposition effect amplitude; 1
 double precision :: minh = 0.0d0     ! opposition effect width; 1
 double precision :: ming = 0.0d0      ! asymmetry of scattering; 1
-double precision :: bartheta = 0.0d0  ! average slope, macroscopic roughness; rad <- NOT USED!
+double precision :: bartheta = 0.0d0  ! average slope, macroscopic roughness; deg
 
 logical :: use_shadowing = .true.
 logical :: use_scattering = .false.

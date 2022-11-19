@@ -20,7 +20,10 @@ set mouse format "%.6f"
 set arrow from T0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
 
 p \
-  "Lc.dat"         u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 t "observed",\
+  "Lc.dat"         u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 t "observed",\
+  "Lc_G.dat"       u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 lc 'green',\
+  "Lc_G.dat"       u ($1-2400000):($2 + 0.158924424):3 w err pt 1 ps 1.5 lw 3 lc 'cyan',\
+  "Lc_V.dat"       u ($1-2400000):2:3 w err lt 3 pt 1 ps 3.5 lc 'blue',\
   "lightcurve2.dat" u ($1-2400000):($2+($3-band)*shift) w lp pt 1 lt 7 t "synthetic",\
   "chi2_LC2.dat"    u ($1-2400000):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
 
