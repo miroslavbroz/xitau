@@ -28,12 +28,9 @@ set grid ytics
 set key right
 
 p \
-  "chi2_LC2.dat"    u (phase($1)):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
-  "Lc.dat"         u (phase($1)):2:3 w err lt 3 pt 1 ps 0.5 t "observed",\
-  "Lc_U.dat"       u (phase($1)):($2+(5-band)*shift):3 t "U" w err lt 4 pt 1 ps 0.5,\
-  "Lc_B.dat"       u (phase($1)):($2+(6-band)*shift):3 t "B" w err lt 5 pt 1 ps 0.5,\
-  "Lc_V.dat"       u (phase($1)):($2+(7-band)*shift):3 t "V" w err lt 2 pt 1 ps 0.5,\
-  "<awk '($1-l>0.2){ print s; }{ print; l=$1; }' lightcurve2.dat" u (phase($1)):($2+($3-band)*shift) w p pt 1 lt 7 t "synthetic"
+  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==2)' chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w err pt 1 ps 0.5 lc 'blue' t "observed",\
+  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==1)' chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w lp  pt 1 lc 'orange' t "synthetic",\
+  "chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w l lw 3 lc 'red' t "residua",\
 
 pa -1
 
@@ -43,6 +40,12 @@ rep
 
 q
 
+  "chi2_LC2.dat"    u (phase($1)):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
+  "Lc.dat"         u (phase($1)):2:3 w err lt 3 pt 1 ps 0.5 t "observed",\
+  "Lc_U.dat"       u (phase($1)):($2+(5-band)*shift):3 t "U" w err lt 4 pt 1 ps 0.5,\
+  "Lc_B.dat"       u (phase($1)):($2+(6-band)*shift):3 t "B" w err lt 5 pt 1 ps 0.5,\
+  "Lc_V.dat"       u (phase($1)):($2+(7-band)*shift):3 t "V" w err lt 2 pt 1 ps 0.5,\
+  "<awk '($1-l>0.2){ print s; }{ print; l=$1; }' lightcurve2.dat" u (phase($1)):($2+($3-band)*shift) w p pt 1 lt 7 t "synthetic"
   "Lc.dat"         u (phase($1)):2:3 w p lt 3 t "observed",\
   "<awk '($1-l>0.01){ print s; }{ print; l=$1; }' Lc_tess.dat"    u (phase($1)):2:3 w p lt 3 not,\
 

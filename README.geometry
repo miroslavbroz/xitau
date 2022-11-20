@@ -1,0 +1,68 @@
+
+Summary of geometries.f:
+
+  0 .. hierarchical ((1+2)+3)+4      a,e,i,Omega,omega,M
+  1 .. two pairs    ((1+2)+(3+4))+5  a,e,i,Omega,omega,M
+  2 .. 1-centric    1+2+3+4          x,y,z,vx,vy,vz
+  3 .. ecliptic     ((1+2)+3)+4      P,e,i,Omega,omega,M
+  4 .. hierarchical ((1+2)+3)+4      P,loge,i,Omega,varpi,lambda
+  5 .. twopairs     ((1+2)+(3+4))+5  P,loge,i,Omega,varpi,lambda
+  6 .. equatorial   ((1+2)+3)+4      P,e,i,Omega,omega,M
+  7 .. hierarchical ((1+2)+3)+4      P,e,i,Omega,omega,M
+
+--
+
+Variable geometry for the Solar System:
+
+   z
+
+   ^             
+   |   y                  
+   |  /                    
+   | /                     
+   |/                      
+  -|----------> x (vernal eqx.) 
+   |                       
+
+  internal, for numerical integrations
+
+  (x, y) in the ecliptic plane (J2000)
+  x positive towards vernal equinox (Psc)
+  y positive towards l=90 deg (Gem)
+  z positive towards N ecliptic pole (Dra)
+  inertial
+  barycentric
+  right-handed
+  looking from N, planets would orbit counterclockwise
+
+   v, +DE
+
+   ^             
+   |   w                  
+   |  /                    
+   | /                     
+   |/                      
+  -|----------> u, -RA
+   |                       
+
+  sky-plane, for observations
+
+--
+
+Transformation for the opposite sign of i:
+
+  i -> -i
+  Omega -> Omega+180
+
+Transformation for the retrorgade orbit:
+
+  i -> 180-i
+  Omega -> Omega+180
+  omega -> 180-omega
+
+Transformation for the mirror orbit:
+
+  i -> -i
+
+--
+

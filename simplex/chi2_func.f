@@ -1,5 +1,5 @@
 c chi2_func.f
-c Run integrator and calculate chi^2 for a given starting vector x().
+c Run integrator and calculate chi^2 for a given state vector x().
 c Miroslav Broz (miroslav.broz@email.cz), Feb 18th 2022
 
       real*8 function chi2_func(x)
@@ -137,10 +137,10 @@ c      enddo
         albedo(i) = x_param(j)
       enddo
 
-      do i = 1, nband
-        j = j+1
-        zero(i) = x_param(j)
-      enddo
+c      do i = 1, nband
+c        j = j+1
+c        zero(i) = x_param(j)
+c      enddo
 
       j = j+1
       gamma = x_param(j)
@@ -182,7 +182,7 @@ c
         enddo
       endif
 c
-c compute log g [cgs] from m, R_star
+c EITHER, compute log g [cgs] from m, R_star
 c
       do i = 1, nbod
         log_g(i) = log10(m(i)*AU**3/day**2/(R_star(i)*R_S)**2*100.d0)
@@ -194,7 +194,7 @@ c
         enddo
       endif
 c
-c compute R_star [R_S] from m, log_g
+c OR, compute R_star [R_S] from m, log_g
 c
 c      do i = 1, nbod
 c        R_star(i) = sqrt(m(i)*AU**3/day**2/(10.d0**log_g(i)/100.d0))/R_S
@@ -206,7 +206,7 @@ c          write(*,*) '# R_star(', i, ') = ', R_star(i), ' R_S'
 c        enddo
 c      endif
 c
-c compute P_rot [d] from R_star, v_rot
+c EITHER, compute P_rot [d] from R_star, v_rot
 c
 c      do i = 1, nbod
 c        P_rot(i) = R_star(i)*R_S/(v_rot(i)*1.d3)/day
@@ -218,7 +218,7 @@ c          write(*,*) '# P_rot(', i, ') = ', P_rot(i), ' d'
 c        enddo
 c      endif
 c
-c compute v_rot [km/s] from R_star, P_rot
+c OR, compute v_rot [km/s] from R_star, P_rot
 c
       do i = 1, nbod
         v_rot(i) = R_star(i)*R_S/(P_rot(i)*day)/1.d3
@@ -491,9 +491,9 @@ c      endif
 
 c optionally, write (u, v, w) coordinates
 
-      if (debug_swift.and.use_vardist) then
-        call write_uvw(NOUT, tout, rh, rp, rp3)
-      endif
+c      if (debug_swift.and.use_vardist) then
+c        call write_uvw(NOUT, tout, rh, rp, rp3)
+c      endif
 
 c sum of ln sigma_i (for MCMC)
       lns = 0.d0

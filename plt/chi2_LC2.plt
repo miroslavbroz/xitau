@@ -20,12 +20,10 @@ set mouse format "%.6f"
 set arrow from T0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
 
 p \
-  "Lc.dat"         u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 t "observed",\
-  "Lc_G.dat"       u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 lc 'green',\
-  "Lc_G.dat"       u ($1-2400000):($2 + 0.158924424):3 w err pt 1 ps 1.5 lw 3 lc 'cyan',\
-  "Lc_V.dat"       u ($1-2400000):2:3 w err lt 3 pt 1 ps 3.5 lc 'blue',\
-  "lightcurve2.dat" u ($1-2400000):($2+($3-band)*shift) w lp pt 1 lt 7 t "synthetic",\
-  "chi2_LC2.dat"    u ($1-2400000):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
+  "lightcurve2.dat" u ($1-2400000):($2+($3-band)*shift) w lp pt 2 lc 'cyan' t "no-zero-point",\
+  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==1)' chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w lp  pt 1 lc 'orange' t "synthetic",\
+  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==2)' chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w err pt 1 ps 0.5 lc 'blue' t "observed",\
+  "chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w l lw 2 lc 'red' t "residua",\
 
 pa -1
 
@@ -35,9 +33,10 @@ rep
 
 q
 
-  "Lc.dat"         u ($1-2400000):2:3 w l lt 3 t "observed",\
-  "Lc_tess.dat"    u ($1-2400000):2:3 w l lt 3 not,\
-  "Lc_U.dat"       u ($1-2400000):($2+(5-band)*shift):3 t "U" w err lt 4 pt 1 ps 0.5,\
-  "Lc_B.dat"       u ($1-2400000):($2+(6-band)*shift):3 t "B" w err lt 5 pt 1 ps 0.5,\
-  "Lc_V.dat"       u ($1-2400000):($2+(7-band)*shift):3 t "V" w err lt 2 pt 1 ps 0.5,\
+
+  "Lc.dat"         u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 t "observed",\
+  "Lc_G.dat"       u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 lc 'green',\
+  "Lc_G.dat"       u ($1-2400000):($2 + 0.158924424):3 w err pt 1 ps 1.5 lw 3 lc 'cyan',\
+  "Lc_V.dat"       u ($1-2400000):2:3 w err lt 3 pt 1 ps 3.5 lc 'blue',\
+
 

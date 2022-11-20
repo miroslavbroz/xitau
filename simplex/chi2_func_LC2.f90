@@ -44,6 +44,7 @@ double precision :: d_to, d_ts
 double precision :: eps, lite, t_interp, mag_interp, l, b, chi2_
 double precision :: xh_interp, yh_interp, zh_interp
 double precision :: alpha, H0
+double precision :: zero2
 
 ! functions
 double precision, external :: interp, interp2
@@ -103,26 +104,20 @@ if (i1st.eq.0) then
 
 endif  ! i1st
 
-!
-! adjust the parameters affected by simplex
-!
-
-! none
-
 if (debug) then
   open(unit=iu, file="lightcurve2.dat", status="unknown")
   write(iu,*) "# JD & magnitude & iband & lite [d] & alpha [deg] & H0 [mag]"
 endif
 
-do k = 1, nband
-  if (debug) then
+if (debug) then
+  do k = 1, nband
     iband = iband_LC(k)
     write(*,*) '# iband = ', iband
     write(*,*) '# lambda_eff = ', lambda_eff(iband), ' m'
     write(*,*) '# band_eff = ', band_eff(iband), ' m'
     write(*,*) '# calib = ', calib(iband), ' J s^-1 m^-2 m^-1'
-  endif
-enddo
+  enddo
+endif
  
 !
 ! interpolate trajectories to the (binned) times of observations
@@ -207,14 +202,28 @@ if (debug) then
   write(iu,*)
 endif
 
+! analytical zero point(s)
+
+if (use_zero) then
+  do k = 1,nband
+    j1 = m_OBS(k)
+    j2 = m_BIN(k)
+    zero2 = sum(mag_OBS(1:j1,k))/j1 - sum(mag(1:j2,k))/j2
+    mag(1:j1,k) = mag(1:j1,k) + zero2
+    if (debug) then
+      write(*,*) '# zero2(', k, ') = ', zero2, ' mag'
+    endif
+  enddo
+endif
+
 !
 ! interpolate synthetic lightcurve to the exact times of observations
 !
 
 if (debug) then
   open(unit=iu,file="chi2_LC2.dat",status="unknown")
-  write(iu,*) "# t_OBS & mag_interp & sigma_mag_OBS & iband & chi^2"
-  write(iu,*) "# t_OBS & mag_OBS    & sigma_mag_OBS & iband & chi^2"
+  write(iu,*) "# t_OBS & mag_interp & sigma_mag_OBS & iband & dataset & chi^2"
+  write(iu,*) "# t_OBS & mag_OBS    & sigma_mag_OBS & iband & dataset & chi^2"
 endif
 
 n = 0
@@ -240,8 +249,8 @@ do k = 1, nband
     n = n + 1
    
     if (debug) then
-      write(iu,*) t_OBS(i,k), mag_interp, sigma_mag_OBS(i,k), iband_LC(k), chi2_
-      write(iu,*) t_OBS(i,k), mag_OBS(i,k), sigma_mag_OBS(i,k), iband_LC(k), chi2_
+      write(iu,*) t_OBS(i,k), mag_interp, sigma_mag_OBS(i,k), iband_LC(k), dataset(i,k), chi2_
+      write(iu,*) t_OBS(i,k), mag_OBS(i,k), sigma_mag_OBS(i,k), iband_LC(k), dataset(i,k), chi2_
       write(iu,*)
     endif
 

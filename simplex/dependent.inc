@@ -46,7 +46,7 @@
       logical use_hec88(NBODMAX)
       logical use_vardist, use_varpole, use_multipole, use_bruteforce
       logical use_oblat, use_tides, use_tides2, use_ppn
-      logical use_polygon
+      logical use_polygon, use_zero
       logical is_forward
       logical debug, debug_swift
 
@@ -84,7 +84,7 @@
      &  use_hec88,                                                      &
      &  use_vardist, use_varpole, use_multipole, use_bruteforce,        &
      &  use_oblat, use_tides, use_tides2, use_ppn,                      &
-     &  use_polygon,                                                    &
+     &  use_polygon, use_zero,                                          &
      &  is_forward,                                                     &
      &  debug, debug_swift
 

@@ -1,7 +1,7 @@
 
 f90 = gfortran
-opt = -O3 -fopenmp
-opt = -O3
+opt = -O3 -J../mod -fopenmp
+opt = -O3 -J../mod
 obj = \
 	const.o \
 	read_elem.o \
