@@ -20,7 +20,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
       write(*,*) "# nbod = ", nbod
 
       if (nbod.gt.NBODMAX) then
-        write(*,*) "# Error nbod = ", nbod, ".gt. NBODMAX = ", NBODMAX
+        write(*,*) "Error nbod = ", nbod, ".gt. NBODMAX = ", NBODMAX
         stop
       endif
 
@@ -92,7 +92,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
       write(*,*) "# nband : "
       read(*,*,err=990,end=990) nband
       if (nband.gt.BANDMAX) then
-        write(*,*) "# Error nband = ", nband, ".gt. BANDMAX = ", BANDMAX
+        write(*,*) "Error nband = ", nband, ".gt. BANDMAX = ", BANDMAX
         stop
       endif
       write(*,*) "# nband = ", nband
@@ -103,8 +103,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
         write(*,*) "# iband_LC(", i, ") = ", iband_LC(i)
         write(*,*) "# file_LC(", i, ") = ", trim(file_LC(i))
         if (iband_LC(i).gt.WDBANDS) then
-          write(*,*) "# Error iband = ", iband_LC(i),
-     :      ".gt. WDBANDS = ", WDBANDS
+          write(*,*) "Error iband = ", iband_LC(i), ".gt. WDBANDS = ",
+     :      WDBANDS
           stop
         endif
       enddo
