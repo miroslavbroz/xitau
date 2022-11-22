@@ -67,7 +67,7 @@ module lc_polygon1_module
 
 contains
 
-subroutine lc_polygon1(time, r, s, o, d1, d2, lambda_eff, Delta_eff, Phi_lambda_cal, V0)
+subroutine lc_polygon1(t_lite, lite, r, s, o, d1, d2, lambda_eff, Delta_eff, Phi_lambda_cal, V0)
 
 use polytype_module
 use const_module
@@ -94,7 +94,7 @@ use rotate_of_p_module
 include '../simplex/simplex.inc'
 include '../simplex/dependent.inc'
 
-double precision, intent(in) :: time
+double precision, intent(in) :: t_lite, lite
 double precision, dimension(:,:), intent(in) :: r
 double precision, dimension(3), intent(in) :: s, o
 double precision, intent(in) :: d1, d2
@@ -125,6 +125,7 @@ integer, dimension(:), pointer, save :: dataset, dataset_
 integer, dimension(:,:), pointer, save :: faces1, faces2
 double precision, dimension(:,:), pointer, save :: nodes1, nodes2
 double precision, dimension(:), pointer, save :: phi1, phi2, phi3
+double precision, dimension(3) :: photocentre
 
 integer, save :: i1st = 0, no = 0
 
@@ -289,7 +290,7 @@ enddo
 ! axis rotation
 do i = 1, size(nodes,1)
   j = dataset(i)
-  phi1(i) = 2.d0*pi*(time-Tmin(j))/P_rot_(j) + phi0_(j)
+  phi1(i) = 2.d0*pi*(t_lite-Tmin(j))/P_rot_(j) + phi0_(j)
   phi2(i) = pi/2.d0-pole_b_(j)
   phi3(i) = pole_l_(j)
 enddo
@@ -370,12 +371,16 @@ if (debug_polygon) then
   no = no+1
 !  if ((no.eq.78).or.(no.eq.79)) then
 !  if ((no.eq.1).or.(no.eq.2).or.(no.eq.3)) then
-  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50)) then
+!  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50).or.(no.eq.99)) then
+  if ((no.ge.1).and.(no.le.99)) then
     write(str,'(i0.2)') no
     call write_node("output.node." // trim(str), nodes)
     call write_face("output.face." // trim(str), faces)
     call write_node("output.normal." // trim(str), normals)
     call write_node("output.centre." // trim(str), centres)
+
+    nodes = nodes/d2/arcsec
+    call write_node("output.arcsec." // trim(str), nodes)
 
     call write_poly("output.poly1." // trim(str), polys1)
     call write_poly("output.poly2." // trim(str), polys2)
@@ -413,9 +418,26 @@ if (debug_polygon) then
     write(10,*) 'o3__ = ', o__(3)
     close(10)
   endif
-endif
 
-!if (no.eq.5) stop  ! dbg
+! photocentre
+  call centre(polys5, centres)
+  photocentre = 0.d0
+  do i = 1, size(surf,1)
+    if (dataset_(i).ne.1) exit
+    if (polys5(i)%c.eq.0) cycle
+    photocentre = photocentre + centres(i,:)*Phi_e(i)*surf(i)
+  enddo
+  photocentre = photocentre/tot
+
+  open(unit=10, file='photocentre.dat', status='unknown',access='append')
+  if (no.eq.1) then
+    write(10,*) '# JD(TDB,nolite) u v w no'
+    write(10,*) '# day arcsec arcsec arcsec 1'
+  endif
+  write(10,*) t_lite-lite, photocentre/d2/arcsec, no
+  close(10)
+
+endif
 
 return
 end subroutine lc_polygon1

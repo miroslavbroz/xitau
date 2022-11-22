@@ -183,7 +183,7 @@ do k = 1, nband
 !
 ! compute magnitude with the lc_polygon code (SI units)
 !
-    call lc_polygon1(t_interp, r_interp*au, n_ts, n_to, d_ts*au, d_to*au, &
+    call lc_polygon1(t_interp, lite, r_interp*au, n_ts, n_to, d_ts*au, d_to*au, &
       lambda_eff(iband), band_eff(iband), calib(iband), mag(i,k))
 
     mag(i,k) = mag(i,k) + zero(k)

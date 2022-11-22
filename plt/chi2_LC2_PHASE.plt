@@ -27,10 +27,15 @@ set yr [:] reverse
 set grid ytics
 set key right
 
+set arrow from phase(2459546.7125847600),graph 0 rto 0,graph 1 nohead lt 0  # 19
+set arrow from phase(2459546.8038658402),graph 0 rto 0,graph 1 nohead lt 0  # 89
+
 p \
-  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==2)' chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w err pt 1 ps 0.5 lc 'blue' t "observed",\
-  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==1)' chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w lp  pt 1 lc 'orange' t "synthetic",\
+  "lightcurve2.dat" u (phase($1)):($2+($3-band)*shift) w p pt 2 lc 'cyan' t "no-zero-point",\
+  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==1)' chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w p  pt 1 lc 'orange' t "synthetic",\
   "chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w l lw 3 lc 'red' t "residua",\
+  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==2)' chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w err pt 1 ps 0.5 lc 'blue' t "observed",\
+  "<awk '!/^ *#/ && (i<100){ i++; print $1,$2,i; }' lightcurve2.dat" u (phase($1)):($2+0.02):3 w labels not,\
 
 pa -1
 
@@ -40,17 +45,10 @@ rep
 
 q
 
-  "chi2_LC2.dat"    u (phase($1)):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
-  "Lc.dat"         u (phase($1)):2:3 w err lt 3 pt 1 ps 0.5 t "observed",\
-  "Lc_U.dat"       u (phase($1)):($2+(5-band)*shift):3 t "U" w err lt 4 pt 1 ps 0.5,\
-  "Lc_B.dat"       u (phase($1)):($2+(6-band)*shift):3 t "B" w err lt 5 pt 1 ps 0.5,\
-  "Lc_V.dat"       u (phase($1)):($2+(7-band)*shift):3 t "V" w err lt 2 pt 1 ps 0.5,\
-  "<awk '($1-l>0.2){ print s; }{ print; l=$1; }' lightcurve2.dat" u (phase($1)):($2+($3-band)*shift) w p pt 1 lt 7 t "synthetic"
-  "Lc.dat"         u (phase($1)):2:3 w p lt 3 t "observed",\
-  "<awk '($1-l>0.01){ print s; }{ print; l=$1; }' Lc_tess.dat"    u (phase($1)):2:3 w p lt 3 not,\
+  "Lc.dat"         u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 t "observed",\
+  "Lc_G.dat"       u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 lc 'green',\
+  "Lc_G.dat"       u ($1-2400000):($2 + 0.158924424):3 w err pt 1 ps 1.5 lw 3 lc 'cyan',\
+  "Lc_V.dat"       u ($1-2400000):2:3 w err lt 3 pt 1 ps 3.5 lc 'blue',\
 
-f(flux, calibration_flux) = -2.5*log10(flux/calibration_flux)
-
-  "../data_20220205_tess/lightcurve_tess/Lc.dat" u ($1-2400000-4832.0-2.8):(f($2, 6.8e5)) w p ps 0.5 lc 'black' t "TESS"
 
 

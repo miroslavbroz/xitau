@@ -65,6 +65,7 @@ p \
   sprintf("<awk '($2==-3) && ($1==%.10f)' out_JDATE_uvw.dat", T0) u (f($3,$6)):(f($4,$6)) not     w p lc 0 pt 1 ps 2,\
   "chi2_SKY.dat" u (-$2*sin($3*deg)):($2*cos($3*deg)):8 t "residua" w l lc palette z lw 3,\
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)) t "observ." w p lt 7 pt 1 ps 0.5,\
+  "<awk '($1>2458192.0)' arcsec_AU.dat" u (f($2,$7)):(f($3,$7)) t "observ." w p lc 'cyan' pt 1 ps 5.0,\
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left,\
   "<./ellipses.awk arcsec_AU.dat" u (f($1,$3)):(f($2,$3)) not w l lt 7,\
   "<awk '(FNR>1){ print $0,ARGIND; }' nodes0001.dat" u 2:3 t "shape" w d lc 'black',\

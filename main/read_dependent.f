@@ -53,26 +53,6 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
       read(*,10,err=990,end=990) file_CLO
       write(*,*) "# file_CLO = ", trim(file_CLO)
 
-      write(*,*) "# nband : "
-      read(*,*,err=990,end=990) nband
-      if (nband.gt.BANDMAX) then
-        write(*,*) "# Error nband = ", nband, ".gt. BANDMAX = ", BANDMAX
-        stop
-      endif
-      write(*,*) "# nband = ", nband
-
-      do i = 1, nband
-        write(*,*) "# iband_LC(", i, ") file_LC(", i, ") : "
-        read(*,*,err=990,end=990) iband_LC(i), file_LC(i)
-        write(*,*) "# iband_LC(", i, ") = ", iband_LC(i)
-        write(*,*) "# file_LC(", i, ") = ", trim(file_LC(i))
-        if (iband_LC(i).gt.WDBANDS) then
-          write(*,*) "# Error iband = ", iband_LC(i),
-     :      ".gt. WDBANDS = ", WDBANDS
-          stop
-        endif
-      enddo
-
       write(*,*) "# file_SYN : "
       read(*,10,err=990,end=990) file_SYN
       write(*,*) "# file_SYN = ", trim(file_SYN)
@@ -108,6 +88,26 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
       write(*,*) "# file_OCC : "
       read(*,10,err=990,end=990) file_OCC
       write(*,*) "# file_OCC = ", trim(file_OCC)
+
+      write(*,*) "# nband : "
+      read(*,*,err=990,end=990) nband
+      if (nband.gt.BANDMAX) then
+        write(*,*) "# Error nband = ", nband, ".gt. BANDMAX = ", BANDMAX
+        stop
+      endif
+      write(*,*) "# nband = ", nband
+
+      do i = 1, nband
+        write(*,*) "# iband_LC(", i, ") file_LC(", i, ") : "
+        read(*,*,err=990,end=990) iband_LC(i), file_LC(i)
+        write(*,*) "# iband_LC(", i, ") = ", iband_LC(i)
+        write(*,*) "# file_LC(", i, ") = ", trim(file_LC(i))
+        if (iband_LC(i).gt.WDBANDS) then
+          write(*,*) "# Error iband = ", iband_LC(i),
+     :      ".gt. WDBANDS = ", WDBANDS
+          stop
+        endif
+      enddo
 
       write(*,*) "# geometry : "
       read(*,*,err=990,end=990) geometry

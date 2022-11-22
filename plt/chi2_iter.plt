@@ -19,7 +19,7 @@ set key outside samplen 1.5
 set arrow from nfree,graph 1 to nfree,graph 0 lt 0 nohead
 set label sprintf(" %.1f ", chi2) at graph 1,first chi2*1.5 right
 
-p "<awk '{ i++; print i, $NF; }' chi2_func.tmp"      u 1:2 t "chi^2" w lp lt 1 ps 0.5,\
+p "<awk '{ i++; print i, $NF; }' chi2_func.tmp"      u 1:2 t "chi^2" w lp lt 1 ps 0.8,\
   "<awk '{ i++; print i, $(NF-15); }' chi2_func.tmp" u 1:2 t "SKY"   w l,\
   "<awk '{ i++; print i, $(NF-14); }' chi2_func.tmp" u 1:2 t "RV"    w l,\
   "<awk '{ i++; print i, $(NF-13); }' chi2_func.tmp" u 1:2 t "TTV"   w l,\
@@ -27,7 +27,7 @@ p "<awk '{ i++; print i, $NF; }' chi2_func.tmp"      u 1:2 t "chi^2" w lp lt 1 p
   "<awk '{ i++; print i, $(NF-11); }' chi2_func.tmp" u 1:2 t "VIS"   w l,\
   "<awk '{ i++; print i, $(NF-10); }' chi2_func.tmp" u 1:2 t "CLO"   w l,\
   "<awk '{ i++; print i, $(NF -9); }' chi2_func.tmp" u 1:2 t "T3"    w l dt 2,\
-  "<awk '{ i++; print i, $(NF -8); }' chi2_func.tmp" u 1:2 t "LC"    w l,\
+  "<awk '{ i++; print i, $(NF -8); }' chi2_func.tmp" u 1:2 t "LC"    w lp lc 'orange' pt 2 ps 0.8,\
   "<awk '{ i++; print i, $(NF -7); }' chi2_func.tmp" u 1:2 t "SYN"   w l lw 2,\
   "<awk '{ i++; print i, $(NF -6); }' chi2_func.tmp" u 1:2 t "SED"   w l lw 2,\
   "<awk '{ i++; print i, $(NF -5); }' chi2_func.tmp" u 1:2 t "AO"    w l,\
