@@ -64,6 +64,10 @@ write(*,*) '# Warning: phi0_ will be overwritten by phi0!'
 write(*,*) '# Warning: P_rot_ will be overwritten by P_rot!'
 write(*,*) '# Warning: R_body will be overwritten by R_star!'
 write(*,*) '# Warning: A_w will be overwritten by albedo!'
+write(*,*) '# Warning: B0 will be overwritten by scattering(1)!'
+write(*,*) '# Warning: minh will be overwritten by scattering(2)!'
+write(*,*) '# Warning: ming will be overwritten by scattering(3)!'
+write(*,*) '# Warning: bartheta will be overwritten by scattering(4)!'
 
 if (law(1:2).eq.'La') then
   f_ptr => f_lambert

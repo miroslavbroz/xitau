@@ -10,10 +10,12 @@
 
 # binary files
 main/chi2
+main/map
 main/simplex
 main/simann
 main/subplex
 main/swift_bs
+multipole/gravity
 
 # debugging data files
 out_JDATE_*.dat

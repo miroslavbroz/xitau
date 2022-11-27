@@ -27,6 +27,7 @@
       real*8 pole_l(NBODMAX), pole_b(NBODMAX)
       real*8 phi0(NBODMAX)
       real*8 albedo(NBODMAX)
+      real*8 scattering(4)
       real*8 zero(BANDMAX)
       real*8 d_pc
 
@@ -35,6 +36,7 @@
       real*8 lambda1, lambda2, lambda3, lambda4
       real*8 pyterpol_Delta(4)
       real*8 silh_factor
+      real*8 spectral_slope
       real*8 eps_BS
 
       character*80 file_SKY(NBODMAX), file_TTV, file_RV(NBODMAX),       &
@@ -66,6 +68,7 @@
      &  pole_l, pole_b,                                                 &
      &  phi0,                                                           &
      &  albedo,                                                         &
+     &  scattering,                                                     &
      &  zero,                                                           &
      &  d_pc,                                                           &
      &  m_min, m_max,                                                   &
@@ -73,6 +76,7 @@
      &  lambda1, lambda2, lambda3, lambda4,                             &
      &  pyterpol_Delta,                                                 &
      &  silh_factor,                                                    &
+     &  spectral_slope,                                                 &
      &  eps_BS,                                                         &
      &  file_SKY, file_TTV, file_RV, file_ECL, file_VIS, file_CLO,      &
      &  file_LC, file_SYN, file_synth, file_SED, file_absol, file_AO,   &

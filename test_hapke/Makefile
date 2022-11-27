@@ -2,9 +2,9 @@
 opt = -O3 -J../mod
 
 obj = \
-  const.o \
-  input.o \
-  hapke.o \
+  ../lc_polygon/const.o \
+  ../lc_polygon/input.o \
+  ../lc_polygon/hapke.o \
 
 test_hapke: test_hapke.f90 $(obj)
 	gfortran $(opt) $(obj) -o $@ $<

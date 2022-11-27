@@ -137,6 +137,12 @@ c      enddo
         albedo(i) = x_param(j)
       enddo
 
+      do i = 1, 4
+        j = j+1
+        scattering(i) = x_param(j)
+      enddo
+      scattering(4) = scattering(4)*deg  ! bartheta
+
 c      do i = 1, nband
 c        j = j+1
 c        zero(i) = x_param(j)
@@ -491,9 +497,9 @@ c      endif
 
 c optionally, write (u, v, w) coordinates
 
-c      if (debug_swift.and.use_vardist) then
-c        call write_uvw(NOUT, tout, rh, rp, rp3)
-c      endif
+      if (debug_swift.and.use_vardist) then
+        call write_uvw(NOUT, tout, rh, rp, rp3)
+      endif
 
 c sum of ln sigma_i (for MCMC)
       lns = 0.d0

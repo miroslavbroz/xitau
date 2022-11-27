@@ -205,6 +205,10 @@ phi0_ = phi0(1:2)
 P_rot_ = P_rot(1:2)
 R_body = R_star(1:2)
 A_w = albedo(1:2)
+B0 = scattering(1)
+minh = scattering(2)
+ming = scattering(3)
+bartheta = max(scattering(4),0.d0)
 
 ! stellar surface
 B_lambda = planck(T_star, lambda_eff)
@@ -230,10 +234,11 @@ endif
 ! asteroid surface
 Phi_lambda = P_lambda/(4.d0*pi*d1**2)
 Phi_V = Phi_lambda*Delta_eff
+reflectance = 1.d0 + spectral_slope*(lambda_eff/1.d-6 - 0.55d0)
 
 do i = 1, size(f_L,1)
   j = dataset_(i)
-  f_L(i) = A_w(j)/(4.d0*pi)
+  f_L(i) = reflectance*A_w(j)/(4.d0*pi)
 enddo
 
 A_hL = pi*f_L(1)
@@ -251,7 +256,9 @@ if (debug_polygon) then
   write(*,*) 'd1 = ', d1/au, ' au'
   write(*,*) 'Phi_lambda = ', Phi_lambda, ' W m^-2 m^-1'
   write(*,*) 'Phi_V = ', Phi_V, ' W m^-2'
+  write(*,*) 'reflectance = ', reflectance
   write(*,*) 'f_L = ', f_L(1), ' sr^-1'
+  write(*,*) 'A_w  = ', A_w(1)
   write(*,*) 'A_hL = ', A_hL
   write(*,*) 'A_gL = ', A_gL
   write(*,*) 'A_BL = ', A_BL
@@ -371,29 +378,29 @@ if (debug_polygon) then
   no = no+1
 !  if ((no.eq.78).or.(no.eq.79)) then
 !  if ((no.eq.1).or.(no.eq.2).or.(no.eq.3)) then
-!  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50).or.(no.eq.99)) then
-  if ((no.ge.1).and.(no.le.99)) then
+  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50).or.(no.eq.99)) then
+!  if ((no.ge.1).and.(no.le.99)) then
     write(str,'(i0.2)') no
     call write_node("output.node." // trim(str), nodes)
     call write_face("output.face." // trim(str), faces)
-    call write_node("output.normal." // trim(str), normals)
-    call write_node("output.centre." // trim(str), centres)
+!    call write_node("output.normal." // trim(str), normals)
+!    call write_node("output.centre." // trim(str), centres)
 
     nodes = nodes/d2/arcsec
     call write_node("output.arcsec." // trim(str), nodes)
 
-    call write_poly("output.poly1." // trim(str), polys1)
-    call write_poly("output.poly2." // trim(str), polys2)
-    call write_poly("output.poly3." // trim(str), polys3)
-    call write_poly("output.poly4." // trim(str), polys4)
+!    call write_poly("output.poly1." // trim(str), polys1)
+!    call write_poly("output.poly2." // trim(str), polys2)
+!    call write_poly("output.poly3." // trim(str), polys3)
+!    call write_poly("output.poly4." // trim(str), polys4)
     call write_poly("output.poly5." // trim(str), polys5)
 
-    call write1("output.f." // trim(str), f)
-    call write1("output.f_L." // trim(str), f_L)
-    call write1("output.mu_i." // trim(str), mu_i)
-    call write1("output.Phi_i." // trim(str), Phi_i)
+!    call write1("output.f." // trim(str), f)
+!    call write1("output.f_L." // trim(str), f_L)
+!    call write1("output.mu_i." // trim(str), mu_i)
+!    call write1("output.surf." // trim(str), surf)
+!    call write1("output.Phi_i." // trim(str), Phi_i)
     call write1("output.Phi_e." // trim(str), Phi_e)
-    call write1("output.surf." // trim(str), surf)
     call write1("output.I_lambda." // trim(str), I_lambda)
 
 ! gnuplotting

@@ -159,6 +159,10 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2022
       read(*,*,err=990,end=990) silh_factor
       write(*,*) "# silh_factor = ", silh_factor
 
+      write(*,*) "# spectral_slope : "
+      read(*,*,err=990,end=990) spectral_slope
+      write(*,*) "# spectral_slope = ", spectral_slope
+
       write(*,*) "# use_planck : "
       read(*,*,err=990,end=990) use_planck
       write(*,*) "# use_planck = ", use_planck

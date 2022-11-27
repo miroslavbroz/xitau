@@ -11,6 +11,7 @@ set yl "magnitude [mag]"
 
 load "T0.plt"
 
+#set xr [59548.5:]
 set yr [:] reverse
 #set ytics shift
 set grid ytics
@@ -38,6 +39,7 @@ p \
   "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==1)' chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w lp  pt 1 lc 'orange' t "synthetic",\
   "chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w l lw 2 lc 'red' t "residua",\
   "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==2)' chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w err pt 1 ps 0.5 lc 'blue' t "observed",\
+  "<awk '!/^ *#/ && (i<100){ i++; print $1,$2,i; }' lightcurve2.dat" u ($1-2400000):($2+0.02):3 w labels not,\
 
 pa -1
 
