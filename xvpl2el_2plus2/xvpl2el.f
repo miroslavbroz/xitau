@@ -1,15 +1,18 @@
 c xvpl2el.f
-c Convert positions and velocities to orbital elements.
+c Convert positions and velocities to orbital elements;
+c vers. for a 2+2 geometry.
 c Miroslav Broz (miroslav.broz@email.cz), Jul 30th 2015
 
       program xvpl2el
 
       include 'common.inc'
       include '../misc/const.inc'
+      include '../simplex/simplex.inc'
+      include '../simplex/dependent.inc'
 
 c input parameters
-      integer npl, id(NPLMAX)
-      real*8 t, y(6,NPLMAX), elmts(6), m(NPLMAX), d, epoch
+      integer id(NBODMAX)
+      real*8 t, y(6,NBODMAX), elmts(6), m(NBODMAX)
 
 c temporary variables
       integer i, k
@@ -17,7 +20,7 @@ c temporary variables
       real*8 r, vkepl
 
 c read chi2.in file first
-      call read_chi2(npl,m,y,d,epoch)
+      call read_chi2(m, y)
 
 c write header
       write(*,30)
@@ -27,14 +30,14 @@ c write header
      :  " & n [deg/yr] & varpi [deg] wrt. P.A. direction ",
      :  " & omega0 [deg] & tau [JD] & tau [Besselian year]")
 
-      if (npl.ne.4) then
-        write(*,*) "Error: npl.ne.4!"
+      if (nbod.ne.4) then
+        write(*,*) "Error: nbod.ne.4!"
         stop
       endif
 
 c read integration output
 5     continue
-        do i = 1, npl
+        do i = 1, nbod
           read(*,*,end=990,err=990) t, id(i), y(1,i), y(2,i), y(3,i),
      :      y(4,i), y(5,i), y(6,i)
 
@@ -67,15 +70,15 @@ c        write(*,*) '# vkepl = ', vkepl, ' au/d'
 
         mtot = m(1)+m(2)
         call e1(y21(1),y21(4),elmts,mtot,0.d0)
-        call write_elmts(t,-2,elmts,mtot,0.d0,d)
+        call write_elmts(t,-2,elmts,mtot,0.d0,d_pc)
 
         mtot = m(3)+m(4)
         call e1(y43(1),y43(4),elmts,mtot,0.d0)
-        call write_elmts(t,-3,elmts,mtot,0.d0,d)
+        call write_elmts(t,-3,elmts,mtot,0.d0,d_pc)
 
         mtot = m(1)+m(2)+m(3)+m(4)
         call e1(yrel(1),yrel(4),elmts,mtot,0.d0)
-        call write_elmts(t,-4,elmts,mtot,0.d0,d)
+        call write_elmts(t,-4,elmts,mtot,0.d0,d_pc)
 
       goto 5
 

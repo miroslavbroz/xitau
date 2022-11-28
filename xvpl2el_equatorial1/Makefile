@@ -18,11 +18,10 @@ obj = \
 inc = \
   common.inc \
   ../misc/const.inc \
+  ../simplex/simplex.inc \
+  ../simplex/dependent.inc \
 
-all : chi2el xvpl2el
-
-chi2el : chi2el.f $(obj) $(inc)
-	$(f77) $(opt) $(obj) -o $@ $<
+all : xvpl2el
 
 xvpl2el : xvpl2el.f $(obj) $(inc)
 	$(f77) $(opt) $(obj) -o $@ $<

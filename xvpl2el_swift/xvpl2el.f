@@ -6,22 +6,24 @@ c Miroslav Broz (miroslav.broz@email.cz), Jul 30th 2015
 
       include 'common.inc'
       include '../misc/const.inc'
+      include '../simplex/simplex.inc'
+      include '../simplex/dependent.inc'
 
 c input parameters
-      integer npl, id(NPLMAX)
-      real*8 t, y(6,NPLMAX), elmts(6), m(NPLMAX), d, epoch
-      real*8 mass(NPLMAX)
-      real*8 xh(NPLMAX), yh(NPLMAX), zh(NPLMAX)
-      real*8 vxh(NPLMAX), vyh(NPLMAX), vzh(NPLMAX)
-      real*8 xj(NPLMAX), yj(NPLMAX), zj(NPLMAX)
-      real*8 vxj(NPLMAX), vyj(NPLMAX), vzj(NPLMAX)
+      integer id(NBODMAX)
+      real*8 t, y(6,NBODMAX), elmts(6), m(NBODMAX)
+      real*8 mass(NBODMAX)
+      real*8 xh(NBODMAX), yh(NBODMAX), zh(NBODMAX)
+      real*8 vxh(NBODMAX), vyh(NBODMAX), vzh(NBODMAX)
+      real*8 xj(NBODMAX), yj(NBODMAX), zj(NBODMAX)
+      real*8 vxj(NBODMAX), vyj(NBODMAX), vzj(NBODMAX)
 
 c temporary variables
       integer i, ialpha
       real*8 gmsum,a,e,inc,capom,omega,capm,msum,tmp
 
 c read chi2.in file first
-      call read_chi2(npl,m,y,d,epoch)
+      call read_chi2(m, y)
 
 c write header
       write(*,30)
@@ -33,7 +35,7 @@ c write header
 
 c read integration output
 5     continue
-        do i = 1, npl
+        do i = 1, nbod
           read(*,*,end=990,err=990) t, id(i), xh(i), yh(i), zh(i),
      :      vxh(i), vyh(i), vzh(i)
           mass(i) = m(i)*GM_S
@@ -50,13 +52,13 @@ c adjust coordinates (to get stellar-astronomy elements)
         enddo
 
 c compute jacobian coordinates
-        call coord_h2j(npl,mass,xh,yh,zh,vxh,vyh,vzh,xj,yj,zj,
+        call coord_h2j(nbod,mass,xh,yh,zh,vxh,vyh,vzh,xj,yj,zj,
      :    vxj,vyj,vzj)
 
 c write elements
         gmsum = mass(1)
         msum = m(1)
-        do i = 2, npl
+        do i = 2, nbod
           gmsum = gmsum + mass(i)
           call orbel_xv2el(xj(i),yj(i),zj(i),vxj(i),vyj(i),vzj(i),gmsum,
      :      ialpha,a,e,inc,capom,omega,capm)
@@ -67,7 +69,7 @@ c write elements
           elmts(5) = omega  ! peri
           elmts(6) = capm
           msum = msum + m(i)
-          call write_elmts(t,id(i),elmts,gmsum,0.d0,d)
+          call write_elmts(t,id(i),elmts,gmsum,0.d0,d_pc)
         enddo
       goto 5
 

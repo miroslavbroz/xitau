@@ -15,6 +15,8 @@ obj = \
 inc = \
   common.inc \
   ../misc/const.inc \
+  ../simplex/simplex.inc \
+  ../simplex/dependent.inc \
 
 all : xvpl2el
 

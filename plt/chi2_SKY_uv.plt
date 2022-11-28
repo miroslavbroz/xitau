@@ -17,6 +17,8 @@ tmp=1.2
 tmp=1.0
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
+set xtics 0.1
+set ytics 0.1
 set size ratio -1
 set zeroaxis
 set ang rad

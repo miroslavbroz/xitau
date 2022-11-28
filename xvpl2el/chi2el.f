@@ -17,7 +17,7 @@ c temporary variables
       real*8 y_jac(6, NPLMAX)
 
 c read chi2.in file first
-      call read_chi2(nbod,m,y,d,epoch)
+      call read_chi2(m, y)
 
       do i = 1, nbod
         write(*,*) '# m(i) = ', m(i)

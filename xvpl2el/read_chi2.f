@@ -2,38 +2,22 @@ c read_chi2.f
 c Read chi2.in file and extract some data.
 c Miroslav Broz (miroslav.broz@email.cz), Jul 30th 2015
 
-      subroutine read_chi2(nbod, m, elmts, d_pc, epoch)
+      subroutine read_chi2(m, y)
 
-      include 'common.inc'
       include '../misc/const.inc'
+      include '../simplex/simplex.inc'
+      include '../simplex/dependent.inc'
 c input
 c output
-      integer nbod
-      real*8 m(NPLMAX), elmts(6, NPLMAX), d_pc, epoch
-
-c constants
-      integer NDIMMAX
-      parameter(NDIMMAX = 50)
-      integer NBODMAX
-      parameter(NBODMAX=4)
-      integer BANDMAX
-      parameter(BANDMAX=5)
+      real*8 m(NBODMAX), y(6,NBODMAX)
 
 c internal
-      integer i, j, k, iu, ierr, nparam, nband
-      real*8 x_param(NDIMMAX)
-      real*8 T_eff(NBODMAX), logg(NBODMAX), v_rot(NBODMAX)
-      real*8 metal(NBODMAX), Delta_t(NBODMAX)
-      real*8 q(NBODMAX)
-      real*8 zero_(BANDMAX)
-      real*8 gamma, T0
-      real*8 msum
-      character*255 str
-      character*80 file_SKY(NBODMAX), file_RV(NBODMAX), file_TTV,
-     :  file_ECL, file_VIS, file_CLO
-      logical debug
+      integer i, j, k, iu, ierr
 
-      debug = .true.
+      real*8 msum
+      real*8 q(NBODMAX)
+      real*8 elmts(NBODMAX,6)
+      character*255 str
 
       iu = 10
       open(unit=iu, file="chi2.in", status="old", iostat=ierr)
@@ -72,6 +56,18 @@ c internal
       read(iu,10,err=990,end=990) file_ECL
       read(iu,10,err=990,end=990) file_VIS
       read(iu,10,err=990,end=990) file_CLO
+      read(iu,10,err=990,end=990) file_SYN
+      do i = 1, nbod
+        read(iu,10,err=990,end=990) file_synth(i)
+      enddo
+      read(iu,10,err=990,end=990) file_SED
+      do i = 1, nbod
+        read(iu,10,err=990,end=990) file_absol(i)
+      enddo
+      read(iu,10,err=990,end=990) file_AO
+      read(iu,10,err=990,end=990) file_SKY2
+      read(iu,10,err=990,end=990) file_SKY3
+      read(iu,10,err=990,end=990) file_OCC
 
       read(iu,*,err=990,end=990) nband
       if (nband.gt.BANDMAX) then
@@ -112,11 +108,11 @@ c      enddo
       enddo
       do i = 1, nbod
         j = j+1
-        logg(i) = x_param(j)
+        R_star(i) = x_param(j)
       enddo
       do i = 1, nbod
         j = j+1
-        v_rot(i) = x_param(j)
+        P_rot(i) = x_param(j)
       enddo
       do i = 1, nbod
         j = j+1
@@ -126,11 +122,32 @@ c      enddo
         j = j+1
         Delta_t(i) = x_param(j)
       enddo
-
-      do i = 1, nband
+      do i = 1, nbod
         j = j+1
-        zero_(i) = x_param(j)
+        C20(i) = x_param(j)
       enddo
+      do i = 1, nbod
+        j = j+1
+        pole_l(i) = x_param(j)*deg
+      enddo
+      do i = 1, nbod
+        j = j+1
+        pole_b(i) = x_param(j)*deg
+      enddo
+      do i = 1, nbod
+        j = j+1
+        phi0(i) = x_param(j)*deg
+      enddo
+      do i = 1, nbod
+        j = j+1
+        albedo(i) = x_param(j)
+      enddo
+
+      do i = 1, 4
+        j = j+1
+        scattering(i) = x_param(j)
+      enddo
+      scattering(4) = scattering(4)*deg  ! bartheta
 
       j = j+1
       gamma = x_param(j)
@@ -156,6 +173,13 @@ c
           write(*,*) '# m(', i, ') = ', m(i), ' M_S'
         enddo
       endif
+
+c ordering...
+      do i = 1, nbod
+        do j = 1, 6
+          y(j,i) = elmts(i,j)
+        enddo
+      enddo
 
       return
 

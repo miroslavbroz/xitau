@@ -4,19 +4,20 @@ c Miroslav Broz (miroslav.broz@email.cz), Jul 30th 2015
 
       program xvpl2el
 
-      include 'common.inc'
       include '../misc/const.inc'
+      include '../simplex/simplex.inc'
+      include '../simplex/dependent.inc'
 
 c input parameters
-      integer npl, id(NPLMAX)
-      real*8 t, y(6,NPLMAX), elmts(6), m(NPLMAX), d, epoch
+      integer nbod, id(NBODMAX)
+      real*8 t, y(6,NBODMAX), elmts(6), m(NBODMAX)
 
 c temporary variables
       integer i
-      real*8 y_ofb(6,NPLMAX),m_ofb(NPLMAX),y_jac(6,NPLMAX),tmp
+      real*8 y_ofb(6,NBODMAX),m_ofb(NBODMAX),y_jac(6,NBODMAX),tmp
 
-c read chi2.in file first
-      call read_chi2(npl,m,y,d,epoch)
+c read chi2.in
+      call read_chi2(m, y)
 
 c write header
       write(*,30)
@@ -28,7 +29,7 @@ c write header
 
 c read integration output
 5     continue
-        do i = 1, npl
+        do i = 1, nbod
           read(*,*,end=990,err=990) t, id(i), y(1,i), y(2,i), y(3,i),
      :      y(4,i), y(5,i), y(6,i)
 
@@ -44,20 +45,20 @@ c adjust coordinates (to get stellar-astronomy elements)
         enddo
 
 c compute jacobian coordinates
-        call barycenters(npl,m,y,m_ofb,y_ofb)
-        call jacobian(npl,y,y_ofb,y_jac)
+        call barycenters(nbod,m,y,m_ofb,y_ofb)
+        call jacobian(nbod,y,y_ofb,y_jac)
 
 c        write(*,*) 'jacobian coordinates:'
-c        do i = 1, npl
+c        do i = 1, nbod
 c          write(*,*) t, id(i), y_jac(1,i), y_jac(2,i), y_jac(3,i),
 c     :      y_jac(4,i), y_jac(5,i), y_jac(6,i)
 c        enddo
 c        write(*,*) 'keplerian elements:'
 
 c write elements
-        do i = 2, npl
+        do i = 2, nbod
           call e1(y_jac(1,i),y_jac(4,i),elmts,m_ofb(i),0.d0)
-          call write_elmts(t,id(i),elmts,m_ofb(i),0.d0,d)
+          call write_elmts(t,id(i),elmts,m_ofb(i),0.d0,d_pc)
         enddo
       goto 5
 
