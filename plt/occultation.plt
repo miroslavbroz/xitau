@@ -14,6 +14,7 @@ set cbr [1:3]
 set view equal xyz
 set xyplane 0.0
 set view 90,90,1.5
+set view 90,270,1.5
 set isosamples 12+1
 set hidden3d
 set key
@@ -43,7 +44,7 @@ sp \
   "<awk '($4==1)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "Xitau",\
   "<awk '($4==2)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "inner moon",\
   "<awk '($4==3)' occultation.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)):4 w lp pt 7 lc palette z t "outer moon",\
-  "<awk 'BEGIN{ for (i=-90;i<=90;i++){ print 0,i; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l dt 2 lc '#666666' not,\
+  "<awk 'BEGIN{ for (i=-90;i<=90;i++){ print 0,i; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l dt 2 lc '#666666' not
 
 pa -1
 

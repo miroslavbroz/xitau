@@ -14,6 +14,7 @@ set cbr [1:3]
 set view equal xyz
 set xyplane 0.0
 set view 90,90,1.5
+set view 90,270,1.5
 set isosamples 12+1
 set hidden3d
 set key
@@ -39,7 +40,7 @@ sp \
   fx(1,u,v),fy(1,u,v),fz(1,u,v) lc 'gray' not,\
   "occultation3.dat" u (fx(1,$2,$3)):(fy(1,$2,$3)):(fz(1,$2,$3)) w l lw 2 lc 'black' not,\
   "chi2_OCC.dat" u (fx(1,$3,$4)):(fy(1,$3,$4)):(fz(1,$3,$4)) w l lw 3 lc 'red' not,\
-  "<awk 'BEGIN{ for (i=-90;i<=90;i++){ print 0,i; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l dt 2 lc '#666666' not,\
+  "<awk 'BEGIN{ for (i=-90;i<=90;i++){ print 0,i; }}'" u (fx(1,$1,$2)):(fy(1,$1,$2)):(fz(1,$1,$2)) w l dt 2 lc '#666666' not
 
 pa -1
 

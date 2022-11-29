@@ -129,7 +129,7 @@ do i = 1, m_OCC
 
   maxk = OCCMAX2
   if (dataset(i).eq.last) maxk = 0
-!  if (dataset(i).gt.0) maxk = 0  ! dbg
+  if (dataset(i).gt.0) maxk = 0  ! dbg
   last = dataset(i)
 
   do j = 1, nbod

@@ -26,13 +26,15 @@ f(x) = \
   x > T2 ? x-T2+100 : \
   x-T1+0
 
-set arrow from T0-T1,graph 0 rto 0,graph 1 nohead lt 0
-set arrow from 100,graph 0 rto 0,graph 1 nohead lt 0
-set arrow from 200,graph 0 rto 0,graph 1 nohead lt 0
+f(x) = x-2400000
 
-set label "DESCAMPS"   at  50,graph 0.05 center
-set label "SPHERE2017" at 150,graph 0.05 center
-set label "SPHERE2018" at 225,graph 0.05 center
+#set arrow from T0-T1,graph 0 rto 0,graph 1 nohead lt 0
+#set arrow from 100,graph 0 rto 0,graph 1 nohead lt 0
+#set arrow from 200,graph 0 rto 0,graph 1 nohead lt 0
+#set label "DESCAMPS"   at  50,graph 0.05 center
+#set label "SPHERE2017" at 150,graph 0.05 center
+#set label "SPHERE2018" at 225,graph 0.05 center
+set arrow from 2454047.326750-2400000,graph 0 rto 0,graph 1 nohead lt 0
 
 p \
   "<awk 'BEGIN{ pi=3.1415926535; deg=pi/180.; }!/^#/ && (NF>0){ t=$1; x=-$2*sin($3*deg); }(i==0){ x0=x; }(i==1){ print t,0,$8; print t,x-x0,$8; print null; }{ i++; }(NF==0){ i=0; }' chi2_SKY.dat" u (f($1)+$3-2):2:3 t "u" w l lc palette z lw 4 dt 1,\

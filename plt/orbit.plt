@@ -20,7 +20,8 @@ set origin 0,0
 
 load "T0.plt"
 set arrow from (T0-2400000),graph 0 rto 0,graph 1 nohead lt 0 front
-`awk '!/^#/{ print "set arrow from " $1 "-2400000,graph 0 rto 0,graph 1 nohead lt 0 front;"; }' Sky2.dat`
+set arrow from (2454047.326750-2400000),graph 0 rto 0,graph 1 nohead lt 0 front
+#`awk '!/^#/{ print "set arrow from " $1 "-2400000,graph 0 rto 0,graph 1 nohead lt 0 front;"; }' Sky2.dat`
 
 set xl "JD - 2400000"
 set yl "a [R_S]"
@@ -37,7 +38,9 @@ p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):4 not w l lt 2
 set origin 0,0.66
 set yl "i [deg]"
 
-p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):5 not w l lt 2
+p "<awk '($2==-2)' xvpl2el.out" u ($1-2400000):5 not w l lt 2,\
+  "<echo 2454047.326750 86.0" u ($1-2400000):2 w p ps 2 not,\
+  "<echo 2459579.344550 89.0" u ($1-2400000):2 w p ps 2 not,\
 
 unset multiplot
 clear
