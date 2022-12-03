@@ -43,7 +43,7 @@ double precision, dimension(3) :: n_to, n_ts
 double precision :: d_to, d_ts
 double precision :: eps, lite, t_interp, mag_interp, l, b, chi2_
 double precision :: xh_interp, yh_interp, zh_interp
-double precision :: alpha, H0
+double precision :: alpha, H0, H0_obs
 double precision :: zero2
 
 ! functions
@@ -106,7 +106,7 @@ endif  ! i1st
 
 if (debug) then
   open(unit=iu, file="lightcurve2.dat", status="unknown")
-  write(iu,*) "# JD & magnitude & iband & lite [d] & alpha [deg] & H0 [mag]"
+  write(iu,*) "# JD & magnitude & iband & lite [d] & alpha [deg] & H0 [mag] & H0_obs [mag]"
 endif
 
 if (debug) then
@@ -191,8 +191,10 @@ do k = 1, nband
     if (debug) then
       alpha = acos(dot_product(n_ts,n_to))
       H0 = mag(i,k) - 5.d0*log10(d_ts) - 5.d0*log10(d_to)
+      j = i_BIN(i,k)
+      H0_obs = mag_obs(j,k) - 5.d0*log10(d_ts) - 5.d0*log10(d_to)
 
-      write(iu,*) t_BIN(i,k), mag(i,k), iband, lite, alpha/deg, H0
+      write(iu,*) t_BIN(i,k), mag(i,k), iband, lite, alpha/deg, H0, H0_obs
     endif
 
   enddo  ! i
