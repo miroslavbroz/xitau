@@ -1,7 +1,12 @@
 #!/usr/bin/gnuplot
 
+set term x11
+set colors classic
+
 set xl "iter"
 set yl "val/val_0"
+
+set zeroaxis
 
 p \
   "<awk '(FNR==1){ i= 1; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "mtot",\
@@ -32,8 +37,12 @@ p \
   "<awk '(FNR==1){ i=26; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "phi02",\
   "<awk '(FNR==1){ i=27; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "albedo1",\
   "<awk '(FNR==1){ i=28; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "albedo2",\
-  "<awk '(FNR==1){ i=29; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "gamma",\
-  "<awk '(FNR==1){ i=30; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "dpc",\
+  "<awk '(FNR==1){ i=29; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "B0",\
+  "<awk '(FNR==1){ i=30; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "minh",\
+  "<awk '(FNR==1){ i=31; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "ming",\
+  "<awk '(FNR==1){ i=32; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "bartheta",\
+  "<awk '(FNR==1){ i=33; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "gamma",\
+  "<awk '(FNR==1){ i=34; p=$i; }{ print NR,$i/p; }' chi2_func.tmp" u 1:2 w lp t "dpc",\
   1.0 w l lt 0
 
 pa -1

@@ -18,17 +18,16 @@ A_w_ = 0.23d0
 B0 = 1.32d0
 minh = 0.20d0
 ming = -0.35d0
-bartheta = 20.d0*deg
 
 mu_i = 0.3d0
 mu_e = 0.3d0
 
 f_L = A_w_/(4.d0*pi)
 
-write(*,*) '# mu_i mu_e alpha psi bartheta S'
+write(*,*) '# mu_i mu_e alpha psi bartheta f_hapke'
 write(*,*) '# 1 1 deg deg deg 1'
 
-m = 9
+m = 90
 do i = 1, 3
 
   if (i.eq.1) bartheta = 5.d0*deg
