@@ -25,7 +25,7 @@ c Reference: Broz & Wolf (2017), Astronomicka mereni, p. 168
 c functions
       real*8 eps_earth
 
-c towards observer
+c away from observer
       hatw(1) = cos(l)*cos(b)
       hatw(2) = sin(l)*cos(b)
       hatw(3) = sin(b)

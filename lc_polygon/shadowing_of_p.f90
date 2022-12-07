@@ -26,9 +26,32 @@ enddo
 return
 end subroutine mu
 
-! Non-illuminated || non-visible won't be computed.
+! Non-illuminated && non-visible won't be computed.
 
 subroutine non(mu_i, mu_e, polys)
+
+use polytype_module
+
+implicit none
+double precision, dimension(:), intent(in) :: mu_i, mu_e
+type(polystype), dimension(:), intent(inout) :: polys
+
+integer :: i
+
+!$omp parallel do private(i) shared(mu_i,mu_e,polys)
+do i = 1, size(mu_i,1)
+  if ((mu_i(i).eq.0.d0).and.(mu_e(i).eq.0.d0)) then
+    polys(i)%c = 0
+  endif
+enddo
+!$omp end parallel do
+
+return
+end subroutine non
+
+! Non-illuminated || non-visible won't be computed.
+
+subroutine non_(mu_i, mu_e, polys)
 
 use polytype_module
 
@@ -47,7 +70,7 @@ enddo
 !$omp end parallel do
 
 return
-end subroutine non
+end subroutine non_
 
 end module shadowing_of_p_module
 

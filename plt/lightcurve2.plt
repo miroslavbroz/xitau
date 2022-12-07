@@ -16,6 +16,10 @@ p \
 
 pa -1
 
+set term png small
+set out "lightcurve2.png"
+rep
+
 q
 
   "lightcurve2.dat_0.000" u 5:($6-0.0),\

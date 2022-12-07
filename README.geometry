@@ -64,5 +64,7 @@ Transformation for the mirror orbit:
 
   i -> -i
 
+Of course, it is NOT true if use_vardist = .true.
+
 --
 

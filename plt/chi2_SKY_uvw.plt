@@ -15,7 +15,7 @@ set yl "v [AU]"
 set zl "w [AU]"
 set size ratio -1
 
-tmp=7.e-6
+tmp=1.0e-5
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zr [-tmp:tmp]
@@ -24,6 +24,7 @@ set ang rad
 set xyplane 0
 set view equal xyz
 set view 0,0
+set arrow from 0,0,0 rto 0,0,-tmp lt 1 lw 2 lc 'blue'
 
 unset colorbox
 set palette gray
@@ -38,6 +39,9 @@ d_pc = x_param22
 f(x) = x*arcsec*(d_pc*pc)/au
 
 sp \
+  sprintf("<awk '($2==-1) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u 3:4:5 not w l lw 10 lc 'gray',\
+  sprintf("<awk '($2==-2) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u 3:4:5 not w l lw 10 lc 'gray',\
+  sprintf("<awk '($2==-3) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u 3:4:5 not w l lw 10 lc 'gray',\
   "<awk '($2==-1)' out_JDATE_uvw.dat" u 3:4:5 t "1" w l lt 1,\
   "<awk '($2==-2)' out_JDATE_uvw.dat" u 3:4:5 t "2" w l lt 2,\
   "<awk '($2==-3)' out_JDATE_uvw.dat" u 3:4:5 t "3" w l lt 3,\

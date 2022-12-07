@@ -322,7 +322,7 @@ call centre(polys1, centres)
 call mu(normals, s, mu_i)
 call mu(normals, o, mu_e)
 
-! non-illuminated || non-visible won't be computed
+! non-illuminated && non-visible won't be computed
 call non(mu_i, mu_e, polys1)
 
 ! 1st transformation
@@ -339,6 +339,9 @@ call clip(polys2, polys3)
 
 ! back-projecion
 call to_three(normals, centres, polys3)
+
+! non-illuminated || non-visible won't be computed
+call non_(mu_i, mu_e, polys3)
 
 ! 2nd transformation
 call uvw(o_, polys3, polys4, equatorial=.true.)
@@ -378,8 +381,8 @@ if (debug_polygon) then
   no = no+1
 !  if ((no.eq.78).or.(no.eq.79)) then
 !  if ((no.eq.1).or.(no.eq.2).or.(no.eq.3)) then
-  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50).or.(no.eq.99)) then
-!  if ((no.ge.1).and.(no.le.99)) then
+!  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50).or.(no.eq.99)) then
+  if ((no.ge.1).and.(no.le.99)) then
     write(str,'(i0.2)') no
     call write_node("output.node." // trim(str), nodes)
     call write_face("output.face." // trim(str), faces)
@@ -398,8 +401,8 @@ if (debug_polygon) then
 !    call write1("output.f." // trim(str), f)
 !    call write1("output.f_L." // trim(str), f_L)
 !    call write1("output.mu_i." // trim(str), mu_i)
-!    call write1("output.surf." // trim(str), surf)
-!    call write1("output.Phi_i." // trim(str), Phi_i)
+    call write1("output.surf." // trim(str), surf)
+    call write1("output.Phi_i." // trim(str), Phi_i)
     call write1("output.Phi_e." // trim(str), Phi_e)
     call write1("output.I_lambda." // trim(str), I_lambda)
 

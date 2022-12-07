@@ -73,7 +73,7 @@ p \
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left,\
   "<awk '($1>2458192.0)' arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left tc 'blue',\
   "<./ellipses.awk arcsec_AU.dat" u (f($1,$3)):(f($2,$3)) not w l lt 7,\
-  "<awk '(FNR>1){ print $0,ARGIND; }' nodes0001.dat" u 2:3 t "shape" w d lc 'black',\
+  "<awk '(FNR>1){ print $0,ARGIND; }' nodes0036.dat" u 2:3 t "shape" w d lc 'black',\
 
 pa -1
 
