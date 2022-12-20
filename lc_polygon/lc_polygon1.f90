@@ -109,6 +109,7 @@ double precision, dimension(:,:), pointer, save :: normals, centres
 double precision, dimension(:), pointer, save :: surf
 double precision, dimension(:), pointer, save :: mu_i, mu_e, f, f_L, Phi_i, Phi_e
 double precision, dimension(:), pointer, save :: I_lambda
+integer, dimension(:), pointer, save :: clips
 
 ! internal variables
 integer :: i, j, k
@@ -190,6 +191,7 @@ if (i1st.eq.0) then
   allocate(Phi_i(size(polys1,1)))
   allocate(Phi_e(size(polys1,1)))
   allocate(I_lambda(size(polys1,1)))
+  allocate(clips(size(polys1,1)))
 
   orignodes = nodes
 
@@ -335,7 +337,8 @@ s_ = (/dot_product(hatu,s), dot_product(hatv,s), dot_product(hatw,s)/)
 o_ = (/dot_product(hatu,o), dot_product(hatv,o), dot_product(hatw,o)/)
 
 ! shadowing
-call clip(polys2, polys3)
+clips = 0
+call clip(polys2, polys3, clips)
 
 ! back-projecion
 call to_three(normals, centres, polys3)
@@ -353,7 +356,7 @@ o__ = (/dot_product(hatu,o_), dot_product(hatv,o_), dot_product(hatw,o_)/)
 s__ = (/dot_product(hatu,s_), dot_product(hatv,s_), dot_product(hatw,s_)/)
 
 ! shadowing
-call clip(polys4, polys5)
+call clip(polys4, polys5, clips)
 
 ! back-projecion
 call to_three(normals, centres, polys5)
@@ -382,12 +385,13 @@ if (debug_polygon) then
 !  if ((no.eq.78).or.(no.eq.79)) then
 !  if ((no.eq.1).or.(no.eq.2).or.(no.eq.3)) then
 !  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50).or.(no.eq.99)) then
-  if ((no.ge.1).and.(no.le.99)) then
+!  if ((no.ge.1).and.(no.le.99)) then
+  if ((no.ge.480).and.(no.le.482)) then
     write(str,'(i0.2)') no
     call write_node("output.node." // trim(str), nodes)
     call write_face("output.face." // trim(str), faces)
 !    call write_node("output.normal." // trim(str), normals)
-!    call write_node("output.centre." // trim(str), centres)
+    call write_node("output.centre." // trim(str), centres)
 
     nodes = nodes/d2/arcsec
     call write_node("output.arcsec." // trim(str), nodes)
@@ -405,6 +409,7 @@ if (debug_polygon) then
     call write1("output.Phi_i." // trim(str), Phi_i)
     call write1("output.Phi_e." // trim(str), Phi_e)
     call write1("output.I_lambda." // trim(str), I_lambda)
+    call write1("output.clip." // trim(str), dble(clips))
 
 ! gnuplotting
     open(unit=10, file='output.gnu', status='unknown')

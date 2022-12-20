@@ -1,5 +1,5 @@
 ! srtidx.f
-! Minimal sort of array; with output od indices.
+! Minimal sort of array; with output of indices.
 ! Miroslav Broz (miroslav.broz@email.cz), Nov 15th 2009
 
 module srtidx_module

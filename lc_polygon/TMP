@@ -1,4 +1,28 @@
 
+! Note: The EPS parameter is necessary to perform at least one clip!
+! Otherwise, a non-clipped polygon (polys4->polys5) has an incorrect
+! orientation, if it was clipped previously (polys2->polys3).
+
+      if (boxes(j,6).lt.boxes(i,6)-EPS) cycle
+
+if (debug) then
+  no = no+1
+  if ((no.ge.480).and.(no.le.490)) then
+    write(str,'(i0.2)') no
+    call write1("output.clips1." // trim(str), dble(clips))
+  endif
+  no = no-1
+endif
+
+    poly_k = poly_i
+poly_i%c = poly_k%c
+do k = 1, poly_k%c
+  l = poly_k%s(k)%c
+  poly_i%s(k)%c = l
+  do m = 1,l
+    poly_i%s(k)%p(m,:) = poly_k%s(k)%p(l+1-m,:)
+  enddo
+enddo
 
 
 double precision function E1(x)
