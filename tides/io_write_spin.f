@@ -6,8 +6,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Jan 19th 2010
 
       include '../swift.inc'
       include 'spin.inc'
-      include '../simplex/simplex.inc'
-      include '../simplex/dependent.inc'
+      include '../chi2/chi2.inc'
+      include '../chi2/dependent.inc'
 
       real*8 time
       integer nbod_, iu

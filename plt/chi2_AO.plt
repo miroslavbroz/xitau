@@ -16,7 +16,8 @@ dx=tmp
 dy=tmp
 
 i=5
-j=7.5
+j=7.0
+#i=1; j=1
 set xr [-0.75*tmp:(i-1+0.75)*tmp]
 set yr [-0.75*tmp:(j-1+0.75)*tmp]
 
@@ -49,6 +50,8 @@ rep
 
 q
 
+
+  "<awk '(FNR==1){ print s; }(FNR>1){ print $0,ARGIND; }' ../../xitaushp_20221225_ADAM/test_polygon4_22__271/nodes*.silh_" u ($1+f($3)):($2+g($3)) t "old o."  w l lc 'cyan',\
 
   "<awk '(NF==0){ i=0; }!/^#/ && (NF>0){ i++; }(i==2){ print; }' chi2_AO.dat" u ($2+f($5)):($3+g($5)):4:4 not w xyerr lc 'blue',\
 

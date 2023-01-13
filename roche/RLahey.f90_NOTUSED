@@ -1,0 +1,17 @@
+! RLahey.f90
+! Roche lobe volume-equivalent radius.
+! Reference: Leahy & Leahy (2015), Comp. Astrophys. Cosmology, 2, 4.
+
+! Roche lobe w. fill-out factor F = 1; Eq. (7)
+
+double precision function RLahey(q)
+implicit none
+double precision, intent(in) :: q
+double precision, parameter :: a1 = 0.64334d0, a2 = 0.86907d0, a3 = 1.2809d0, a4 = -0.74303d0, a5 = 0.73103d0 
+
+RLahey = a1*q**a4/(a2*q**a5 + log(1.d0+a3*q**(a4+1.d0/3.d0)))
+
+return
+end function RLahey
+
+

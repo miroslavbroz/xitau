@@ -21,8 +21,8 @@ use silhouette_module
 
 implicit none
 
-include '../simplex/simplex.inc'
-include '../simplex/dependent.inc'
+include '../chi2/chi2.inc'
+include '../chi2/dependent.inc'
 
 double precision, intent(in) :: t_nolite, lite
 double precision, dimension(3), intent(in) :: r_EA, r_AO
@@ -34,7 +34,7 @@ logical, intent(out) :: has_solution
 
 ! bruteforce.in
 character(len=255) :: f_elem, f_face, f_node
-double precision, save :: rho, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_
+double precision, save :: rho, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_, R_body
 
 integer, dimension(:,:), pointer, save :: faces
 double precision, dimension(:,:), pointer, save :: nodes, nodes_
@@ -56,15 +56,12 @@ if (i1st.eq.0) then
 !
   call read_bruteforce('bruteforce.in', f_elem, f_face, f_node, rho, unit, P_rot_, Tmin, pole_l_, pole_b_, phi0_)
 
-  call read_face(f_face, faces)
-  call read_node(f_node, nodes)
-
+  allocate(faces(size(facesforchi,1),3))
+  allocate(nodes(size(nodesforchi,1),3))
+  allocate(nodes_(size(nodes,1),3))
   allocate(masks(size(faces,1)))
   allocate(silh(nsilh,2))
   allocate(silh_(nsilh,2))
-  allocate(nodes_(size(nodes,1),3))
-
-  nodes = nodes*unit/au
 
 ! no shadow of a shadow...
   masks = .True.
@@ -77,9 +74,18 @@ pole_l_ = pole_l(1)
 pole_b_ = pole_b(1)
 phi0_ = phi0(1)
 P_rot_ = P_rot(1)
+R_body = R_star(1)
+
+faces = facesforchi
+nodes = nodesforchi
+
+! unit conversion
+nodes = nodes*unit/au
+
+! scaling
+nodes_ = R_body*nodes
 
 ! axis rotation
-nodes_ = nodes
 t_lite = t_nolite + lite
 phi1 = 2.d0*pi*(t_lite-Tmin)/P_rot_ + phi0_
 call rot_z_nodes(nodes_, phi1)

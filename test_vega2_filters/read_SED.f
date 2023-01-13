@@ -6,7 +6,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 15th 2016
      :  mag, sigma, calibration, file_filter)
 
       implicit none
-      include 'simplex.inc'
+      include 'chi2.inc'
 
       character*(*) filename
       integer N

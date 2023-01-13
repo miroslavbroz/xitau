@@ -30,7 +30,7 @@ scl=arcsec*2.13832494981512*au
 
 sp \
   "<./poly.awk output.poly5.01"  u 4:5:6 w l not,\
-  "<./poly.awk output.poly5.01 | awk '($1==53) || (NF==0)'" u 4:5:6 w l lw 3 lc 'black',\
+  "<./poly.awk output.poly5.01 | awk '($1==14) || (NF==0)'" u 4:5:6 w l lw 3 lc 'black',\
 
 pa -1
 

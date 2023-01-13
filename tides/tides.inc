@@ -1,6 +1,6 @@
-c tides.inc
-c Common variables for tides computations.
-c Miroslav Broz (miroslav.broz@email.cz), Nov 7th 2013
+! tides.inc
+! Common variables for tides computations.
+! Miroslav Broz (miroslav.broz@email.cz), Nov 7th 2013
 
       real*8 capR(NPLMAX)
       real*8 k_2(NPLMAX)

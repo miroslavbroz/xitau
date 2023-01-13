@@ -2,9 +2,9 @@
       REAL*8 FUNCTION amotry(p,y,psum,mp,np,ndim,funk,ihi,fac)
 
       implicit none
-      INTEGER ihi,mp,ndim,np,NMAX
+      include '../chi2/chi2.inc'
+      INTEGER ihi,mp,ndim,np
       REAL*8 fac,p(mp,np),psum(np),y(mp),funk
-      PARAMETER (NMAX=60)
       EXTERNAL funk
 C USES funk
 
@@ -12,7 +12,7 @@ c Extrapolates by a factor fac through the face of the simplex across from the h
 c tries it, and replaces the high point if the new point is better.
 
       INTEGER j
-      REAL*8 fac1,fac2,ytry,ptry(NMAX)
+      REAL*8 fac1,fac2,ytry,ptry(NDIMMAX)
       fac1=(1.d0-fac)/ndim
       fac2=fac1-fac
       do 11 j=1,ndim

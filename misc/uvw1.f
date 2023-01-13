@@ -10,8 +10,8 @@ c Reference: Broz & Wolf (2017), Astronomicka mereni, p. 168
 
       implicit none
       include 'const.inc'
-      include '../simplex/simplex.inc'
-      include '../simplex/dependent.inc'
+      include '../chi2/chi2.inc'
+      include '../chi2/dependent.inc'
 
       real*8 t, l, b
       real*8 hatu(3), hatv(3), hatw(3)

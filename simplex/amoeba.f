@@ -1,11 +1,11 @@
 
-      SUBROUTINE amoeba(p,y,mp,np,ndim,ftol,funk,iter)
+      SUBROUTINE amoeba(p,y,mp,np,ndim,ftol,funk,iter,itmax)
 
       implicit none
-      include 'cb_itmax.inc'
-      INTEGER iter,mp,ndim,np,NMAX
+      include '../chi2/chi2.inc'
+      INTEGER iter,itmax,mp,ndim,np
       REAL*8 ftol,p(mp,np),y(mp),funk,TINY
-      PARAMETER (NMAX=60,TINY=1.d-10) ! Maximum allowed dimensions and function
+      PARAMETER (TINY=1.d-10) ! Maximum allowed dimensions and function
       EXTERNAL funk
 C USES amotry,funk
 
@@ -19,7 +19,7 @@ c (n.b.!). On output, p and y will have been reset to ndim+1 new points all with
 c a minimum function value, and iter gives the number of function evaluations taken.
 
       INTEGER i,ihi,ilo,inhi,j,m,n
-      REAL*8 rtol,sum,swap,ysave,ytry,psum(NMAX),amotry
+      REAL*8 rtol,sum,swap,ysave,ytry,psum(NDIMMAX),amotry
       iter=0
 1     do 12 n=1,ndim ! Enter here when starting or have just overall contracted.
         sum=0.d0 ! Recompute psum.
@@ -58,9 +58,8 @@ c Compute the fractional range from highest to lowest and return if satisfactory
 14      enddo
         return
       endif
-      if (iter.ge.ITMAX) then
-c        write(*,*)    ! output an empty line to stdin
-        write(*,*) '# amoeba(): Warning - ITMAX exceeded in amoeba'
+      if (iter.ge.itmax) then
+        write(*,*) '# amoeba(): Warning - itmax exceeded in amoeba'
         return
       endif
       iter=iter+2

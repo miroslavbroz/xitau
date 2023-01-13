@@ -4,7 +4,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 22nd 2016
       program test_sun
 
       implicit none
-      include 'simplex.inc'
+      include 'chi2.inc'
 
 c observational data
       integer m_OBS

@@ -4,3 +4,5 @@ A small sphere eclipsing a BIG sphere.
 Small triangles can be so small, they fit inside big triangles;
 the program correctly computes the respective annular eclipse!
 
+The difference wrt. the previsous version is due to the LITE.
+

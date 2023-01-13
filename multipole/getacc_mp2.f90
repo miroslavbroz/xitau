@@ -15,8 +15,8 @@ use read_multipole_module
 
 implicit none
 
-include '../simplex/simplex.inc'
-include '../simplex/dependent.inc'
+include '../chi2/chi2.inc'
+include '../chi2/dependent.inc'
 
 integer :: nbod_
 double precision, dimension(nbod_) :: mass, xb, yb, zb

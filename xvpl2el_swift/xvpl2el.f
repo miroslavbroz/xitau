@@ -6,8 +6,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Jul 30th 2015
 
       include 'common.inc'
       include '../misc/const.inc'
-      include '../simplex/simplex.inc'
-      include '../simplex/dependent.inc'
+      include '../chi2/chi2.inc'
+      include '../chi2/dependent.inc'
 
 c input parameters
       integer id(NBODMAX)

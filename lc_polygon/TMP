@@ -1,29 +1,97 @@
 
-! Note: The EPS parameter is necessary to perform at least one clip!
+!hatu = (/sin(l), -cos(l), 0.d0/)  ! old vers. from chi2_func_AO.f90, incorrect front<->back
+!hatu = (/-sin(l), cos(l), 0.d0/)  ! new vers, correct front<->back
+!hatu = (/sin(l), -cos(l), 0.d0/)  ! this does NOT switch area sign!
+
+! perpendicular, left-handed?!
+!hatv = vector_product(hatu, hatw)  ! orig. vers.
+!hatv = -vector_product(hatu, hatw)  ! this does NOT switch area sign!
+
+! switched u <-> v, right-handed
+!hatv = (/-sin(l), cos(l), 0.d0/)
+!hatu = vector_product(hatv, hatw)
+! Note: If there is no clip, it is necessary to revert the polygon!
 ! Otherwise, a non-clipped polygon (polys4->polys5) has an incorrect
 ! orientation, if it was clipped previously (polys2->polys3).
 
-      if (boxes(j,6).lt.boxes(i,6)-EPS) cycle
+! Note: revert() is no longer needed, for right-handed (u, v, w)?!
+!  if ((c.eq.0).and.(clips(i).lt.1000)) then
+!  if (c.eq.0) then
+!    call revert(poly_i)
+!    c = c+1000
+!  endif
 
-if (debug) then
+!    surf(i) = surf(i) + sign(tmp2,tmp3)  ! old vers., left-handed (u, v, w)
+    surf(i) = surf(i) - sign(tmp2,tmp3)  ! new vers., right-handed (u, v, w), revert in clip_in_c()
+
+    if (i.eq.219) then
+!      write(*,*) 'i = ', i
+!      write(*,*) 'tmp = ', tmp
+!      write(*,*) 'tmp2 = ', tmp2
+      write(*,*) 'tmp3 = ', tmp3
+!      write(*,*) 'normals = ', normals(i,:)
+    endif
+
+
+! A TEST TRANSFORMATION:
+!capS = surface(polys1, normals, surf)
+!
+!no = no+1
+!write(str,'(i0.2)') no
+!call write_poly("output.poly1." // trim(str), polys1)
+!call write1("output.surf1." // trim(str), surf)
+
+!!s_ = (/0.d0, 0.d0, 1.d0/)
+!call uvw(s, polys1, polys2)
+!call uvw_(normals)
+!capS = surface(polys2, normals, surf)
+!
+!call write_poly("output.poly2." // trim(str), polys2)
+!call write1("output.surf2." // trim(str), surf)
+!
+!call xyz(polys2, polystmp)
+!call xyz_(normals)
+!capS = surface(polystmp, normals, surf)
+!
+!call write_poly("output.polytmp." // trim(str), polystmp)
+!call write1("output.surftmp." // trim(str), surf)
+!stop
+
+if (debug_polygon) then
   no = no+1
-  if ((no.ge.480).and.(no.le.490)) then
+  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50)) then
     write(str,'(i0.2)') no
-    call write1("output.clips1." // trim(str), dble(clips))
+    call write1("output.clip1." // trim(str), dble(clips))
   endif
   no = no-1
 endif
 
-    poly_k = poly_i
-poly_i%c = poly_k%c
-do k = 1, poly_k%c
-  l = poly_k%s(k)%c
-  poly_i%s(k)%c = l
-  do m = 1,l
-    poly_i%s(k)%p(m,:) = poly_k%s(k)%p(l+1-m,:)
-  enddo
-enddo
+!capS = surface(polys2, normals, surf)
+!call write1("output.surf2." // trim(str), surf)
 
+!capS = surface(polys3, normals, surf)
+!call write1("output.surf3." // trim(str), surf)
+
+!call uvw(o_, polys3, polys4, equatorial=.true.)  ! old vers.
+
+!capS = surface(polys4, normals, surf)
+!call write1("output.surf4." // trim(str), surf)
+
+!call write1("output.surf5." // trim(str), surf)
+
+! revert?
+!do i = 1, size(polys5,1)
+!  if (clips(i).eq.0) then
+!    call revert(polys5(i))
+!  endif
+!enddo
+
+! old basis (not '), in old coordinates
+!hatx = (/1.d0, 0.d0, 0.d0/)
+!haty = (/0.d0, 1.d0, 0.d0/)
+!hatz = (/0.d0, 0.d0, 1.d0/)
+
+stop
 
 double precision function E1(x)
 implicit none

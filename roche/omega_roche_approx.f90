@@ -19,8 +19,8 @@ use roche_module
 
 implicit none
 
-include '../simplex/simplex.inc'
-include '../simplex/dependent.inc'
+include '../chi2/chi2.inc'
+include '../chi2/dependent.inc'
 
 integer :: k
 double precision, intent(in) :: R, q_

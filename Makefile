@@ -28,12 +28,19 @@ obj = \
   io/io_write_pl.o \
   limcof/limcof_read.o \
   limcof/limcof_interp.o \
-  main/read_dependent.o \
-  main/read_dependent_bs.o \
+  luminosity/filter.o \
+  luminosity/hec88.o \
+  luminosity/lum_func.o \
+  luminosity/luminosities.o \
+  luminosity/luminosity_planck_bandpass.o \
+  luminosity/luminosity_synthetic_bandpass.o \
+  luminosity/luminosity_synthetic_filters.o \
   misc/arcsec_au.o \
   misc/au_arcsec.o \
   misc/au_day.o \
   misc/auday_kms.o \
+  misc/bessj1.o \
+  misc/bessj32.o \
   misc/dotprod.o \
   misc/eps_earth.o \
   misc/gammln.o \
@@ -53,7 +60,6 @@ obj = \
   misc/qtrap.o \
   misc/ran1.o \
   misc/split.o \
-  misc/srtidx.o \
   misc/trapzd.o \
   misc/vproduct.o \
   misc/omega_kopal.o \
@@ -88,62 +94,49 @@ obj = \
   orbel/orbel_zget.o \
   ppn/getacc_ppn.o \
   pyterpol/pyterpol_.o \
+  chi2/chi2_func_CLO.o \
+  chi2/chi2_func_ECL.o \
+  chi2/chi2_func_LC.o \
+  chi2/chi2_func_RV.o \
+  chi2/chi2_func_SED.o \
+  chi2/chi2_func_SKY.o \
+  chi2/chi2_func_SKY2.o \
+  chi2/chi2_func_SKY3.o \
+  chi2/chi2_func_SYN.o \
+  chi2/chi2_func_T3.o \
+  chi2/chi2_func_TTV.o \
+  chi2/chi2_func_VIS.o \
+  chi2/distance_AB_C.o \
+  chi2/merit_func.o \
+  chi2/read_CLO.o \
+  chi2/read_ECL.o \
+  chi2/read_LC.o \
+  chi2/read_RV.o \
+  chi2/read_SED.o \
+  chi2/read_SKY.o \
+  chi2/read_SKY2.o \
+  chi2/read_SYN.o \
+  chi2/read_TTV.o \
+  chi2/read_VIS.o \
+  chi2/read_filter.o \
+  chi2/read_synth.o \
+  chi2/read_time.o \
+  chi2/read_time_all.o \
+  chi2/swift_bs_xyzb.o \
+  chi2/write_uvw.o \
+  geometry/geometries.o \
+  geometry/geometry_1centric.o \
+  geometry/geometry_ecliptic.o \
+  geometry/geometry_equatorial.o \
+  geometry/geometry_hierarch.o \
+  geometry/geometry_hierarch2.o \
+  geometry/geometry_twopairs.o \
+  geometry/geometry_twopairs2.o \
+  geometry/geometry_periods.o \
   simplex/amebsa.o \
   simplex/amoeba.o \
   simplex/amotry.o \
   simplex/amotsa.o \
-  simplex/baryc.o \
-  simplex/bessj1.o \
-  simplex/bessj32.o \
-  simplex/chi2_func.o \
-  simplex/chi2_func_CLO.o \
-  simplex/chi2_func_ECL.o \
-  simplex/chi2_func_LC.o \
-  simplex/chi2_func_RV.o \
-  simplex/chi2_func_SED.o \
-  simplex/chi2_func_SKY.o \
-  simplex/chi2_func_SKY2.o \
-  simplex/chi2_func_SKY3.o \
-  simplex/chi2_func_SYN.o \
-  simplex/chi2_func_T3.o \
-  simplex/chi2_func_TTV.o \
-  simplex/chi2_func_VIS.o \
-  simplex/distance_AB_C.o \
-  simplex/filter.o \
-  simplex/geometries.o \
-  simplex/geometry_1centric.o \
-  simplex/geometry_ecliptic.o \
-  simplex/geometry_equatorial.o \
-  simplex/geometry_hierarch.o \
-  simplex/geometry_hierarch2.o \
-  simplex/geometry_twopairs.o \
-  simplex/geometry_twopairs2.o \
-  simplex/geometry_periods.o \
-  simplex/hec88.o \
-  simplex/lum_func.o \
-  simplex/luminosities.o \
-  simplex/luminosity_planck_bandpass.o \
-  simplex/luminosity_synthetic_bandpass.o \
-  simplex/luminosity_synthetic_filters.o \
-  simplex/merit_func.o \
-  simplex/read_CLO.o \
-  simplex/read_ECL.o \
-  simplex/read_LC.o \
-  simplex/read_RV.o \
-  simplex/read_SED.o \
-  simplex/read_SKY.o \
-  simplex/read_SKY2.o \
-  simplex/read_SYN.o \
-  simplex/read_TTV.o \
-  simplex/read_VIS.o \
-  simplex/read_ephemeris.o \
-  simplex/read_filter.o \
-  simplex/read_synth.o \
-  simplex/read_time.o \
-  simplex/read_time_all.o \
-  simplex/swift_bs_xyzb.o \
-  simplex/write_poles.o \
-  simplex/write_uvw.o \
   subplex/calcc.o \
   subplex/dasum.o \
   subplex/daxpy.o \
@@ -257,15 +250,27 @@ obj = \
 #  sofa/bpn2xy.o \
 
 obj90 = \
-  multipole/const.o \
+  misc/const.o \
   ao/read_pnm.o \
   ao/write_pnm.o \
   ao/write_silh.o \
   ao/shadowing.o \
   ao/silhouette.o \
-  multipole/read_elem.o \
-  multipole/read_face.o \
-  multipole/read_node.o \
+  main/read_dependent.o \
+  misc/nrtype.o \
+  misc/nrutil.o \
+  misc/srtidx.o \
+  misc/srtint.o \
+  misc/uvw_nodes.o \
+  shape/read_face.o \
+  shape/read_node.o \
+  shape/read_elem.o \
+  shape/write_face.o \
+  shape/write_node.o \
+  shape/write_edge.o \
+  shape/write_elem.o \
+  shape/edge.o \
+  shape/subdivide.o \
   multipole/read_bruteforce.o \
   multipole/read_multipole.o \
   multipole/vector_product.o \
@@ -281,14 +286,9 @@ obj90 = \
   multipole/multipole2.o \
   multipole/bruteforce.o \
   multipole/rotate.o \
-  multipole/nrtype.o \
-  multipole/nrutil.o \
   multipole/jacobi.o \
   multipole/normalize.o \
   multipole/normal.o \
-  multipole/write_elem.o \
-  multipole/write_face.o \
-  multipole/write_node.o \
   multipole/write_multipole.o \
   multipole/getacc_bf.o \
   multipole/getacc_bf2.o \
@@ -298,7 +298,6 @@ obj90 = \
   roche/romberg.o \
   roche/roche.o \
   roche/omega_roche_approx.o \
-  simplex/uvw_nodes.o \
   occult/intersect_AB_e.o \
   occult/intersect_AB_p.o \
   occult/rotateinv.o \
@@ -328,58 +327,75 @@ obj90 = \
   lc_polygon/uvw.o \
   lc_polygon/write1.o \
   lc_polygon/write_poly.o \
+  lc_polygon/xyz.o \
   lc_polygon/centre_of_p.o \
   lc_polygon/normal_of_p.o \
   lc_polygon/shadowing_of_p.o \
   lc_polygon/rotate_of_p.o \
   lc_polygon/lc_polygon1.o \
-  simplex/read_AO.o \
-  simplex/read_LC2.o \
-  simplex/read_OCC.o \
-  simplex/chi2_func_AO.o \
-  simplex/chi2_func_OCC.o \
-  simplex/chi2_func_LC2.o \
+  adam/center_pnm.o \
+  adam/intersect_AB_l.o \
+  adam/inside_polygon.o \
+  adam/raytrace.o \
+  adam/cliptrace.o \
+  psf/psf.o \
+  psf/wrap.o \
+  psf/fourrow.o \
+  psf/four2.o \
+  psf/realft2.o \
+  psf/convolve.o \
+  psf/convolve_fft.o \
+  chi2/read_ephemeris.o \
+  chi2/read_AO.o \
+  chi2/read_LC2.o \
+  chi2/read_OCC.o \
+  chi2/write_poles.o \
+  chi2/chi2_func_AO.o \
+  chi2/chi2_func_AO2.o \
+  chi2/chi2_func_OCC.o \
+  chi2/chi2_func_LC2.o \
+  chi2/chi2_func.o \
 
 objc = \
   lc_polygon/clip_in_c.o \
+  adam/crop_in_c.o \
   clipper2/clipper.engine.o \
 
 inc = \
   swift.inc \
   version.inc \
+  chi2/chi2.inc \
+  chi2/dependent.inc \
+  chi2/cb_limb.inc \
+  chi2/cb_t3amp.inc \
   filters/filters.inc \
   limcof/limcof.inc \
+  luminosity/cb_absol.inc \
   misc/const.inc \
-  simplex/dependent.inc \
-  simplex/simplex.inc \
-  simplex/cb_absol.inc \
-  simplex/cb_itmax.inc \
-  simplex/cb_limb.inc \
-  simplex/cb_t3amp.inc \
+  subplex/usubc.inc \
   tides/spin.inc \
   tides/tides.inc \
   tides2/tides2.inc \
   wd/lc.inc \
-  subplex/usubc.inc \
 
 all: main/chi2 main/simplex main/simann main/subplex main/swift_bs main/map
 
-main/chi2: main/chi2.f $(obj90) $(obj) $(objc) $(inc)
+main/chi2: main/chi2.f90 $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
-main/simplex: main/simplex.f $(obj90) $(obj) $(objc) $(inc)
+main/simplex: main/simplex.f90 $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
-main/simann: main/simann.f $(obj90) $(obj) $(objc) $(inc)
+main/simann: main/simann.f90 $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
-main/subplex: main/subplex.f $(obj90) $(obj) $(objc) $(inc)
+main/subplex: main/subplex.f90 $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 main/swift_bs: main/swift_bs.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
-main/map: main/map.f $(obj90) $(obj) $(objc) $(inc)
+main/map: main/map.f90 $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 $(obj90) : %.o:%.f90 $(inc)
@@ -389,7 +405,7 @@ $(obj) : %.o:%.f $(inc)
 	$(f77) $(opt) -c -o $@ $<
 
 $(objc) : %.o:%.cpp $(inc)
-	$(cc) $(opt) -c -o $@ $<
+	$(cc) $(opt) -std=c++17 -c -o $@ $<
 
 clean : FORCE
 	rm -f mod/*.mod

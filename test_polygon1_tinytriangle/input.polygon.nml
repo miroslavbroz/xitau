@@ -10,7 +10,7 @@ unit2 = 0.1d0
 
 law = 'Lambert'
 
-debug = .true.
+debug_polygon = .true.
 
 / ! end-of-input
 

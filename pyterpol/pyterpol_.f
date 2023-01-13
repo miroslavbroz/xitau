@@ -6,7 +6,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jun 23rd 2016
      :  Delta, lambda1, lambda2, absolute, nbod2)
 
       implicit none
-      include '../simplex/simplex.inc'
+      include '../chi2/chi2.inc'
 c input
       integer nbod
       real*8 T_eff(nbod), log_g(nbod), v_rot(nbod), metal(nbod)

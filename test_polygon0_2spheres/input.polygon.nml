@@ -8,7 +8,7 @@ f_face2 = 'sphere.1.face'
 
 law = 'Lambert'
 
-debug = .true.
+debug_polygon = .true.
 
 / ! end-of-input
 

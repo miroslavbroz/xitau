@@ -9,8 +9,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Petr Pokorny, Apr 3rd 2021
       include '../misc/const.inc'
       include 'tides.inc'
       include 'spin.inc'
-      include '../simplex/simplex.inc'
-      include '../simplex/dependent.inc'
+      include '../chi2/chi2.inc'
+      include '../chi2/dependent.inc'
 
 c input
       integer nbod_

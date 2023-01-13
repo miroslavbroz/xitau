@@ -11,8 +11,8 @@ use getacc_mp_module
 
 implicit none
 
-include '../simplex/simplex.inc'
-include '../simplex/dependent.inc'
+include '../chi2/chi2.inc'
+include '../chi2/dependent.inc'
 
 !integer, parameter :: NBODMAX = 2
 

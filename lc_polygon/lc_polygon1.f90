@@ -37,11 +37,11 @@
 ! orignodes      .. nodes, original (to be scaled, rotated, translated), m
 ! faces          .. triangular faces, 1
 ! elems          .. tetrahedral elements, 1
-! poly1          .. sets of polygons, derived from triangles, m
-! poly2          .. sets of polygons, transformed to line-of-sun
-! poly3          .. sets of polygons, clipped (shadowing)
-! poly4          .. sets of polygons, transformed to line-of-sight
-! poly5          .. sets of polygons, clipped (visibility)
+! polys1         .. sets of polygons, derived from triangles, m
+! polys2         .. sets of polygons, transformed to line-of-sun
+! polys3         .. sets of polygons, clipped (shadowing)
+! polys4         .. sets of polygons, transformed to line-of-sight
+! polys5         .. sets of polygons, clipped (visibility)
 ! normals        .. normals of polygons, 1
 ! centres        .. centres of polygons, m
 ! surf           .. surface of polygons, m^2
@@ -65,9 +65,16 @@
 
 module lc_polygon1_module
 
+use polytype_module
+
+type(polystype), dimension(:), pointer, save :: polys1, polys2, polys3, polys4, polys5, polystmp
+double precision, dimension(:), pointer, save :: mu_i, mu_e, f, f_L, Phi_i, Phi_e
+double precision, dimension(:,:), pointer, save :: normals, centres
+double precision, dimension(3) :: photocentre
+
 contains
 
-subroutine lc_polygon1(t_lite, lite, r, s, o, d1, d2, lambda_eff, Delta_eff, Phi_lambda_cal, V0)
+subroutine lc_polygon1(t_lite, lite, r, s, o, d1, d2, lambda_eff, Delta_eff, Phi_lambda_cal, V0, i2nd)
 
 use polytype_module
 use const_module
@@ -81,6 +88,7 @@ use write_poly_module
 use write1_module
 use to_poly_module
 use uvw_module
+use xyz_module
 use clip_module
 use to_three_module
 use surface_module
@@ -91,8 +99,11 @@ use centre_of_p_module
 use shadowing_of_p_module
 use rotate_of_p_module
 
-include '../simplex/simplex.inc'
-include '../simplex/dependent.inc'
+use normalize_module
+use revert_module
+
+include '../chi2/chi2.inc'
+include '../chi2/dependent.inc'
 
 double precision, intent(in) :: t_lite, lite
 double precision, dimension(:,:), intent(in) :: r
@@ -100,14 +111,12 @@ double precision, dimension(3), intent(in) :: s, o
 double precision, intent(in) :: d1, d2
 double precision, intent(in) :: lambda_eff, Delta_eff, Phi_lambda_cal
 double precision, intent(out) :: V0
+integer, intent(inout) :: i2nd
 
 integer, dimension(:,:), pointer, save :: faces
 double precision, dimension(:,:), pointer, save :: nodes, orignodes
-type(polystype), dimension(:), pointer, save :: polys1, polys2, polys3, polys4, polys5
 
-double precision, dimension(:,:), pointer, save :: normals, centres
 double precision, dimension(:), pointer, save :: surf
-double precision, dimension(:), pointer, save :: mu_i, mu_e, f, f_L, Phi_i, Phi_e
 double precision, dimension(:), pointer, save :: I_lambda
 integer, dimension(:), pointer, save :: clips
 
@@ -126,9 +135,12 @@ integer, dimension(:), pointer, save :: dataset, dataset_
 integer, dimension(:,:), pointer, save :: faces1, faces2
 double precision, dimension(:,:), pointer, save :: nodes1, nodes2
 double precision, dimension(:), pointer, save :: phi1, phi2, phi3
-double precision, dimension(3) :: photocentre
 
 integer, save :: i1st = 0, no = 0
+
+!
+! initialisation
+!
 
 if (i1st.eq.0) then
 
@@ -136,21 +148,63 @@ if (i1st.eq.0) then
   call read_input()
 
   ! read 2 objects...
-  call read_face(f_face1, faces1)
-  call read_node(f_node1, nodes1)
+!  call read_face(f_face1, faces1)
+!  call read_node(f_node1, nodes1)
   call read_face(f_face2, faces2)
   call read_node(f_node2, nodes2)
 
-  ! ...and merge them
+  ! units
+  nodes2 = unit2*nodes2
+
+  ! from dependent.inc
+  allocate(nodes1(size(nodesforchi,1),size(nodesforchi,2)))
+  allocate(faces1(size(facesforchi,1),size(facesforchi,2)))
+
   allocate(nodes(size(nodes1,1)+size(nodes2,1), size(nodes1,2))) 
   allocate(faces(size(faces1,1)+size(faces2,1), size(faces1,2))) 
   allocate(dataset(size(nodes,1)))
   allocate(dataset_(size(faces,1)))
 
+  ! allocation
+  allocate(orignodes(size(nodes,1), size(nodes,2)))
+  allocate(phi1(size(orignodes,1)))
+  allocate(phi2(size(orignodes,1)))
+  allocate(phi3(size(orignodes,1)))
+
+  allocate(polys1(size(faces,1)))
+  allocate(polys2(size(polys1,1)))
+  allocate(polys3(size(polys1,1)))
+  allocate(polys4(size(polys1,1)))
+  allocate(polys5(size(polys1,1)))
+  allocate(polystmp(size(polys1,1)))
+  allocate(normals(size(polys1,1),3))
+  allocate(centres(size(polys1,1),3))
+  allocate(mu_i(size(polys1,1)))
+  allocate(mu_e(size(polys1,1)))
+  allocate(surf(size(polys1,1)))
+  allocate(f(size(polys1,1)))
+  allocate(f_L(size(polys1,1)))
+  allocate(Phi_i(size(polys1,1)))
+  allocate(Phi_e(size(polys1,1)))
+  allocate(I_lambda(size(polys1,1)))
+  allocate(clips(size(polys1,1)))
+
+  i1st = 1
+endif  ! i1st
+
+!
+! 2nd initialisation, whenever the shape is modified
+!
+
+if (i2nd.eq.0) then
+
+  nodes1 = nodesforchi
+  faces1 = facesforchi
+
   ! units
   nodes1 = unit1*nodes1
-  nodes2 = unit2*nodes2
 
+  ! ...and merge them
   do j = 1, size(nodes1,1)
     nodes(j,:) = nodes1(j,:)
     dataset(j) = 1
@@ -170,33 +224,9 @@ if (i1st.eq.0) then
     dataset_(k) = 2
   enddo
 
-  ! allocation
-  allocate(orignodes(size(nodes,1), size(nodes,2)))
-  allocate(phi1(size(orignodes,1)))
-  allocate(phi2(size(orignodes,1)))
-  allocate(phi3(size(orignodes,1)))
-
-  allocate(polys1(size(faces,1)))
-  allocate(polys2(size(polys1,1)))
-  allocate(polys3(size(polys1,1)))
-  allocate(polys4(size(polys1,1)))
-  allocate(polys5(size(polys1,1)))
-  allocate(normals(size(polys1,1),3))
-  allocate(centres(size(polys1,1),3))
-  allocate(mu_i(size(polys1,1)))
-  allocate(mu_e(size(polys1,1)))
-  allocate(surf(size(polys1,1)))
-  allocate(f(size(polys1,1)))
-  allocate(f_L(size(polys1,1)))
-  allocate(Phi_i(size(polys1,1)))
-  allocate(Phi_e(size(polys1,1)))
-  allocate(I_lambda(size(polys1,1)))
-  allocate(clips(size(polys1,1)))
-
   orignodes = nodes
 
-  i1st = 1
-endif  ! i1st
+endif  ! i2nd
 
 call cpu_time(t1)
 
@@ -255,6 +285,7 @@ Phi_thermal = pi*B_thermal
 
 if (debug_polygon) then
   write(*,*) '# at asteroid surface:'
+  write(*,*) 'lite = ', lite, ' d'
   write(*,*) 'd1 = ', d1/au, ' au'
   write(*,*) 'Phi_lambda = ', Phi_lambda, ' W m^-2 m^-1'
   write(*,*) 'Phi_V = ', Phi_V, ' W m^-2'
@@ -346,14 +377,20 @@ call to_three(normals, centres, polys3)
 ! non-illuminated || non-visible won't be computed
 call non_(mu_i, mu_e, polys3)
 
+! back-transformation
+call xyz(polys3, polystmp)
+call xyz_(nodes)
+call xyz_(normals)
+call xyz_(centres)
+
 ! 2nd transformation
-call uvw(o_, polys3, polys4, equatorial=.true.)
+call uvw(o, polystmp, polys4, equatorial=.true.)
 call uvw_(nodes)
 call uvw_(normals)
 call uvw_(centres)
 
-o__ = (/dot_product(hatu,o_), dot_product(hatv,o_), dot_product(hatw,o_)/)
-s__ = (/dot_product(hatu,s_), dot_product(hatv,s_), dot_product(hatw,s_)/)
+o__ = (/dot_product(hatu,o), dot_product(hatv,o), dot_product(hatw,o)/)
+s__ = (/dot_product(hatu,s), dot_product(hatv,s), dot_product(hatw,s)/)
 
 ! shadowing
 call clip(polys4, polys5, clips)
@@ -376,35 +413,46 @@ if (debug_polygon) then
   write(*,*) 'V0 = ', V0, ' mag'
 endif
 
+! photocentre
+call centre(polys5, centres)
+photocentre = 0.d0
+do i = 1, size(surf,1)
+  if (dataset_(i).ne.1) exit
+  if (polys5(i)%c.eq.0) cycle
+  photocentre = photocentre + centres(i,:)*Phi_e(i)*surf(i)
+enddo
+photocentre = photocentre/tot
+
 call cpu_time(t2)
-write(*,*) 'cpu_time = ', t2-t1, ' s'  ! dbg
 
 ! debugging
 if (debug_polygon) then
   no = no+1
-!  if ((no.eq.78).or.(no.eq.79)) then
-!  if ((no.eq.1).or.(no.eq.2).or.(no.eq.3)) then
-!  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50).or.(no.eq.99)) then
+  write(*,*) 'no = ', no
+  write(*,*) 'cpu_time = ', t2-t1, ' s'  ! dbg
+
+  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50)) then
 !  if ((no.ge.1).and.(no.le.99)) then
-  if ((no.ge.480).and.(no.le.482)) then
     write(str,'(i0.2)') no
     call write_node("output.node." // trim(str), nodes)
     call write_face("output.face." // trim(str), faces)
-!    call write_node("output.normal." // trim(str), normals)
+    call write_node("output.normal." // trim(str), normals)
     call write_node("output.centre." // trim(str), centres)
 
     nodes = nodes/d2/arcsec
     call write_node("output.arcsec." // trim(str), nodes)
 
-!    call write_poly("output.poly1." // trim(str), polys1)
-!    call write_poly("output.poly2." // trim(str), polys2)
-!    call write_poly("output.poly3." // trim(str), polys3)
-!    call write_poly("output.poly4." // trim(str), polys4)
+    call write_poly("output.poly1." // trim(str), polys1)
+    call write_poly("output.poly2." // trim(str), polys2)
+    call write_poly("output.poly3." // trim(str), polys3)
+    call write_poly("output.poly4." // trim(str), polys4)
     call write_poly("output.poly5." // trim(str), polys5)
+    call write_poly("output.polytmp." // trim(str), polystmp)
 
-!    call write1("output.f." // trim(str), f)
-!    call write1("output.f_L." // trim(str), f_L)
-!    call write1("output.mu_i." // trim(str), mu_i)
+    call write1("output.f." // trim(str), f)
+    call write1("output.f_L." // trim(str), f_L)
+    call write1("output.mu_i." // trim(str), mu_i)
+    call write1("output.mu_e." // trim(str), mu_e)
     call write1("output.surf." // trim(str), surf)
     call write1("output.Phi_i." // trim(str), Phi_i)
     call write1("output.Phi_e." // trim(str), Phi_e)
@@ -434,16 +482,6 @@ if (debug_polygon) then
     close(10)
   endif
 
-! photocentre
-  call centre(polys5, centres)
-  photocentre = 0.d0
-  do i = 1, size(surf,1)
-    if (dataset_(i).ne.1) exit
-    if (polys5(i)%c.eq.0) cycle
-    photocentre = photocentre + centres(i,:)*Phi_e(i)*surf(i)
-  enddo
-  photocentre = photocentre/tot
-
   open(unit=10, file='photocentre.dat', status='unknown',access='append')
   if (no.eq.1) then
     write(10,*) '# JD(TDB,nolite) u v w no'
@@ -454,6 +492,7 @@ if (debug_polygon) then
 
 endif
 
+!stop  ! dbg
 return
 end subroutine lc_polygon1
 

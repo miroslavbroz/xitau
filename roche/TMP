@@ -1,0 +1,38 @@
+
+! WORKING VERSION:
+!  OmegaL1 = 1.d0/q*(OmegaL1 + q**2/(2.d0*(1.d0+q))) - (1.d0/q)**2/(2.d0*(1.d0+(1.d0/q)))
+!  OmegaF  = 1.d0/q*(OmegaF  + q**2/(2.d0*(1.d0+q))) - (1.d0/q)**2/(2.d0*(1.d0+(1.d0/q)))
+
+!  OmegaL1 = 1.d0/q*OmegaL1 + q/(2.d0*(1.d0+q)) - 1.d0/(2.d0*q*(1.d0+q))
+!  OmegaF  = 1.d0/q*OmegaF  + q/(2.d0*(1.d0+q)) - 1.d0/(2.d0*q*(1.d0+q))
+
+!  OmegaL1 = 1.d0/q*OmegaL1 + (q-1.d0)/(2.d0*q)
+!  OmegaF  = 1.d0/q*OmegaF  + (q-1.d0)/(2.d0*q)
+
+
+!x = r*cos(phi)*sintheta
+!y = r*sin(phi)*sintheta
+!z = r*cos(theta)
+!
+!if (komp.eq.2) then
+!  x = x-1.d0
+!endif
+
+!r1 = sqrt(x**2+y**2+z**2)
+!r2 = sqrt((x-1.d0)**2+y**2+z**2)
+
+!term1 = 1.d0/r1
+!term2 = q/r2
+!term3 = 0.5d0*(1.d0+q)*P*P*(x**2+y**2) - q*x
+
+!x = x_
+!if (komp.eq.2) then
+!  x = x-1.d0
+!endif
+
+write(*,*) 'R = ', R
+write(*,*) 'Rvol(', i-1, ') = ', Rvol(i-1)
+write(*,*) 'Rvol(', i, ') = ', Rvol(i)
+write(*,*) 'Omega(', i-1, ') = ', Omega(i-1)
+write(*,*) 'Omega(', i, ') = ', Omega(i)
+

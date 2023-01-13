@@ -4,6 +4,8 @@
 
 module boundingbox_module
 
+double precision, parameter :: INF = 1.d38
+
 contains
 
 subroutine boundingbox(polys, boxes)
@@ -14,7 +16,6 @@ implicit none
 type(polystype), dimension(:), pointer, intent(in) :: polys
 double precision, dimension(:,:), pointer, intent(out) :: boxes
 
-double precision, parameter :: INF = 1.d38
 integer :: i, j, k
 double precision :: minu, minv, minw, maxu, maxv, maxw
 

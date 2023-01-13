@@ -1,0 +1,59 @@
+! fplane.f90
+! Fundamental plane for occultations.
+! Miroslav Broz (miroslav.broz@email.cz), Jun 28th 2022
+
+!      /|              
+!     / /              
+!    / E|              
+!   | /-------A-------O
+!   |/ /  d            
+!   / /                
+!   |/                 
+
+module fplane_module
+
+contains
+
+! topocentric observer (of-date) -> fundamental plane (J2000)
+
+subroutine fplane(t_TDB, r_EA, r_AO, r_EO, lambda, phi, h, u, v, has_solution)
+
+use normalize_module
+use vector_product_module
+use geodetic_module
+use intersect_AB_p_module
+
+implicit none
+double precision, dimension(3), intent(in) :: r_EA, r_AO, r_EO
+double precision, intent(in) :: lambda, phi, h
+double precision, intent(out) :: u, v
+logical, intent(out) :: has_solution
+
+double precision, dimension(3) :: p
+double precision, dimension(3) :: hatu, hatv, hatw
+double precision :: w
+
+! new origin
+d = sqrt(dot_product(r_EA, r_EA))
+r0 = r_EA - d*r_AO
+
+! Earth rotation
+call geodetic(lambda_obs, phi_obs, h_obs)
+call
+
+call intersect_AB_p(r_EA-r0, -r_AO-r0, p, (/r_AO(1),r_AO(2),r_AO(3),0.d0/), has_solution)
+
+hatw = normalize(r_AO)
+hatu = normalize((/r_AO(2), -r_AO(1), 0.d0/))
+hatv = vector_product(hatu, hatw)
+
+u = dot_product(hatu, p)
+v = dot_product(hatv, p)
+w = dot_product(hatw, p)
+
+return
+end subroutine fplane
+
+end module fplane_module
+
+

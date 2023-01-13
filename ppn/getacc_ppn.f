@@ -12,8 +12,8 @@ c "Orbital ephemerides of the Sun, Moon and Planets."
 
       include "../swift.inc"
       include "../misc/const.inc"
-      include "../simplex/simplex.inc"
-      include "../simplex/dependent.inc"
+      include "../chi2/chi2.inc"
+      include "../chi2/dependent.inc"
 
 c input
       integer nbod_

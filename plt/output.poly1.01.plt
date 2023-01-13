@@ -21,7 +21,7 @@ set arrow from 0+0.02,0,0 to o1+0.01,o2,o3 front lc 'blue'
 sp \
   "<./poly.awk output.poly1.01" u 4:5:6 w lp,\
   "<./poly.awk output.poly1.99" u 4:5:6 w lp,\
-  "<./poly.awk output.poly1.01 | awk '($1==88) || (NF==0)'" u 4:5:6 w l lw 3 lc 'black',\
+  "<./poly.awk output.poly1.01 | awk '($1==14) || (NF==0)'" u 4:5:6 w l lw 3 lc 'black',\
 
 pa -1
 

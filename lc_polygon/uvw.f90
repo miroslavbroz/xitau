@@ -1,12 +1,34 @@
 ! uvw.f90
-! Compute (u, v, w) coordinates
+! Compute (u, v, w) coordinates.
 ! Miroslav Broz (miroslav.broz@email.cz), Nov 5th 2022
 
 ! Note: see polytype.f90
 
+! Note: in README.geometry, uvw1.f, w's away from observer, left-handed!
+
+!      v, +DE
+! 
+!      ^                  
+!      |                  
+!      |                  
+!      |                  
+!      |                  
+!     -|----------> u, -RA
+!     /|                  
+!    /
+!   /
+!  w
+!
+!  sky-plane, for observations
+!  u positive towards -RA
+!  v positive towards +DE
+!  w positive towards observer
+!  right-handed
+
 module uvw_module
 
 double precision, dimension(3) :: hatu, hatv, hatw
+double precision, dimension(3) :: hatx_, haty_, hatz_
 
 contains
 
@@ -14,6 +36,7 @@ subroutine uvw(s, polys1, polys2, equatorial)
 
 use polytype_module
 use const_module
+use input_module
 use vector_product_module
 use rotate_module
 
@@ -34,18 +57,17 @@ else
   e_ = .false.
 endif
 
-! new basis (as in uvw1.f)
-! towards observer
+! new basis
+! towards observer!
 hatw = s
 l = atan2(s(2),s(1))
 b = asin(s(3))
 
 ! in (x,y) plane
-!hatu = (/sin(l), -cos(l), 0.d0/)
 hatu = (/-sin(l), cos(l), 0.d0/)
 
-! perpendicular, left-handed?!
-hatv = vector_product(hatu, hatw)
+! right-handed!
+hatv = -vector_product(hatu, hatw)
 
 ! ecliptic J2000 -> equatorial J2000
 if (e_) then
@@ -55,9 +77,11 @@ if (e_) then
   hatv = vaxis_rotate(hatv, hatw, -zeta)
 endif
 
-!write(*,*) 'hatu = ', hatu
-!write(*,*) 'hatv = ', hatv
-!write(*,*) 'hatw = ', hatw
+if (debug_polygon) then
+  write(*,*) 'hatu = ', hatu
+  write(*,*) 'hatv = ', hatv
+  write(*,*) 'hatw = ', hatw
+endif
 
 !$omp parallel do private(i,j,k) shared(polys1,polys2,hatu,hatv,hatw)
 do i = 1, size(polys1,1)
@@ -78,6 +102,11 @@ do i = 1, size(polys1,1)
   enddo
 enddo
 !$omp end parallel do
+
+! old basis ('), in new coordinates
+hatx_ = (/hatu(1), hatv(1), hatw(1)/)
+haty_ = (/hatu(2), hatv(2), hatw(2)/)
+hatz_ = (/hatu(3), hatv(3), hatw(3)/)
 
 return
 end subroutine uvw

@@ -37,8 +37,8 @@ read(10,*,err=900,end=900) dummy
 
 allocate(pnm(w, h))
 
-! i ... row
-! j ... column
+! i .. row
+! j .. column
 
 i = 1
 j = 1

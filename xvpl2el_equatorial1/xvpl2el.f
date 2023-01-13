@@ -6,8 +6,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Nov 28th 2022
       program xvpl2el
 
       include '../misc/const.inc'
-      include '../simplex/simplex.inc'
-      include '../simplex/dependent.inc'
+      include '../chi2/chi2.inc'
+      include '../chi2/dependent.inc'
 
 c input parameters
       integer id(NBODMAX)

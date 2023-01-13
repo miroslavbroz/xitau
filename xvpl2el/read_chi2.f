@@ -5,8 +5,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Jul 30th 2015
       subroutine read_chi2(m, y)
 
       include '../misc/const.inc'
-      include '../simplex/simplex.inc'
-      include '../simplex/dependent.inc'
+      include '../chi2/chi2.inc'
+      include '../chi2/dependent.inc'
 c input
 c output
       real*8 m(NBODMAX), y(6,NBODMAX)

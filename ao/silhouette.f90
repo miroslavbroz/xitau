@@ -8,6 +8,205 @@ integer, parameter :: nsilh = 360
 
 contains
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! Compute an observed silhouette for a PNM image
+
+subroutine silhouette2(pnm, silh_factor, center, silh, use_multipoint)
+
+use const_module
+
+implicit none
+
+double precision, dimension(:,:), pointer, intent(in) :: pnm
+double precision, intent(in) :: silh_factor
+double precision, dimension(2), intent(in) :: center
+double precision, dimension(:,:), pointer, intent(out) :: silh
+logical, intent(in), optional :: use_multipoint
+logical :: use_, debug_
+
+integer :: i, j, k, l, w, h, maxl
+double precision :: phi, u, v, du, dv, u_inpxl, v_inpxl, r, dr
+double precision :: x0, f0, minf_
+double precision, dimension(:), allocatable :: x, x_, f, f_
+integer, parameter :: step = 1
+logical :: debug = .false.
+
+if (present(use_multipoint)) then
+  use_ = use_multipoint
+else
+  use_ = .false.
+endif
+
+!debug = .true.  ! dbg
+
+! i .. row, up -> down, v
+! j .. column, left -> right, u
+
+h = size(pnm, 1)
+w = size(pnm, 2)
+
+maxl = step*int(sqrt(dble(w*w+h*h)/4.d0))+1
+
+allocate(x(maxl))
+allocate(f(maxl))
+allocate(x_(maxl))
+allocate(f_(maxl))
+
+do k = 1, nsilh
+!do k = 1, 2
+
+  phi = dble(k-1)/nsilh * 2.d0*pi
+  du = cos(phi)
+  dv = sin(phi)
+  dr = 1.d0/step/max(abs(du),abs(dv))
+
+  ! find radial profile
+  do l = 1, maxl
+    r = (float(l)-0.5d0)*dr
+    u = center(1) + r*du
+    v = center(2) + r*dv
+    x(l) = r
+    f(l) = 0.d0
+
+    v_inpxl = 0.5d0*h - v + 1.0d0
+    u_inpxl = 0.5d0*w + u + 1.0d0
+    i = int(v_inpxl)
+    j = int(u_inpxl)
+
+    if (use_) then
+
+      if ((i.gt.1).and.(i.lt.h).and.(j.gt.1).and.(j.lt.w)) then
+        f(l) = multipoint(pnm, i, j, u_inpxl, v_inpxl)
+      endif
+
+    else
+
+      if ((i.ge.1).and.(i.le.h).and.(j.ge.1).and.(j.le.w)) then
+        f(l) = pnm(i,j)
+        if (debug) then
+          write(20,*) u, v, i, j, pnm(i,j)
+        endif
+      endif
+
+    endif
+
+    if (debug) then
+      write(10,*) u, v
+      write(30,*) u, v, l, x(l), f(l)
+    endif
+  enddo
+
+  ! find the respective level
+  f0 = silh_factor*maxval(f)
+  x0 = nonmonotonic(f, x, f0)
+
+  u = x0*cos(phi)
+  v = x0*sin(phi)
+
+! Note: This would align silhouette again w. PNM, but it's offset wrt. shape in chi2_AO.f90!
+!  if (use_) then
+!    u = u + 0.5d0
+!    v = v - 0.5d0
+!  endif
+
+  silh(k, :) = (/u, v/)
+enddo
+
+deallocate(x)
+deallocate(f)
+deallocate(x_)
+deallocate(f_)
+
+end subroutine silhouette2
+
+! Multi-point interpolation.
+
+double precision function multipoint(pnm, i, j, u, v)
+
+implicit none
+double precision, dimension(:,:), pointer, intent(in) :: pnm
+integer, intent(in) :: i, j
+double precision, intent(in) :: u, v
+
+double precision :: v00, v01, v10, v11, v0, v1, val
+
+v00 = pnm(i+0,j+0)
+v01 = pnm(i+0,j+1)
+v10 = pnm(i+1,j+0)
+v11 = pnm(i+1,j+1)
+
+v0 = v00 + (v01-v00)*(u-j)/(j+1-j)
+v1 = v10 + (v11-v10)*(u-j)/(j+1-j)
+
+val = v0 + (v1-v0)*(v-i)/(i+1-i)
+
+!write(40,*) v00, v01
+!write(40,*) v10, v11
+!write(40,*)
+!write(40,*) v0, v1
+!write(40,*)
+!write(40,*) val
+!write(40,*) '--'
+
+multipoint = val
+return
+end function multipoint
+
+! Non-monotonic interpolation; we use it for x(f), NOT f(x)!
+
+double precision function nonmonotonic(x, y, x0)
+
+implicit none
+double precision, dimension(:) :: x, y
+double precision :: x0
+
+integer :: i, n
+double precision :: y0
+
+n = size(x)
+y0 = 0.d0
+
+do i = 2, n
+  if (((x(i-1).le.x0).and.(x(i).ge.x0)).or.((x(i-1).ge.x0).and.(x(i).le.x0))) then
+    y0 = y(i-1) + (y(i)-y(i-1)) * (x0-x(i-1))/(x(i)-x(i-1))
+  endif
+enddo
+
+nonmonotonic = y0
+return
+end function nonmonotonic
+
+! Silhouette center as triangles centre-of-area (weigthed by area).
+
+function center_silh(silh)
+
+implicit none
+double precision, dimension(:,:), pointer, intent(out) :: silh
+double precision, dimension(2) :: center_silh
+
+integer :: i, n
+double precision :: tmp, s
+double precision, dimension(2) :: a, b, c
+
+n = size(silh,1)
+s = 0.d0
+c = (/0.d0, 0.d0/)
+do i = 1, n-1
+  a = silh(i,:)
+  b = silh(i+1,:)
+  tmp = abs(a(1)*b(2)-a(2)*b(1))
+  s = s + tmp
+  c = c + tmp*(a+b)/3.d0
+enddo
+c = c/s
+
+center_silh = c
+return
+end function center_silh
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ! Compute a synthetic silhouette from nodes/faces; convex version.
 
 subroutine silhouette(nodes, faces, masks, silh)
@@ -81,138 +280,9 @@ if ((t.ge.0.d0).and.(t.le.1.d0).and.(s.gt.0.d0)) then
 else
   intersect = 0.d0
 endif
-return
 
+return
 end function intersect
-
-! Compute an observed silhouette for a PNM image
-
-subroutine silhouette2(pnm, silh_factor, center, silh)
-
-use const_module
-
-implicit none
-
-double precision, dimension(:,:), pointer, intent(in) :: pnm
-double precision, intent(in) :: silh_factor
-double precision, dimension(2), intent(in) :: center
-double precision, dimension(:,:), pointer :: silh
-
-integer :: i, j, k, l, w, h, maxl
-double precision :: phi, u, v, x0, f0, minf_
-double precision, dimension(:), allocatable :: x, x_, f, f_
-
-! i ... row
-! j ... column
-
-h = size(pnm, 1)
-w = size(pnm, 2)
-
-maxl = int(sqrt(dble(w*w+h*h)/4.d0))+1
-allocate(x(maxl))
-allocate(f(maxl))
-allocate(x_(maxl))
-allocate(f_(maxl))
-
-do k = 1, nsilh
-
-  phi = dble(k-1)/nsilh * 2.d0*pi
-
-  ! find radial profile
-  do l = 1, maxl
-    u = center(1) + l*cos(phi)
-    v = center(2) + l*sin(phi)
-    i = int(h/2.d0-v+0.5)
-    j = int(w/2.d0+u+0.5)
-    x(l) = l
-    if ((i.ge.1).and.(i.le.h).and.(j.ge.1).and.(j.le.w)) then
-      f(l) = pnm(i, j)
-    else
-      f(l) = 0.d0
-    endif
-  enddo
-
-  ! find the respective level
-  f0 = silh_factor*max_(f)
-  x0 = interp_(f, x, f0)
-  u = x0*cos(phi)
-  v = x0*sin(phi)
-
-  silh(k, :) = (/u, v/)
-enddo
-
-deallocate(x)
-deallocate(f)
-deallocate(x_)
-deallocate(f_)
-
-end subroutine silhouette2
-
-! Non-monotonic interpolation; we use it for x(f), NOT f(x)!
-
-double precision function interp_(x, y, x0)
-
-implicit none
-
-double precision, dimension(:) :: x, y
-double precision :: x0
-
-integer :: i, n
-double precision :: y0
-
-n = size(x)
-interp_ = -1.d0
-
-do i = 2, n
-  if (((x(i-1).lt.x0).and.(x(i).gt.x0)).or.((x(i).lt.x0).and.(x(i-1).gt.x0))) then
-    interp_ = y(i-1) + (y(i)-y(i-1)) * (x0-x(i-1))/(x(i)-x(i-1))
-  endif
-enddo
-
-return
-end function interp_
-
-
-double precision function max_(x)
-
-double precision, dimension(:) :: x
-
-integer i
-
-max_ = x(1)
-do i = 1, size(x)
-  max_ = max(x(i), max_)
-enddo
-
-return
-end function max_
-
-! Silhouette center as triangles centre-of-area (weigthed by area).
-
-function center_silh(silh)
-
-double precision, dimension(:,:), pointer, intent(out) :: silh
-double precision, dimension(2) :: center_silh
-
-integer :: i, n
-double precision :: tmp, s
-double precision, dimension(2) :: a, b, c
-
-n = size(silh,1)
-s = 0.d0
-c = (/0.d0, 0.d0/)
-do i = 1, n-1
-  a = silh(i,:)
-  b = silh(i+1,:)
-  tmp = abs(a(1)*b(2)-a(2)*b(1))
-  s = s + tmp
-  c = c + tmp*(a+b)/3.d0
-enddo
-c = c/s
-
-center_silh = c
-return
-end function center_silh
 
 end module silhouette_module
 

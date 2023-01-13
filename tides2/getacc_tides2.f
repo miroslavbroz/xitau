@@ -6,10 +6,12 @@ c \vec a = Gm'/R^3 [ 3(\vec r\cdot\vec n)\vec n - \vec r]
 
       subroutine getacc_tides2(time,nbod_,mass,xb,yb,zb,axb,ayb,azb)
 
+      use read_ephemeris_module
+
       include "../swift.inc"
       include "tides2.inc"
-      include "../simplex/simplex.inc"
-      include "../simplex/dependent.inc"
+      include "../chi2/chi2.inc"
+      include "../chi2/dependent.inc"
 
 c input
       integer nbod_

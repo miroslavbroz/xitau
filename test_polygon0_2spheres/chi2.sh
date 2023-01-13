@@ -3,7 +3,7 @@
 #./chi2 < chi2.in
 ./chi2 < chi2.in > chi2.out
 
-#./chi2_LC2.plt
+./chi2_LC2.plt
 ./output.surf.plt
 
 #./chi2_TTV.plt

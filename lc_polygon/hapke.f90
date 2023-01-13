@@ -107,7 +107,7 @@ tani = sini/cosi
 tane = sine/cose
 
 cospsi = (cos(alpha)-cosi*cose)/(sini*sine)
-psi = acos(min(cospsi, 1.d0))
+psi = acos(min(max(cospsi, -1.d0), 1.d0))
 sinpsihalfsq = (sin(psi/2.d0))**2
 
 xi = 1.d0/sqrt(1.d0 + pi*tanbartheta**2)
@@ -157,11 +157,13 @@ else
 endif
 
 if (.false.) then
+!if (isnan(Sr)) then
   write(*,*) 'mu_i = ', mu_i
   write(*,*) 'mu_e = ', mu_e
   write(*,*) 'alpha = ', alpha
   write(*,*) 'bartheta = ', bartheta/deg, ' deg'
   write(*,*) 'tanbartheta = ', tanbartheta
+  write(*,*) 'cospsi = ', cospsi
   write(*,*) 'psi = ', psi/deg, ' deg'
   write(*,*) 'xi = ', xi
   write(*,*) 'f = ', f

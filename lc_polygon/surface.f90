@@ -45,7 +45,7 @@ do i = 1, size(polys,1)
 
     tmp2 = 0.5d0*sqrt(dot_product(tmp,tmp))
     tmp3 = dot_product(tmp,normals(i,:))
-    surf(i) = surf(i) + sign(tmp2,tmp3)
+    surf(i) = surf(i) - sign(tmp2,tmp3)
 
   enddo
   S = S + surf(i)

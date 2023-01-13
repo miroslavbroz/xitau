@@ -20,6 +20,7 @@ set mouse format "%.6f"
 set arrow from T0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
 
 p \
+  "../../xitau_20221206_ECLIPSE/test_polygon0_2spheres/lightcurve2.dat" u ($1-2400000):($2+($3-band)*shift) w lp pt 2 lc 'gray',\
   "lightcurve2.dat" u ($1-2400000):($2+($3-band)*shift) w lp pt 1 lt 7 t "synthetic",\
   30.450906610632611 w l lt 0
 

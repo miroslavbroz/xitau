@@ -14,8 +14,8 @@ c Hence, the factor 1/6 wrt. the multipole model.
 
       include "../swift.inc"
       include "tides2.inc"
-      include '../simplex/simplex.inc'
-      include '../simplex/dependent.inc'
+      include '../chi2/chi2.inc'
+      include '../chi2/dependent.inc'
       include '../misc/const.inc'
 
 c input
