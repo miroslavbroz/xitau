@@ -22,7 +22,7 @@ set view equal xyz
 set xyplane 0.0
 set palette gray
 
-scl=1
+scl=1.5e5
 set arrow from scl*(0+0.00),0,0 to scl*(s1__+0.00),scl*s2__,scl*s3__ front lc 'orange'
 set arrow from scl*(0+0.01),0,0 to scl*(o1__+0.01),scl*o2__,scl*o3__ front lc 'blue'
 

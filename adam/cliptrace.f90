@@ -6,12 +6,13 @@ module cliptrace_module
 
 contains
 
-subroutine cliptrace(polys, Phi_e, normals, d_to, pixel_scale, c, w, h, pnm)
+subroutine cliptrace(polys, Phi_e, mu_e, normals, d_to, pixel_scale, c, w, h, pnm)
 
 ! Notation:
 !
-! polys  .. sets of polygons, clipped (visibility), m
+! polys   .. sets of polygons, clipped (visibility), m
 ! Phi_e   .. monochromatic flux, outgoing
+! mu_e    .. directional cosine, outgoing, 1
 ! normals .. normals of polygons, 1
 ! d_to    .. target-observer distance, m
 ! c       .. centre of image, rad
@@ -40,7 +41,7 @@ interface
 end interface
 
 type(polystype), dimension(:), pointer, intent(in) :: polys
-double precision, dimension(:), pointer, intent(in) :: Phi_e
+double precision, dimension(:), pointer, intent(in) :: Phi_e, mu_e
 double precision, dimension(:,:), pointer, intent(in) :: normals
 double precision, intent(in) :: d_to, pixel_scale
 double precision, dimension(2), intent(in) :: c
@@ -127,10 +128,13 @@ do i = 1, h
 
       if (polystmp(1)%c.eq.0) cycle
 
+! Note: no back-projection of surf => division by mu_e!
+
       ! i.e., contribution to 1 pixel
       normalstmp(1,:) = normals(k,:)
       S = surface(polystmp, normalstmp, surf)
-      tot = tot + Phi_e(k)*S
+      tot = tot + Phi_e(k)*S/mu_e(k)
+!      tot = tot + Phi_e(k)*S  ! dbg
     enddo
 
     pnm(i,j) = tot

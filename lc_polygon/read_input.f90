@@ -14,6 +14,7 @@ use normalize_module
 use lambert_module
 use lommel_module
 use hapke_module
+use geometric_module
 
 implicit none
 integer :: ierr
@@ -78,6 +79,9 @@ elseif (law(1:2).eq.'Lo') then
 elseif (law(1:2).eq.'Ha') then
   f_ptr => f_hapke
   write(*,*) 'scattering is Hapke'
+elseif (law(1:2).eq.'ge') then
+  f_ptr => f_geometric
+  write(*,*) 'scattering is geometric'
 else
   write(*,*) 'Error: scattering is undefined!'
   stop

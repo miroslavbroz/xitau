@@ -30,7 +30,7 @@ f(x) = mod(x-1,i)*dx
 g(x) = int((x-1)/i)*dy
 
 p \
-  "chi2_AO2.dat" u ($3-0.5*w+f($1)):(-$2+0.5*h+g($1)):7 w p pt 7 lc palette z not
+  "chi2_AO2.dat" u ($3-0.5*w+f($1)):(-$2+0.5*h+g($1)):7 w p pt 5 lc palette z not
 
 pa -1
 

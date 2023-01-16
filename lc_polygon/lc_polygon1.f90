@@ -18,8 +18,8 @@
 ! P_lambda       .. monochromatic power, W m^-1
 ! P_V            .. passband power, W
 ! V0             .. brightness, mag
-! mu_i           .. directional cosine, incoming, cos(theta)
-! mu_e           .. directional cosine, outgoing
+! mu_i           .. directional cosine, incoming, cos(theta), 1
+! mu_e           .. directional cosine, outgoing, 1
 ! alpha          .. phase angle, sun-target-observer
 ! omega          .. solid angle, sr
 ! lambda_eff     .. effective wavelength, m
@@ -69,6 +69,8 @@ use polytype_module
 
 type(polystype), dimension(:), pointer, save :: polys1, polys2, polys3, polys4, polys5, polystmp
 double precision, dimension(:), pointer, save :: mu_i, mu_e, f, f_L, Phi_i, Phi_e
+double precision, dimension(:), pointer, save :: surf
+double precision, dimension(:), pointer, save :: I_lambda
 double precision, dimension(:,:), pointer, save :: normals, centres
 double precision, dimension(3) :: photocentre
 
@@ -116,8 +118,6 @@ integer, intent(inout) :: i2nd
 integer, dimension(:,:), pointer, save :: faces
 double precision, dimension(:,:), pointer, save :: nodes, orignodes
 
-double precision, dimension(:), pointer, save :: surf
-double precision, dimension(:), pointer, save :: I_lambda
 integer, dimension(:), pointer, save :: clips
 
 ! internal variables

@@ -12,7 +12,7 @@ module raytrace_module
 
 contains
 
-subroutine raytrace(polys, Phi_e, d_to, pixel_scale, c, w, h, pnm)
+subroutine raytrace(polys, Phi_e, mu_e, d_to, pixel_scale, c, w, h, pnm)
 
 use const_module
 use polytype_module
@@ -21,7 +21,7 @@ use inside_polygon_module
 
 implicit none
 type(polystype), dimension(:), pointer, intent(in) :: polys
-double precision, dimension(:), pointer, intent(in) :: Phi_e
+double precision, dimension(:), pointer, intent(in) :: Phi_e, mu_e
 double precision, intent(in) :: d_to, pixel_scale
 double precision, dimension(2), intent(in) :: c
 integer, intent(in) :: w, h
@@ -96,8 +96,10 @@ do i = 1, h
       if (is_inside) exit
     enddo
 
+! Note: pixel's S is already projected => division by mu_e!
+
     if (is_inside) then
-      pnm(i,j) = Phi_e(k)
+      pnm(i,j) = Phi_e(k)/mu_e(k)
     endif
 
 !    write(10,*) u, v  ! dbg

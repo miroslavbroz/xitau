@@ -19,7 +19,7 @@ set arrow from 0,0,0 to s1,s2,s3 front lc 'orange'
 set arrow from 0+0.01,0,0 to o1+0.01,o2,o3 front lc 'blue'
 
 sp \
-  "<./face.awk origoutput.node origoutput.face" u 2:3:4 w l lw 1 not,\
+  "<./face.awk output.node.01 output.face.01" u 2:3:4 w l lw 1 not,\
   "<./face.awk 22.1.node 22.1.face" u 2:3:4 w l lw 1 not,\
 
 pa -1
