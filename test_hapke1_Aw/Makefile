@@ -2,7 +2,7 @@
 opt = -O3 -J../mod
 
 obj = \
-  ../lc_polygon/const.o \
+  ../misc/const.o \
   ../lc_polygon/input.o \
   ../lc_polygon/hapke.o \
 

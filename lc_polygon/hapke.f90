@@ -30,6 +30,8 @@
 ! mu_e_           .. effective mu_e, 1
 ! eta_i           .. ditto for psi = 0, 1
 ! eta_e           .. ditto for psi = 0, 1
+! xi              .. <cos bartheta>
+! f               .. fraction of illumunation shadow hidden in visibility s. (or vice-versa)
 
 ! M(mu_i,mu_e)    .. multiple scattering, anisotropic; Eq. (2.21) NOT USED!
 ! 1+B_C           .. opposition effect, coherent back-scattering; Eq. (2.27) NOT USED!
@@ -52,11 +54,13 @@ double precision, intent(in) :: f_L, mu_i, mu_e, alpha
 double precision :: A_w, mu_i_, mu_e_, tmp
 
 ! Note: Effective mu_i_, mu_e_ should be used in scattering, not projection!
+! Note: Additional factor mu_e_/mu_e, due to using BDRF (w. mu_e), not BDR as Hapke!
 
 if ((mu_i.gt.0.d0).and.(mu_e.gt.0.d0)) then
   A_w = 4.d0*pi*f_L
   tmp = Sr(mu_i, mu_e, alpha, mu_i_, mu_e_)
   f_hapke = f_L/(mu_i_+mu_e_) * ((1.d0+B)*P + H(mu_i_,A_w)*H(mu_e_,A_w) - 1.d0) * tmp  ! Eqs. (2.16), (2.31)
+  f_hapke = f_hapke * mu_e_/mu_e
 else
   f_hapke = 0.d0
 endif
@@ -137,48 +141,34 @@ E1e = exp(-2.d0/(pi*tanbartheta*tane))
 E2i = exp(-1.d0/(pi*(tanbartheta*tani)**2))
 E2e = exp(-1.d0/(pi*(tanbartheta*tane)**2))
 
+eta_i = xi*(cosi + sini*tanbartheta * E2i/(2.d0-E1i))  ! Eq. (12.49)
+eta_e = xi*(cose + sine*tanbartheta * E2e/(2.d0-E1e))  ! Eq. (12.48)
+
 ! Note: Signs in Eqs. corrected as in Hapke (1984), Eqs. (47), (48), (50), (51).
 
-if (sine.ge.sini) then
+if (sini.le.sine) then
 
   K1 = cospsi*E2e + sinpsihalfsq*E2i
   K2 = 2.d0 - E1e - psi/pi*E1i
   K3 = E2e - sinpsihalfsq*E2i
 
-  mu_i_ = cosi + sini*tanbartheta * K1/K2  ! Eq. (2.36)
-  mu_e_ = cose + sine*tanbartheta * K3/K2  ! Eq. (2.37)
-
-  K1 = E2e
-  K2 = 2.d0 - E1e
-  K3 = E2e
-
-  eta_i = cosi + sini*tanbartheta * K1/K2
-  eta_e = cose + sine*tanbartheta * K3/K2
+  mu_i_ = xi*(cosi + sini*tanbartheta * K1/K2)  ! Eq. (2.36)
+  mu_e_ = xi*(cose + sine*tanbartheta * K3/K2)  ! Eq. (2.37)
 
   Sr = mu_i/eta_i * mu_e_/eta_e * xi/(1.d0 - f + f*xi*mu_i/eta_i)  ! Eq. (2.38)
 
-else
+else  ! sini.gt.sine
 
   K1 = cospsi*E2i + sinpsihalfsq*E2e
   K2 = 2.d0 - E1i - psi/pi*E1e
   K3 = E2i - sinpsihalfsq*E2e
 
-  mu_i_ = cosi + sini*tanbartheta * K3/K2  ! Eq. (2.39)
-  mu_e_ = cose + sine*tanbartheta * K1/K2  ! Eq. (2.40)
-
-  K1 = E2i
-  K2 = 2.d0 - E1i
-  K3 = E2i
-
-  eta_i = cosi + sini*tanbartheta * K3/K2
-  eta_e = cose + sine*tanbartheta * K1/K2
+  mu_i_ = xi*(cosi + sini*tanbartheta * K3/K2)  ! Eq. (2.39)
+  mu_e_ = xi*(cose + sine*tanbartheta * K1/K2)  ! Eq. (2.40)
 
   Sr = mu_i/eta_i * mu_e_/eta_e * xi/(1.d0 - f + f*xi*mu_e/eta_e)  ! Eq. (2.41)
 
 endif
-
-mu_i_ = xi*mu_i_
-mu_e_ = xi*mu_e_
 
 if (.false.) then
 !if (.true.) then
