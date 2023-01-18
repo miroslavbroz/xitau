@@ -79,8 +79,8 @@ double precision, dimension(OUTMAX1) :: tout1
 double precision, dimension(OUTMAX2) :: tout2
 double precision, dimension(OUTMAX1,NBODMAX,3) :: rout1, vout1
 double precision, dimension(OUTMAX2,NBODMAX,3) :: rout2, vout2
-double precision, dimension(NBODMAX) :: omega0
-double precision, dimension(NBODMAX,3) :: s0
+double precision, dimension(NBODMAX), save :: omega0
+double precision, dimension(NBODMAX,3), save :: s0
 character(len=80) :: inparfile
 
 ! internal variables
@@ -101,11 +101,6 @@ integer, save :: i1st=0
 
 ! functions
 double precision, external :: merit_func, kms_auday
-
-! read shape
-
-  call read_node("input.node", nodesforchi)
-  call read_face("input.face", facesforchi)
 
 ! get both free and fixed parameters
 
