@@ -40,6 +40,7 @@ c internal
       read(iu,*,err=990,end=990) (x_param(i), i=1,nparam)
 
       read(iu,*,err=990,end=990) T0
+      read(iu,*,err=990,end=990) nshp
       read(iu,*,err=990,end=990) nbod
       if (nbod.gt.NBODMAX) then
         write(*,*) "# Error nbod = ", nbod, ".gt. NBODMAX = ",NBODMAX
@@ -65,6 +66,7 @@ c internal
         read(iu,10,err=990,end=990) file_absol(i)
       enddo
       read(iu,10,err=990,end=990) file_AO
+      read(iu,10,err=990,end=990) file_AO2
       read(iu,10,err=990,end=990) file_SKY2
       read(iu,10,err=990,end=990) file_SKY3
       read(iu,10,err=990,end=990) file_OCC
@@ -148,6 +150,11 @@ c      enddo
         scattering(i) = x_param(j)
       enddo
       scattering(4) = scattering(4)*deg  ! bartheta
+
+      do i = 1, 2
+        j = j+1
+        psf_param(i) = x_param(j)
+      enddo
 
       j = j+1
       gamma = x_param(j)

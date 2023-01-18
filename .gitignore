@@ -16,6 +16,7 @@ main/simann
 main/subplex
 main/swift_bs
 multipole/gravity
+xvpl2el/xvpl2el
 
 # debugging data files
 out_JDATE_*.dat

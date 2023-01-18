@@ -9,7 +9,7 @@ c Miroslav Broz (miroslav.broz@email.cz), Jul 30th 2015
       include '../chi2/dependent.inc'
 
 c input parameters
-      integer nbod, id(NBODMAX)
+      integer nbod_, id(NBODMAX)
       real*8 t, y(6,NBODMAX), elmts(6), m(NBODMAX)
 
 c temporary variables

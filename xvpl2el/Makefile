@@ -16,8 +16,8 @@ obj = \
 inc = \
   common.inc \
   ../misc/const.inc \
-  ../simplex/simplex.inc \
-  ../simplex/dependent.inc \
+  ../chi2/chi2.inc \
+  ../chi2/dependent.inc \
 
 all : chi2el xvpl2el
 
