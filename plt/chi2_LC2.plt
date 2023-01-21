@@ -20,23 +20,37 @@ set mouse format "%.6f"
 
 set arrow from T0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
 
-set arrow from 2459546.7125847600-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 19
-set arrow from 2459546.8038658402-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 89
-set arrow from 2459548.5640605805-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 1
-set arrow from 2459548.6379006002-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 66
+#set arrow from 2459546.7125847600-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 19
+#set arrow from 2459546.8038658402-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 89
+#set arrow from 2459548.5640605805-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 1
+#set arrow from 2459548.6379006002-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 66
 
-set label "REF"         at 2454165.50793978-2400000,graph 0.95 center
-set label "ECL of L."   at 2454167.50085480-2400000,graph 0.95 center
-set label "ECL of (22)" at 2454176.56817257-2400000,graph 0.95 center
-set label "REF"         at 2454177.56877556-2400000,graph 0.95 center
-set label "OCC of L."   at 2459546.680844-2400000,graph 0.95 center
-set label "REF"         at 2459547.720452-2400000,graph 0.95 center
-set label "TRA of L."   at 2459548.552881-2400000,graph 0.95 center
-set label "REF"         at 2459548.668864-2400000,graph 0.95 center
-set label "OCC"         at 2459555.667224-2400000,graph 0.95 center
-set label "TRA"         at 2459556.723283-2400000,graph 0.95 center
-set label "OCC"         at 2459557.415516-2400000,graph 0.95 center
-set label "REF"         at 2459559.384698-2400000,graph 0.95 center
+#set label "REF"         at 2454165.50793978-2400000,graph 0.95 center
+#set label "ECL of L."   at 2454167.50085480-2400000,graph 0.95 center
+#set label "ECL of (22)" at 2454176.56817257-2400000,graph 0.95 center
+#set label "REF"         at 2454177.56877556-2400000,graph 0.95 center
+#set label "OCC of L."   at 2459546.680844-2400000,graph 0.95 center
+#set label "REF"         at 2459547.720452-2400000,graph 0.95 center
+#set label "TRA of L."   at 2459548.552881-2400000,graph 0.95 center
+#set label "REF"         at 2459548.668864-2400000,graph 0.95 center
+#set label "OCC"         at 2459555.667224-2400000,graph 0.95 center
+#set label "TRA"         at 2459556.723283-2400000,graph 0.95 center
+#set label "OCC"         at 2459557.415516-2400000,graph 0.95 center
+#set label "REF"         at 2459559.384698-2400000,graph 0.95 center
+
+T1=2459546.7663
+P1=3.6017793629369406
+
+set label "OCC of L."         at T1+0.0*P1-2400000,graph 0.95 center
+set label "OCC of L."         at T1+1.0*P1-2400000,graph 0.95 center
+set label "OCC of L."         at T1+2.0*P1-2400000,graph 0.95 center
+set label "OCC of L."         at T1+3.0*P1-2400000,graph 0.95 center
+set label "OCC of L."         at T1+4.0*P1-2400000,graph 0.95 center
+set label "TRA of L."         at T1+0.5*P1-2400000,graph 0.95 center
+set label "TRA of L."         at T1+1.5*P1-2400000,graph 0.95 center
+set label "TRA of L."         at T1+2.5*P1-2400000,graph 0.95 center
+set label "TRA of L."         at T1+3.5*P1-2400000,graph 0.95 center
+set label "TRA of L."         at T1+4.5*P1-2400000,graph 0.95 center
 
 p \
   "lightcurve2.dat" u ($1-2400000):($2+($3-band)*shift) w lp pt 2 lc 'cyan' t "no-zero-point",\

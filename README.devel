@@ -1,4 +1,7 @@
 
+improvement of chi^2 computation -- a sequence of offsets
+with the SAME SIGN shoud be penalized!!
+
 if no minima are detected, chi^2_TTV = 0; a penalty is missing
 
 model for *mutual* interactions due to C20?

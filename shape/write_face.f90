@@ -52,6 +52,8 @@ enddo
 
 close(unit=10)
 
+deallocate(masks_)
+
 return
 
 ! error handlers

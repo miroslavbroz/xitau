@@ -144,6 +144,7 @@ enddo ! i
 
 deallocate(polystmp)
 deallocate(surf)
+deallocate(normalstmp)
 deallocate(boxes)
 
 end subroutine cliptrace

@@ -9,12 +9,11 @@ set zl "z"
 set cbl "I_{lambda} [W m^{-2} sr^{-1} m^{-1}]" offset 3,0
 
 tmp=1.5e5
-tmp=1.5
-set xr [-tmp:tmp]
-set yr [-tmp:tmp]
+#tmp=1.5
+#set xr [-tmp:tmp]
+#set yr [-tmp:tmp]
 set cbr [0:]
-set cbr [0:1.4e7]
-set cbr [0:1.4e8]
+#set cbr [0:1.4e7]
 
 set view 90,0,0.5
 set view 0,0,1.5
