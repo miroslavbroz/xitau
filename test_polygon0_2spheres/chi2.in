@@ -15,14 +15,15 @@
 #  phi01 phi02
 #  albedo1 albedo2
 #  B0 minh ming bartheta
+#  alpha beta
 #  gamma
 #  d_pc
 #  ...
 #
-34
+36
 
    6.22460462363475e-28  1.0
-   1.0                  -16.0    0.0   0.0   0.0   90.0
+   1.0                  -16.0    0.0   0.0   0.0   266.0
    300.0     300.0
    1.0                       1.0
    1000.0                    1000.0
@@ -34,10 +35,13 @@
    0.0   0.0
    1.0   1.0
    0.0   0.0   0.0   0.0
+   0.66  3.0
    0.0
    1.0
 
 2458773.18865178		! fixed (dependent) parameters: T0 [JD]; 2019 WDS interferometry
+
+0			! nshp number of shape parameters
 
 2			! nbod number of bodies; a list of 2*nbod+4 files with observational data (or '-' if no data)...
 -Sky1.dat
@@ -55,6 +59,7 @@
 -1.abs
 -2.abs
 -AO1.dat
+-AO2.dat
 -Sky_differential.dat_minusuv
 -Sky_angularvelocity.dat
 -Occ.dat
@@ -76,6 +81,7 @@ F F			! use_hec88(nbod) use Harmanec (1988) to constrain components (i.e. use on
 
 0.2			! silh_factor [] signal = factor*max(signal) to compute a silhouette
 0.45                    ! spectral_slope [1] reflectance = 1.0 + slope*(lambda_eff/mu-0.55) to compute LC
+0			! nsub number of sub-divisions
 
 T			! use_planck [T|F] use Planck approximation; otherwise use absolute synthetic spectra (*.abs files)
 F			! use_filters [T|F] use filter transmissions to compute SED; otherwise use effective wavelengths and bandpasses
@@ -91,8 +97,11 @@ F                       ! use_tides [T|F] use tides (Mignard 1979)
 F                       ! use_tides2 [T|F] use external tides
 T                       ! use_polygon [T|F] use lc_polygon to compute the lightcurve (instead of wd)
 F                       ! use_zero [T|F] use analytical zero-point(s) to the lightcurve(s)
+T			! use_adam [T|F] use adam-like synthetic images, u. lc_polygon
+F			! use_stellar [T|F] use stellar.pnm as PSF; otherwise use Moffat
+T			! use_cliptrace [T|F] use cliptrace instead of raytrace
 
-10.0 1.0 1.0 10.0  1.0 1.0 1.0  1.0 0.1 0.1  1.0 1.0 1.0 1.0	! w_SKY w_RV w_TTV w_ECL  w_VIS w_CLO w_T3  w_LC w_SYN w_SED  w_AO w_SKY2 w_SKY3 w_OCC weights for chi^2 computation
+1.0 1.0 1.0 1.0  1.0 1.0 1.0  1.0 0.1 0.1  1.0 1.0 1.0 1.0 1.0	! w_SKY w_RV w_TTV w_ECL  w_VIS w_CLO w_T3  w_LC w_SYN w_SED  w_AO w_AO2 w_SKY2 w_SKY3 w_OCC weights for chi^2 computation
 1.e-8			! eps_BS for Bulirsch-Stoer integrator
 T			! debugging output?
 T			! debug integrator?

@@ -17,7 +17,7 @@ band = 7
 band = 54
 shift = 0.0
 
-set xl "JD - 2400000"
+set xl "phase [1]"
 set yl "magnitude [mag]"
 
 load "T0.plt"
