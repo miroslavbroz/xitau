@@ -1,6 +1,6 @@
 #!/usr/bin/gnuplot
 
-f(x) = x>720. ? x-720. : x>360. ? x-360. : x
+f(x) = x>720. ? x-720. : x>360. ? x-360. : x>180. ? x-360 : x
 
 set colors classic
 
@@ -118,8 +118,6 @@ p "<awk '($2==-3)' xvpl2el.diff" u ($1-2400000):(f($6+$7+$8)) not w d lt 3
 unset multiplot
 clear
 
-q
-
 ########################################################################
 
 set out "orbit_diff3.png"
@@ -164,7 +162,7 @@ set yl "Omega [deg]"
 p "<awk '($2==-4)' xvpl2el.diff" u ($1-2400000):6 not w d lt 4
 
 set origin 0,0.33
-set yl "lambda [deg]"
+set yl "varpi [deg]"
 
 p "<awk '($2==-4)' xvpl2el.diff" u ($1-2400000):(f($6+$7)) not w d lt 4
 

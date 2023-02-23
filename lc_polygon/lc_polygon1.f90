@@ -431,8 +431,8 @@ if (debug_polygon) then
   write(*,*) 'no = ', no
   write(*,*) 'cpu_time = ', t2-t1, ' s'  ! dbg
 
-  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50)) then
-!  if ((no.ge.1).and.(no.le.99)) then
+!  if ((no.eq.1).or.(no.eq.49).or.(no.eq.50)) then
+  if ((no.ge.1).and.(no.le.99)) then
     write(str,'(i0.2)') no
     call write_node("output.node." // trim(str), nodes)
     call write_face("output.face." // trim(str), faces)

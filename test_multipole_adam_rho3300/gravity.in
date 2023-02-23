@@ -8,5 +8,7 @@ tri_file_octdec_3.1.node
 2444502.76914			! Tmin [JD]
 73.4308				! pole_l [deg]
 20.8808				! pole_b [deg]
+0.0				! phi_0 [deg]
+10				! maxl [1]
 
 

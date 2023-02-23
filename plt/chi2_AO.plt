@@ -19,7 +19,7 @@ i=5
 j=7.0
 #i=1; j=1
 set xr [-0.75*tmp:(i-1+0.75)*tmp]
-set yr [-0.75*tmp:(j-1+0.75)*tmp]
+set yr [-0.75*tmp:(j-1-0.25)*tmp]
 
 set xtics 0.5*tmp
 set ytics 0.5*tmp

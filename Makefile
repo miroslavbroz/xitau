@@ -271,6 +271,7 @@ obj90 = \
   shape/write_elem.o \
   shape/edge.o \
   shape/subdivide.o \
+  shape/subdivide_n.o \
   multipole/read_bruteforce.o \
   multipole/read_multipole.o \
   multipole/vector_product.o \

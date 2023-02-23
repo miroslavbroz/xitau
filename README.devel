@@ -1,4 +1,12 @@
 
+Note: A shift of the 2nd orbit was due to shifted photocentre (Rstar2 = 1.0 was too big)!
+
+Rstar1, Rstar2 should represent real radii, i.e., the shape
+itself (input.node) should be re-normalized to 1!
+otherwise, the photocentre in chi2_func.f90 is offset
+
+Note: Close-to-keplerian periods for oblate (130) were due to incorred Prot1 (h vs. d)!
+
 improvement of chi^2 computation -- a sequence of offsets
 with the SAME SIGN shoud be penalized!!
 

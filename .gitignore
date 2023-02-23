@@ -15,7 +15,7 @@ main/simplex
 main/simann
 main/subplex
 main/swift_bs
-multipole/gravity
+test_multipole/gravity
 xvpl2el/xvpl2el
 
 # debugging data files

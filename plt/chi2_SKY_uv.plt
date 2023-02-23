@@ -13,8 +13,8 @@ set tit "viewing geometry is changing..."
 set xl "u [arcsec]"
 set yl "v [arcsec]"
 
-tmp=1.2
 tmp=1.0
+tmp=1.2
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set xtics 0.1
@@ -26,12 +26,12 @@ set key left
 
 load "T0.plt"
 
-P1 = x_param3
+P1 = x_param4
 #d_pc = x_param22
 #d_pc = x_param35
 
 set cbl "ibod"
-set cbr [2:3]
+set cbr [2:4]
 set cbtics 1
 set palette defined (\
   0.0 '#ff0000',\
@@ -56,22 +56,24 @@ set palette defined (\
 f(x,d) = x/d/arcsec
 
 p \
+  "<awk '($2==-4)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "4" w l lc 'cyan',\
+  "<awk '($2==-3)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "3" w l lc 'blue',\
+  "<awk '($2==-2)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "2" w l lc 'green',\
+  "<awk '($2==-1)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "1" w l lc 'red',\
   sprintf("<awk '($2==-1) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u (f($3,$6)):(f($4,$6)) not w l lw 10 lc 'gray',\
   sprintf("<awk '($2==-2) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u (f($3,$6)):(f($4,$6)) not w l lw 10 lc 'gray',\
   sprintf("<awk '($2==-3) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u (f($3,$6)):(f($4,$6)) not w l lw 10 lc 'gray',\
-  sprintf("<awk '($2==-2) && ($1>=%.10f) && ($1<=%.10f) && ($5<0.0)' out_JDATE_uvw.dat", T0-P1, T0+P1) u (f($3,$6)):(f($4,$6)) not w p pt 5 lc 'green',\
-  "<awk '($2==-4)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "4" w l lt 4,\
-  "<awk '($2==-3)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "3" w l lt 3,\
-  "<awk '($2==-2)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "2" w l lt 2,\
-  "<awk '($2==-1)' out_JDATE_uvw.dat" u (f($3,$6)):(f($4,$6)) t "1" w l lt 1,\
+  sprintf("<awk '($2==-4) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_uvw.dat", T0, T0+0.1) u (f($3,$6)):(f($4,$6)) not w l lw 10 lc 'gray',\
   sprintf("<awk '($2==-1) && ($1==%.10f)' out_JDATE_uvw.dat", T0) u (f($3,$6)):(f($4,$6)) t "T_0" w p lc 0 pt 1 ps 2,\
   sprintf("<awk '($2==-2) && ($1==%.10f)' out_JDATE_uvw.dat", T0) u (f($3,$6)):(f($4,$6)) not     w p lc 0 pt 1 ps 2,\
   sprintf("<awk '($2==-3) && ($1==%.10f)' out_JDATE_uvw.dat", T0) u (f($3,$6)):(f($4,$6)) not     w p lc 0 pt 1 ps 2,\
+  sprintf("<awk '($2==-4) && ($1==%.10f)' out_JDATE_uvw.dat", T0) u (f($3,$6)):(f($4,$6)) not     w p lc 0 pt 1 ps 2,\
   "chi2_SKY.dat" u (-$2*sin($3*deg)):($2*cos($3*deg)):8 t "residua" w l lc palette z lw 3,\
   "<awk '($NF+0>100)' chi2_SKY.dat" u (-$2*sin($3*deg)):($2*cos($3*deg)):8 t "chi^2 > 100" w p lt 1 pt 6 ps 1.5 lw 3,\
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)) t "observ." w p lt 7 pt 1 ps 0.5,\
+  "<awk '' arcsec_AU.dat" u (f($2,$7)):(f($3,$7)) t "observ." w p lt 7 pt 1 ps 0.5,\
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left,\
-  "<awk '($1>2458192.0)' arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left tc 'blue',\
+  "<awk '($1>=2457021.56786759-0.001) && ($1<2457021.56786759+0.001)' arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left tc 'blue',\
   "<./ellipses.awk arcsec_AU.dat" u (f($1,$3)):(f($2,$3)) not w l lt 7,\
   "<awk '(FNR>1){ print $0,ARGIND; }' nodes0036.dat" u 2:3 t "shape" w d lc 'black',\
 
@@ -83,6 +85,7 @@ rep
 
 q
 
+  sprintf("<awk '($2==-2) && ($1>=%.10f) && ($1<=%.10f) && ($5<0.0)' out_JDATE_uvw.dat", T0-P1, T0+P1) u (f($3,$6)):(f($4,$6)) not w p pt 5 lc 'green',\
   sprintf("<./ellipse2.awk %.6e %.6e %.6e %.6e", x3, y3, a3, b3) u 1:2 t "PSF (3-s.)" w l lc 'black' dt 2,\
   sprintf("<./ellipse2.awk %.6e %.6e %.6e %.6e", x1, y1, a1, a1) u 1:2 t "10 km" w l lc 'black',\
   "box.dat" u (x2-a2/2+a2*$1):(y2-b2/2+b2*$2) t "1 pixel" w l lc 'black',\

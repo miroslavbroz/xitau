@@ -23,9 +23,9 @@ n=assert_eq((/size(a,1),size(a,2),size(d),size(v,1),size(v,2)/),'jacobi')
 call unit_matrix(v(:,:))   ! Initialize v to the identity matrix.
 b(:)=get_diag_dv(a(:,:))  ! Initialize b and d to the diagonal of a.
 d(:)=b(:)
-z(:)=0.0   ! This vector will accumulate terms of the form tapq as in eq. (11.1.14).
+z(:)=0.0_dp   ! This vector will accumulate terms of the form tapq as in eq. (11.1.14).
 nrot=0
-do i=1,50
+do i=1,100
   sm=sum(abs(a),mask=upper_triangle(n,n))   ! Sum off-diagonal elements.
   if (sm == 0.0d0) RETURN  ! The normal return, which relies on quadratic convergence to machine underflow.
   tresh=merge(0.2_dp*sm/n**2,0.0_dp, i < 4 )  ! On the first three sweeps, we will rotate only if tresh exceeded.
@@ -33,7 +33,7 @@ do i=1,50
     do iq=ip+1,n
       g=100.0_dp*abs(a(ip,iq))  ! After four sweeps, skip the rotation if the off-diagonal element is small.
       if ((i > 4) .and. (abs(d(ip))+g == abs(d(ip))) .and. (abs(d(iq))+g == abs(d(iq)))) then
-        a(ip,iq)=0.0
+        a(ip,iq)=0.0_dp
       else if (abs(a(ip,iq)) > tresh) then
         h=d(iq)-d(ip)
         if (abs(h)+g == abs(h)) then
@@ -41,9 +41,9 @@ do i=1,50
         else
           theta=0.5_dp*h/a(ip,iq)   ! Equation (11.1.10).
           t=1.0_dp/(abs(theta)+sqrt(1.0_dp+theta**2))
-          if (theta < 0.0) t=-t
+          if (theta < 0.0_dp) t=-t
         end if
-        c=1.0_dp/sqrt(1+t**2)
+        c=1.0_dp/sqrt(1.0_dp+t**2)
         s=t*c
         tau=s/(1.0_dp+c)
         h=t*a(ip,iq)
@@ -51,7 +51,7 @@ do i=1,50
         z(iq)=z(iq)+h
         d(ip)=d(ip)-h
         d(iq)=d(iq)+h
-        a(ip,iq)=0.0
+        a(ip,iq)=0.0_dp
         call jrotate(a(1:ip-1,ip),a(1:ip-1,iq))        ! Case of rotations 1 ≤ j < p.
         call jrotate(a(ip,ip+1:iq-1),a(ip+1:iq-1,iq))  ! Case of rotations p < j < q.
         call jrotate(a(ip,iq+1:n),a(iq,iq+1:n))        ! Case of rotations q < j ≤ n.
@@ -61,8 +61,8 @@ do i=1,50
     end do
   end do
   b(:)=b(:)+z(:)
-  d(:)=b(:)  ! Update d with the sum of tapq ,
-  z(:)=0.0   ! and reinitialize z.
+  d(:)=b(:)     ! Update d with the sum of tapq,
+  z(:)=0.0_dp   ! and reinitialize z.
 end do
 call nrerror('too many iterations in jacobi')
 

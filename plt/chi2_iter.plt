@@ -10,7 +10,7 @@ set xl "iter"
 set yl "chi^2"
 
 set yr [1e0:2e8]
-#set yr [300:320]
+#set yr [1000:1100]
 set logscale y
 set ytics 10
 set mytics 10

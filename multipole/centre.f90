@@ -15,7 +15,7 @@ double precision, dimension(:,:), pointer, intent(in) :: nodes
 double precision, dimension(:,:), pointer, intent(out) :: coms
 
 integer :: i, j
-double precision, dimension(3) :: s
+!double precision, dimension(3) :: a, b, c, d
 
 do i = 1, size(elems,1)
 

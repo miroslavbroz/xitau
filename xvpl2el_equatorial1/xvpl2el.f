@@ -33,12 +33,13 @@ c towards "observer"
       hatw(3) = sin(b)
 
 c in (x,y) plane
-      hatu(1) = sin(l)
-      hatu(2) = -cos(l)
+      hatu(1) = -sin(l)
+      hatu(2) = cos(l)
       hatu(3) = 0.d0
 
-c perpendicular, left-handed?!
+c perpendicular, right-handed
       call vproduct(hatu, hatw, hatv)
+      hatv = -hatv
 
       write(*,*) '# hatu = ', hatu
       write(*,*) '# hatv = ', hatv

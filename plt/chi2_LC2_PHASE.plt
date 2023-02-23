@@ -40,6 +40,8 @@ p \
   "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==1)' chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w p  pt 1 lc 'orange' t "synthetic",\
   "chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w l lw 3 lc 'red' t "residua",\
   "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==2)' chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3:($1-2400000) w err pt 1 ps 0.5 lc palette z t "observed",\
+  "lightcurve2.dat" u (phase($1)):($2+($3-band)*shift) w p pt 2 lc 'cyan' t "no-zero-point",\
+  "<awk '!/^ *#/ && (i<100){ i++; print $1,$2,i; }' lightcurve2.dat" u (phase($1)):($2+0.02):3 w labels not,\
 
 pa -1
 
@@ -49,8 +51,6 @@ rep
 
 q
 
-  "lightcurve2.dat" u (phase($1)):($2+($3-band)*shift) w p pt 2 lc 'cyan' t "no-zero-point",\
-  "<awk '!/^ *#/ && (i<100){ i++; print $1,$2,i; }' lightcurve2.dat" u (phase($1)):($2+0.02):3 w labels not,\
 
   "Lc.dat"         u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 t "observed",\
   "Lc_G.dat"       u ($1-2400000):2:3 w err lt 3 pt 1 ps 1.5 lc 'green',\
