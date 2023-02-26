@@ -49,7 +49,7 @@ real :: t1, t2
 double precision, dimension(3) :: T, a_g
 double precision, dimension(6) :: I
 double precision, dimension(3) :: omega, L_, elambda, elambda_, r1
-double precision, dimension(3,3) :: I_, evector, evector_
+double precision, dimension(3,3) :: I_, evector, evector_, Itmp
 double precision, dimension(0:npole,0:npole) :: Clm, Slm
 integer, dimension(3) :: id
 integer, dimension(:,:), pointer :: elems, faces
@@ -202,13 +202,25 @@ write(*,*) 'gamma = ', gamma/deg, ' deg'
 write(*,*)
 
 ! eigenvalues & eigenvectors
-call jacobi(I_, elambda, evector, nrot)
+Itmp = I_
+call jacobi(Itmp, elambda, evector, nrot)
 
 write(*,*) 'elambda = ', elambda
 write(*,*) 'evector(1) = ', evector(1,:)
 write(*,*) 'evector(2) = ', evector(2,:)
 write(*,*) 'evector(3) = ', evector(3,:)
-write(*,*) 'nrot = ', nrot
+
+! Note: In jacobi, eigenvectors are already transposed (in columns)!
+! For this check (A \times v = lambda v), non-transposed are needed.
+evector_ = transpose(evector)
+
+write(*,*) 'A \times v = lambda v:'
+write(*,*) matmul(I_, evector_(1,:))
+write(*,*) elambda(1)*evector_(1,:)
+write(*,*) matmul(I_, evector_(2,:))
+write(*,*) elambda(2)*evector_(2,:)
+write(*,*) matmul(I_, evector_(3,:))
+write(*,*) elambda(3)*evector_(3,:)
 
 call srtidx(elambda, id)
 do j = 1, 3
@@ -252,7 +264,8 @@ do k = 1, 3
   I_(2,:) = [I(6),I(2),I(4)]
   I_(3,:) = [I(5),I(4),I(3)]
 
-  call jacobi(I_, elambda, evector, nrot)
+  Itmp = I_
+  call jacobi(Itmp, elambda, evector, nrot)
 
   do j = 1, 3
     elambda_(j) = elambda(id(j))

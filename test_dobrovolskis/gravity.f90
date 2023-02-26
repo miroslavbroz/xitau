@@ -24,6 +24,7 @@ use write_elem_module
 use write_face_module
 use write_node_module
 use srtidx_module
+use dobrovolskis_module
 
 implicit none
 
@@ -165,7 +166,7 @@ write(*,*) 'T(3) = ', T(3)
 write(*,*)
 
 ! moment of inertia
-I = inertia(vols, coms) * rho
+I = dobrovolskis(faces, nodes) * rho
 A = I(1)
 B = I(2)
 C = I(3)

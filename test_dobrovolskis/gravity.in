@@ -1,0 +1,22 @@
+tri_file_octdecv_1.1.ele
+tri_file_octdecv_1.1.face
+tri_file_octdecv_1.1.node
+4110.				! rho [kg m^-3]; i.e. critical equipotential
+500. 0. 0.			! \vec r = (x, y, z) [unit]
+1.d3				! unit [m]
+0.172841675833333		! P [day]; see ../shape/param_octdecv_1_damit
+2436258.0			! Tmin [JD]
+195.0606			! pole_l [deg]
+3.3321				! pole_b [deg]
+0.0				! phi_0 [deg]
+10				! maxl [1]
+
+
+! Marin etal., Tab. 1, ADAM
+! P = 4.148200(1) h
+! lambda = 195 +- 3
+! beta = 4 +- 3
+! M = (7.72 +- 0.61) 10^18 kg
+! rho = 4.11 ± 0.40 g cm^-3
+
+

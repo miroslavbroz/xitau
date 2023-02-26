@@ -1,5 +1,7 @@
 ! jacobi.f90
 
+! Note: The matrix a is destroyed on output!!
+
 module jacobi_module
 
 contains
