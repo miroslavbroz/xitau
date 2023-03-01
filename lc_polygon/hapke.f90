@@ -40,6 +40,7 @@
 module hapke_module
 
 double precision :: B, P, tanbartheta
+double precision :: mu_i_, mu_e_, Stmp
 
 contains
 
@@ -51,15 +52,16 @@ use const_module
 
 implicit none
 double precision, intent(in) :: f_L, mu_i, mu_e, alpha
-double precision :: A_w, mu_i_, mu_e_, tmp
+double precision :: A_w
+!double precision :: mu_i_, mu_e_, Stmp
 
 ! Note: Effective mu_i_, mu_e_ should be used in scattering, not projection!
 ! Note: Additional factor mu_e_/mu_e, due to using BDRF (w. mu_e), not BDR as Hapke!
 
 if ((mu_i.gt.0.d0).and.(mu_e.gt.0.d0)) then
   A_w = 4.d0*pi*f_L
-  tmp = Sr(mu_i, mu_e, alpha, mu_i_, mu_e_)
-  f_hapke = f_L/(mu_i_+mu_e_) * ((1.d0+B)*P + H(mu_i_,A_w)*H(mu_e_,A_w) - 1.d0) * tmp  ! Eqs. (2.16), (2.31)
+  Stmp = Sr(mu_i, mu_e, alpha, mu_i_, mu_e_)
+  f_hapke = f_L/(mu_i_+mu_e_) * ((1.d0+B)*P + H(mu_i_,A_w)*H(mu_e_,A_w) - 1.d0) * Stmp  ! Eqs. (2.16), (2.31)
   f_hapke = f_hapke * mu_e_/mu_e
 else
   f_hapke = 0.d0
@@ -85,13 +87,13 @@ end subroutine init_hapke
 
 ! Chandrasekhar function.
 
+! Note: in Broz & Solc (2013), a bracket in H(mu) is missing!
+
 double precision function H(mu, A_w)
 
 implicit none
 double precision, intent(in) :: mu, A_w
 double precision :: gamma, r0
-
-! Note: in Broz & Solc (2013), a bracket in H(mu) is missing!
 
 gamma = sqrt(1.d0-A_w)                                                          ! Eq. (2.19)
 r0 = (1.d0-gamma)/(1.d0+gamma)                                                  ! Eq. (2.18)
@@ -101,6 +103,11 @@ return
 end function H
 
 ! Surface roughness.
+
+! Notes: If i, e < pi/2 - bartheta, then mu_i' ~ xi mu_i, mu_e' = xi mu_e.
+! If i, e > pi/2 - bartheta, then the effective surface tilts towards
+! the source or observer by about bartheta; except if both i, e are large
+! and psi -> pi, the effective tilt goes to 0.
 
 double precision function Sr(mu_i, mu_e, alpha, mu_i_, mu_e_)
 
@@ -174,6 +181,9 @@ if (.false.) then
 !if (.true.) then
 !if (isnan(Sr)) then
 !if (Sr.lt.0.9d0) then
+  write(*,*) 'e = ', acos(mu_i)/deg, ' deg'
+  write(*,*) 'i = ', acos(mu_e)/deg, ' deg'
+  write(*,*) 'pi/2-bartheta = ', (pi/2-bartheta)/deg, ' deg'
   write(*,*) 'mu_i = ', mu_i
   write(*,*) 'mu_e = ', mu_e
   write(*,*) 'alpha = ', alpha/deg, ' deg'

@@ -3,22 +3,25 @@
 set term x11
 load "output.gnu"
 
+set tit "s'', o'' vectors are misaligned..."
 set xl "x"
 set yl "y"
 set zl "z"
 set cbl "Phi_e [W m^{-2} m^{-1}]" offset 3,0
 
 set cbr [0:]
-set cbr [0:1e7]
+#set cbr [0:1e7]
 #set nocolorbox
 
 set view 0,0,1.5
 set view equal xyz
 set xyplane 0.0
+set zeroaxis
 set palette gray
 set surface hidden3d
 set pm3d depthorder
 set hidden3d front
+#set nocolorbox
 
 #set xl tc 'white'
 #set yl tc 'white'
@@ -31,8 +34,8 @@ set cbtics tc 'white'
 #set border lc 'white'
 set object rectangle from screen 0,0 to screen 1.01,1.01 behind fc 'black' fs solid noborder
 
-set arrow from 0,0,0 to s1__,s2__,s3__ front lc 'orange'
-set arrow from 0+0.01,0,0 to o1__+0.01,o2__,o3__ front lc 'blue'
+#set arrow from 0,0,0 to s1__,s2__,s3__ front lc 'orange'
+#set arrow from 0+0.01,0,0 to o1__+0.01,o2__,o3__ front lc 'blue'
 
 tmp=300000
 

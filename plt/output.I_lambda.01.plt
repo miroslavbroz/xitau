@@ -10,11 +10,11 @@ set zl "z"
 set cbl "I_{lambda} [W m^{-2} sr^{-1} m^{-1}]" offset 3,0
 
 tmp=1.5e5
-set xr [-tmp:tmp]
-set yr [-tmp:tmp]
-set zr [-tmp:tmp]
+#set xr [-tmp:tmp]
+#set yr [-tmp:tmp]
+#set zr [-tmp:tmp]
 set cbr [0:]
-set cbr [0:1.2e7]
+#set cbr [0:1.2e7]
 
 set view 90,0,0.5
 set view 0,0,1.5
@@ -28,8 +28,8 @@ set hidden3d front
 
 scl=1.e5
 scl=1.6e0
-set arrow from scl*(0+0.00),0,0 to scl*(s1__+0.00),scl*s2__,scl*s3__ front lc 'orange'
-set arrow from scl*(0+0.01),0,0 to scl*(o1__+0.01),scl*o2__,scl*o3__ front lc 'blue'
+#set arrow from scl*(0+0.00),0,0 to scl*(s1__+0.00),scl*s2__,scl*s3__ front lc 'orange'
+#set arrow from scl*(0+0.01),0,0 to scl*(o1__+0.01),scl*o2__,scl*o3__ front lc 'blue'
 
 sp \
   "<./pm3d.awk output.node.01 output.face.01 output.I_lambda.01" u 1:2:3:5 w pm3d not,\

@@ -10,9 +10,10 @@ test_hapke: test_hapke.f90 $(obj)
 	gfortran $(opt) $(obj) -o $@ $<
 
 $(obj): %.o:%.f90
-	gfortran $(opt) -c $<
+	gfortran $(opt) -c $< -o $@
 
 clean:
 	rm $(obj)
+
 
 

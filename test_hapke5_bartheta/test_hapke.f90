@@ -19,15 +19,15 @@ B0 = 1.32d0
 minh = 0.20d0
 ming = -0.35d0
 
-mu_i = 0.3d0
-mu_e = 0.3d0
+mu_i = 0.3d0; mu_e = 0.3d0
+!mu_i = 0.8d0; mu_e = 0.8d0
 
 f_L = A_w_/(4.d0*pi)
 
-write(*,*) '# mu_i mu_e alpha psi bartheta f_hapke'
+write(*,*) '# mu_i mu_e alpha psi bartheta f_hapke Sr mu_i_ mu_e_'
 write(*,*) '# 1 1 deg deg deg 1'
 
-m = 90
+m = 180
 do i = 1, 3
 
   if (i.eq.1) bartheta = 5.d0*deg
@@ -36,7 +36,7 @@ do i = 1, 3
 
   do j = 0, m
 
-    alpha = dble(j)/m * pi/2.d0
+    alpha = dble(j)/m * pi
     cosi = mu_i
     cose = mu_e
     sini = sqrt(1.d0-cosi**2)
@@ -46,10 +46,9 @@ do i = 1, 3
 
     call init_hapke(alpha)
 
-!    val = S(mu_i, mu_e, alpha)
     val = f_hapke(f_L, mu_i, mu_e, alpha)
 
-    write(*,*) mu_i, mu_e, alpha/deg, psi/deg, bartheta/deg, val
+    write(*,*) mu_i, mu_e, alpha/deg, psi/deg, bartheta/deg, val, Stmp, mu_i_, mu_e_
 
   enddo
   write(*,*)
