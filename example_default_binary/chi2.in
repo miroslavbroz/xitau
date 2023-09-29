@@ -24,7 +24,7 @@
 36
 
    2.0                       1.0
-   1.0                       -10.0                       90.0                     90.0                       0.0                      90.0
+   1.0                       -10.0                       90.0                     90.0                       0.0                       0.0
        6000.0                    6000.0
        1.0                       1.0
        1.0                       1.0
@@ -39,7 +39,7 @@
         0.0
         100.0
 
-2459546.69210264	! fixed (dependent) parameters: T0 [JD]; 1st Trappist LC point
+0.0	! fixed (dependent) parameters: T0 [JD]; like in phoebe.default_binary()
 
 0			! nshp number of shape parameters
 
