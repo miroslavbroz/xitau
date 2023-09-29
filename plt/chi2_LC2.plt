@@ -20,10 +20,14 @@ set mouse format "%.6f"
 
 set arrow from T0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
 
-#set arrow from 2459546.7125847600-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 19
-#set arrow from 2459546.8038658402-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 89
-#set arrow from 2459548.5640605805-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 1
-#set arrow from 2459548.6379006002-2400000,graph 0 rto 0,graph 1 nohead lt 0  # 66
+set arrow from (2459880.6675-2400000),graph 0 rto 0,graph 1 nohead lt 0
+set arrow from (2459881.9175-2400000),graph 0 rto 0,graph 1 nohead lt 0
+set arrow from (2459883.2091-2400000),graph 0 rto 0,graph 1 nohead lt 0
+set arrow from (2459884.5008-2400000),graph 0 rto 0,graph 1 nohead lt 0
+set arrow from (2459885.7508-2400000),graph 0 rto 0,graph 1 nohead lt 0
+set arrow from (2459887.0425-2400000),graph 0 rto 0,graph 1 nohead lt 0
+set arrow from (2459888.3341-2400000),graph 0 rto 0,graph 1 nohead lt 0
+set arrow from (2459889.5841-2400000),graph 0 rto 0,graph 1 nohead lt 0
 
 #set label "REF"         at 2454165.50793978-2400000,graph 0.95 center
 #set label "ECL of L."   at 2454167.50085480-2400000,graph 0.95 center

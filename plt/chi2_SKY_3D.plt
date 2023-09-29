@@ -11,11 +11,13 @@ set size 0.66,1
 
 set xl "x [AU]"
 set yl "y [AU]"
+set zl "z [AU]"
 set cbl "dataset"
 set size ratio -1
 set nokey
 
 tmp=1.0e-5
+tmp=0.05
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zr [-tmp:tmp]

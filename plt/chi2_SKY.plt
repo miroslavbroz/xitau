@@ -14,6 +14,7 @@ set yl "y [AU]"
 set size ratio -1
 
 tmp=2.e-5
+tmp=0.05
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zeroaxis

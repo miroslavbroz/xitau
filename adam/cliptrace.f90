@@ -134,7 +134,6 @@ do i = 1, h
       normalstmp(1,:) = normals(k,:)
       S = surface(polystmp, normalstmp, surf)
       tot = tot + Phi_e(k)*S/mu_e(k)
-!      tot = tot + Phi_e(k)*S  ! dbg
     enddo
 
     pnm(i,j) = tot

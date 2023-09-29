@@ -2,9 +2,9 @@
 
 load "T0.plt"
 
-JD0 = 2436258.0000000000
-P = x_param4
-P = 0.17284167583333299
+JD0 = 2443032.0
+P = x_param13
+#P = 0.17284167583333299
 
 f1(x) = x > 0.0 ? x : x+1.0
 frac(x) = f1(x-int(x))
@@ -13,8 +13,7 @@ phase(jd) = frac((jd-JD0)/P)
 set colors classic
 set term x11
 
-band = 7
-band = 54
+band = 15
 shift = 0.0
 
 set xl "phase [1]"

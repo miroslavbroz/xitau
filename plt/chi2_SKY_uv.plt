@@ -13,8 +13,7 @@ set tit "viewing geometry is changing..."
 set xl "u [arcsec]"
 set yl "v [arcsec]"
 
-tmp=1.0
-tmp=1.2
+tmp=0.8
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set xtics 0.1
@@ -31,11 +30,12 @@ P1 = x_param4
 #d_pc = x_param35
 
 set cbl "ibod"
-set cbr [2:4]
+set cbr [0:10]
 set cbtics 1
 set palette defined (\
-  0.0 '#ff0000',\
-  1.0 '#ffaa00' \
+  0.0 '#ccffcc',\
+  0.5 '#ffcc00',\
+  1.0 '#ff0000' \
   )
 
 #x1 = 0.0
@@ -68,14 +68,14 @@ p \
   sprintf("<awk '($2==-2) && ($1==%.10f)' out_JDATE_uvw.dat", T0) u (f($3,$6)):(f($4,$6)) not     w p lc 0 pt 1 ps 2,\
   sprintf("<awk '($2==-3) && ($1==%.10f)' out_JDATE_uvw.dat", T0) u (f($3,$6)):(f($4,$6)) not     w p lc 0 pt 1 ps 2,\
   sprintf("<awk '($2==-4) && ($1==%.10f)' out_JDATE_uvw.dat", T0) u (f($3,$6)):(f($4,$6)) not     w p lc 0 pt 1 ps 2,\
-  "chi2_SKY.dat" u (-$2*sin($3*deg)):($2*cos($3*deg)):8 t "residua" w l lc palette z lw 3,\
+  "<./ellipses.awk arcsec_AU.dat" u (f($1,$3)):(f($2,$3)) not w l lc 'black',\
+  "chi2_SKY.dat" u (-$2*sin($3*deg)):($2*cos($3*deg)):9 t "residua" w l lc palette z lw 3,\
   "<awk '($NF+0>100)' chi2_SKY.dat" u (-$2*sin($3*deg)):($2*cos($3*deg)):8 t "chi^2 > 100" w p lt 1 pt 6 ps 1.5 lw 3,\
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)) t "observ." w p lt 7 pt 1 ps 0.5,\
   "<awk '' arcsec_AU.dat" u (f($2,$7)):(f($3,$7)) t "observ." w p lt 7 pt 1 ps 0.5,\
   "arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left,\
   "<awk '($1>=2457021.56786759-0.001) && ($1<2457021.56786759+0.001)' arcsec_AU.dat" u (f($2,$7)):(f($3,$7)):(sprintf("  %.0f  ", int($1-2400000))) not w labels left tc 'blue',\
-  "<./ellipses.awk arcsec_AU.dat" u (f($1,$3)):(f($2,$3)) not w l lt 7,\
-  "<awk '(FNR>1){ print $0,ARGIND; }' nodes0036.dat" u 2:3 t "shape" w d lc 'black',\
+  "<awk '(FNR>1){ print $0,ARGIND; }' nodes0001.dat" u 2:3 t "shape" w d lc 'black',\
 
 pa -1
 
@@ -85,6 +85,7 @@ rep
 
 q
 
+  "chi2_SKY.dat" u (-$2*sin($3*deg)):($2*cos($3*deg)):8 t "residua" w l lc palette z lw 3,\
   sprintf("<awk '($2==-2) && ($1>=%.10f) && ($1<=%.10f) && ($5<0.0)' out_JDATE_uvw.dat", T0-P1, T0+P1) u (f($3,$6)):(f($4,$6)) not w p pt 5 lc 'green',\
   sprintf("<./ellipse2.awk %.6e %.6e %.6e %.6e", x3, y3, a3, b3) u 1:2 t "PSF (3-s.)" w l lc 'black' dt 2,\
   sprintf("<./ellipse2.awk %.6e %.6e %.6e %.6e", x1, y1, a1, a1) u 1:2 t "10 km" w l lc 'black',\
