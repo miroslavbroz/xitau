@@ -1,4 +1,11 @@
 
+!call clip(polys4, polys5, clips)
+
+!call uvw(s, polys1_, polys2_)
+!polys3_ = polys2_
+!call xyz(polys3_, polystmp_)
+!call uvw(o, polystmp_, polys4_, equatorial=.true.)
+
 !hatu = (/sin(l), -cos(l), 0.d0/)  ! old vers. from chi2_func_AO.f90, incorrect front<->back
 !hatu = (/-sin(l), cos(l), 0.d0/)  ! new vers, correct front<->back
 !hatu = (/sin(l), -cos(l), 0.d0/)  ! this does NOT switch area sign!

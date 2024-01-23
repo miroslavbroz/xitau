@@ -317,6 +317,7 @@ obj90 = \
   lc_polygon/boundingbox.o \
   lc_polygon/revert.o \
   lc_polygon/clip.o \
+  lc_polygon/clip2.o \
   lc_polygon/hapke.o \
   lc_polygon/lambert.o \
   lc_polygon/lommel.o \

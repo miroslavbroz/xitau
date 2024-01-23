@@ -14,10 +14,11 @@ set size ratio -1
 tmp=1.5
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
+set palette rgbformulae 33,13,10
 
 p \
   "Closure.dat"      u ($10*deg):8:12  t "observed T3"  w p ps 0.75 lc var,\
-  "closurephase.dat" u 8:7             t "synthetic T3" w p ps 0.75
+  "closurephase.dat" u 8:7:1           t "synthetic T3" w p ps 0.75 lc palette z
 
 pa -1
 

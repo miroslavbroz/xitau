@@ -14,6 +14,7 @@ set xl "u [arcsec]"
 set yl "v [arcsec]"
 
 tmp=0.8
+tmp=1.6
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set xtics 0.1

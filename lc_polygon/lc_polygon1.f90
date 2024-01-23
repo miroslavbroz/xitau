@@ -92,6 +92,7 @@ use to_poly_module
 use uvw_module
 use xyz_module
 use clip_module
+use clip2_module
 use to_three_module
 use surface_module
 use planck_module
@@ -118,6 +119,7 @@ integer, intent(inout) :: i2nd
 integer, dimension(:,:), pointer, save :: faces
 double precision, dimension(:,:), pointer, save :: nodes, orignodes
 
+type(polystype), dimension(:), pointer, save :: polys1_, polys4_
 integer, dimension(:), pointer, save :: clips
 
 ! internal variables
@@ -177,6 +179,8 @@ if (i1st.eq.0) then
   allocate(polys4(size(polys1,1)))
   allocate(polys5(size(polys1,1)))
   allocate(polystmp(size(polys1,1)))
+  allocate(polys1_(size(faces,1)))
+  allocate(polys4_(size(polys1,1)))
   allocate(normals(size(polys1,1),3))
   allocate(centres(size(polys1,1),3))
   allocate(mu_i(size(polys1,1)))
@@ -347,6 +351,7 @@ enddo
 
 ! conversion
 call to_poly(faces, nodes, polys1)
+polys1_ = polys1
 
 ! geometry
 call normal(polys1, normals)
@@ -392,8 +397,9 @@ call uvw_(centres)
 o__ = (/dot_product(hatu,o), dot_product(hatv,o), dot_product(hatw,o)/)
 s__ = (/dot_product(hatu,s), dot_product(hatv,s), dot_product(hatw,s)/)
 
-! shadowing
-call clip(polys4, polys5, clips)
+! visibility
+call uvw(o, polys1_, polys4_, equatorial=.true.)
+call clip2(polys4, polys4_, polys5, clips)
 
 ! back-projecion
 call to_three(normals, centres, polys5)
