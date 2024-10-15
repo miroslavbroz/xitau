@@ -1,14 +1,13 @@
 c getacc_oblat.f
 c Oblatness accelerations (to be added).
-c Miroslav Broz (miroslav.broz@email.cz), Sep 29th 2022
+c Miroslav Broz (miroslav.broz@email.cz), Oct 15th 2024
 
-c Reference: Fabrycky (2010), Eq. (4)
+c Reference: Fabrycky (2010), Eq. (4), w. a correction of 1/2 -> 3.
 c
-c f_R = -1/2 k_L,star Omega_star^2 R_star^5 / r^5 \vec r
+c f_R = -3 k_L,star Omega_star^2 R_star^5 / r^5 \vec r
 c
 c Warning: This only holds for a spin PERPENDICULAR to the orbit!
 c Warning: This only includes the radial component of acceleration!
-c Hence, the factor 1/6 wrt. the multipole model.
 
       subroutine getacc_oblat(nbod_,mass,xb,yb,zb,irij5,axb,ayb,azb)
 
@@ -43,7 +42,7 @@ c acc = koef2 R_body^5 / rij^5
 c from dependent.inc
       do i = 1, nbod
         R_body(i) = R_star(i)*R_S/AU
-        koef2(i) = -0.5d0*C20(i)*mass(i)*R_body(i)**2
+        koef2(i) = -3.0d0*C20(i)*mass(i)*R_body(i)**2
       enddo
 
       do i = 1, nbod  ! "planet"

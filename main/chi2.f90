@@ -22,6 +22,9 @@ double precision, dimension(NDIMMAX) :: xtry
 character(len=255) :: str
 double precision :: chi2, probp, probq
 double precision, external :: gammp, gammq
+double precision :: t1, t2
+
+call cpu_time(t1)
 
 !
 ! read input parameters
@@ -107,6 +110,10 @@ write(*,*) '# nparam = ', nparam
 write(*,*) '# nu = ', int(nu)
 write(*,*) '# probp = ', probp
 write(*,*) '# probq = ', probq
+
+call cpu_time(t2)
+
+write(*,*) '# cpu_time = ', t2-t1, ' s'
 
 stop
 

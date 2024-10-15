@@ -17,6 +17,7 @@ dy=tmp
 
 i=5
 j=6.0
+j=2.0
 #i=1; j=1
 set xr [-0.75*tmp:(i-1+0.75)*tmp]
 set yr [-0.75*tmp:(j-1+0.75)*tmp]
