@@ -92,8 +92,8 @@ double precision :: Lumtot
 double precision :: lambda_eff, band_eff
 double precision, dimension(MINMAX) :: tmin, duration
 double precision :: gamma, gamma_auday
-integer :: n_of_interest
-double precision, dimension(TIMEMAX) :: t_of_interest, t_of_interest1, t_of_interest2
+integer, save :: n_of_interest
+double precision, dimension(TIMEMAX), save :: t_of_interest, t_of_interest1, t_of_interest2
 double precision :: msum
 double precision, dimension(NBODMAX) :: q
 double precision :: dummy
