@@ -261,7 +261,7 @@ endif
 ! EITHER, compute P_rot [d] from R_star, v_rot
  
 !do i = 1, nbod
-!  P_rot(i) = R_star(i)*R_S/(v_rot(i)*1.d3)/day
+!  P_rot(i) = 2.d0*pi*R_star(i)*R_S/(v_rot(i)*1.d3)/day
 !enddo
 !
 !if (debug_swift) then
@@ -273,7 +273,7 @@ endif
 ! OR, compute v_rot [km/s] from R_star, P_rot
 
 do i = 1, nbod
-  v_rot(i) = R_star(i)*R_S/(P_rot(i)*day)/1.d3
+  v_rot(i) = 2.d0*pi*R_star(i)*R_S/(P_rot(i)*day)/1.d3
 enddo
 
 if (debug_swift) then
