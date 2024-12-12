@@ -196,6 +196,11 @@ do i = 1, 2
   psf_param(i) = x_param(j)
 enddo
 
+do i = 1, nband
+  j = j+1
+  zero(i) = x_param(j)
+enddo
+
 j = j+1
 gamma = x_param(j)
 j = j+1
