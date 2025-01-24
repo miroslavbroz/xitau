@@ -20,20 +20,20 @@ c output
 
 c observational data
       integer m_OBS
-      real*8 t_OBS(OBSMAX), lambda_OBS(OBSMAX), Int_OBS(OBSMAX),
-     :  sigma_Int_OBS(OBSMAX)
-      integer dataset_OBS(OBSMAX)
+      real*8 t_OBS(SYNMAX), lambda_OBS(SYNMAX), Int_OBS(SYNMAX),
+     :  sigma_Int_OBS(SYNMAX)
+      integer dataset_OBS(SYNMAX)
 
 c synthetic spectra
       integer n_synth(NBODMAX)
-      real*8 lambda_synth(OBSMAX,NBODMAX), Int_synth(OBSMAX,NBODMAX)
+      real*8 lambda_synth(SYNMAX,NBODMAX), Int_synth(SYNMAX,NBODMAX)
 
 c internal variables
       integer i,j,k,l,i1st,iua,iub,ier,nbod2
       real*8 chi2_
-      real*8 vzb_interp, lambda_interp, Int_interp, Int_Sum(OBSMAX)
-      real*8 Lum_, Lumtot(OBSMAX)
-      real*8 Lum__(OBSMAX,NBODMAX), Int__(OBSMAX,NBODMAX)
+      real*8 vzb_interp, lambda_interp, Int_interp, Int_Sum(SYNMAX)
+      real*8 Lum_, Lumtot(SYNMAX)
+      real*8 Lum__(SYNMAX,NBODMAX), Int__(SYNMAX,NBODMAX)
       character*80 str
 
 c external functions
@@ -187,7 +187,7 @@ c compute monochromatic "luminosity" at given lambda
 
 c a very detailed output of all intensities and luminosities...
 
-      if (debug) then
+      if (debug_swift) then
         open(unit=iub,file="synthetic2.dat",status="unknown")
         write(iub,*) "# t & lambda [m] & Int_lambda []",
      :    " & Lum_lambda [W m^-1] & Lum_tot [W m^-1] & ibod & dataset"
@@ -230,7 +230,7 @@ c
      :    " & dataset & chi^2"
       endif
 
-      if (debug) then
+      if (debug_swift) then
         open(unit=iub,file="synthetic.dat",status="unknown")
         write(iub,*) "# t & lambda [m] & Int [] & dataset"
       endif
@@ -254,7 +254,7 @@ c add to chi^2
           write(iua,*)
         endif
 
-        if (debug) then
+        if (debug_swift) then
           if ((i.gt.1).and.(dataset_OBS(i).ne.dataset_OBS(i-1))) then
             write(iub,*)
             write(iub,*)
