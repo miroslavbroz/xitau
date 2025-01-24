@@ -1,8 +1,10 @@
-c chi2_func_SED.f
-c Calculate chi^2 for spectral energy distribution.
-c Mirolav Broz (miroslav.broz@email.cz), Mar 18th 2016
+c chi2_func_SED2.f
+c Calculate chi^2 for spectral energy distribution, individual ones.
+c Mirolav Broz (miroslav.broz@email.cz), Jan 21st 2025
 
-      subroutine chi2_func_SED(chi2, n)
+c Note: Doesn't work with chi2_func_SED.f due to 2nd call of luminosity_synthetic_filters.f!
+
+      subroutine chi2_func_SED2(chi2, n)
 
       implicit none
       include '../misc/const.inc'
@@ -16,13 +18,14 @@ c output
 
 c observational data
       integer m_OBS
+      integer one(SEDMAX)
       real*8 lambda_eff_OBS(SEDMAX), band_eff_OBS(SEDMAX),
      :  mag_OBS(SEDMAX), sigma_mag_OBS(SEDMAX), calibration(SEDMAX)
       character*80 file_filter(SEDMAX)
 
 c internal variables
       integer i, k, i1st, iu
-      real*8 d, lambda, band, flux, mag, chi2_
+      real*8 d, lambda, band, flux, fluxtot, mag, chi2_
       real*8 band_filter(SEDMAX)
       real*8 Lum_lambda(NBODMAX), Lumtot
 
@@ -34,17 +37,17 @@ c functions
 
       save i1st,
      :  m_OBS, lambda_eff_OBS, band_eff_OBS, mag_OBS, sigma_mag_OBS,
-     :  calibration, file_filter, band_filter
+     :  one, calibration, file_filter, band_filter
 c
 c read SED observations (only 1st time!)
 c
       if (i1st.eq.0) then
 
-        call read_SED(file_SED, m_OBS, lambda_eff_OBS, band_eff_OBS,
-     :    mag_OBS, sigma_mag_OBS, calibration, file_filter)
+        call read_SED2(file_SED2, m_OBS, lambda_eff_OBS, band_eff_OBS,
+     :    mag_OBS, sigma_mag_OBS, one, calibration, file_filter)
 
         if (debug) then
-          write(*,*) "# m_SED = ", m_OBS
+          write(*,*) "# m_SED2 = ", m_OBS
         endif
 
         i1st = 1
@@ -53,7 +56,7 @@ c
 c chi^2 for SED data
 c
       if (debug) then
-        open(unit=iu,file="chi2_SED.dat",status="unknown")
+        open(unit=iu,file="chi2_SED2.dat",status="unknown")
         write(iu,*) "# lambda [m] & band [m] & mag [mag] & sigma [mag]",
      :    " & calibration flux F_lambda [J s^-1 m^-2 m^-1] & filter",
      :    " & chi^2"
@@ -85,17 +88,15 @@ c
      :      band_filter, Lum_lambda, Lumtot)
 
           band = band_filter(i)
-
         else
           write(*,*) "chi2_func_SED.f: Error: use_planck = ",
      :      use_planck, " and use_filters = ", use_filters,
      :      " is NOT supported."
-          stop
-
         endif
 
-        flux = Lumtot/(4.d0*pi_*d**2)
-        mag = -2.5d0*log10(flux/(calibration(i)*band))
+        flux = Lum_lambda(one(i))/(4.d0*pi_*d**2)
+        fluxtot = Lumtot/(4.d0*pi_*d**2)
+        mag = -2.5d0*log10(flux/(fluxtot-flux))
 
         chi2_ = ((mag-mag_OBS(i))/sigma_mag_OBS(i))**2
         lns = lns + log(sigma_mag_OBS(i))

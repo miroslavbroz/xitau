@@ -13,13 +13,17 @@ jd(bessel) = (bessel-1900.0)*365.242198781 + 2415020.31352;
 
 ########################################################################
 
+load "T0.plt"
+
 set xl "JD - 2400000"
 set yl "vzb [km/s]"
 
+#set xr [T0-2400000:]
+#set xr [59450:59500]
+#tmp=10; set xr [59531-tmp:59531+tmp]
 #tmp=60.0; set yr [-tmp:tmp]
 set zeroaxis
 
-load "T0.plt"
 set arrow from T0-2400000,graph 0 to T0-2400000,graph 1 nohead lt 0
 
 gamma = x_param21
@@ -27,10 +31,10 @@ set arrow from graph 0,first gamma rto graph 1,first 0 nohead lt 0
 #set arrow from jd(1960.0941692)-2400000,graph 0 rto 0,graph 1 nohead lt 0
 
 p \
-  "<awk '($2==-1)' out_JDATE_barycentric.dat" u ($1-2400000):(g($8)) t "1" w l lt 1,\
-  "<awk '($2==-2)' out_JDATE_barycentric.dat" u ($1-2400000):(g($8)) t "2" w l lt 2,\
-  "<awk '($2==-3)' out_JDATE_barycentric.dat" u ($1-2400000):(g($8)) t "3" w l lt 3,\
-  "<awk '($2==-4)' out_JDATE_barycentric.dat" u ($1-2400000):(g($8)) t "4" w l lt 4,\
+  "<awk '($2==-1)' out_JDATE_lighttime.dat" u ($1-2400000):(g($8)) t "1" w l lt 1,\
+  "<awk '($2==-2)' out_JDATE_lighttime.dat" u ($1-2400000):(g($8)) t "2" w l lt 2,\
+  "<awk '($2==-3)' out_JDATE_lighttime.dat" u ($1-2400000):(g($8)) t "3" w l lt 3,\
+  "<awk '($2==-4)' out_JDATE_lighttime.dat" u ($1-2400000):(g($8)) t "4" w l lt 4,\
   "RV1.dat" u ($1-2400000):2:3 t "observ." w err lt 1 pt 1 ps 0.5,\
   "RV2.dat" u ($1-2400000):2:3 not         w err lt 2 pt 1 ps 0.5,\
   "RV3.dat" u ($1-2400000):2:3 not         w err lt 3 pt 1 ps 0.5,\

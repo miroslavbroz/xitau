@@ -68,6 +68,8 @@ c compute angular momentum (assuming a PCA rotation)
         enddo
       enddo
 
+      write(*,*) "# Warning: Delta_t_ will be overwritten by Delta_t!"
+
       return
       end
 

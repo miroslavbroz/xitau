@@ -2,12 +2,10 @@
 
 load "T0.plt"
 
-JD0 = 2457733.83207
-#JD0 = 2458773.18865178
-#P = x_param3
-P = x_param4
-P = 5.732436
-P = 5.732436+0.000130
+JD0 = T0
+P = x_param5
+P = 7.147596
+P = 7.143630
 
 f1(x) = x > 0.0 ? x : x+1.0
 frac(x) = f1(x-int(x))
@@ -22,17 +20,26 @@ shift = 0.0
 
 set xl "JD - 2400000"
 set yl "magnitude [mag]"
+set cbl "JD - 2400000"
 
 load "T0.plt"
 
+set xr [-0.1:1.1]
 set yr [:] reverse
+set xtics 0.1
+#set yr [1.12:0.98]
 #set ytics shift
 set grid ytics
 set key right
+set palette rgbformulae 33,13,10
+
+set arrow from 0.0,graph 0 rto 0.0,graph 1 nohead lt 0
+set arrow from 0.5,graph 0 rto 0.0,graph 1 nohead lt 0
+set arrow from 1.0,graph 0 rto 0.0,graph 1 nohead lt 0
 
 p \
   "chi2_LC.dat"    u (phase($1)):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
-  "<awk '($1-l>0.01){ print s; }{ print; l=$1; }' Lc.dat"         u (phase($1)):2:3 w l lt 3 t "observed",\
+  "<awk '($1-l>0.01){ print s; }{ print; l=$1; }' Lc.dat"         u (phase($1)):2:($1-2400000) w l lc palette z t "observed",\
   "<awk '($1-l>0.01){ print s; }{ print; l=$1; }' Lc_tess.dat"    u (phase($1)):2:3 w l lt 3 not,\
   "Lc_U.dat"       u (phase($1)):($2+(5-band)*shift):3 t "U" w err lt 4 pt 1 ps 0.5,\
   "Lc_B.dat"       u (phase($1)):($2+(6-band)*shift):3 t "B" w err lt 5 pt 1 ps 0.5,\

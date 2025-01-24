@@ -16,8 +16,10 @@ set cbl "dataset"
 set size ratio -1
 set nokey
 
-tmp=1.0e-5
-tmp=0.05
+#tmp=1.0e-5
+#tmp=40.0
+tmp=0.15
+#tmp=1.0
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zr [-tmp:tmp]
@@ -42,17 +44,17 @@ d_pc = x_param19
 f(x) = x*arcsec*(d_pc*pc)/au
 
 sp \
-  sprintf("<awk '($2==-1) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_heliocentric.dat", T0, T0+0.1) u 3:4:5 not w l lw 10 lc 'gray',\
-  sprintf("<awk '($2==-2) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_heliocentric.dat", T0, T0+0.1) u 3:4:5 not w l lw 10 lc 'gray',\
-  sprintf("<awk '($2==-3) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_heliocentric.dat", T0, T0+0.1) u 3:4:5 not w l lw 10 lc 'gray',\
-  "<awk '($2==-1)' out_JDATE_heliocentric.dat"  u 3:4:5 t "1" w l lt 1,\
-  "<awk '($2==-2)' out_JDATE_heliocentric.dat"  u 3:4:5 t "2" w l lt 2,\
-  "<awk '($2==-3)' out_JDATE_heliocentric.dat"  u 3:4:5 t "3" w l lt 3,\
-  "<awk '($2==-4)' out_JDATE_heliocentric3.dat" u 3:4:5 t "4" w l lt 4,\
-  sprintf("<awk '($2==-1) && ($1==%.10f)' out_JDATE_heliocentric.dat", T0)  u 3:4:5 t "T_0" w p lc 0 pt 1 ps 2,\
-  sprintf("<awk '($2==-2) && ($1==%.10f)' out_JDATE_heliocentric.dat", T0)  u 3:4:5 not     w p lc 0 pt 1 ps 2,\
-  sprintf("<awk '($2==-3) && ($1==%.10f)' out_JDATE_heliocentric.dat", T0)  u 3:4:5 not     w p lc 0 pt 1 ps 2,\
-  sprintf("<awk '($2==-4) && ($1==%.10f)' out_JDATE_heliocentric3.dat", T0) u 3:4:5 not     w p lc 0 pt 1 ps 2,\
+  sprintf("<awk '($2==-1) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_photocentric.dat", T0, T0+0.1) u 3:4:5 not w l lw 10 lc 'gray',\
+  sprintf("<awk '($2==-2) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_photocentric.dat", T0, T0+0.1) u 3:4:5 not w l lw 10 lc 'gray',\
+  sprintf("<awk '($2==-3) && ($1>=%.10f) && ($1<=%.10f)' out_JDATE_photocentric.dat", T0, T0+0.1) u 3:4:5 not w l lw 10 lc 'gray',\
+  "<awk '($2==-1)' out_JDATE_photocentric.dat"  u 3:4:5 t "1" w l lt 1,\
+  "<awk '($2==-2)' out_JDATE_photocentric.dat"  u 3:4:5 t "2" w l lt 2,\
+  "<awk '($2==-3)' out_JDATE_photocentric.dat"  u 3:4:5 t "3" w l lt 3,\
+  "<awk '($2==-4)' out_JDATE_photocentric3.dat" u 3:4:5 t "4" w l lt 4,\
+  sprintf("<awk '($2==-1) && ($1==%.10f)' out_JDATE_photocentric.dat", T0)  u 3:4:5 t "T_0" w p lc 0 pt 1 ps 2,\
+  sprintf("<awk '($2==-2) && ($1==%.10f)' out_JDATE_photocentric.dat", T0)  u 3:4:5 not     w p lc 0 pt 1 ps 2,\
+  sprintf("<awk '($2==-3) && ($1==%.10f)' out_JDATE_photocentric.dat", T0)  u 3:4:5 not     w p lc 0 pt 1 ps 2,\
+  sprintf("<awk '($2==-4) && ($1==%.10f)' out_JDATE_photocentric3.dat", T0) u 3:4:5 not     w p lc 0 pt 1 ps 2,\
   "<awk '(NF==0) || ($4==0) || ($4==1)' uvw.dat" u ($1*tmp):($2*tmp):($3*tmp) t "u" w l lc 'orange'  ,\
   "<awk '(NF==0) || ($4==0) || ($4==2)' uvw.dat" u ($1*tmp):($2*tmp):($3*tmp) t "v" w l lc 'yellow',\
   "<awk '(NF==0) || ($4==0) || ($4==3)' uvw.dat" u ($1*tmp):($2*tmp):($3*tmp) t "w" w l lc 'cyan' ,\

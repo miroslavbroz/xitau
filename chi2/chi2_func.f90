@@ -7,11 +7,13 @@
 ! m             .. mass [M_S]
 ! r             .. initial coordinates [au]
 ! rb            .. barycentric coordinates [au]
+! rl            .. light-time coordinates [au]
 ! rh            .. heliocentric coordinates [au]
 ! rp            .. photocentric coordinates [au]
 ! rp3           .. (1+2+3)-photocentric coordinates [au]
 ! v             .. ditto velocities [au d^-1]
 ! vb            .. ditto velocities [au d^-1]
+! vl            .. ditto velocities [au d^-1]
 ! vh            .. ditto velocities [au d^-1]
 ! vp            .. ditto velocities [au d^-1]
 ! vp3           .. ditto velocities [au d^-1]
@@ -59,6 +61,7 @@ use chi2_func_AO_module
 use chi2_func_AO2_module
 use chi2_func_LC2_module
 use chi2_func_OCC_module
+use lite_module
 
 include '../swift.inc'
 include '../tides/spin.inc'
@@ -74,7 +77,7 @@ double precision, dimension(NBODMAX) :: m
 double precision, dimension(NBODMAX,3) :: r, v
 double precision, dimension(NBODMAX,6) :: elmts
 double precision, dimension(OUTMAX) :: tout
-double precision, dimension(OUTMAX,NBODMAX,3) :: rb, vb, rh, vh, rp, vp, rp3, vp3
+double precision, dimension(OUTMAX,NBODMAX,3) :: rb, vb, rl, vl, rh, vh, rp, vp, rp3, vp3
 double precision, dimension(OUTMAX1) :: tout1
 double precision, dimension(OUTMAX2) :: tout2
 double precision, dimension(OUTMAX1,NBODMAX,3) :: rout1, vout1
@@ -100,7 +103,7 @@ double precision :: dummy
 integer, save :: i1st=0
 
 ! functions
-double precision, external :: merit_func, kms_auday
+double precision, external :: kms_auday, merit_func
 
 ! get both free and fixed parameters
 
@@ -140,22 +143,22 @@ do i = 1, nbod
   j = j+1
   T_eff(i) = x_param(j)
 enddo
-do i = 1, nbod
-  j = j+1
-  R_star(i) = x_param(j)
-enddo
 !do i = 1, nbod
 !  j = j+1
-!  log_g(i) = x_param(j)
-!enddo
-!do i = 1, nbod
-!  j = j+1
-!  v_rot(i) = x_param(j)
+!  R_star(i) = x_param(j)
 !enddo
 do i = 1, nbod
   j = j+1
-  P_rot(i) = x_param(j)
+  log_g(i) = x_param(j)
 enddo
+do i = 1, nbod
+  j = j+1
+  v_rot(i) = x_param(j)
+enddo
+!do i = 1, nbod
+!  j = j+1
+!  P_rot(i) = x_param(j)
+!enddo
 do i = 1, nbod
   j = j+1
   metal(i) = x_param(j)
@@ -241,51 +244,51 @@ endif
 
 ! EITHER, compute log g [cgs] from m, R_star
 
-do i = 1, nbod
-  log_g(i) = log10(m(i)*AU**3/day**2/(R_star(i)*R_S)**2*100.d0)
-enddo
-
-if (debug_swift) then
-  do i = 1, nbod
-    write(*,*) '# log_g(', i, ') = ', log_g(i)
-  enddo
-endif
+!do i = 1, nbod
+!  log_g(i) = log10(m(i)*AU**3/day**2/(R_star(i)*R_S)**2*100.d0)
+!enddo
+!
+!if (debug_swift) then
+!  do i = 1, nbod
+!    write(*,*) '# log_g(', i, ') = ', log_g(i)
+!  enddo
+!endif
 
 ! OR, compute R_star [R_S] from m, log_g
 
-!do i = 1, nbod
-!  R_star(i) = sqrt(m(i)*AU**3/day**2/(10.d0**log_g(i)/100.d0))/R_S
-!enddo
-!
-!if (debug_swift) then
-!  do i = 1, nbod
-!    write(*,*) '# R_star(', i, ') = ', R_star(i), ' R_S'
-!  enddo
-!endif
-
-! EITHER, compute P_rot [d] from R_star, v_rot
- 
-!do i = 1, nbod
-!  P_rot(i) = 2.d0*pi*R_star(i)*R_S/(v_rot(i)*1.d3)/day
-!enddo
-!
-!if (debug_swift) then
-!  do i = 1, nbod
-!    write(*,*) '# P_rot(', i, ') = ', P_rot(i), ' d'
-!  enddo
-!endif
- 
-! OR, compute v_rot [km/s] from R_star, P_rot
-
 do i = 1, nbod
-  v_rot(i) = 2.d0*pi*R_star(i)*R_S/(P_rot(i)*day)/1.d3
+  R_star(i) = sqrt(m(i)*AU**3/day**2/(10.d0**log_g(i)/100.d0))/R_S
 enddo
 
 if (debug_swift) then
   do i = 1, nbod
-    write(*,*) '# v_rot(', i, ') = ', v_rot(i), ' km/s'
+    write(*,*) '# R_star(', i, ') = ', R_star(i), ' R_S'
   enddo
 endif
+
+! EITHER, compute P_rot [d] from R_star, v_rot
+ 
+do i = 1, nbod
+  P_rot(i) = 2.d0*pi*R_star(i)*R_S/(v_rot(i)*1.d3)/day
+enddo
+
+if (debug_swift) then
+  do i = 1, nbod
+    write(*,*) '# P_rot(', i, ') = ', P_rot(i), ' d'
+  enddo
+endif
+ 
+! OR, compute v_rot [km/s] from R_star, P_rot
+
+!do i = 1, nbod
+!  v_rot(i) = 2.d0*pi*R_star(i)*R_S/(P_rot(i)*day)/1.d3
+!enddo
+!
+!if (debug_swift) then
+!  do i = 1, nbod
+!    write(*,*) '# v_rot(', i, ') = ', v_rot(i), ' km/s'
+!  enddo
+!endif
 
 ! constrain some of the components by Harmanec (1988) relations
 
@@ -347,10 +350,6 @@ if (i1st.eq.0) then
     t_of_interest2(j) = T0-t_of_interest(i)
   enddo
 
-! read shape
-  call read_node("input.node", nodesforchi)
-  call read_face("input.face", facesforchi)
-
 ! init tidal code
   call io_init_spin("spin.in", nbod)
   call io_init_tides("tides.in", nbod)
@@ -361,6 +360,12 @@ if (i1st.eq.0) then
     omega0(i) = omega(i)
   enddo
 
+! read shape
+  if (nshp.gt.0) then
+    call read_node("input.node", nodesforchi)
+    call read_face("input.face", facesforchi)
+  endif
+
   i1st = 1
 endif
 
@@ -369,10 +374,6 @@ do i = 1, nbod
   s0(i,1) = cos(pole_l(i))*cos(pole_b(i))
   s0(i,2) = sin(pole_l(i))*cos(pole_b(i))
   s0(i,3) = sin(pole_b(i))
-enddo
-
-do i = 1, nbod
-  Delta_t_(i) = Delta_t(i)
 enddo
 
 !-----------------------------------------------------------------------
@@ -438,6 +439,7 @@ gamma_auday = kms_auday(gamma)
 do i = 1, nout
   do j = 1, nbod
     vb(i,j,3) = vb(i,j,3) + gamma_auday
+    rb(i,j,3) = rb(i,j,3) + gamma_auday*(tout(i) - T0)
   enddo
 enddo
 
@@ -451,13 +453,29 @@ if (debug_swift) then
   close(iu)
 endif
 
+! light-time effect
+
+call lite(nout, tout, rb, vb, rl, vl)
+
+if (debug_swift) then
+  open(unit=iu,file="out_JDATE_lighttime.dat",status="unknown")
+  do i = 1, nout
+    do j = 1, nbod
+      write(iu,*) tout(i),-j,rl(i,j,1),rl(i,j,2),rl(i,j,3),vl(i,j,1),vl(i,j,2),vl(i,j,3)
+    enddo
+  enddo
+  close(iu)
+endif
+
+! Note: all other coordinates with light-time effect
+
 ! convert to heliocentric (1-centric) coordinates
 
 do i = 1, nout
   do j = 1, nbod
     do k = 1, 3
-      rh(i,j,k) = rb(i,j,k) - rb(i,1,k)
-      vh(i,j,k) = vb(i,j,k) - vb(i,1,k)
+      rh(i,j,k) = rl(i,j,k) - rl(i,1,k)
+      vh(i,j,k) = vl(i,j,k) - vl(i,1,k)
     enddo
   enddo
 enddo
@@ -481,16 +499,16 @@ do i = 1, nout
     v_photocentre(k) = 0.d0
     do j = 1, min(2, nbod)
        Lumtot = Lumtot + Lum(j)
-       r_photocentre(k) = r_photocentre(k) + rb(i,j,k)*Lum(j)
-       v_photocentre(k) = v_photocentre(k) + vb(i,j,k)*Lum(j)
+       r_photocentre(k) = r_photocentre(k) + rl(i,j,k)*Lum(j)
+       v_photocentre(k) = v_photocentre(k) + vl(i,j,k)*Lum(j)
     enddo
     r_photocentre(k) = r_photocentre(k)/Lumtot
     v_photocentre(k) = v_photocentre(k)/Lumtot
   enddo
   do j = 1, nbod
     do k = 1, 3
-      rp(i,j,k) = rb(i,j,k) - r_photocentre(k)
-      vp(i,j,k) = vb(i,j,k) - v_photocentre(k)
+      rp(i,j,k) = rl(i,j,k) - r_photocentre(k)
+      vp(i,j,k) = vl(i,j,k) - v_photocentre(k)
     enddo
   enddo
 enddo
@@ -514,29 +532,29 @@ do i = 1, nout
     v_photocentre(k) = 0.d0
     do j = 1, min(3, nbod)
        Lumtot = Lumtot + Lum(j)
-       r_photocentre(k) = r_photocentre(k) + rb(i,j,k)*Lum(j)
-       v_photocentre(k) = v_photocentre(k) + vb(i,j,k)*Lum(j)
+       r_photocentre(k) = r_photocentre(k) + rl(i,j,k)*Lum(j)
+       v_photocentre(k) = v_photocentre(k) + vl(i,j,k)*Lum(j)
     enddo
     r_photocentre(k) = r_photocentre(k)/Lumtot
     v_photocentre(k) = v_photocentre(k)/Lumtot
   enddo
   do j = 1, nbod
     do k = 1, 3
-      rp3(i,j,k) = rb(i,j,k) - r_photocentre(k)
-      vp3(i,j,k) = vb(i,j,k) - v_photocentre(k)
+      rp3(i,j,k) = rl(i,j,k) - r_photocentre(k)
+      vp3(i,j,k) = vl(i,j,k) - v_photocentre(k)
     enddo
   enddo
 enddo
 
-!if (debug_swift) then
-!  open(unit=iu,file="out_JDATE_photocentric3.dat", status="unknown")
-!  do i = 1, nout
-!    do j = 1, nbod
-!      write(iu,*) tout(i),-j,rp3(i,j,1),rp3(i,j,2),rp3(i,j,3),vp3(i,j,1),vp3(i,j,2),vp3(i,j,3)
-!    enddo
-!  enddo
-!  close(iu)
-!endif
+if (debug_swift) then
+  open(unit=iu,file="out_JDATE_photocentric3.dat", status="unknown")
+  do i = 1, nout
+    do j = 1, nbod
+      write(iu,*) tout(i),-j,rp3(i,j,1),rp3(i,j,2),rp3(i,j,3),vp3(i,j,1),vp3(i,j,2),vp3(i,j,3)
+    enddo
+  enddo
+  close(iu)
+endif
 
 ! optionally, write (u, v, w) coordinates
 
@@ -566,12 +584,13 @@ lns = 0.d0  ! sum of ln sigma_i (for MCMC)
 !  14. angular velocity
 !  15. occultation timings
 !  16. light curve (u. lc_polygon algorithm)
+!  17. spectral-energy distribution for components
 
 call chi2_func_SKY(nout, tout, rh, rp, rp3, chi2_SKY, n_SKY)
 
-call chi2_func_RV(nout, tout, vb, chi2_RV, n_RV)
+call chi2_func_RV(nout, tout, vl, chi2_RV, n_RV)
 
-call chi2_func_TTV(nout, nout2, m, tout, rh, rb, nmin, tmin, duration, chi2_TTV, n_TTV)
+call chi2_func_TTV(nout, nout2, m, tout, rh, nmin, tmin, duration, chi2_TTV, n_TTV)
 
 call chi2_func_ECL(nmin, tmin, duration, chi2_ECL, n_ECL)
 
@@ -583,7 +602,7 @@ call chi2_func_T3(chi2_T3, n_T3)
 
 call chi2_func_LC(nout, nout2, m, tout, rh, vh, rb, chi2_LC, n_LC)
 
-call chi2_func_SYN(nout, tout, vb, chi2_SYN, n_SYN)
+call chi2_func_SYN(nout, tout, vl, chi2_SYN, n_SYN)
 
 call chi2_func_SED(chi2_SED, n_SED)
 
@@ -599,6 +618,8 @@ call chi2_func_OCC(nout, tout, rh, chi2_OCC, n_OCC)
 
 call chi2_func_LC2(nout, tout, rh, vh, chi2_LC, n_LC)
 
+call chi2_func_SED2(chi2_SED2, n_SED2)
+
 ! add artificial term(s) to constrain parameters
 
 chi2_MASS = 0.d0
@@ -609,31 +630,32 @@ enddo
 ! sum everything
 
 n_fit = n_SKY + n_RV + n_TTV + n_ECL + n_VIS + n_CLO + n_T3 + n_LC &
-  + n_SYN + n_SED + n_AO + n_AO2 + n_SKY2 + n_SKY3 + n_OCC
+  + n_SYN + n_SED + n_AO + n_AO2 + n_SKY2 + n_SKY3 + n_OCC + n_SED2
 
 chi2 = w_SKY*chi2_SKY + w_RV*chi2_RV + w_TTV*chi2_TTV + w_ECL*chi2_ECL &
   + w_VIS*chi2_VIS + w_CLO*chi2_CLO + w_T3*chi2_T3 + w_LC*chi2_LC &
   + w_SYN*chi2_SYN + w_SED*chi2_SED + w_AO*chi2_AO + w_AO2*chi2_AO2 &
-  + w_SKY2*chi2_SKY2 + w_SKY3*chi2_SKY3 + w_OCC*chi2_OCC + chi2_MASS
+  + w_SKY2*chi2_SKY2 + w_SKY3*chi2_SKY3 + w_OCC*chi2_OCC &
+  + w_SED2*chi2_SED2 + chi2_MASS
 
 write(*,'(a,$)') "# n values: "
 write(*,*) n_SKY, n_RV, n_TTV, n_ECL, n_VIS, n_CLO, n_T3, n_LC, &
-  n_SYN, n_SED, n_AO, n_AO2, n_SKY2, n_SKY3, n_OCC, n_fit
+  n_SYN, n_SED, n_AO, n_AO2, n_SKY2, n_SKY3, n_OCC, n_SED2, n_fit
 
 write(*,'(a,$)') "# chi^2 values: "
 write(*,*) chi2_SKY, chi2_RV, chi2_TTV, chi2_ECL, chi2_VIS, chi2_CLO, &
   chi2_T3, chi2_LC, chi2_SYN, chi2_SED, chi2_AO, chi2_AO2, chi2_SKY2, &
-  chi2_SKY3, chi2_OCC, chi2_MASS, chi2
+  chi2_SKY3, chi2_OCC, chi2_SED2, chi2_MASS, chi2
 
 ! write hi-precision output
 
 open(unit=iu, file="chi2_func.tmp", access="append")
 write(iu,*) (x_param(j), j = 1,nparam), &
   n_SKY, n_RV, n_TTV, n_ECL, n_VIS, n_CLO, n_T3, n_LC, n_SYN, n_SED, &
-  n_AO, n_AO2, n_SKY2, n_SKY3, n_OCC, n_fit, &
+  n_AO, n_AO2, n_SKY2, n_SKY3, n_OCC, n_SED2, n_fit, &
   chi2_SKY, chi2_RV, chi2_TTV, chi2_ECL, chi2_VIS, chi2_CLO, chi2_T3, &
   chi2_LC, chi2_SYN, chi2_SED, chi2_AO, chi2_AO2, chi2_SKY2, chi2_SKY3, &
-  chi2_OCC, chi2_MASS, chi2
+  chi2_OCC, chi2_SED2, chi2_MASS, chi2
 close(iu)
 
 chi2_func = chi2

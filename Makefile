@@ -99,6 +99,7 @@ obj = \
   chi2/chi2_func_LC.o \
   chi2/chi2_func_RV.o \
   chi2/chi2_func_SED.o \
+  chi2/chi2_func_SED2.o \
   chi2/chi2_func_SKY.o \
   chi2/chi2_func_SKY2.o \
   chi2/chi2_func_SKY3.o \
@@ -113,6 +114,7 @@ obj = \
   chi2/read_LC.o \
   chi2/read_RV.o \
   chi2/read_SED.o \
+  chi2/read_SED2.o \
   chi2/read_SKY.o \
   chi2/read_SKY2.o \
   chi2/read_SYN.o \
@@ -348,6 +350,7 @@ obj90 = \
   psf/realft2.o \
   psf/convolve.o \
   psf/convolve_fft.o \
+  chi2/lite.o \
   chi2/read_ephemeris.o \
   chi2/read_AO.o \
   chi2/read_LC2.o \

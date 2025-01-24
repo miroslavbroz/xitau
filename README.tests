@@ -1,0 +1,13 @@
+
+Tests in test_* directories were run during the development.
+
+However, it is NOT guaranteed that all tests will run with
+the current version of Xitau; I'm sorry! Sometimes, it is
+necessary to adjust the input files, e.g., chi2.in, which has
+a different format -- e.g., m1, m2, m3 vs. mtot, q1, q2;
+or additional parameters -- e.g., spectral_slope, use_zero.
+
+Please, see:
+
+  git log
+

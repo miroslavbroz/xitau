@@ -1,4 +1,21 @@
 
+Correction of the light-time effect!
+Correction of '-' sign in TTV, LC.
+Removal of incorrect 'lite12' term.
+Consistent lite for all datasets.
+Other coordinates (rh, rp, rp3) also with lite. 
+Elements for a specific geometry.
+Shift z (not only vz) by gamma.^1
+Correction of luminosity in SED.
+SED2 for individual components.^2
+Gnuplotting.
+
+--
+^1 Periods are no longer synodic, but sideric.
+^2 Doesn't work together with SED.
+
+--
+
 Note: A shift of the 2nd orbit was due to shifted photocentre (Rstar2 = 1.0 was too big)!
 
 Rstar1, Rstar2 should represent real radii, i.e., the shape

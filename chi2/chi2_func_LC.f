@@ -39,7 +39,7 @@ c internal variables
       real*8 vxh_interp, vyh_interp, vzh_interp
       real*8 mag_interp, chi2_
       real*8 X(3), Y(3), Z(3), V(3), O(3), O_EB(3)
-      real*8 mu, dt, LITE, LITE12
+      real*8 mu, dt, lite, lite12
       real*8 zb1, zb2, zb_interp, zb_interp0
       real*8 x1, y1, z1, vx1, vy1, vz1
       real*8 x2, y2, z2, vx2, vy2, vz2
@@ -164,7 +164,7 @@ c use an average of keplerian drift from two neighbouring points.
 c 
 
 c barycenter at T0
-        zb_interp0 = (rb(NOUT2,1,3)*m(1)+rb(NOUT2,2,3)*m(2))/(m(1)+m(2))
+c        zb_interp0 = (rb(NOUT2,1,3)*m(1)+rb(NOUT2,2,3)*m(2))/(m(1)+m(2))
  
         j = 2
         do i = 1, m_BIN(k)
@@ -175,13 +175,14 @@ c barycenter at T0
 
 c account for light-time effect due to external bodies
 
-          zb1 = interp(tout(j-1), tout(j), rb(j-1,1,3), rb(j,1,3),
-     :      t_BIN(i,k))
-          zb2 = interp(tout(j-1), tout(j), rb(j-1,2,3), rb(j,2,3),
-     :      t_BIN(i,k))
-          zb_interp = (zb1*m(1)+zb2*m(2)) / (m(1)+m(2))  ! barycenter of 1+2 body, z coordinate
- 
-          LITE = au_day(zb_interp - zb_interp0)
+c          zb1 = interp(tout(j-1), tout(j), rb(j-1,1,3), rb(j,1,3),
+c     :      t_BIN(i,k))
+c          zb2 = interp(tout(j-1), tout(j), rb(j-1,2,3), rb(j,2,3),
+c     :      t_BIN(i,k))
+c          zb_interp = (zb1*m(1)+zb2*m(2)) / (m(1)+m(2))  ! barycenter of 1+2 body, z coordinate
+c 
+c          lite = au_day(zb_interp - zb_interp0)
+          lite = 0.d0
  
           mu = m(1)+m(2)
           x1 = rh(j-1,2,1)
@@ -190,8 +191,9 @@ c account for light-time effect due to external bodies
           vx1 = vh(j-1,2,1)
           vy1 = vh(j-1,2,2)
           vz1 = vh(j-1,2,3)
-          LITE12 = -au_day(z1)
-          dt = t_BIN(i,k) - (tout(j-1) + LITE + LITE12)
+c          lite12 = -au_day(z1)
+          lite12 = 0.d0
+          dt = t_BIN(i,k) - (tout(j-1) + lite + lite12)
           call drift_one(mu, x1, y1, z1, vx1, vy1, vz1, dt, iflg)
 
 c positive timespan -> negative velocities
@@ -201,8 +203,9 @@ c positive timespan -> negative velocities
           vx2 = -vh(j,2,1)
           vy2 = -vh(j,2,2)
           vz2 = -vh(j,2,3)
-          LITE12 = -au_day(z2)
-          dt = tout(j) + LITE + LITE12 - t_BIN(i,k)
+c          lite12 = -au_day(z2)
+          lite12 = 0.d0
+          dt = tout(j) + lite + lite12 - t_BIN(i,k)
           call drift_one(mu, x2, y2, z2, vx2, vy2, vz2, dt, iflg)
 c
 c compute true phase and inclination (i.e. NOT usual mean phase)

@@ -2,7 +2,7 @@ c chi2_func_TTV.f
 c Calculate chi^2 for transit-timing variations.
 c Miroslav Broz (miroslav.broz@email.cz), Jul 24th 2015
 
-      subroutine chi2_func_TTV(NOUT, NOUT2, m, tout, rh, rb,
+      subroutine chi2_func_TTV(NOUT, NOUT2, m, tout, rh,
      :  nmin, tmin, duration, chi2, n)
 
       implicit none
@@ -14,7 +14,7 @@ c input
       integer NOUT,NOUT2
       real*8 m(NBODMAX)
       real*8 tout(OUTMAX)
-      real*8 rh(OUTMAX,NBODMAX,3), rb(OUTMAX,NBODMAX,3)
+      real*8 rh(OUTMAX,NBODMAX,3)
 
 c output
       integer nmin
@@ -34,7 +34,6 @@ c internal variables
       real*8 A(2), B(2), C_(2), t_, dmax, v, d
       logical extra
       real*8 t_of_closest,OMC
-      real*8 LITE, LITE12, zb1, zb2, zb_interp, zb_interp0, zh2
       real*8 vx, vy
 
 c functions
@@ -65,7 +64,7 @@ c
 
 c-----------------------------------------------------------------------
 c
-c  chi^2 for the transit-timing variations second
+c  chi^2 for the transit-timing variations
 c
 
 c find ALL synthetic minima of the eclipsing binary
@@ -129,39 +128,13 @@ c     :          "minimum. d = ", d, " AU, dmax = ", dmax, " AU"
         close(iu)
       endif
 
-c barycenter at T0
-      zb_interp0 = (rb(NOUT2,1,3)*m(1)+rb(NOUT2,2,3)*m(2))/(m(1)+m(2))
-
       if (debug_swift) then
         write(*,*) "# nmin = ", nmin
 
         open(unit=iu,file="minima.dat",status="unknown")
-        write(iu,*) "# Min JD (without LITE) & eclipsed [1|2]",
-     :    " & LITE [d] & LITE12 [d]"
-
-        j = 2
+        write(iu,*) "# Min JD (without LITE) & eclipsed [1|2]"
         do i = 1, nmin
-          t_of_closest = tmin(i)
-
-          do while ((j.lt.NOUT).and.(tout(j).le.t_of_closest))
-            j = j+1
-          enddo
-
-c light-time effect for all of them
-          zb1 = interp(tout(j-1), tout(j), rb(j-1,1,3), rb(j,1,3),
-     :      t_of_closest)
-          zb2 = interp(tout(j-1), tout(j), rb(j-1,2,3), rb(j,2,3),
-     :      t_of_closest)
-          zb_interp = (zb1*m(1)+zb2*m(2)) / (m(1)+m(2))  ! barycenter of 1+2 body, z coordinate
-
-          LITE = au_day(zb_interp - zb_interp0)
-
-          zh2 = interp(tout(j-1), tout(j), rh(j-1,2,3), rh(j,2,3),
-     :      t_of_closest)
-
-          LITE12 = -au_day(zh2)
-
-          write(iu,*) tmin(i), eclipsed(i), LITE, LITE12
+          write(iu,*) tmin(i), eclipsed(i)
         enddo
         close(iu)
       endif
@@ -169,7 +142,7 @@ c light-time effect for all of them
       if (debug) then
         open(unit=iu,file="chi2_TTV.dat",status="unknown")
         write(iu,*) "# t_TTV & t_of_closest [JD] & ",
-     :    "O-C (with LITE) [day] & LITE & sigmat_TTV & chi^2"
+     :    "O-C (with LITE) [day] & sigmat_TTV & chi^2"
       endif
 
       chi2 = 0.d0
@@ -177,7 +150,6 @@ c light-time effect for all of them
 
       if (nmin.ge.2) then
 
-        j = 2
         k = 2
         do i = 1, m_TTV
 
@@ -193,52 +165,15 @@ c find the closest synthetic minimum to the observed one
             t_of_closest = tmin(k-1)
           endif
 
-          do while ((j.lt.NOUT).and.(tout(j).le.t_of_closest))
-            j = j+1
-          enddo
-
-c light-time effect due to external bodies
-
-          zb1 = interp(tout(j-1), tout(j), rb(j-1,1,3), rb(j,1,3),
-     :      t_of_closest)
-          zb2 = interp(tout(j-1), tout(j), rb(j-1,2,3), rb(j,2,3),
-     :      t_of_closest)
-          zb_interp = (zb1*m(1)+zb2*m(2)) / (m(1)+m(2))  ! barycenter of 1+2 body, z coordinate
-
-          LITE = au_day(zb_interp - zb_interp0)
-
-c and also due to EB itself!
-c when the secondary is behind primary (zh2 positive),
-c it's apparent position is delayed
-c and the synthetic minimum occurs earlier
-          zh2 = interp(tout(j-1), tout(j), rh(j-1,2,3), rh(j,2,3),
-     :      t_of_closest)
-
-          LITE12 = -au_day(zh2)
-
-          t_of_closest = t_of_closest + LITE + LITE12
-
           OMC = t_TTV(i)-t_of_closest
-c          write(*,*) "# t_TTV(", i, ") = ", t_TTV(i)
-c          write(*,*) "# tmin(", k-1, ") = ", tmin(k-1)
-c          write(*,*) "# tmin(", k, ") = ", tmin(k)
-c          write(*,*) "# LITE = ", LITE
-c          write(*,*) "# LITE12 = ", LITE12
-c          write(*,*) "# t_of_closest = ", t_of_closest
-c          write(*,*) "# OMC = ", OMC
-c          write(*,*) ""
-c          if (abs(OMC).gt.3.d0) then
-c            stop
-c          endif
-
           chi2_ = (OMC/sigmat_TTV(i))**2
           lns = lns + log(sigmat_TTV(i))
           chi2 = chi2 + chi2_
           n = n + 1
 
           if (debug) then
-            write(iu,*) t_TTV(i), t_of_closest, OMC, LITE + LITE12,
-     :        sigmat_TTV(i), chi2_
+            write(iu,*) t_TTV(i), t_of_closest, OMC, sigmat_TTV(i),
+     :        chi2_
           endif
 
         enddo

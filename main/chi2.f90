@@ -53,17 +53,6 @@ enddo
 !
 call read_dependent()
 
-! gnuplot
-if (debug) then
-  open(unit=10,file="T0.plt",status="unknown")
-  write(10,*) "T0 = ", T0
-  do i = 1, nparam
-    write(str,*) i
-    write(10,*) "x_param", adjustl(trim(str)) ," = ", x_param(i)
-  enddo
-  close(10)
-endif
-
 ! calculate chi^2 and the corresponding probability
 ndim = nparam
 do i = 1, nparam
@@ -102,6 +91,7 @@ write(*,*) '# chi2_AO2  = ', chi2_AO2
 write(*,*) '# chi2_SKY2 = ', chi2_SKY2
 write(*,*) '# chi2_SKY3 = ', chi2_SKY3
 write(*,*) '# chi2_OCC  = ', chi2_OCC
+write(*,*) '# chi2_SED2 = ', chi2_SED2
 write(*,*) '# chi2_MASS = ', chi2_MASS
 write(*,*) '# chi2 = ', chi2
 write(*,*) '# lns = ', lns
@@ -110,6 +100,18 @@ write(*,*) '# nparam = ', nparam
 write(*,*) '# nu = ', int(nu)
 write(*,*) '# probp = ', probp
 write(*,*) '# probq = ', probq
+
+! gnuplot
+if (debug) then
+  open(unit=10,file="T0.plt",status="unknown")
+  write(10,*) "T0 = ", T0
+  do i = 1, nparam
+    write(str,*) i
+    write(10,*) "x_param", adjustl(trim(str)) ," = ", x_param(i)
+  enddo
+  write(10,*) "d_pc = ", d_pc
+  close(10)
+endif
 
 call cpu_time(t2)
 

@@ -1,23 +1,31 @@
 #!/usr/bin/gnuplot
 
 set colors classic
+#set terminal wxt font "Monospace,10"
 #set term x11
 
 c = 3.e8  # m s^-1
 km = 1.e3  # m
 nm = 1.e-9  # m
 ang = 1.e-10/nm  # nm
-shift = 0.25
-#shift = 0.125
+shift = 0.100
 
-set xl "lambda [nm]"
-set yl "I_lambda [] (shifted by 1/4 dataset number)"
+#set xl "lambda [nm]"
+#set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
 #tmp=5.; set xr [501.6-tmp:501.6+tmp]
-#set yr [0.60:1.05]
-set ytics shift
-set mytics 1
-set grid ytics mytics
+#set xr [462.6:472.0]
+#set yr [1.8:2.05]
+
+#set xr [484.5:488.3]
+#set yr [1.65:2.02]
+
+#set xr [652.28:659.9]
+#set yr [1.71:2.05]
+
+#set ytics shift
+#set mytics 1
+#set grid ytics mytics
 set zeroaxis
 set bar 0.5
 set key outside font "Helvetica,8" width -3

@@ -1,16 +1,61 @@
 ! chi2.inc
 ! Include file for chi2 subroutines.
-! Miroslav Broz (miroslav.broz@email.cz), Nov 14th 2022
+! Miroslav Broz (miroslav.broz@email.cz), Jan 21st 2025
 
       integer ndim, nparam
-      integer n_SKY, n_TTV, n_RV, n_ECL, n_VIS, n_CLO,                  &
-     &  n_T3, n_LC, n_SYN, n_SED, n_AO, n_SKY2, n_SKY3, n_OCC, n_AO2,   &
+      integer                                                           &
+     &  n_SKY,                                                          &
+     &  n_TTV,                                                          &
+     &  n_RV,                                                           &
+     &  n_ECL,                                                          &
+     &  n_VIS,                                                          &
+     &  n_CLO,                                                          &
+     &  n_T3,                                                           &
+     &  n_LC,                                                           &
+     &  n_SYN,                                                          &
+     &  n_SED,                                                          &
+     &  n_AO,                                                           &
+     &  n_SKY2,                                                         &
+     &  n_SKY3,                                                         &
+     &  n_OCC,                                                          &
+     &  n_AO2,                                                          &
+     &  n_SED2,                                                         &
      &  n_fit
-      real*8 chi2_SKY, chi2_TTV, chi2_RV, chi2_ECL, chi2_VIS, chi2_CLO, &
-     &  chi2_T3, chi2_LC, chi2_SYN, chi2_SED, chi2_AO, chi2_SKY2,       &
-     &  chi2_SKY3, chi2_OCC, chi2_AO2, chi2_MASS
-      real*8 w_SKY, w_TTV, w_RV, w_ECL, w_VIS, w_CLO,                   &
-     &  w_T3, w_LC, w_SYN, w_SED, w_AO, w_SKY2, w_SKY3, w_OCC, w_AO2
+      real*8                                                            &
+     &  chi2_SKY,                                                       &
+     &  chi2_TTV,                                                       &
+     &  chi2_RV,                                                        &
+     &  chi2_ECL,                                                       &
+     &  chi2_VIS,                                                       &
+     &  chi2_CLO,                                                       &
+     &  chi2_T3,                                                        &
+     &  chi2_LC,                                                        &
+     &  chi2_SYN,                                                       &
+     &  chi2_SED,                                                       &
+     &  chi2_AO,                                                        &
+     &  chi2_SKY2,                                                      &
+     &  chi2_SKY3,                                                      &
+     &  chi2_OCC,                                                       &
+     &  chi2_AO2,                                                       &
+     &  chi2_SED2,                                                      &
+     &  chi2_MASS
+      real*8                                                            &
+     &  w_SKY,                                                          &
+     &  w_TTV,                                                          &
+     &  w_RV,                                                           &
+     &  w_ECL,                                                          &
+     &  w_VIS,                                                          &
+     &  w_CLO,                                                          &
+     &  w_T3,                                                           &
+     &  w_LC,                                                           &
+     &  w_SYN,                                                          &
+     &  w_SED,                                                          &
+     &  w_AO,                                                           &
+     &  w_SKY2,                                                         &
+     &  w_SKY3,                                                         &
+     &  w_OCC,                                                          &
+     &  w_AO2,                                                          &
+     &  w_SED2
 
       real*8 x_param(NDIMMAX)
       logical variable(NDIMMAX)
@@ -42,17 +87,45 @@
       real*8 spectral_slope
       real*8 eps_BS
 
-      character*80 file_SKY(NBODMAX), file_TTV, file_RV(NBODMAX),       &
-     &  file_ECL, file_VIS, file_CLO, file_LC(BANDMAX),                 &
-     &  file_SYN, file_synth(NBODMAX), file_SED, file_absol(NBODMAX),   &
-     &  file_AO, file_SKY2, file_SKY3, file_OCC, file_AO2
+      character*80                                                      &
+     &  file_SKY(NBODMAX),                                              &
+     &  file_TTV,                                                       &
+     &  file_RV(NBODMAX),                                               &
+     &  file_ECL,                                                       &
+     &  file_VIS,                                                       &
+     &  file_CLO,                                                       &
+     &  file_LC(BANDMAX),                                               &
+     &  file_SYN,                                                       &
+     &  file_synth(NBODMAX),                                            &
+     &  file_SED,                                                       &
+     &  file_absol(NBODMAX),                                            &
+     &  file_AO,                                                        &
+     &  file_SKY2,                                                      &
+     &  file_SKY3,                                                      &
+     &  file_OCC,                                                       &
+     &  file_AO2,                                                       &
+     &  file_SED2
 
-      logical use_planck, use_filters, use_limbdark, use_pyterpol
+      logical                                                           &
+     &  use_planck,                                                     &
+     &  use_filters,                                                    &
+     &  use_limbdark,                                                   &
+     &  use_pyterpol,                                                   &
+     &  use_vardist,                                                    &
+     &  use_varpole,                                                    &
+     &  use_multipole,                                                  &
+     &  use_bruteforce,                                                 &
+     &  use_oblat,                                                      &
+     &  use_tides,                                                      &
+     &  use_tides2,                                                     &
+     &  use_ppn,                                                        &
+     &  use_polygon,                                                    &
+     &  use_zero,                                                       &
+     &  use_adam,                                                       &
+     &  use_stellar,                                                    &
+     &  use_cliptrace
+
       logical use_hec88(NBODMAX)
-      logical use_vardist, use_varpole, use_multipole, use_bruteforce
-      logical use_oblat, use_tides, use_tides2, use_ppn
-      logical use_polygon, use_zero
-      logical use_adam, use_stellar, use_cliptrace
       logical is_forward
       logical debug, debug_swift
 
@@ -60,11 +133,39 @@
       integer, dimension(:,:), pointer :: facesforchi
 
       common /dependent/                                                &
-     &  chi2_SKY, chi2_TTV, chi2_RV, chi2_ECL, chi2_VIS, chi2_CLO,      &
-     &  chi2_T3, chi2_LC, chi2_SYN, chi2_SED, chi2_AO, chi2_SKY2,       &
-     &  chi2_SKY3, chi2_OCC, chi2_AO2, chi2_MASS,                       &
-     &  w_SKY, w_TTV, w_RV, w_ECL, w_VIS, w_CLO,                        &
-     &  w_T3, w_LC, w_SYN, w_SED, w_AO, w_SKY2, w_SKY3, w_OCC, w_AO2,   &
+     &  chi2_SKY,                                                       &
+     &  chi2_TTV,                                                       &
+     &  chi2_RV,                                                        &
+     &  chi2_ECL,                                                       &
+     &  chi2_VIS,                                                       &
+     &  chi2_CLO,                                                       &
+     &  chi2_T3,                                                        &
+     &  chi2_LC,                                                        &
+     &  chi2_SYN,                                                       &
+     &  chi2_SED,                                                       &
+     &  chi2_AO,                                                        &
+     &  chi2_SKY2,                                                      &
+     &  chi2_SKY3,                                                      &
+     &  chi2_OCC,                                                       &
+     &  chi2_AO2,                                                       &
+     &  chi2_SED2,                                                      &
+     &  chi2_MASS,                                                      &
+     &  w_SKY,                                                          &
+     &  w_TTV,                                                          &
+     &  w_RV,                                                           &
+     &  w_ECL,                                                          &
+     &  w_VIS,                                                          &
+     &  w_CLO,                                                          &
+     &  w_T3,                                                           &
+     &  w_LC,                                                           &
+     &  w_SYN,                                                          &
+     &  w_SED,                                                          &
+     &  w_AO,                                                           &
+     &  w_SKY2,                                                         &
+     &  w_SKY3,                                                         &
+     &  w_OCC,                                                          &
+     &  w_AO2,                                                          &
+     &  w_SED2,                                                         &
      &  x_param, variable, lns,                                         &
      &  T0,                                                             &
      &  R_star, T_eff, Lum,                                             &
@@ -87,20 +188,63 @@
      &  spectral_slope,                                                 &
      &  eps_BS,                                                         &
      &  nodesforchi, facesforchi,                                       &
-     &  file_SKY, file_TTV, file_RV, file_ECL, file_VIS, file_CLO,      &
-     &  file_LC, file_SYN, file_synth, file_SED, file_absol, file_AO,   &
-     &  file_SKY2, file_SKY3, file_OCC, file_AO2,                       &
-     &  ndim, nparam, nbod, nband, iband_LC, geometry,                  &
+     &  file_SKY,                                                       &
+     &  file_TTV,                                                       &
+     &  file_RV,                                                        &
+     &  file_ECL,                                                       &
+     &  file_VIS,                                                       &
+     &  file_CLO,                                                       &
+     &  file_LC,                                                        &
+     &  file_SYN,                                                       &
+     &  file_synth,                                                     &
+     &  file_SED,                                                       &
+     &  file_absol,                                                     &
+     &  file_AO,                                                        &
+     &  file_SKY2,                                                      &
+     &  file_SKY3,                                                      &
+     &  file_OCC,                                                       &
+     &  file_AO2,                                                       &
+     &  file_SED2,                                                      &
+     &  ndim, nparam,                                                   &
+     &  nbod, nband,                                                    &
+     &  iband_LC,                                                       &
+     &  geometry,                                                       &
      &  nshp, nsub,                                                     &
-     &  n_SKY, n_TTV, n_RV, n_ECL, n_VIS, n_CLO,                        &
-     &  n_T3, n_LC, n_SYN, n_SED, n_AO, n_SKY2, n_SKY3, n_OCC, n_AO2,   &
+     &  n_SKY,                                                          &
+     &  n_TTV,                                                          &
+     &  n_RV,                                                           &
+     &  n_ECL,                                                          &
+     &  n_VIS,                                                          &
+     &  n_CLO,                                                          &
+     &  n_T3,                                                           &
+     &  n_LC,                                                           &
+     &  n_SYN,                                                          &
+     &  n_SED,                                                          &
+     &  n_AO,                                                           &
+     &  n_SKY2,                                                         &
+     &  n_SKY3,                                                         &
+     &  n_OCC,                                                          &
+     &  n_AO2,                                                          &
+     &  n_SED2,                                                         &
      &  n_fit,                                                          &
-     &  use_planck, use_filters, use_limbdark, use_pyterpol,            &
+     &  use_planck,                                                     &
+     &  use_filters,                                                    &
+     &  use_limbdark,                                                   &
+     &  use_pyterpol,                                                   &
+     &  use_vardist,                                                    &
+     &  use_varpole,                                                    &
+     &  use_multipole,                                                  &
+     &  use_bruteforce,                                                 &
+     &  use_oblat,                                                      &
+     &  use_tides,                                                      &
+     &  use_tides2,                                                     &
+     &  use_ppn,                                                        &
+     &  use_polygon,                                                    &
+     &  use_zero,                                                       &
+     &  use_adam,                                                       &
+     &  use_stellar,                                                    &
+     &  use_cliptrace,                                                  &
      &  use_hec88,                                                      &
-     &  use_vardist, use_varpole, use_multipole, use_bruteforce,        &
-     &  use_oblat, use_tides, use_tides2, use_ppn,                      &
-     &  use_polygon, use_zero,                                          &
-     &  use_adam, use_stellar, use_cliptrace,                           &
      &  is_forward,                                                     &
      &  debug, debug_swift
 

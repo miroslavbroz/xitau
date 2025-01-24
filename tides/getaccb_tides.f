@@ -63,7 +63,7 @@ c compute tidal accelerations
 
       do i = 1, nbod_  ! "Earth"
 
-        if (Delta_t_(i).eq.0.d0) cycle
+        if (Delta_t(i).eq.0.d0) cycle
 
         do j = 1, nbod_  ! "Moon"
 
@@ -86,7 +86,7 @@ c compute tidal accelerations
                 omega_vec(2) = omega(i)*s(2,i)
                 omega_vec(3) = omega(i)*s(3,i)
         
-                call mignard(mass(j), capR(i), k_2(i), sgn*Delta_t_(i),
+                call mignard(mass(j), capR(i), k_2(i), sgn*Delta_t(i),
      :            r, v, r_dash, omega_vec, a)
             
                 call mignard_torque(mass(k), r_dash, a, T)

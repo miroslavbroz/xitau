@@ -7,14 +7,14 @@ nm = 1.e-9  # m
 km = 1.e3  # m
 c = 299792458.  # m/s
 ang = 1.e-10/nm  # nm
-shift = 0.25
-shift = 0.50
+shift = 0.050
 
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
-#set xr [500:504]
-set yr [2.6:3.1]
+tmp=5.0
+set xr [656.3-tmp:656.3+tmp]
+#set yr [2.6:3.1]
 set ytics shift
 set mytics 1
 set grid ytics mytics

@@ -53,7 +53,7 @@ set out "orbit4.png"
 set origin 0,0
 set size 1,1
 set multiplot
-set size 1.0,0.33
+set size 1,0.33
 set origin 0,0
 
 set xl "JD - 2400000"
