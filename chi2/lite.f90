@@ -2,6 +2,18 @@
 ! Light-time effect.
 ! Miroslav Broz (miroslav.broz@email.cz), Jan 21st 2025
 
+! +z     2 *...       t            
+!          |                       
+!          |          lite of 2 '-'
+!          V                       
+!  0       + c.o.m.   t_interp     
+!          ^                       
+!          |          lite of 1 '+'
+!          |                       
+! -z     1 *...       t            
+!                                  
+!     to observer                  
+
 module lite_module
 
 contains
@@ -24,7 +36,7 @@ integer :: i, j, k, l
 double precision :: lite_, delta, t_interp, zb
 
 ! functions
-double precision, external :: au_day, interp
+double precision, external :: au_day, extrap
 
 if (debug_swift) then
   open(unit=iu,file="lite.dat",status="unknown")
@@ -32,7 +44,7 @@ if (debug_swift) then
 endif
 
 k = 2
-do i = 2, nout-1
+do i = 1, nout
   do j = 1, nbod
     t_interp = tout(i)
 
@@ -46,18 +58,17 @@ do i = 2, nout-1
         k = k+1
       enddo
      
-      zb = interp(tout(k-1), tout(k), rb(k-1,j,3), rb(k,j,3), t_interp)
+      zb = extrap(tout(k-1), tout(k), rb(k-1,j,3), rb(k,j,3), t_interp)
 
-!      lite_ = au_day(zb)
-      lite_ = -au_day(zb)  ! A CORRECTION?!
+      lite_ = -au_day(zb)
       t_interp = tout(i) + lite_
       delta = abs(t_interp - tout(i) - lite_)
     enddo
 
 ! interpolate other coordinates
     do l = 1, 3
-      rl(i,j,l) = interp(tout(k-1), tout(k), rb(k-1,j,l), rb(k,j,l), t_interp)
-      vl(i,j,l) = interp(tout(k-1), tout(k), vb(k-1,j,l), vb(k,j,l), t_interp)
+      rl(i,j,l) = extrap(tout(k-1), tout(k), rb(k-1,j,l), rb(k,j,l), t_interp)
+      vl(i,j,l) = extrap(tout(k-1), tout(k), vb(k-1,j,l), vb(k,j,l), t_interp)
     enddo
 
     if (debug_swift) then
@@ -71,11 +82,7 @@ if (debug_swift) then
   close(iu)
 endif
 
-! Note: lite is NOT computed for the 1st and last points.
-rl(1,:,:) = rb(1,:,:)
-vl(1,:,:) = vb(1,:,:)
-rl(nout,:,:) = rb(nout,:,:)
-vl(nout,:,:) = vb(nout,:,:)
+! Note: lite is extrapolated for a few 1st and last points!
 
 return
 end subroutine lite

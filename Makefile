@@ -43,6 +43,7 @@ obj = \
   misc/bessj32.o \
   misc/dotprod.o \
   misc/eps_earth.o \
+  misc/extrap.o \
   misc/gammln.o \
   misc/gammp.o \
   misc/gammq.o \

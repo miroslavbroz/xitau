@@ -8,20 +8,13 @@ c = 3.e8  # m s^-1
 km = 1.e3  # m
 nm = 1.e-9  # m
 ang = 1.e-10/nm  # nm
-shift = 0.100
+shift = 0.025
 
-#set xl "lambda [nm]"
-#set yl "I_lambda [] (shifted by 1/4 dataset number)"
+set xl "lambda [nm]"
+set yl "I_lambda [1] (shifted by dataset number)"
 
-#tmp=5.; set xr [501.6-tmp:501.6+tmp]
-#set xr [462.6:472.0]
-#set yr [1.8:2.05]
-
-#set xr [484.5:488.3]
-#set yr [1.65:2.02]
-
-#set xr [652.28:659.9]
-#set yr [1.71:2.05]
+#tmp=5.; set xr [656.3-tmp:656.3+tmp]
+set xr [650.0:660.0]
 
 #set ytics shift
 #set mytics 1
@@ -29,7 +22,7 @@ shift = 0.100
 set zeroaxis
 set bar 0.5
 set key outside font "Helvetica,8" width -3
-set tmargin 2.0
+set tmargin 3.0
 
 call "line.plt" "Halpha" 6562.81
 call "line.plt" "Hbeta"  4861
