@@ -14,7 +14,7 @@ set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
 tmp=5.0
 set xr [656.3-tmp:656.3+tmp]
-#set yr [2.6:3.1]
+set yr [0.6:1.6]
 set ytics shift
 set mytics 1
 set grid ytics mytics

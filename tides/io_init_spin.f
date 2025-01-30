@@ -45,6 +45,9 @@ c  main
 
       close(unit = 7)
       write(*,*) ' '
+
+      write(*,*) "# Warning: s will be overwritten by pole_l, pole_b!"
+
       return
 
 99    continue

@@ -21,7 +21,7 @@ if (ierr.gt.0) then
   stop
 endif
 
-read(10,*) nnodes, ndim, dummy, dummy
+read(10,*,err=900,end=900) nnodes, ndim, dummy, dummy
 if (ndim.ne.3) then
   write(*,'(a,a)') '# Error: Only 3D nodes are supported in file ', f_node 
   stop

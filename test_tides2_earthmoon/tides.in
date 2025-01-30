@@ -1,0 +1,17 @@
+2
+
+6378.173	0.3	638.	8.008e37	! Earth
+1737.5		0.3	0.	2.5e35		! Moon
+
+1.d0		! dtspin [day], it should be an integer number of dt (see param.in)
+1.d0		! dtspinout [day]
+spin.out
+F		! use_tides [T|F]
+F		! debug_spin [T|F]
+
+! npl
+! capR [km] radius & k_2 [] Love number & Delta_t [sec] time lag & I [kg m^2] moment of inertia
+
+! https://scienceworld.wolfram.com/physics/MomentofInertiaEarth.html
+! chatgpt.com
+

@@ -18,8 +18,9 @@ set nokey
 
 #tmp=1.0e-5
 #tmp=40.0
-tmp=0.15
+#tmp=0.15
 #tmp=1.0
+tmp=0.0025
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zr [-tmp:tmp]

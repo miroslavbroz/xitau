@@ -330,7 +330,7 @@ class SyntheticSpectrum:
         :param fmt: format
 
         """
-        header = str(self.props.keys())
+        header = str(self.props)
         np.savetxt(f, np.column_stack([self.wave, self.intens]), fmt=fmt, header=header)
 
     def measure_spectrum(self):

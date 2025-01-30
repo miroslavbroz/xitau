@@ -1,0 +1,10 @@
+2
+
+0.	0.	1.	 6.28318530717959 	! Earth
+0.	0.	1.	 0.229900669856553	! Moon
+
+! nbod
+! sx, sy, sz [] spin axis unitvector & omega [rad/day] spin rate
+
+! Warning: \vec s will be overwritten by pole_l, pole_b!
+

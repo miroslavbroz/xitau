@@ -355,16 +355,16 @@ if (i1st.eq.0) then
   call io_init_tides("tides.in", nbod)
   call io_init_tides2("tides2.in", nbod)
 
-! save values from spin.in
-  do i = 1, nbod
-    omega0(i) = omega(i)
-  enddo
-
-! read shape
+! init shape
   if (nshp.gt.0) then
     call read_node("input.node", nodesforchi)
     call read_face("input.face", facesforchi)
   endif
+
+! save values from spin.in
+  do i = 1, nbod
+    omega0(i) = omega(i)
+  enddo
 
   i1st = 1
 endif
@@ -375,6 +375,12 @@ do i = 1, nbod
   s0(i,2) = sin(pole_l(i))*cos(pole_b(i))
   s0(i,3) = sin(pole_b(i))
 enddo
+
+if (debug_swift) then
+  do i = 1, nbod
+    write(*,*) '# s0(', i, ') = ', s0(i,:)
+  enddo
+endif
 
 !-----------------------------------------------------------------------
 

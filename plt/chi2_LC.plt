@@ -29,6 +29,7 @@ set cbl "JD - 2400000"
 
 load "T0.plt"
 
+#tmp=0.2; set xr [T0-2400000-tmp:T0-2400000+tmp]
 set yr [:] reverse
 #set ytics shift
 set grid ytics
@@ -37,10 +38,22 @@ set mouse format "%.6f"
 set palette rgbformulae 33,13,10
 
 set arrow from T0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
-set arrow from jd0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
-set arrow from jd1-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
-set arrow from jd2-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
-set arrow from jd3-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+#set arrow from jd0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+#set arrow from jd1-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+#set arrow from jd2-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+#set arrow from jd3-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+
+# from Omc12.dat_tdb:
+set arrow from 2456224.72474826-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+set arrow from 2456228.30177255-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+set arrow from 2456231.86899621-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+set arrow from 2456235.44584543-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+set arrow from 2459147.70172873-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+set arrow from 2459151.27557915-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+set arrow from 2459154.84385145-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+set arrow from 2459161.98563354-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+set arrow from 2459165.55942638-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
+set arrow from 2459169.12716193-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
 
 p \
   "chi2_LC.dat"    u ($1-2400000):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\

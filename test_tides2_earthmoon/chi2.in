@@ -1,0 +1,112 @@
+# chi2.in
+# nparam number of paramters
+# x() vector:
+#
+#  msum q1 q2 q3
+#  P1 loge1 i1 Omega1 varpi1 lambda1
+#  P2 loge2 i2 Omega2 varpi2 lambda2
+#  P3 loge3 i3 Omega3 varpi3 lambda3
+#  Teff (nbod)
+#  logg (nbod)
+#  vrot (nbod)
+#  metal (nbod)
+#  Delta_t (nbod)
+#  C20 (nbod)
+#  pole_l (nbod)
+#  pole_b (nbod)
+#  phi0 (nbod)
+#  albedo (nbod)
+#  scattering (4)
+#  psf_param (2)
+#  zero (nband)
+#  gamma
+#  d_pc
+#
+#  ...
+36
+
+3.0e-6   0.0125
+27.33    0.0    0.0   0.0   0.0   0.0
+300.0    300.0
+2.97786524703297   2.21085336531489
+0.463833829632518  0.00462329182726575
+0.0      0.0
+638.0    0.0
+0.0      0.0
+0.0      0.0
+90.0     90.0
+0.0      0.0
+0.0      0.0
+0.0      0.0    0.0    0.0
+0.0      0.0
+0.0
+100.0
+
+0.0		! fixed (dependent) parameters: T0 [JD];
+
+0			! nshp - number of shape parameters
+
+2			! nbod number of bodies; a list of 2*nbod+4 files with observational data (or '-' if no data)...
+-Speckle1.dat
+-Speckle2.dat
+-RV1.dat_tdb
+-RV2.dat_tdb
+-Omc12.dat_tdb
+-Ecl12.dat_tdb
+-Vis.dat
+-Clo.dat
+-Spectra.dat
+-1.syn
+-2.syn
+-Sed.dat
+-1.abs
+-2.abs
+-AO1.dat
+-AO2.dat
+-Sky_differential.dat
+-Sky_angularvelocity.dat
+-Occ.dat
+-Sed2.dat
+
+0			! nband number of photometric bands; a list of bands and lightcurve files
+  
+3                       ! geometry of the system: 0 ... hierarchical ((1+2)+3)+4, 1 ... two pairs ((1+2)+(3+4))+5
+
+0.0 0.0 0.0 0.0		! m_min(nbod) [M_S] minimum masses
+10.0 10.0 10.0 10.0	! m_max(nbod) [M_S] maximum masses
+F F F F			! use_hec88(nbod) use Harmanec (1988) to constrain components (i.e. use only T_eff as a parameter!)
+
+0.005			! lightcurve_timestep [day] timestep of synthetic lightcurve; set to 0.0 if all observed points should be computed
+0.100			! approx_eclipse_duration [day] approximate eclipse duration for eclipse detection
+420.e-9 910.e-9		! lambda1 lambda2 [metres] wavelength range for rectified synthetic spectra
+301.e-9 2700.e-9	! lambda3 lambda4 [metres] range for absolute spectra (to fit SED)
+0.0 0.0 0.0 0.0         ! pyterpol_Delta for Teff, logg, vrot, metal [K,1,km/s,1]
+
+0.2			! silh_factor [] signal = factor*max(signal) to compute a silhouette
+0.0                     ! spectral_slope [1] reflectance = 1.0 + slope*(lambda_eff/mu-0.55) to compute LC
+0                       ! nsub number of sub-divisions
+
+T			! use_planck [T|F] use Planck approximation; otherwise use absolute synthetic spectra (*.abs files)
+F			! use_filters [T|F] use filter transmissions to compute SED; otherwise use effective wavelengths and bandpasses
+F			! use_limbdark [T|F] use linear limb-darkening coefficients for visibility |V|^2 calculation
+F			! use_pyterpol [T|F] use Pyterpol (Nemravova et al. 2016) to generate synthetic spectra on-the-fly
+F			! use_vardist [T|F] use variable distance/geometry (in solar system)
+F			! use_varpole [T|F] use variable pole of body 1 (in solar system)
+F			! use_multipole [T|F] use multipole expansion of body 1
+F			! use_bruteforce [T|F] use shape of body 1 and brute-force algorithm
+F                       ! use_oblat [T|F] use oblateness (Fabrycky 2010)			!
+T                       ! use_tides [T|F] use tides (Mignard 1979)				!
+F                       ! use_tides2 [T|F] use external tides					!
+F                       ! use_ppn [T|F] use parametrized post-Newtonian approximation
+F                       ! use_polygon [T|F] use lc_polygon to compute the lightcurve (instead of wd)!
+F                       ! use_zero [T|F] use analytical zero-point(s) to the lightcurve(s)	!	
+F                       ! use_adam [T|F] use adam-like synthetic images, u. lc_polygon		!
+F                       ! use_stellar [T|F] use stellar.pnm as PSF; otherwise use Moffat	!	
+F                       ! use_cliptrace [T|F] use cliptrace instead of raytrace			!
+
+1.0 1.0 1.0 1.0   1.0 1.0 1.0   1.0 1.0 1.0   1.0 1.0 1.0 1.0 1.0 1.0	! w_SKY w_RV w_TTV w_ECL   w_VIS w_CLO w_T3   w_LC w_SYN w_SED   w_AO w_AO2 w_SKY2 w_SKY3 w_OCC w_SED2 weights for chi^2 computation
+1.e-12			! eps_BS for Bulirsch-Stoer integrator
+T			! debugging output?
+T			! debug integrator?
+
+

@@ -91,8 +91,10 @@ c compute tidal accelerations
             
                 call mignard_torque(mass(k), r_dash, a, T)
 
+c                write(*,*) 'omega_vec = ', omega_vec
 c                write(*,*) i,j,k,a
 c                write(*,*) i,j,k,T
+c                stop
 
                 do l = 1, 3
                   a_tides(l,k) = a_tides(l,k) + a(l)  ! the acceleration is acting on the k-th body

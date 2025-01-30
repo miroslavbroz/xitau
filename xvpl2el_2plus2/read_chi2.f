@@ -1,1 +1,0 @@
-../xvpl2el/read_chi2.f

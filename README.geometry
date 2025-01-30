@@ -1,14 +1,18 @@
 
 Summary of geometries.f:
 
-  0 .. hierarchical ((1+2)+3)+4      a,e,i,Omega,omega,M
-  1 .. two pairs    ((1+2)+(3+4))+5  a,e,i,Omega,omega,M
-  2 .. 1-centric    1+2+3+4          x,y,z,vx,vy,vz
+  0 .. hierarch     ((1+2)+3)+4      a,e,i,Omega,omega,M          ^1
+  1 .. twopairs     ((1+2)+(3+4))+5  a,e,i,Omega,omega,M          ^1
+  2 .. 1centric     1+2+3+4          x,y,z,vx,vy,vz
   3 .. ecliptic     ((1+2)+3)+4      P,e,i,Omega,omega,M
-  4 .. hierarchical ((1+2)+3)+4      P,loge,i,Omega,varpi,lambda
-  5 .. twopairs     ((1+2)+(3+4))+5  P,loge,i,Omega,varpi,lambda
-  6 .. equatorial   ((1+2)+3)+4      P,e,i,Omega,omega,M
-  7 .. hierarchical ((1+2)+3)+4      P,e,i,Omega,omega,M
+  4 .. hierarch2    ((1+2)+3)+4      P,loge,i,Omega,varpi,lambda  ^1
+  5 .. twopairs2    ((1+2)+(3+4))+5  P,loge,i,Omega,varpi,lambda  ^1
+  6 .. equatorial   ((1+2)+3)+4      P,e,i,Omega,omega,M          ^2
+  7 .. periods      ((1+2)+3)+4      P,e,i,Omega,omega,M          ^1
+
+--
+^1 standard stellar-astronomy coordinates
+^2 rotated by ~ 23.5 deg
 
 --
 

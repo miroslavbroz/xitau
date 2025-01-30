@@ -12,7 +12,7 @@ set y2l "lite [day]"
 set ytics nomirror
 set y2tics
 
-#tmp=0.0035; set yr [-tmp:tmp]
+tmp=0.0035; set yr [-tmp:tmp]
 #set xr [56000:60500]
 set zeroaxis
 set key left

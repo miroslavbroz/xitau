@@ -21,7 +21,7 @@ if (ierr.gt.0) then
   stop
 endif
 
-read(10,*) nfaces, dummy
+read(10,*,err=900,end=900) nfaces, dummy
 
 allocate(faces(nfaces,3))
 

@@ -207,7 +207,7 @@ obj = \
   wd/spot.o \
   wd/surfas.o \
   wd/volume.o \
-  xvpl2el/nula2pi.o \
+  xv2el/nula2pi.o \
   sofa/cal2jd.o \
   sofa/dat.o \
   sofa/dtdb.o \

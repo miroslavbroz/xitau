@@ -1,4 +1,6 @@
 
+  7 .. barycentric  1+2+3+4          x,y,z,vx,vy,vz
+
 Correction of the light-time effect!
 Correction of '-' sign in TTV, LC.
 Removal of incorrect 'lite12' term.
