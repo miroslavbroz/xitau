@@ -10,9 +10,9 @@ c Miroslav Broz (miroslav.broz@email.cz), May 23rd 2016
 
       character*(*) filename
       integer N
-      real*8 t(OBSMAX), lambda(OBSMAX), Int_lambda(OBSMAX),
-     :  sigma_Int(OBSMAX)
-      integer dataset(OBSMAX)
+      real*8 t(SYNMAX), lambda(SYNMAX), Int_lambda(SYNMAX),
+     :  sigma_Int(SYNMAX)
+      integer dataset(SYNMAX)
       integer i,length,ierr
       character*255 str
 
@@ -34,12 +34,12 @@ c Miroslav Broz (miroslav.broz@email.cz), May 23rd 2016
 10      format(a)
         if ((str(1:1).ne."#").and.(length(str).gt.0)) then
           i = i+1
-          if (i.le.OBSMAX) then
+          if (i.le.SYNMAX) then
             read(str,*,err=20,end=20) t(i), lambda(i), Int_lambda(i),
      :        sigma_Int(i), dataset(i)
           else
             write(*,*) "read_SYN.f: Error number of observations",
-     :        " .gt. OBSMAX = ", OBSMAX
+     :        " .gt. SYNMAX = ", SYNMAX
             stop
           endif
          endif

@@ -7,14 +7,14 @@ set yl "temperature"
 
 set xr [0:10000]
 set logscale y
-set mytics 10
+set ytics 10
 #set yr [0.1:]
 set grid
 set samples 1000
 
 nparam = 0
-temptr = 1000000.
-iter_at_temp = 100
+iter_at_temp = 50
+temptr = 10000.
 eps_temptr = 0.10
 
 p "<awk 'BEGIN{ itertot = 0; }/# itertot/{ itertot = $4; }/# temptr/{ print itertot, $4; }' simann.out"  u 1:2 not w lp,\

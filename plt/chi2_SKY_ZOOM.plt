@@ -21,7 +21,7 @@ set ang rad
 
 load "T0.plt"
 
-d_pc = x_param56
+#d_pc = x_param56
 #d_pc = x_param57
 #d_pc = x_param58
 f(x) = x*arcsec*(d_pc*pc)/au
@@ -55,7 +55,7 @@ p \
 
 pa -1
 
-set term png small
+set term png small size 2048,2048
 set out "chi2_SKY_ZOOM.png"
 rep
 

@@ -1,5 +1,7 @@
 #!/usr/bin/gnuplot
 
+load "T0.plt"
+
 set term x11
 
 #day = 1440.  # min
@@ -12,13 +14,13 @@ set y2l "lite [day]"
 set ytics nomirror
 set y2tics
 
+set xr [56000:60500]
+#set xr [T0-2400000-10:T0-2400000+40]
 tmp=0.0035; set yr [-tmp:tmp]
-#set xr [56000:60500]
 set zeroaxis
 set key left
 set palette rgbformulae 33,13,10
 
-load "T0.plt"
 set arrow from T0-2400000,graph 0 to T0-2400000,graph 1 nohead lt 0
 
 p "minima.dat" u ($1-2400000):(0.0) t "synthetic minima (primary and secondary)" w p lc 'gray' pt 1 ps 1.0,\
@@ -29,7 +31,8 @@ p "minima.dat" u ($1-2400000):(0.0) t "synthetic minima (primary and secondary)"
   "<awk '($2==1)' lite.dat" u ($1-2400000):3:2 ax x1y2 w l lc palette z not,\
   "<awk '($2==2)' lite.dat" u ($1-2400000):3:2 ax x1y2 w l lc palette z not,\
   "<awk '($2==3)' lite.dat" u ($1-2400000):3:2 ax x1y2 w l lc palette z not,\
-  "<awk '($2==4)' lite.dat" u ($1-2400000):3:2 ax x1y2 w l lc palette z not
+  "<awk '($2==4)' lite.dat" u ($1-2400000):3:2 ax x1y2 w l lc palette z not,\
+  "<echo 0 0" u (T0-2400000):(0.0) ax x1y2 w p pt 1 ps 2 lc 'gray' not
 
 #  "utctolite.tmp" u ($1-2400000):($2*day) w lp lc 'green' t "heliocentric correction (lite)"
 

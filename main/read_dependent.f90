@@ -287,6 +287,10 @@ write(*,*) "# debug_swift : "
 read(*,*,err=990,end=990) debug_swift
 write(*,*) "# debug_swift = ", debug_swift
 
+write(*,*) "# tmpdir : "
+read(*,10,err=990,end=990) tmpdir
+write(*,*) "# tmpdir = ", trim(tmpdir)
+
 return
 
 990 continue

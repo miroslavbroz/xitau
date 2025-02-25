@@ -104,7 +104,8 @@
      &  file_SKY3,                                                      &
      &  file_OCC,                                                       &
      &  file_AO2,                                                       &
-     &  file_SED2
+     &  file_SED2,                                                      &
+     &  tmpdir
 
       logical                                                           &
      &  use_planck,                                                     &
@@ -205,6 +206,7 @@
      &  file_OCC,                                                       &
      &  file_AO2,                                                       &
      &  file_SED2,                                                      &
+     &  tmpdir,                                                         &
      &  ndim, nparam,                                                   &
      &  nbod, nband,                                                    &
      &  iband_LC,                                                       &

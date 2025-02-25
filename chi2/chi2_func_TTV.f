@@ -132,7 +132,7 @@ c     :          "minimum. d = ", d, " AU, dmax = ", dmax, " AU"
         write(*,*) "# nmin = ", nmin
 
         open(unit=iu,file="minima.dat",status="unknown")
-        write(iu,*) "# Min JD (without LITE) & eclipsed [1|2]"
+        write(iu,*) "# Min JD (with LITE) & eclipsed [1|2]"
         do i = 1, nmin
           write(iu,*) tmin(i), eclipsed(i)
         enddo

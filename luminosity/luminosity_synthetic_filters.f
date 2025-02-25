@@ -79,13 +79,13 @@ c
       if (use_pyterpol) then
 
         call pyterpol_(nbod, T_eff, log_g, v_rot, metal,
-     :    pyterpol_Delta, lambda3, lambda4, .true., nbod2)
+     :    pyterpol_Delta, lambda3, lambda4, .true., tmpdir, nbod2)
 
 c read them back
         if ((nbod2.gt.0).or.(n_absol(1).eq.0)) then
           do j = 1, nbod
-            write(str,10) j
-10          format(i1, ".abs")
+            write(str,10) trim(tmpdir), j
+10          format(a, i1, ".abs")
          
             call read_synth(str, n_absol(j), lambda_absol(1,j),
      :        flux_absol(1,j))

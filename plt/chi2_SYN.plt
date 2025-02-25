@@ -9,12 +9,13 @@ km = 1.e3  # m
 nm = 1.e-9  # m
 ang = 1.e-10/nm  # nm
 shift = 0.025
+shift = 0.125
 
 set xl "lambda [nm]"
 set yl "I_lambda [1] (shifted by dataset number)"
 
 #tmp=5.; set xr [656.3-tmp:656.3+tmp]
-set xr [650.0:660.0]
+#set xr [650.0:660.0]
 
 #set ytics shift
 #set mytics 1

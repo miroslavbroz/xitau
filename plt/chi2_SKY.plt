@@ -44,6 +44,7 @@ p \
   "<awk '($2==-2)' out_JDATE_photocentric.dat"  u 3:4 t "2" w l lt 2,\
   "<awk '($2==-3)' out_JDATE_photocentric.dat"  u 3:4 t "3" w l lt 3,\
   "<awk '($2==-4)' out_JDATE_photocentric3.dat" u 3:4 t "4" w l lt 4,\
+  "<awk '($2==-5)' out_JDATE_photocentric3.dat" u 3:4 t "5" w l lt 5,\
   sprintf("<awk '($2==-1) && ($1==%.10f)' out_JDATE_photocentric.dat", T0)  u 3:4 t "T_0" w p lc 0 pt 1 ps 2,\
   sprintf("<awk '($2==-2) && ($1==%.10f)' out_JDATE_photocentric.dat", T0)  u 3:4 not     w p lc 0 pt 1 ps 2,\
   sprintf("<awk '($2==-3) && ($1==%.10f)' out_JDATE_photocentric.dat", T0)  u 3:4 not     w p lc 0 pt 1 ps 2,\

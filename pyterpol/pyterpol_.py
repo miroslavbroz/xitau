@@ -10,14 +10,13 @@ __author__ = "Miroslav Broz (miroslav.broz@email.cz)"
 __version__ = "Jun 23rd 2016"
 
 import os
+import sys
 import pyterpolmini
 
 dir_ = os.path.dirname(os.path.realpath(__file__))
 
-# read input file
-f = open("pyterpol_.in", "r")
-lines = f.readlines()
-f.close()
+# read from stdin
+lines = sys.stdin.readlines()
 
 # parse parameters
 nbod = int(lines[0])
@@ -28,6 +27,7 @@ v_rot = [ float(l) for l in lines[4].split() ]
 metal = [ float(l) for l in lines[5].split() ]
 lambda_ = [ float(l) for l in lines[6].split() ]
 absolute = lines[7].split()[0]
+tmpdir = lines[8].split()[0]
 
 if absolute == "T":
     absolute = True
@@ -80,7 +80,7 @@ sg.ABS_default_grid_order = ['BSTAR', 'OSTAR', 'PHOENIX']
 for j in range(0, nbod):
     comp = dict(teff=T_eff[j], logg=log_g[j], z=metal[j])
     vrot = v_rot[j]
-    filename = name[j] + extension
+    filename = tmpdir + name[j] + extension
     print(str(filename) + ": " + str(comp) + " vrot=" + str(vrot))
 
     c = sg.get_synthetic_spectrum(comp, lambda_, order=4, step=step, padding=0.0)

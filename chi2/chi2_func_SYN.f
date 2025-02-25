@@ -89,14 +89,14 @@ c
       if (use_pyterpol.and.(m_OBS.gt.0)) then
 
         call pyterpol_(nbod, T_eff, log_g, v_rot, metal,
-     :    pyterpol_Delta, lambda1, lambda2, .false., nbod2)
+     :    pyterpol_Delta, lambda1, lambda2, .false., tmpdir, nbod2)
 
 c read them back
         if (nbod2.gt.0) then
           do j = 1, nbod
-            write(str,10) j
-10          format(i1, ".syn")
-         
+            write(str,10) trim(tmpdir), j
+10          format(a, i1, ".syn")
+
             call read_synth(str, n_synth(j), lambda_synth(1,j),
      :        Int_synth(1,j))
          
@@ -166,6 +166,7 @@ c interpolate intensities to observed lambda using Hermite cubic spline
      :            lambda_synth(l-2,k), " m"
                 write(*,*) "# lambda_synth(", l-2+n_synth(k)-l+2, ",",
      :            k, ") = ", lambda_synth(l-2+n_synth(k)-l+2,k), " m"
+                stop
               endif
 
 c compute monochromatic "luminosity" at given lambda

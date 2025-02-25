@@ -12,7 +12,7 @@ p \
   "<awk '($2==2)' lite.dat" u ($1-2400000):3 w l t "2",\
   "<awk '($2==3)' lite.dat" u ($1-2400000):3 w l t "3",\
   "<awk '($2==4)' lite.dat" u ($1-2400000):3 w l t "4",\
-  "<awk '($2==1)' lite2.dat" u ($1-2400000):3 w lp t ""
+  "<awk '($2==5)' lite.dat" u ($1-2400000):3 w l t "5",\
 
 pa -1
 
@@ -20,4 +20,7 @@ set term png small size 2048,1024
 set out "lite.png"
 rep
 
+q
+
+  "<awk '($2==1)' lite2.dat" u ($1-2400000):3 w lp t ""
 

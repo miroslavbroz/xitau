@@ -3,7 +3,7 @@ c A simple Fortran 77 interface to Pyterpol (Nemravova et al. 2016).
 c Miroslav Broz (miroslav.broz@email.cz), Jun 23rd 2016
 
       subroutine pyterpol_(nbod, T_eff, log_g, v_rot, metal,
-     :  Delta, lambda1, lambda2, absolute, nbod2)
+     :  Delta, lambda1, lambda2, absolute, tmpdir, nbod2)
 
       implicit none
       include '../chi2/chi2.inc'
@@ -13,6 +13,7 @@ c input
       real*8 Delta(4)
       real*8 lambda1, lambda2
       logical absolute
+      character*80 tmpdir
 c output
 c  spectra will be saved in 1.syn, 2.syn, ... files
 c  (or 1.abs, 2.abs, ...)
@@ -29,7 +30,7 @@ c constants
 
 c internal
       integer i, j, k, iu, ierr
-      character*80 cmd
+      character*80 str, cmd
       integer name2(NBODMAX)
       real*8 T_eff1(NBODMAX,2), log_g1(NBODMAX,2), v_rot1(NBODMAX,2),
      :  metal1(NBODMAX,2)
@@ -86,10 +87,10 @@ c        write(*,*) "# pyterpol_.f: No spectra are needed."  ! dbg
 c
 c write temporary file
 c
-      open(unit=iu, file="pyterpol_.in", status="unknown",
-     :  iostat=ierr)
+      str = trim(tmpdir) // "pyterpol_.in"
+      open(unit=iu, file=str, status="unknown", iostat=ierr)
       if (ierr.ne.0) then
-        write(*,*) "pyterpol_.f: Error opening file 'pyterpol_.in'."
+        write(*,*) "pyterpol_.f: Error opening file '", str, "'."
         stop
       endif
 
@@ -101,12 +102,13 @@ c
       write(iu,*) (Z(metal2(j)), j = 1, nbod2)
       write(iu,*) lambda1/Ang, lambda2/Ang
       write(iu,*) absolute
+      write(iu,*) tmpdir
 
       close(iu)
 c
 c call Pyterpol
 c
-      cmd = "python3 pyterpol_.py"
+      cmd = "python3 pyterpol_.py < " // trim(tmpdir) // "pyterpol_.in"
       ierr = system(cmd)
 
       if (ierr.ne.0) then
