@@ -63,7 +63,7 @@ c adjust coordinates (the elements were standard stellar-astronomy)
         vj(i,2) = tmp
         vj(i,3) = -vj(i,3)
 
-        if (debug_swift) then
+        if (debug) then
           write(*,*) '# a = ', a, ' au = ', a*au/R_S, ' R_S'
         endif
       enddo

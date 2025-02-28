@@ -59,8 +59,14 @@ p \
   "chi2_LC.dat"    u ($1-2400000):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
   "Lc.dat"         u ($1-2400000):2:($1-2400000) w l lc palette z not,\
   "Lc.dat"         u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 t "observed",\
-  "Lc_tess.dat"    u ($1-2400000):2:3 w l lt 3 not,\
-  "Lc_tess.dat"    u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 not,\
+  "data/LC_most12.dat_tdb"    u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 not,\
+  "data/LC_most17.dat_tdb"    u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 not,\
+  "data/LC_tess31.dat_tdb"    u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 not,\
+  "data/LC_tess42.dat_tdb"    u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 not,\
+  "data/LC_tess43.dat_tdb"    u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 not,\
+  "data/LC_tess44.dat_tdb"    u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 not,\
+  "data/LC_tess70.dat_tdb"    u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 not,\
+  "data/LC_tess71.dat_tdb"    u ($1-2400000):2:3 w err lt 3 pt 1 ps 0.5 not,\
   "Lc_U.dat"       u ($1-2400000):($2+(5-band)*shift):3 t "U" w err lt 4 pt 1 ps 0.5,\
   "Lc_B.dat"       u ($1-2400000):($2+(6-band)*shift):3 t "B" w err lt 5 pt 1 ps 0.5,\
   "Lc_V.dat"       u ($1-2400000):($2+(7-band)*shift):3 t "V" w err lt 2 pt 1 ps 0.5,\
@@ -74,4 +80,6 @@ rep
 
 q
 
+
+  "Lc_tess.dat"    u ($1-2400000):2:3 w l lt 3 not,\
 

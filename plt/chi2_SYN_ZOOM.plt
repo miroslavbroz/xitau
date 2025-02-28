@@ -6,13 +6,14 @@ set term x11
 nm = 1.e-9  # m
 ang = 1.e-10/nm  # nm
 shift = 0.025
+shift = 0.125
 
 set xl "lambda [nm]"
 set yl "I_lambda [] (shifted by 1/4 dataset number)"
 
 tmp=1
 set xr [656.3-tmp:656.3+tmp]
-set yr [0.6:1.1]
+set yr [0.5:1.1]
 #set yr [12*shift:22*shift]
 #set yr [1+1*shift:1+8*shift]
 

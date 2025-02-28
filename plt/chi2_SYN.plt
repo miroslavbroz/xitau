@@ -8,7 +8,6 @@ c = 3.e8  # m s^-1
 km = 1.e3  # m
 nm = 1.e-9  # m
 ang = 1.e-10/nm  # nm
-shift = 0.025
 shift = 0.125
 
 set xl "lambda [nm]"

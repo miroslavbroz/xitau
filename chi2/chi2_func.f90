@@ -260,7 +260,7 @@ do i = 1, nbod
   R_star(i) = sqrt(m(i)*AU**3/day**2/(10.d0**log_g(i)/100.d0))/R_S
 enddo
 
-if (debug_swift) then
+if (debug) then
   do i = 1, nbod
     write(*,*) '# R_star(', i, ') = ', R_star(i), ' R_S'
   enddo
@@ -272,7 +272,7 @@ do i = 1, nbod
   P_rot(i) = 2.d0*pi*R_star(i)*R_S/(v_rot(i)*1.d3)/day
 enddo
 
-if (debug_swift) then
+if (debug) then
   do i = 1, nbod
     write(*,*) '# P_rot(', i, ') = ', P_rot(i), ' d'
   enddo

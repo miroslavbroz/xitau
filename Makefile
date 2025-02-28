@@ -35,6 +35,7 @@ obj = \
   luminosity/luminosity_planck_bandpass.o \
   luminosity/luminosity_synthetic_bandpass.o \
   luminosity/luminosity_synthetic_filters.o \
+  luminosity/luminosity_synthetic_filters2.o \
   misc/arcsec_au.o \
   misc/au_arcsec.o \
   misc/au_day.o \

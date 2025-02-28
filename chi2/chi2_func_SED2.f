@@ -84,7 +84,7 @@ c
      :      lambda, band, Lum_lambda, Lumtot)
 
         else if ((.not.use_planck).and.(use_filters)) then
-          call luminosity_synthetic_filters(m_OBS, file_filter, i,
+          call luminosity_synthetic_filters2(m_OBS, file_filter, i,
      :      band_filter, Lum_lambda, Lumtot)
 
           band = band_filter(i)
