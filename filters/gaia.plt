@@ -2,7 +2,7 @@
 
 set term x11
 
-set xl "lambda [nm]"
+set xl "lambda [A]"
 set yl "f [1]"
 
 set yr [0:1]
@@ -21,7 +21,7 @@ set arrow from lambda_eff-band_eff/2,graph 0 rto 0,graph 1 nohead lt 0
 set arrow from graph 0,first 0.5 rto graph 1,first 0.0 nohead lt 0
 
 p \
-  "<awk '($2<99.)' gaia.G" u 1:2 w lp,\
+  "gaia.G" u 1:2 w lp,\
 
 pa -1
 

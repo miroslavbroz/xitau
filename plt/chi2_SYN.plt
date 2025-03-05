@@ -97,7 +97,7 @@ call "line.plt" "?" 4447
 x0=430.0
 x0=446.0
 #x0=475.0
-#x0=635.0
+x0=650.0
 
 p \
   "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lc 'orange',\

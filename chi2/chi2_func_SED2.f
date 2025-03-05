@@ -24,7 +24,7 @@ c observational data
       character*80 file_filter(SEDMAX)
 
 c internal variables
-      integer i, k, i1st, iu
+      integer i, j, i1st, iu
       real*8 d, lambda, band, flux, fluxtot, mag, chi2_
       real*8 band_filter(SEDMAX)
       real*8 Lum_lambda(NBODMAX), Lumtot
@@ -94,7 +94,10 @@ c
      :      " is NOT supported."
         endif
 
-        flux = Lum_lambda(one(i))/(4.d0*pi_*d**2)
+        flux = 0.d0
+        do j = one(i), nbod
+          flux = flux + Lum_lambda(j)/(4.d0*pi_*d**2)  ! dbg
+        enddo
         fluxtot = Lumtot/(4.d0*pi_*d**2)
         mag = -2.5d0*log10(flux/(fluxtot-flux))
 

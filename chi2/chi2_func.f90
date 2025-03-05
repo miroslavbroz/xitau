@@ -315,7 +315,7 @@ band_eff = 85.d-9  ! m
 
 call luminosities(T_eff, R_star, nbod, lambda_eff, band_eff, Lum, Lumtot, use_planck)
 
-if (debug_swift) then
+if (debug) then
   do i = 1, nbod
     write(*,*) '# Lum(', i, ') = ', Lum(i)/Lumtot
   enddo

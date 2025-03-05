@@ -11,7 +11,7 @@ set yl "UBV magnitude [mag]"
 #set xr [200:30000]
 set yr [:] reverse
 set ytics 0.1
-set logscale x
+#set logscale x
 set zeroaxis
 
 tmp= 367; set label "U" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
@@ -24,10 +24,10 @@ tmp=1630; set label "H" at tmp,graph 1.01 center
 tmp=2190; set label "K" at tmp,graph 1.01 center; set arrow from tmp,graph 0 rto 0,graph 1 nohead lt 0
 
 p \
-  "chi2_SED.dat" u ($1/nm):3 t "synthetic" w p pt 1 lt 8,\
-  "Sed.dat" u ($1/nm):3   t "observed" w l   lt 3,\
-  "Sed.dat" u ($1/nm):3:($2/2/nm):4 not  w xyerr lt 3 ps 0,\
-  "chi2_SED.dat" u ($1/nm):3 t "residua" w l lt 1 lw 3
+  "chi2_SED.dat" u ($1/nm):3 t "synthetic" w p pt 1 lc 'orange',\
+  "Sed.dat" u ($1/nm):3   t "observed" w l   lc 'blue',\
+  "Sed.dat" u ($1/nm):3:($2/2/nm):4 not  w xyerr ps 0 lc 'blue',\
+  "chi2_SED.dat" u ($1/nm):3 t "residua" w l lw 3 lc 'red'
 pa -1
 
 set term png small
