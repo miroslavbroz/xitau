@@ -46,6 +46,10 @@ c output
 
         call geometry_periods(nbod, m, elmts, r, v)
 
+      else if (geometry.eq.8) then
+
+        call geometry_3plus2(nbod, m, elmts, r, v)
+
       else
         write(*,*) "geometries.f: Error unknown geometry = ",
      :    geometry

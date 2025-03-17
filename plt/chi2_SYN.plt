@@ -1,5 +1,9 @@
 #!/usr/bin/gnuplot
 
+c = 299792458.  # m/s
+
+gamma = 0.0
+
 set colors classic
 #set terminal wxt font "Monospace,10"
 #set term x11
@@ -104,7 +108,9 @@ p \
   "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lt 3 pt 1 ps 0,\
   "chi2_SYN.dat"  u ($2/nm):($3+shift*($5-1))   t "residua"  w l lt 1 lw 1,\
   "<awk '($NF+0>100)' chi2_SYN.dat" u ($2/nm):($3+shift*($5-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5,\
-  "<awk '($5!=l){ print; }{ l=$5; }' Spectra.dat" u (x0):(1.0-0.05+shift*($5-1)):5 w labels left not
+  "<awk '($5!=l){ print; }{ l=$5; }' Spectra.dat" u (x0):(1.0-0.05+shift*($5-1)):5 w labels left not,\
+  "<awk '!/^#/{ i++; print $2,i; }' RV1.dat_nights" u (656.281*(1.0+(gamma+$1)*1.e3/c)):(0.625+shift*($2-1)):("1") w labels center not,\
+  "<awk '!/^#/{ i++; print $2,i; }' RV2.dat_nights" u (656.281*(1.0+(gamma+$1)*1.e3/c)):(0.625+shift*($2-1)):("2") w labels center not
 pa -1
 
 set term png small size 2048,1536

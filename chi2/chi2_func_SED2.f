@@ -2,8 +2,6 @@ c chi2_func_SED2.f
 c Calculate chi^2 for spectral energy distribution, individual ones.
 c Mirolav Broz (miroslav.broz@email.cz), Jan 21st 2025
 
-c Note: Doesn't work with chi2_func_SED.f due to 2nd call of luminosity_synthetic_filters.f!
-
       subroutine chi2_func_SED2(chi2, n)
 
       implicit none
@@ -96,7 +94,7 @@ c
 
         flux = 0.d0
         do j = one(i), nbod
-          flux = flux + Lum_lambda(j)/(4.d0*pi_*d**2)  ! dbg
+          flux = flux + Lum_lambda(j)/(4.d0*pi_*d**2)
         enddo
         fluxtot = Lumtot/(4.d0*pi_*d**2)
         mag = -2.5d0*log10(flux/(fluxtot-flux))

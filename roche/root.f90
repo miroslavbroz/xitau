@@ -6,14 +6,19 @@ contains
 
 ! Root of a function f(x).
 
-double precision function root(func, a, b)
+double precision function root(func, a_, b_)
 
 implicit none
 double precision :: func
-double precision :: a, b
+double precision, intent(in) :: a_, b_
+
 double precision, parameter :: eps = 1.0d-9
+double precision :: a, b
 double precision :: c, s, fa, fb, fc, fs, d, dum
 logical :: mflag, con1, con2, con3, con4, con5
+
+a = a_
+b = b_
 
 fa = func(a)
 fb = func(b)
@@ -73,6 +78,7 @@ do while ((abs(b-a).gt.eps).and.(fb.ne.0.d0))
     dum = a; a = b; b = dum
     dum = fa; fa = fb; fb = dum
   endif
+
 enddo
 
 root = s

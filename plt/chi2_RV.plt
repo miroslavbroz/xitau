@@ -19,7 +19,7 @@ set xl "JD - 2400000"
 set yl "vzb [km/s]"
 
 #set xr [T0-2400000:]
-#set xr [59450:59500]
+set xr [59450:59500]
 #tmp=10; set xr [59531-tmp:59531+tmp]
 #tmp=60.0; set yr [-tmp:tmp]
 set zeroaxis
@@ -35,6 +35,7 @@ p \
   "<awk '($2==-2)' out_JDATE_lighttime.dat" u ($1-2400000):(g($8)) t "2" w l lt 2,\
   "<awk '($2==-3)' out_JDATE_lighttime.dat" u ($1-2400000):(g($8)) t "3" w l lt 3,\
   "<awk '($2==-4)' out_JDATE_lighttime.dat" u ($1-2400000):(g($8)) t "4" w l lt 4,\
+  "<awk '($2==-5)' out_JDATE_lighttime.dat" u ($1-2400000):(g($8)) t "5" w l lt 5,\
   "RV1.dat" u ($1-2400000):2:3 t "observ." w err lt 1 pt 1 ps 0.5,\
   "RV2.dat" u ($1-2400000):2:3 not         w err lt 2 pt 1 ps 0.5,\
   "RV3.dat" u ($1-2400000):2:3 not         w err lt 3 pt 1 ps 0.5,\

@@ -62,6 +62,7 @@ use chi2_func_AO2_module
 use chi2_func_LC2_module
 use chi2_func_OCC_module
 use lite_module
+use hec88_module
 
 include '../swift.inc'
 include '../tides/spin.inc'
@@ -294,15 +295,13 @@ endif
 
 do i = 1, nbod
   if (use_hec88(i)) then
-    call hec88(T_eff(i), R_star(i), m(i), dummy, log_g(i))
-
-    m(i) = m(i)*GM_S
+    call hec88(m(i)/GM_S, T_eff(i), R_star(i), dummy, log_g(i))
 
     if (debug) then
       write(*,*) '# Using Harmanec (1988) for component no. ', i
+      write(*,*) '# m(', i, ') = ', m(i)/GM_S, ' M_S'
       write(*,*) '# T_eff(', i, ') = ', T_eff(i), ' K'
       write(*,*) '# R_star(', i, ') = ', R_star(i), ' R_S'
-      write(*,*) '# m(', i, ') = ', m(i)/GM_S, ' M_S'
       write(*,*) '# log_g(', i, ') = ', log_g(i), ' [cgs]'
     endif
   endif

@@ -1,5 +1,9 @@
 #!/usr/bin/gnuplot
 
+c = 299792458.  # m/s
+
+gamma = 0.0
+
 set colors classic
 set term x11
 
@@ -90,7 +94,10 @@ p \
   "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lt 7,\
   "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lt 3 pt 1 ps 0,\
   "chi2_SYN.dat"  u ($2/nm):($3+shift*($5-1))   t "residua"  w l lt 1 lw 1,\
-  "<awk '($NF+0>20)' chi2_SYN.dat" u ($2/nm):($3+shift*($5-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5
+  "<awk '($NF+0>20)' chi2_SYN.dat" u ($2/nm):($3+shift*($5-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5,\
+  "<awk '!/^#/{ i++; print $2,i; }' RV1.dat_nights" u (656.281*(1.0+(gamma+$1)*1.e3/c)):(0.625+shift*($2-1)):("1") w labels center not,\
+  "<awk '!/^#/{ i++; print $2,i; }' RV2.dat_nights" u (656.281*(1.0+(gamma+$1)*1.e3/c)):(0.625+shift*($2-1)):("2") w labels center not
+
 pa -1
 
 set term png small size 2048,1024
@@ -99,4 +106,5 @@ rep
 
 q
 
+  "<awk '!/^#/{ i++; print $2,i; }' RV1.dat" u (6562.81):(1.0+shift*$2):("1") w labels center not
 

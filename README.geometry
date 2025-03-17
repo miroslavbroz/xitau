@@ -9,6 +9,7 @@ Summary of geometries.f:
   5 .. twopairs2    ((1+2)+(3+4))+5  P,loge,i,Omega,varpi,lambda  ^1
   6 .. equatorial   ((1+2)+3)+4      P,e,i,Omega,omega,M          ^2
   7 .. periods      ((1+2)+3)+4      P,e,i,Omega,omega,M          ^1
+  8 .. 3plus2       ((1+2)+3)+(4+5)  P,loge,i,Omega,varpi,lambda  ^1
 
 --
 ^1 standard stellar-astronomy coordinates

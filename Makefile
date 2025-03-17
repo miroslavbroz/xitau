@@ -29,7 +29,6 @@ obj = \
   limcof/limcof_read.o \
   limcof/limcof_interp.o \
   luminosity/filter.o \
-  luminosity/hec88.o \
   luminosity/lum_func.o \
   luminosity/luminosities.o \
   luminosity/luminosity_planck_bandpass.o \
@@ -130,6 +129,7 @@ obj = \
   chi2/write_uvw.o \
   geometry/geometries.o \
   geometry/geometry_1centric.o \
+  geometry/geometry_3plus2.o \
   geometry/geometry_ecliptic.o \
   geometry/geometry_equatorial.o \
   geometry/geometry_hierarch.o \
@@ -266,6 +266,7 @@ obj90 = \
   misc/srtidx.o \
   misc/srtint.o \
   misc/uvw_nodes.o \
+  luminosity/hec88.o \
   shape/read_face.o \
   shape/read_node.o \
   shape/read_elem.o \
