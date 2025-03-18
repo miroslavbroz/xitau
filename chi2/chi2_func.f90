@@ -104,7 +104,7 @@ double precision :: dummy
 integer, save :: i1st=0
 
 ! functions
-double precision, external :: kms_auday, merit_func
+double precision, external :: kms_auday, constraint
 
 ! get both free and fixed parameters
 
@@ -629,7 +629,7 @@ call chi2_func_SED2(chi2_SED2, n_SED2)
 
 chi2_MASS = 0.d0
 do i = 1, nbod
-  chi2_MASS = chi2_MASS + merit_func(m(i)/GM_S,m_min(i),m_max(i))
+  chi2_MASS = chi2_MASS + constraint(m(i)/GM_S,m_min(i),m_max(i))
 enddo
 
 ! sum everything

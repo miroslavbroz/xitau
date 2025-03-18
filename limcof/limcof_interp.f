@@ -72,6 +72,12 @@ c (NOT assuming a complete grid, only sorted one)
           do while ((Teff_avail(k).lt.Teff).and.(k.lt.n_avail))
             k = k+1
           enddo
+          if ((k.lt.2).or.(Teff_avail(k).lt.Teff_avail(k-1))) then
+            write(*,*) "limcof_interp.f: Extrapolation for Teff = ",
+     :        Teff, " not allowed!"
+            stop
+          endif
+
           Teff_(i,j,1) = Teff_avail(k-1)
           Teff_(i,j,2) = Teff_avail(k)
 

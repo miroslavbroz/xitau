@@ -109,7 +109,7 @@ obj = \
   chi2/chi2_func_TTV.o \
   chi2/chi2_func_VIS.o \
   chi2/distance_AB_C.o \
-  chi2/merit_func.o \
+  chi2/constraint.o \
   chi2/read_CLO.o \
   chi2/read_ECL.o \
   chi2/read_LC.o \
