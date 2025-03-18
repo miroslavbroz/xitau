@@ -266,7 +266,6 @@ obj90 = \
   misc/srtidx.o \
   misc/srtint.o \
   misc/uvw_nodes.o \
-  luminosity/hec88.o \
   shape/read_face.o \
   shape/read_node.o \
   shape/read_elem.o \
@@ -304,6 +303,7 @@ obj90 = \
   roche/romberg.o \
   roche/roche.o \
   roche/omega_roche_approx.o \
+  luminosity/hec88.o \
   occult/intersect_AB_e.o \
   occult/intersect_AB_p.o \
   occult/rotateinv.o \

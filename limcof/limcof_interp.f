@@ -22,6 +22,13 @@ c internal
 c functions
       real*8 interp
 
+c defaults
+      m = 2
+      lambda(1) = 0.d0
+      lambda(2) = 1.d0
+      u(1) = 0.d0
+      u(2) = 0.d0
+
 c find closest Z
       j = 1
       do while ((Z_avail(j).lt.Z).and.(j.lt.n_avail))
@@ -29,8 +36,8 @@ c find closest Z
       enddo
       if ((j.lt.2).or.(Z_avail(j).lt.Z)) then
         write(*,*) "limcof_interp.f: Extrapolation for Z = ", Z,
-     :    " not allowed!"
-        stop
+     :    " forbidden!"
+        return
       endif
       Z_(1) = Z_avail(j-1)
       Z_(2) = Z_avail(j)
@@ -45,8 +52,8 @@ c (assuming a complete grid in Z vs log g)
       enddo
       if ((j.lt.2).or.(logg_avail(j).lt.logg)) then
         write(*,*) "limcof_interp.f: Extrapolation for log(g) = ", logg,
-     :    " not allowed!"
-        stop
+     :    " forbidden!"
+        return
       endif
       logg_(1,1) = logg_avail(j-1)
       logg_(1,2) = logg_avail(j)
@@ -74,8 +81,8 @@ c (NOT assuming a complete grid, only sorted one)
           enddo
           if ((k.lt.2).or.(Teff_avail(k).lt.Teff_avail(k-1))) then
             write(*,*) "limcof_interp.f: Extrapolation for Teff = ",
-     :        Teff, " not allowed!"
-            stop
+     :        Teff, " forbidden!"
+            return
           endif
 
           Teff_(i,j,1) = Teff_avail(k-1)
