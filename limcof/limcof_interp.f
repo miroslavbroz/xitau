@@ -23,11 +23,8 @@ c functions
       real*8 interp
 
 c defaults
-      m = 2
-      lambda(1) = 0.d0
-      lambda(2) = 1.d0
-      u(1) = 0.d0
-      u(2) = 0.d0
+      m = 16
+      u(:) = 0.d0
 
 c find closest Z
       j = 1

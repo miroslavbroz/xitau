@@ -94,6 +94,11 @@ c chi^2 for closure phase data
         call luminosities(T_eff, R_star, nbod, lambda, band,
      :    Lum_lambda, Lumtot, use_planck)
 
+c          |^ (u3,v3)   
+c          | \          
+c          |  \         
+c  (u2,v2) V---> (u1,v1)
+
         B(1) = sqrt(u1_OBS(i)**2 + v1_OBS(i)**2)  ! baseline length [m]
         B(2) = sqrt(u2_OBS(i)**2 + v2_OBS(i)**2)
         u(3) = -(u2_OBS(i) + u1_OBS(i))

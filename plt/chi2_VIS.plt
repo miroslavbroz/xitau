@@ -59,10 +59,6 @@ p \
   "visibility.dat" u (sqrt($2**2+$3**2)/$4):($5+fac*($6-1))   t "synthetic visibility" w p lt 7 pt 1,\
   "chi2_VIS.dat"   u (sqrt($2**2+$3**2)/$4):($6+fac*($8-1))   t "residua" w l lt 1 lw 1,\
   "<awk '($NF+0>100)' chi2_VIS.dat" u (sqrt($2**2+$3**2)/$4):($6+fac*($8-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5,\
-  musq_binary(x,0,alpha1,0)-2.0 t sprintf("binary, alpha = %f mas", alpha1/mas) w l lc 'green',\
-  musq_binary(x,0,alpha2,0)-2.0 t sprintf("binary, alpha = %f mas", alpha2/mas) w l lc 'gray',\
-  musq_disk(x,0,theta1)-2.0      t sprintf("disk, theta1 = %f mas", theta1/mas) w l lc 'cyan',\
-  musq_disk(x,0,theta_)-2.0      t sprintf("disk, theta_ = %f mas", theta_/mas) w l lc 'gray'
 
 pa -1
 
@@ -72,6 +68,10 @@ rep
 
 q
 
+  musq_binary(x,0,alpha1,0)-2.0 t sprintf("binary, alpha = %f mas", alpha1/mas) w l lc 'green',\
+  musq_binary(x,0,alpha2,0)-2.0 t sprintf("binary, alpha = %f mas", alpha2/mas) w l lc 'gray',\
+  musq_disk(x,0,theta1)-2.0      t sprintf("disk, theta1 = %f mas", theta1/mas) w l lc 'cyan',\
+  musq_disk(x,0,theta_)-2.0      t sprintf("disk, theta_ = %f mas", theta_/mas) w l lc 'gray'
   "<awk '($1<0.0+0.5)' test_xitau_agreement.out" u (sqrt($2**2+$3**2)/$4):($5+fac*0) t "Phoebe test" w l lc 'black' lw 3 dt 2,\
   "<awk '($1>0.0+0.5)' test_xitau_agreement.out" u (sqrt($2**2+$3**2)/$4):($5+fac*1) not             w l lc 'black' lw 3 dt 2,\
 

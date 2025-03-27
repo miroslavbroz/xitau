@@ -1,1 +1,1 @@
-../simplex/interp.f
+../misc/interp.f
