@@ -43,6 +43,8 @@ c chi^2 for |T_3| data
 
       do i = 1, m_OBS
 
+        if (t3amp_OBS(i).lt.-99.d0) cycle
+
         lambda = lambda_eff_OBS(i)
         band = band_eff_OBS(i)
         chi2_ = ((t3amp(i)-t3amp_OBS(i))/sigma_t3amp_OBS(i))**2
