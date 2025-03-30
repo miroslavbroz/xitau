@@ -1,7 +1,7 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 set colors classic
-set term x11
+#set term x11
 
 rad = 180./pi
 
@@ -21,7 +21,7 @@ set arrow from T0-2400000,graph 0 to T0-2400000,graph 1 nohead lt 0
 
 p \
   "Clo.dat"          u (sqrt($2**2+$3**2)/$6):($10+($12-7)*360*1):11 t "observed closure phase" w err lt 3 pt 1 ps 0.5,\
-  "closurephase.dat" u (sqrt($2**2+$3**2)/$6):($8+($9-7)*360*1)  t "synthetic closure phase" w p lt 7 pt 1,\
+  "closurephase.dat" u (sqrt($2**2+$3**2)/$6):($8+($9-7)*360*1)  t "synthetic closure phase" w p lc 'orange' pt 1,\
   "chi2_CLO.dat"     u (sqrt($2**2+$3**2)/$6):($10+($12-7)*360*1):13 t "residua" w l lt 1 lw 3 lc palette z,\
   "<awk '($NF+0>100)' chi2_CLO.dat" u (sqrt($2**2+$3**2)/$6):($10+($12-7)*360*1) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5,\
 

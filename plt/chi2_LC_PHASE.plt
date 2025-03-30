@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 load "T0.plt"
 
@@ -12,7 +12,7 @@ frac(x) = f1(x-int(x))
 phase(jd) = frac((jd-JD0)/P)
 
 set colors classic
-set term x11
+#set term x11
 
 band = 7
 band = 54

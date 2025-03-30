@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 deg = pi/180.  # rad
 arcsec = deg/3600.
@@ -38,7 +38,7 @@ musq_disk(u,v,theta) = (2.*besj1(pi*theta*sqrt(u**2+v**2))/(pi*theta*sqrt(u**2+v
 ########################################################################
 
 set colors classic
-set term x11
+#set term x11
 
 set xl "B/lambda [cycles]"
 set yl "V^2 [] (shifted by dataset number)"
@@ -56,7 +56,7 @@ fac=2.0
 
 p \
   "Vis.dat"        u (sqrt($2**2+$3**2)/$4):($6+fac*($8-1)):7 t "observed visibility" w err lt 3 pt 1 ps 0.5,\
-  "visibility.dat" u (sqrt($2**2+$3**2)/$4):($5+fac*($6-1))   t "synthetic visibility" w p lt 7 pt 1,\
+  "visibility.dat" u (sqrt($2**2+$3**2)/$4):($5+fac*($6-1))   t "synthetic visibility" w p lc 'orange' pt 1,\
   "chi2_VIS.dat"   u (sqrt($2**2+$3**2)/$4):($6+fac*($8-1))   t "residua" w l lt 1 lw 1,\
   "<awk '($NF+0>100)' chi2_VIS.dat" u (sqrt($2**2+$3**2)/$4):($6+fac*($8-1)) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5,\
 

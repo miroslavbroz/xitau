@@ -27,35 +27,35 @@ J2 = 1./2. * (a1/a1)**2 * m1*m2/(m1+m2)**2  # perturbation radius r = a1, refere
 
 n2 = 2.*pi/P2
 eta2 = sqrt(1.-e2**2)
-dotOmega2 = -3./2.*n2*J2*(a1/a2)**2 * cos(i2)/eta2**4  # standard coefficients; Bertotti etal. (2003), p. 332
+dotomega2 = +3.*n2*J2*(a1/a2)**2 * (5.*cos(i2)**2-1.)/(4.*eta2**4)  # standard coefficients; Bertotti etal. (2003), p. 332
 
 print "a1 = ", a1/au, " au"
 print "a2 = ", a2/au, " au"
 print "n2 = ", n2, " rad s^-1"
-print "J2 = ", J2, "  <-- cf. 2.e-7"
+print "J2 = ", J2, ""
 print "eta2^4 = ", eta2**4
-print "cos i2 = ", cos(i2)
-print "dotOmega2 = ", dotOmega2, " rad s^-1"
+print "(5 cos^2 i2-1)/4 = ", (5.*cos(i2)**2-1.)/4.
+print "dotomega2 = ", dotomega2, " rad s^-1"
 
 f(x) = x > 180. ? x - 360. : x
 
 set xl "time [yr]"
-set yl "Omega_1 [deg]"
+set yl "omega_2 [deg]"
 
 set zeroaxis
-set key left
 
 load "T0.plt"
 
 p \
-  "<awk '($2==-3)' xvpl2el.out" u (($1-T0)*day/yr):(f($6)) w lp,\
-  (0.0 + dotOmega2*(x*yr))/deg lw 2 lc 'orange',\
-  (0.0 - dotOmega2*(x*yr))/deg lw 2 dt 2 lc 'gray'
+  "<awk '($2==-3)' xvpl2el.out" u (($1-T0)*day/yr):(f($7)) w lp,\
+  (0.0 + dotomega2*(x*yr))/deg lw 2 lc 'orange',\
+  (0.0 - dotomega2*(x*yr))/deg lw 2 dt 2 lc 'gray'
+  
 
 pa -1
 
 set term png small
-set out "Omega2.png"
+set out "omega2.png"
 rep
 
 q

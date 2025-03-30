@@ -6,9 +6,11 @@ f77 = gfortran
 f90 = gfortran
 cc = g++
 
-opt = -O3 -pg -mcmodel=large -Jmod 
+#opt = -O3 -Jmod -pg -mcmodel=large
+opt = -O3 -Jmod 
+optc = -O3
 
-lib = -L. -lstdc++
+lib = -L. -lc++ -lstdc++
 
 obj = \
   anal/anal_energy.o \
@@ -414,7 +416,7 @@ $(obj) : %.o:%.f $(inc)
 	$(f77) $(opt) -c -o $@ $<
 
 $(objc) : %.o:%.cpp $(inc)
-	$(cc) $(opt) -std=c++17 -c -o $@ $<
+	$(cc) $(optc) -std=c++17 -c -o $@ $<
 
 clean : FORCE
 	rm -f mod/*.mod

@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 cm = 1.e-2  # m
 mu = 1.e-6  # m
@@ -41,7 +41,7 @@ load "T0.plt"
 ########################################################################
 
 set colors classic
-set term x11
+#set term x11
 
 nm = 1.e-9
 

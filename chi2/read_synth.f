@@ -9,7 +9,7 @@ c Miroslav Broz (miroslav.broz@email.cz), May 23rd 2016
 
       character*(*) filename
       integer N
-      real*8 lambda(OBSMAX), Int_lambda(OBSMAX)
+      real*8 lambda(SYNMAX), Int_lambda(SYNMAX)
       integer i,length,ierr
       character*80 str
 
@@ -32,13 +32,13 @@ c Miroslav Broz (miroslav.broz@email.cz), May 23rd 2016
 10      format(a)
         if ((str(1:1).ne."#").and.(length(str).gt.0)) then
           i = i+1
-          if (i.le.OBSMAX) then
+          if (i.le.SYNMAX) then
             read(str,*,err=20,end=20) lambda(i), Int_lambda(i)
 
             lambda(i) = lambda(i)*1.d-10  ! A -> m
           else
             write(*,*) "read_synth.f: Error number of data points",
-     :        " .gt. OBSMAX = ", OBSMAX
+     :        " .gt. SYNMAX = ", SYNMAX
             stop
           endif
          endif

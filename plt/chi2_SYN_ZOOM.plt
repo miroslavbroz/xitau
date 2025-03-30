@@ -1,11 +1,11 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 c = 299792458.  # m/s
 
 gamma = 0.0
 
 set colors classic
-set term x11
+#set term x11
 
 nm = 1.e-9  # m
 ang = 1.e-10/nm  # nm

@@ -1,10 +1,10 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 chi2 = `awk 'BEGIN{ min=1e38; }{ chi=$NF; if (chi<min){ min=chi; } }END{ print min; }' chi2_func.tmp`
 nfree = 47
 
 set colors classic
-set term x11
+#set term x11
 
 set xl "iter"
 set yl "chi^2"

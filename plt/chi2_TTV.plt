@@ -1,8 +1,9 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 load "T0.plt"
 
-set term x11
+set colors classic
+#set term x11
 
 #day = 1440.  # min
 day = 1.  # day

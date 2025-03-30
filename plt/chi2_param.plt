@@ -1,6 +1,6 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
-set term x11
+#set term x11
 set colors classic
 
 set xl "iter"

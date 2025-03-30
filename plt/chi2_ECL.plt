@@ -1,7 +1,7 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 set colors classic
-set term x11
+#set term x11
 
 set xl "JD - 2400000"
 set yl "eclipse duration [day]"

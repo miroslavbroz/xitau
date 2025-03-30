@@ -24,36 +24,38 @@ R1 = sqrt(G*m1/g1)
 a1 = (G*(m1+m2)/(4.*pi**2)*P1**2)**(1./3.)
 n1 = sqrt(G*(m1+m2)/a1**3)
 eta1 = sqrt(1.-e1**2)
-dotOmega = -3./2.*n1*J2*(R1/a1)**2*cos(i1)/eta1**4  # standard coefficients
+dotomega = -3.*n1*J2*(R1/a1)**2 * (1.-5.*cos(i1)**2)/(4.*eta1**4)  # standard coefficient
 
 print "i1 = ", i1/deg, " deg"
 print "R1 = ", R1/R_S, " R_S"
 print "a1 = ", a1/au, " au"
 print "n1 = ", n1, " rad s^-1"
 print "J2 = ", J2, "  <-- cf. 2.e-7"
-print "dotOmega = ", dotOmega, " rad s^-1"
+print "eta1^4 = ", eta1**4
+print "(5 cos^2 i-1)/4 = ", (5.*cos(i1)**2-1.)/4.
+print "dotomega = ", dotomega, " rad s^-1"
 
 f(x) = x > 180. ? x - 360. : x
 
 set xl "time [yr]"
-set yl "Omega_1 [deg]"
+set yl "omega_1 [deg]"
 
 set zeroaxis
-set key left
 
 load "T0.plt"
 
 p \
-  "xvpl2el.out" u (($1-T0)*day/yr):(f($6)) w lp,\
-  "../../test_oblat6_63.4deg/xvpl2el/xvpl2el.out" u (($1-T0)*day/yr):(f($6)) w lp,\
-  "../../test_oblat7_80deg/xvpl2el/xvpl2el.out" u (($1-T0)*day/yr):(f($6)) w lp,\
-  (0.0 + dotOmega*(x*yr))/deg lw 2 lc 'orange',\
-  (0.0 - dotOmega*(x*yr))/deg lw 2 dt 2 lc 'gray'
+  "xvpl2el.out" u (($1-T0)*day/yr):(f($7)) w lp,\
+  "../../test_oblat6_63.4deg/xvpl2el/xvpl2el.out" u (($1-T0)*day/yr):(f($7)) w lp,\
+  "../../test_oblat7_80deg/xvpl2el/xvpl2el.out" u (($1-T0)*day/yr):(f($7)) w lp,\
+  (0.0 + dotomega*(x*yr))/deg lw 2 lc 'orange',\
+  (0.0 - dotomega*(x*yr))/deg lw 2 dt 2 lc 'gray'
+  
 
 pa -1
 
 set term png small
-set out "Omega1.png"
+set out "omega1.png"
 rep
 
 q
