@@ -33,7 +33,7 @@ $(obj90) : %.o:%.f90
 	$(f77) $(opt) -c -o $@ $<
 
 clean : FORCE
-	rm $(obj)
+	rm $(obj) $(obj90)
 FORCE :
 
 

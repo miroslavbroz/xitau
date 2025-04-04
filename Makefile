@@ -6,11 +6,16 @@ f77 = gfortran
 f90 = gfortran
 cc = g++
 
-#opt = -O3 -Jmod -pg -mcmodel=large
 opt = -O3 -Jmod 
 optc = -O3
-
 lib = -L. -lc++ -lstdc++
+
+OS := $(shell uname -s | tr A-Z a-z)
+
+ifeq ($(OS), linux)
+#	opt = -O3 -Jmod -pg -mcmodel=large
+	lib = -L. -lstdc++
+endif
 
 obj = \
   anal/anal_energy.o \
