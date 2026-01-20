@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 f(x) = x>720. ? x-720. : x>360. ? x-360. : x
 g(x) = f(x)>180. ? f(x)-360. : f(x)

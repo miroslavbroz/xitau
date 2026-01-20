@@ -123,8 +123,8 @@ c adjust the parameters affected by simplex
 c
       if (debug) then
         open(unit=iu, file="lightcurve.dat", status="unknown")
-        write(iu,*) "# JD & magnitude & iband & true phase [0-1]",
-     :    " & inclination [deg] & vkm1 & vkm2 [km/s]"
+        write(iu,*) "# JD & magnitude & iband & dataset & ",
+     :    " true phase [0-1] & inclination [deg] & vkm1 & vkm2 [km/s]"
       endif
 
       do k = 1, nband
@@ -284,7 +284,7 @@ c
           mag(i,k) = mag(i,k) + zero(k)
 
           if (debug) then
-            write(iu,*) t_BIN(i,k), mag(i,k), iband, gpha, xincl,
+            write(iu,*) t_BIN(i,k), mag(i,k), iband, k, gpha, xincl,
      :        vkm1(i,k), vkm2(i,k)
           endif
 
@@ -304,9 +304,9 @@ c
       if (debug) then
         open(unit=iu,file="chi2_LC.dat",status="unknown")
         write(iu,*) "# t_OBS & mag_interp & sigma_mag_OBS & iband &",
-     :    " chi^2"
+     :    " dataset & chi^2"
         write(iu,*) "# t_OBS & mag_OBS    & sigma_mag_OBS & iband &",
-     :    " chi^2"
+     :    " dataset & chi^2"
       endif
 
       n = 0
@@ -334,9 +334,9 @@ c
          
           if (debug) then
             write(iu,*) t_OBS(i,k), mag_interp, sigma_mag_OBS(i,k),
-     :        iband_LC(k), chi2_
+     :        iband_LC(k), k, chi2_
             write(iu,*) t_OBS(i,k), mag_OBS(i,k), sigma_mag_OBS(i,k),
-     :        iband_LC(k), chi2_
+     :        iband_LC(k), k, chi2_
             write(iu,*)
           endif
 

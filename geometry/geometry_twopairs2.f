@@ -156,7 +156,7 @@ c finally, convert to barycentric frame
      :  x,y,z,
      :  vx,vy,vz)
 
-      if (debug_swift) then
+      if (debug) then
         write(*,*) '# a = ', a, ' au = ', a*au/R_S, ' R_S'
       endif
 

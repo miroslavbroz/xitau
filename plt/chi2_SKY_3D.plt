@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 deg = pi/180.
 arcsec = deg/3600.
@@ -6,7 +6,7 @@ au = 1.49597870700e11  # m, from IAU 2012
 pc = 648000.0/pi*au  # m, from IAU 2015
 
 set colors classic
-set term x11
+#set term x11
 set size 0.66,1
 
 set xl "x [AU]"
@@ -18,9 +18,8 @@ set nokey
 
 #tmp=1.0e-5
 #tmp=40.0
-#tmp=0.15
 #tmp=1.0
-tmp=0.0025
+tmp=0.03
 set xr [-tmp:tmp]
 set yr [-tmp:tmp]
 set zr [-tmp:tmp]

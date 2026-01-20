@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 c = 299792458.  # m/s
 
@@ -28,16 +28,17 @@ set bar 0.5
 set key outside font "Helvetica,8" width -3
 set tmargin 3.0
 
-call "line.plt" "Halpha" 6562.81
-call "line.plt" "Hbeta"  4861
-call "line.plt" "Hgamma" 4341
-#call "line.plt" "+19"    (4341*(1+19.*km/c))
-call "line.plt" "-100"   (4341*(1-100.*km/c))
-call "line.plt" "+100"   (4341*(1+100.*km/c))
-call "line.plt" "-300"   (4341*(1-300.*km/c))
-call "line.plt" "+300"   (4341*(1+300.*km/c))
-call "line.plt" "Hdelta" 4102
-call "line.plt" "Hepsil" 3970
+call "line.plt" "Halpha" 6562.79
+call "line.plt" "Hbeta"  4861.35
+call "line.plt" "Hgamma" 4340.472
+call "line.plt" "Hdelta" 4101.734
+call "line.plt" "Hepsil" 3970.075
+call "line.plt" "Hzeta"  3889.064
+call "line.plt" "Heta"   3835.397
+call "line.plt" "Hinfty" 3645
+#call "line.plt" "-100"   (6562.79*(1-100.*km/c))
+#call "line.plt" "+100"   (6562.79*(1+100.*km/c))
+
 call "line.plt" "HeI"    4009.258
 call "line.plt" "HeI"    4026.210
 call "line.plt" "HeI"    4120.811
@@ -111,6 +112,7 @@ p \
   "<awk '($5!=l){ print; }{ l=$5; }' Spectra.dat" u (x0):(1.0-0.05+shift*($5-1)):5 w labels left not,\
   "<awk '!/^#/{ i++; print $2,i; }' RV1.dat_nights" u (656.281*(1.0+(gamma+$1)*1.e3/c)):(0.625+shift*($2-1)):("1") w labels center not,\
   "<awk '!/^#/{ i++; print $2,i; }' RV2.dat_nights" u (656.281*(1.0+(gamma+$1)*1.e3/c)):(0.625+shift*($2-1)):("2") w labels center not
+
 pa -1
 
 set term png small size 2048,1536
@@ -118,6 +120,4 @@ set out "chi2_SYN.png"
 rep
 
 q
-
-  "<awk '($NF+0>100)' chi2_VIS.dat" u (sqrt($2**2+$3**2)/$4):($5+$7) t "chi^2 > 100" w p lt 1 pt 6 ps 1.5
 

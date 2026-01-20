@@ -394,7 +394,7 @@ inc = \
   tides2/tides2.inc \
   wd/lc.inc \
 
-all: main/chi2 main/simplex main/simann main/subplex main/swift_bs main/map
+all: main/chi2 main/simplex main/simann main/subplex main/swift_bs main/map main/map2
 
 main/chi2: main/chi2.f90 $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
@@ -412,6 +412,9 @@ main/swift_bs: main/swift_bs.f $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 main/map: main/map.f90 $(obj90) $(obj) $(objc) $(inc)
+	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
+
+main/map2: main/map2.f90 $(obj90) $(obj) $(objc) $(inc)
 	$(f77) $(opt) $(obj) $(obj90) $(objc) -o $@ $< $(lib)
 
 $(obj90) : %.o:%.f90 $(inc)

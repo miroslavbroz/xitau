@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 set colors classic
 #set term x11

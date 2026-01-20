@@ -1,7 +1,7 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 set colors classic
-set term x11
+#set term x11
 
 rad = 180./pi
 

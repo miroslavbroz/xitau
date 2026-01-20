@@ -19,7 +19,7 @@ set xl "JD - 2400000"
 set yl "vzb [km/s]"
 
 #set xr [T0-2400000:]
-set xr [59450:59500]
+set xr [57400:57900]
 #tmp=10; set xr [59531-tmp:59531+tmp]
 #tmp=60.0; set yr [-tmp:tmp]
 set zeroaxis

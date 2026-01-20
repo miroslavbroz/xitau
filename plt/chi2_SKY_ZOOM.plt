@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 deg = pi/180.
 arcsec = deg/3600.
@@ -6,7 +6,7 @@ au = 1.49597870700e11  # m, from IAU 2012
 pc = 648000.0/pi*au  # m, from IAU 2015
 
 set colors classic
-set term x11
+#set term x11
 
 set tit "orbit misaligned w. observations..."
 set xl "x [AU]"

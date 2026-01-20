@@ -108,7 +108,7 @@ c find ALL synthetic minima of the eclipsing binary
                   vx = (B(1)-A(1))/(tout(i+1)-tout(i))
                   vy = (B(2)-A(2))/(tout(i+1)-tout(i))
                   write(iu,*) A(1),A(2),B(1),B(2),d,dmax,vx,vy,
-     :              duration(nmin),eclipsed(nmin)
+     :              duration(nmin),eclipsed(nmin),i,tout(i),t_,extra
                 endif
               else
                 write(*,*) "chi2_func_TTV.f: Error number of minima ",
