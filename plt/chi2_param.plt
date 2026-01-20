@@ -6,6 +6,7 @@ set colors classic
 set xl "iter"
 set yl "val/val_0"
 
+set yr [0:2]
 set zeroaxis
 
 p \

@@ -29,7 +29,7 @@ set cbl "JD - 2400000"
 
 load "T0.plt"
 
-#tmp=3.0; set xr [T0-2400000-tmp:T0-2400000+tmp]
+tmp=5.0; set xr [T0-2400000-1.5:T0-2400000+tmp]
 set yr [:] reverse
 #set ytics shift
 set grid ytics
