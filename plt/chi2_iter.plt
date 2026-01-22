@@ -25,7 +25,7 @@ p "<awk '{ i++; print i, $NF; }' chi2_func.tmp"      u 1:2 t "chi^2" w lp lt 1 p
   "<awk '{ i++; print i, $(NF-15); }' chi2_func.tmp" u 1:2 t "TTV"   w l,\
   "<awk '{ i++; print i, $(NF-14); }' chi2_func.tmp" u 1:2 t "ECL"   w l,\
   "<awk '{ i++; print i, $(NF-13); }' chi2_func.tmp" u 1:2 t "VIS"   w l lc '#9933ff',\
-  "<awk '{ i++; print i, $(NF-12); }' chi2_func.tmp" u 1:2 t "CLO"   w l,\
+  "<awk '{ i++; print i, $(NF-12); }' chi2_func.tmp" u 1:2 t "CLO"   w l lc '#000099',\
   "<awk '{ i++; print i, $(NF-11); }' chi2_func.tmp" u 1:2 t "T3"    w l dt 2,\
   "<awk '{ i++; print i, $(NF-10); }' chi2_func.tmp" u 1:2 t "LC"    w lp lc 'orange' pt 2 ps 0.8,\
   "<awk '{ i++; print i, $(NF -9); }' chi2_func.tmp" u 1:2 t "SYN"   w l lw 2,\

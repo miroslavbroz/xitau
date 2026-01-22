@@ -29,7 +29,7 @@ set cbl "JD - 2400000"
 
 load "T0.plt"
 
-tmp=5.0; set xr [T0-2400000-1.5:T0-2400000+tmp]
+#tmp=5.0; set xr [T0-2400000-1.5:T0-2400000+tmp]
 set yr [:] reverse
 #set ytics shift
 set grid ytics
@@ -159,6 +159,7 @@ p \
   "Lc_U.dat"       u ($1-2400000):($2+(5-band)*shift):3 t "U" w err lt 4 pt 1 ps 0.5,\
   "Lc_B.dat"       u ($1-2400000):($2+(6-band)*shift):3 t "B" w err lt 5 pt 1 ps 0.5,\
   "Lc_V.dat"       u ($1-2400000):($2+(7-band)*shift):3 t "V" w err lt 2 pt 1 ps 0.5,\
+  "Lc_R.dat"       u ($1-2400000):($2+(8-band)*shift):3 t "R" w err lt 5 pt 1 ps 0.5,\
   "lightcurve.dat" u ($1-2400000):($2+($3-band)*shift) w lp pt 1 lc 'orange' t "synthetic",\
   "chi2_LC.dat"    u ($1-2400000):($2+($4-band)*shift):3 w l lt 1 lw 3 t "residua",\
 

@@ -171,6 +171,11 @@ c limb-darkened complex visibility (Hanbury-Brown et al. 1974)
         t3amp(i) = abs(t3)
         t3phi(i) = atan2(dimag(t3),dble(t3))
 
+c slips
+        tmp = t3phi(i)-t3phi_OBS(i)
+        if (tmp.gt.+pi_) t3phi(i) = t3phi(i)-2.d0*pi_
+        if (tmp.lt.-pi_) t3phi(i) = t3phi(i)+2.d0*pi_
+
         chi2_ = ((t3phi(i)-t3phi_OBS(i))/sigma_t3phi_OBS(i))**2
         lns = lns + log(sigma_t3phi_OBS(i))
         chi2 = chi2 + chi2_
