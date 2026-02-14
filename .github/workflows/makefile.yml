@@ -18,6 +18,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y g++-12
 
+    - name: Show versions
+      run: |
+        gcc-12 --version
+        g++-12 --version
+
     - name: Build
       run: |
         export CC=gcc-12

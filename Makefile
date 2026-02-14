@@ -4,7 +4,7 @@
 
 f77 = gfortran
 f90 = gfortran
-cc = g++
+#cc = g++
 
 opt = -O3 -Jmod 
 optc = -O3
@@ -424,7 +424,7 @@ $(obj) : %.o:%.f $(inc)
 	$(f77) $(opt) -c -o $@ $<
 
 $(objc) : %.o:%.cpp $(inc)
-	$(cc) $(optc) -std=c++17 -c -o $@ $<
+	$(CXX) $(optc) -std=c++17 -c -o $@ $<
 
 clean : FORCE
 	rm -f mod/*.mod
