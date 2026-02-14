@@ -22,6 +22,10 @@ c output
 
         call geometry_hierarch2(nbod, m, r, v, elmts)
 
+      else if (geometry.eq.8) then
+
+        call geometry_3plus2(nbod, m, r, v, elmts)
+
       else
         write(*,*) "geometries.f: Error unknown geometry = ",
      :    geometry

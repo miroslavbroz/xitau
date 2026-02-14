@@ -7,8 +7,10 @@ opt = -O3 -J../mod
 obj = \
   nula2pi.o \
   coord/coord_b2j.o \
+  coord/coord_j2h.o \
   orbel/orbel_xv2el.o \
   geometry/geometries.o \
+  geometry/geometry_3plus2.o \
   geometry/geometry_ecliptic.o \
   geometry/geometry_hierarch2.o \
 

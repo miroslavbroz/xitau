@@ -1,5 +1,5 @@
 c geometry_hierarch2.f
-c Convert elements to barycentric coordinates for geometry like ((1+2)+3)+4;
+c Convert barycentric coordinates to elements for geometry like ((1+2)+3)+4;
 c use log(e), varpi, and true longitude (instead of e, omega, M).
 c Miroslav Broz (miroslav.broz@email.cz), Sep 16th 2020
 

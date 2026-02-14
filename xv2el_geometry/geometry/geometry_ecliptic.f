@@ -1,5 +1,5 @@
 c geometry_ecliptic.f
-c Convert elements to barycentric coordinates for geometry like ((1+2)+3)+4.
+c Convert barycentric coordinates to elements for geometry like ((1+2)+3)+4.
 c Miroslav Broz (miroslav.broz@email.cz), Jun 7th 2016
 
 c      _          \                |
