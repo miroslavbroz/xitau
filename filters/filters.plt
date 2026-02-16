@@ -1,9 +1,8 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 ang = 0.1
 
 set colors classic
-set term x11
 
 set xl "lambda [nm]"
 set yl "normalized response []"

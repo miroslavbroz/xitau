@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 set xl "lambda [nm]"
 set yl "normalized response []"

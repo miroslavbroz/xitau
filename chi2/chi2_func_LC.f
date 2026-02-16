@@ -135,12 +135,6 @@ c
         rm = m(2)/m(1)
         iband = iband_LC(k)
 
-        if (debug) then
-          write(*,*) '# iband = ', iband
-          write(*,*) '# lambda_eff = ', lambda_eff(iband)
-          write(*,*) '# band_eff = ', band_eff(iband)
-        endif
- 
         call luminosities(T_eff, R_star, nbod, lambda_eff(iband),
      :    band_eff(iband), Lum, Lumtot, use_planck)
  
@@ -157,15 +151,21 @@ c
         enddo
         el3 = (Lum3/Lumtot)/(4.d0*pi_)
  
+        if (debug) then
+          write(*,*) '# iband = ', iband
+          write(*,*) '# lambda_eff = ', lambda_eff(iband)
+          write(*,*) '# band_eff = ', band_eff(iband)
+          do j = 1, nbod
+            write(*,*) '# Lum(', j, ') = ', Lum(j)/Lumtot, ' Lumtot'
+          enddo
+        endif
+ 
         i2nd = 0  ! enforce initialisation of WD
 c
 c Interpolate trajectory to the (binned) times of observations;
 c use an average of keplerian drift from two neighbouring points.
 c 
 
-c barycenter at T0
-c        zb_interp0 = (rb(NOUT2,1,3)*m(1)+rb(NOUT2,2,3)*m(2))/(m(1)+m(2))
- 
         j = 2
         do i = 1, m_BIN(k)
           
@@ -173,16 +173,9 @@ c        zb_interp0 = (rb(NOUT2,1,3)*m(1)+rb(NOUT2,2,3)*m(2))/(m(1)+m(2))
             j = j + 1
           enddo
 
-c account for light-time effect due to external bodies
-
-c          zb1 = interp(tout(j-1), tout(j), rb(j-1,1,3), rb(j,1,3),
-c     :      t_BIN(i,k))
-c          zb2 = interp(tout(j-1), tout(j), rb(j-1,2,3), rb(j,2,3),
-c     :      t_BIN(i,k))
-c          zb_interp = (zb1*m(1)+zb2*m(2)) / (m(1)+m(2))  ! barycenter of 1+2 body, z coordinate
-c 
-c          lite = au_day(zb_interp - zb_interp0)
+c Note: the light-time effect has been moved to chi2_func.f90!
           lite = 0.d0
+          lite12 = 0.d0
  
           mu = m(1)+m(2)
           x1 = rh(j-1,2,1)
@@ -191,8 +184,6 @@ c          lite = au_day(zb_interp - zb_interp0)
           vx1 = vh(j-1,2,1)
           vy1 = vh(j-1,2,2)
           vz1 = vh(j-1,2,3)
-c          lite12 = -au_day(z1)
-          lite12 = 0.d0
           dt = t_BIN(i,k) - (tout(j-1) + lite + lite12)
           call drift_one(mu, x1, y1, z1, vx1, vy1, vz1, dt, iflg)
 

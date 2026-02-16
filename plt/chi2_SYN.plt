@@ -104,6 +104,9 @@ x0=446.0
 #x0=475.0
 x0=650.0
 
+set term png small size 2048,1536
+set out "chi2_SYN.png"
+
 p \
   "synthetic.dat" u ($2/nm):($3+shift*($4-1))   t "synthetic" w l lc 'orange',\
   "Spectra.dat"   u ($2/nm):($3+shift*($5-1)):4 t "observed" w err lt 3 pt 1 ps 0,\
@@ -113,11 +116,9 @@ p \
   "<awk '!/^#/{ i++; print $2,i; }' RV1.dat_nights" u (656.281*(1.0+(gamma+$1)*1.e3/c)):(0.625+shift*($2-1)):("1") w labels center not,\
   "<awk '!/^#/{ i++; print $2,i; }' RV2.dat_nights" u (656.281*(1.0+(gamma+$1)*1.e3/c)):(0.625+shift*($2-1)):("2") w labels center not
 
-pa -1
+#pa -1
 
-set term png small size 2048,1536
-set out "chi2_SYN.png"
-rep
+#rep
 
 q
 
