@@ -1,4 +1,4 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 deg = pi/180.
 arcsec = deg/3600.
@@ -7,7 +7,6 @@ pc = 648000.0/pi*au  # m, from IAU 2015
 km = 1.e3  # m
 
 set colors classic
-set term x11
 
 set tit "viewing geometry is changing..."
 set xl "u [arcsec]"

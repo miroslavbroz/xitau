@@ -6,7 +6,8 @@ f77 = gfortran
 f90 = gfortran
 #cc = g++
 
-opt = -O3 -Jmod 
+opt = -O3 -Jmod
+opt = -O3 -Jmod -g
 optc = -O3
 lib = -L. -lc++ -lstdc++
 

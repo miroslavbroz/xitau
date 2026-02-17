@@ -1,4 +1,4 @@
-#!/usr/bin/gawk -f
+#!/usr/bin/env gawk -f
 
 (ARGIND==1) && (FNR>1) && !/^#/{
   i = $1;

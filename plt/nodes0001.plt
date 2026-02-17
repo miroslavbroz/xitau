@@ -1,13 +1,14 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 pixel_scale = 3.6e-3  # arcsec/pxl
+pixel_scale = 1.2e-3  # arcsec/pxl
 w = 256
 h = 256
 
 #c  =   -1.6242093805569224        1.1517621045560109       pxl
 #c_ =    1.6127382815832165E-002  -6.0601123568080123E-003  pxl
 c1 = -1.6242093805569224
-c2 =         1.1517621045560109
+c2 = 1.1517621045560109
 c1 = c1 + -2.0832515513309748E-002
 c2 = c2 +  2.8088874447172148E-003
 c1 = c1 + 0.5
@@ -30,7 +31,7 @@ do for [i=-1:1:1] {
 }
 
 p \
-  "01_SRobj.png" binary filetype=png origin=((-0.5*w+0.5-c1)*pixel_scale,(-0.5*h+0.5-c2)*pixel_scale) dx=pixel_scale dy=pixel_scale with rgbimage,\
+  "AO1_1.png" binary filetype=png origin=((-0.5*w+0.5-c1)*pixel_scale,(-0.5*h+0.5-c2)*pixel_scale) dx=pixel_scale dy=pixel_scale with rgbimage,\
   "nodes0001.silh"                        u 1:2 w l lc 'orange',\
   "nodes0001.silh_"                       u 1:2 w l lc 'blue',\
   "<awk '($6==1) || (NF==0)' chi2_AO.dat" u 2:3 w l lc 'red',\

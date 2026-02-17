@@ -77,14 +77,16 @@ integer, save :: nout1, nout2, nout
 double precision, dimension(NBODMAX) :: m
 double precision, dimension(NBODMAX,3) :: r, v
 double precision, dimension(NBODMAX,6) :: elmts
-double precision, dimension(OUTMAX) :: tout
-double precision, dimension(OUTMAX,NBODMAX,3) :: rb, vb, rl, vl, rh, vh, rp, vp, rp3, vp3
 double precision, dimension(OUTMAX1) :: tout1
 double precision, dimension(OUTMAX2) :: tout2
 double precision, dimension(OUTMAX1,NBODMAX,3) :: rout1, vout1
 double precision, dimension(OUTMAX2,NBODMAX,3) :: rout2, vout2
 double precision, dimension(NBODMAX), save :: omega0
 double precision, dimension(NBODMAX,3), save :: s0
+
+double precision, dimension(:), allocatable, save :: tout
+double precision, dimension(:,:,:), allocatable, save :: rb, vb, rl, vl, rh, vh, rp, vp, rp3, vp3
+
 character(len=80) :: inparfile
 
 ! internal variables
@@ -105,6 +107,20 @@ integer, save :: i1st=0
 
 ! functions
 double precision, external :: kms_auday, constraint
+
+if (.not.allocated(tout)) then
+  allocate(tout(OUTMAX))
+  allocate(rb(OUTMAX,NBODMAX,3))
+  allocate(vb(OUTMAX,NBODMAX,3))
+  allocate(rl(OUTMAX,NBODMAX,3))
+  allocate(vl(OUTMAX,NBODMAX,3))
+  allocate(rh(OUTMAX,NBODMAX,3))
+  allocate(vh(OUTMAX,NBODMAX,3))
+  allocate(rp(OUTMAX,NBODMAX,3))
+  allocate(vp(OUTMAX,NBODMAX,3))
+  allocate(rp3(OUTMAX,NBODMAX,3))
+  allocate(vp3(OUTMAX,NBODMAX,3))
+endif
 
 ! get both free and fixed parameters
 
@@ -144,22 +160,22 @@ do i = 1, nbod
   j = j+1
   T_eff(i) = x_param(j)
 enddo
-!do i = 1, nbod
-!  j = j+1
-!  R_star(i) = x_param(j)
-!enddo
 do i = 1, nbod
   j = j+1
-  log_g(i) = x_param(j)
-enddo
-do i = 1, nbod
-  j = j+1
-  v_rot(i) = x_param(j)
+  R_star(i) = x_param(j)
 enddo
 !do i = 1, nbod
 !  j = j+1
-!  P_rot(i) = x_param(j)
+!  log_g(i) = x_param(j)
 !enddo
+!do i = 1, nbod
+!  j = j+1
+!  v_rot(i) = x_param(j)
+!enddo
+do i = 1, nbod
+  j = j+1
+  P_rot(i) = x_param(j)
+enddo
 do i = 1, nbod
   j = j+1
   metal(i) = x_param(j)
@@ -245,51 +261,51 @@ endif
 
 ! EITHER, compute log g [cgs] from m, R_star
 
-!do i = 1, nbod
-!  log_g(i) = log10(m(i)*AU**3/day**2/(R_star(i)*R_S)**2*100.d0)
-!enddo
-!
-!if (debug_swift) then
-!  do i = 1, nbod
-!    write(*,*) '# log_g(', i, ') = ', log_g(i)
-!  enddo
-!endif
+do i = 1, nbod
+  log_g(i) = log10(m(i)*AU**3/day**2/(R_star(i)*R_S)**2*100.d0)
+enddo
+
+if (debug_swift) then
+  do i = 1, nbod
+    write(*,*) '# log_g(', i, ') = ', log_g(i)
+  enddo
+endif
 
 ! OR, compute R_star [R_S] from m, log_g
 
-do i = 1, nbod
-  R_star(i) = sqrt(m(i)*AU**3/day**2/(10.d0**log_g(i)/100.d0))/R_S
-enddo
-
-if (debug) then
-  do i = 1, nbod
-    write(*,*) '# R_star(', i, ') = ', R_star(i), ' R_S'
-  enddo
-endif
+!do i = 1, nbod
+!  R_star(i) = sqrt(m(i)*AU**3/day**2/(10.d0**log_g(i)/100.d0))/R_S
+!enddo
+!
+!if (debug) then
+!  do i = 1, nbod
+!    write(*,*) '# R_star(', i, ') = ', R_star(i), ' R_S'
+!  enddo
+!endif
 
 ! EITHER, compute P_rot [d] from R_star, v_rot
  
-do i = 1, nbod
-  P_rot(i) = 2.d0*pi*R_star(i)*R_S/(v_rot(i)*1.d3)/day
-enddo
-
-if (debug) then
-  do i = 1, nbod
-    write(*,*) '# P_rot(', i, ') = ', P_rot(i), ' d'
-  enddo
-endif
+!do i = 1, nbod
+!  P_rot(i) = 2.d0*pi*R_star(i)*R_S/(v_rot(i)*1.d3)/day
+!enddo
+!
+!if (debug) then
+!  do i = 1, nbod
+!    write(*,*) '# P_rot(', i, ') = ', P_rot(i), ' d'
+!  enddo
+!endif
  
 ! OR, compute v_rot [km/s] from R_star, P_rot
 
-!do i = 1, nbod
-!  v_rot(i) = 2.d0*pi*R_star(i)*R_S/(P_rot(i)*day)/1.d3
-!enddo
-!
-!if (debug_swift) then
-!  do i = 1, nbod
-!    write(*,*) '# v_rot(', i, ') = ', v_rot(i), ' km/s'
-!  enddo
-!endif
+do i = 1, nbod
+  v_rot(i) = 2.d0*pi*R_star(i)*R_S/(P_rot(i)*day)/1.d3
+enddo
+
+if (debug_swift) then
+  do i = 1, nbod
+    write(*,*) '# v_rot(', i, ') = ', v_rot(i), ' km/s'
+  enddo
+endif
 
 ! constrain some of the components by Harmanec (1988) relations
 
@@ -355,10 +371,8 @@ if (i1st.eq.0) then
   call io_init_tides2("tides2.in", nbod)
 
 ! init shape
-  if (nshp.gt.0) then
-    call read_node("input.node", nodesforchi)
-    call read_face("input.face", facesforchi)
-  endif
+  call read_node("input.node", nodesforchi)
+  call read_face("input.face", facesforchi)
 
 ! save values from spin.in
   do i = 1, nbod

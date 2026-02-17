@@ -8,8 +8,8 @@
       integer NBODMAX, OUTMAX1, OUTMAX2, OUTMAX, OBSMAX, MINMAX
       integer TIMEMAX, BANDMAX, SYNMAX, SEDMAX, FLTMAX, AOMAX, OCCMAX
       parameter (NBODMAX = 5)			! max number of bodies
-      parameter (OUTMAX1 = 300000)		! max number of forward integration points
-      parameter (OUTMAX2 = 100000)		! max number of backward integration points
+      parameter (OUTMAX1 = 400000)		! max number of forward integration points
+      parameter (OUTMAX2 = 600000)		! max number of backward integration points
       parameter (OUTMAX = OUTMAX1+OUTMAX2)	! max number of integration points
       parameter (OBSMAX = 100000)		! max number of observations
       parameter (MINMAX = OUTMAX)		! max number of minima
