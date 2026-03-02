@@ -24,6 +24,10 @@ c temporary variables
 c read chi2.in
       call read_chi2(m, y)
 
+      do i = 1, nbod
+        write(*,*) '# m(', i, ') = ', m(i), ' M_S'
+      enddo
+
 c i.e., 1st-body equatorial frame
 c towards "observer"
       l = pole_l(1)
@@ -41,6 +45,8 @@ c perpendicular, right-handed
       call vproduct(hatu, hatw, hatv)
       hatv = -hatv
 
+      write(*,*) '# pole_l(1) = ', pole_l(1)/deg, ' deg'
+      write(*,*) '# pole_b(1) = ', pole_b(1)/deg, ' deg'
       write(*,*) '# hatu = ', hatu
       write(*,*) '# hatv = ', hatv
       write(*,*) '# hatw = ', hatw
@@ -54,12 +60,11 @@ c write header
      :  " & omega0 [deg] & tau [JD] & tau [Besselian year]")
 
 c read integration output
+      read(*,*,end=990,err=990) str
 5     continue
         do i = 1, nbod
           read(*,*,end=990,err=990) t, id(i), y(1,i), y(2,i), y(3,i),
      :      y(4,i), y(5,i), y(6,i)
-
-!          write(*,*) 't = ', t
 
 c transform to 1st-body equatorial frame
           call uvw2(hatu, hatv, hatw, y(1,i), y(2,i), y(3,i), u, v, w)

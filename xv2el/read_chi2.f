@@ -70,6 +70,7 @@ c internal
       read(iu,10,err=990,end=990) file_SKY2
       read(iu,10,err=990,end=990) file_SKY3
       read(iu,10,err=990,end=990) file_OCC
+      read(iu,10,err=990,end=990) file_SED2
 
       read(iu,*,err=990,end=990) nband
       if (nband.gt.BANDMAX) then
@@ -112,6 +113,14 @@ c      enddo
         j = j+1
         R_star(i) = x_param(j)
       enddo
+!     do i = 1, nbod
+!       j = j+1
+!       log_g(i) = x_param(j)
+!     enddo
+!     do i = 1, nbod
+!       j = j+1
+!       v_rot(i) = x_param(j)
+!     enddo
       do i = 1, nbod
         j = j+1
         P_rot(i) = x_param(j)
@@ -154,6 +163,11 @@ c      enddo
       do i = 1, 2
         j = j+1
         psf_param(i) = x_param(j)
+      enddo
+
+      do i = 1, nband
+        j = j+1
+        zero(i) = x_param(j)
       enddo
 
       j = j+1

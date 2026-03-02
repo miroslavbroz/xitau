@@ -21,6 +21,7 @@ c input parameters
 c temporary variables
       integer i, ialpha
       real*8 gmsum,a,e,inc,capom,omega,capm,msum,tmp
+      character*80 str
 
 c read chi2.in file first
       call read_chi2(m, y)
@@ -34,6 +35,7 @@ c write header
      :  " & omega0 [deg] & tau [JD] & tau [Besselian year]")
 
 c read integration output
+      read(*,*,end=990,err=990) str
 5     continue
         do i = 1, nbod
           read(*,*,end=990,err=990) t, id(i), xh(i), yh(i), zh(i),

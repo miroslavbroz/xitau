@@ -464,6 +464,7 @@ enddo
 
 if (debug_swift) then
   open(unit=iu,file="out_JDATE_barycentric.dat",status="unknown")
+  write(iu,*) '# without light-time effect'
   do i = 1, nout
     do j = 1, nbod
       write(iu,*) tout(i),-j,rb(i,j,1),rb(i,j,2),rb(i,j,3),vb(i,j,1),vb(i,j,2),vb(i,j,3)
@@ -501,6 +502,7 @@ enddo
 
 if (debug_swift) then
   open(unit=iu,file="out_JDATE_heliocentric.dat",status="unknown")
+  write(iu,*) '# with light-time effect'
   do i = 1, nout
     do j = 1, nbod
       write(iu,*) tout(i),-j,rh(i,j,1),rh(i,j,2),rh(i,j,3),vh(i,j,1),vh(i,j,2),vh(i,j,3)
