@@ -1,7 +1,6 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 set colors classic
-set term x11
 
 band = 7
 shift = 0.0
@@ -11,11 +10,13 @@ set yl "magnitude [mag]"
 
 load "T0.plt"
 
-#set xr [59548.5:]
+#set xr [58491.60:58491.85]
 set yr [:] reverse
+#set yr [10:9]
 #set ytics shift
 set grid ytics
 set key right
+set xtics format "%.6f"
 set mouse format "%.6f"
 
 set arrow from T0-2400000,graph 0 rto 0,graph 1 nohead lt 0 front
@@ -58,10 +59,10 @@ set label "TRA of L."         at T1+4.5*P1-2400000,graph 0.95 center
 
 p \
   "lightcurve2.dat" u ($1-2400000):($2+($3-band)*shift) w lp pt 2 lc 'cyan' t "no-zero-point",\
-  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==1)' chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w lp  pt 1 lc 'orange' t "synthetic",\
+  "<gawk '(NF==0){ i=0; }(NF>0) && !/^ #/{ i++; }(i==1)' chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w lp  pt 1 lc 'orange' t "synthetic",\
   "chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w l lw 2 lc 'red' t "residua",\
-  "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==2)' chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w err pt 1 ps 0.5 lc 'blue' t "observed",\
-  "<awk '!/^ *#/ && (i<100){ i++; print $1,$2,i; }' lightcurve2.dat" u ($1-2400000):($2+0.02):3 w labels not,\
+  "<gawk '(NF==0){ i=0; }(NF>0) && !/^ #/{ i++; }(i==2)' chi2_LC2.dat" u ($1-2400000):($2+($4-band)*shift):3 w err pt 1 ps 0.5 lc 'blue' t "observed",\
+  "<gawk '!/^ *#/ && (i<100){ i++; print $1,$2,i; }' lightcurve2.dat" u ($1-2400000):($2+0.02):3 w labels not,\
 
 pa -1
 

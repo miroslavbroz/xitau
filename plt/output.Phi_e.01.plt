@@ -1,6 +1,5 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
-set term x11
 load "output.gnu"
 
 set tit "s'', o'' vectors are misaligned..."
@@ -9,6 +8,10 @@ set yl "y"
 set zl "z"
 set cbl "Phi_e [W m^{-2} m^{-1}]" offset 3,0
 
+tmp=150000
+#set xr [-tmp:tmp]
+#set yr [-tmp:tmp]
+#set zr [-tmp:tmp]
 set cbr [0:]
 #set cbr [0:1e7]
 #set nocolorbox

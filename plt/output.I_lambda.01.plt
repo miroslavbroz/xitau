@@ -1,6 +1,5 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
-set term x11
 load "output.gnu"
 
 set tit "s'', o'' vectors are misaligned..."
@@ -14,7 +13,7 @@ tmp=1.5e5
 #set yr [-tmp:tmp]
 #set zr [-tmp:tmp]
 set cbr [0:]
-#set cbr [0:1.2e7]
+set cbr [0:1.e8]
 
 set view 90,0,0.5
 set view 0,0,1.5
@@ -33,7 +32,6 @@ scl=1.6e0
 
 sp \
   "<./pm3d.awk output.node.01 output.face.01 output.I_lambda.01" u 1:2:3:5 w pm3d not,\
-  "<./poly.awk output.poly5.01" u 4:5:6 w lp lw 1 lc 'green' not,\
 
 pa -1
 
@@ -42,6 +40,8 @@ set out "output.I_lambda.01.png"
 rep
 
 q
+
+  "<./poly.awk output.poly5.01" u 4:5:6 w lp lw 1 lc 'green' not,\
 
   "<awk '(NR>1)' output.centre.01" u 2:3:4:1 w labels tc 'brown' not,\
 

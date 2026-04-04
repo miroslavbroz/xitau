@@ -144,8 +144,10 @@ c light-time effect
 c linear interpolation of integrated data to a given position in time
 
 c use 1-centric coordinates for the 2nd body
+c for (216) Kleopatra, also for the 3rd body!
 
-          if (k.le.2) then
+c          if (k.le.2) then
+          if (k.le.3) then
             xh_interp = interp(tout(j-1), tout(j), rh(j-1,k,1),
      :        rh(j,k,1), t_interp)  ! k-th body, x coordinate
             yh_interp = interp(tout(j-1), tout(j), rh(j-1,k,2),

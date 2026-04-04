@@ -1,16 +1,17 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 w = 256
 h = 256
 
 set colors classic
-set term x11
 
 set xl "u [pxl]"
 set yl "v [pxl]"
 set cbl "chi^2 [1]"
 
-tmp=50
+tmp=75
+set xr [-0.5*tmp:]
+set yr [-0.5*tmp:]
 set xtics 0.5*tmp
 set ytics 0.5*tmp
 set grid xtics ytics
@@ -30,11 +31,11 @@ f(x) = mod(x-1,i)*dx
 g(x) = int((x-1)/i)*dy
 
 p \
-  "chi2_AO2.dat" u ($3-0.5*w+f($1)):(-$2+0.5*h+g($1)):7 w p pt 5 lc palette z not
+  "chi2_AO2.dat" u ($3-0.5*w+f($1)):(-$2+0.5*h+g($1)):7 w p pt 5 ps 0.5 lc palette z not
 
 pa -1
 
-set term png small size 1024,1024
+set term png small size 2048,2048
 set out "chi2_AO2.png"
 rep
 

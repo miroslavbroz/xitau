@@ -1,15 +1,13 @@
-#!/usr/bin/gnuplot
-
-set term x11
+#!/usr/bin/env gnuplot
 
 set xl "x"
 set yl "y"
 set zl "z"
 
 tmp=2.5
-set xr [-tmp:tmp]
-set yr [-tmp:tmp]
-set zr [-tmp:tmp]
+#set xr [-tmp:tmp]
+#set yr [-tmp:tmp]
+#set zr [-tmp:tmp]
 
 set view equal xyz
 set xyplane 0.0
@@ -26,6 +24,10 @@ sp \
 
 
 pa -1
+
+set term png small size 1024,1024
+set out "shape.png"
+rep
 
 q
 

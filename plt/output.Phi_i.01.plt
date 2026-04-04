@@ -1,6 +1,5 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
-set term x11
 load "output.gnu"
 
 set tit "s'', o'' vectors are misaligned..."

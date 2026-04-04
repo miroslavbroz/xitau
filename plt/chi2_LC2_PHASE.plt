@@ -1,17 +1,16 @@
-#!/usr/bin/gnuplot
+#!/usr/bin/env gnuplot
 
 load "T0.plt"
 
-JD0 = 2443032.0
-P = x_param13
-#P = 0.17284167583333299
+JD0 = 2444502.76914
+P = x_param22
+P = 0.224386764166667
 
 f1(x) = x > 0.0 ? x : x+1.0
 frac(x) = f1(x-int(x))
 phase(jd) = frac((jd-JD0)/P)
 
 set colors classic
-set term x11
 
 band = 15
 shift = 0.0
@@ -32,8 +31,8 @@ set palette defined (\
   1.0 "cyan" \
   )
 
-set arrow from phase(2459546.7125847600),graph 0 rto 0,graph 1 nohead lt 0  # 19
-set arrow from phase(2459546.8038658402),graph 0 rto 0,graph 1 nohead lt 0  # 89
+#set arrow from phase(2459546.7125847600),graph 0 rto 0,graph 1 nohead lt 0  # 19
+#set arrow from phase(2459546.8038658402),graph 0 rto 0,graph 1 nohead lt 0  # 89
 
 p \
   "<awk '(NF==0){ i=0; }(NF>0){ i++; }(i==1)' chi2_LC2.dat" u (phase($1)):($2+($4-band)*shift):3 w p  pt 1 lc 'orange' t "synthetic",\
