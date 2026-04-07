@@ -11,7 +11,7 @@ subroutine chi2_func_LC2(NOUT, tout, rh, vh, chi2, n)
 use const_module
 use read_LC2_module
 use read_ephemeris_module
-use lc_polygon1_module
+use lc_polygon_module
 
 implicit none
 include '../filters/filters.inc'
@@ -106,7 +106,7 @@ if (i1st.eq.0) then
 
 endif  ! i1st
 
-i2nd = 0  ! to init lc_polygon1, whenever shape is modified
+i2nd = 0  ! to init lc_polygon, whenever shape is modified
 
 if (debug) then
   open(unit=iu, file="lightcurve2.dat", status="unknown")
@@ -187,7 +187,7 @@ do k = 1, nband
 !
 ! compute magnitude with the lc_polygon code (SI units)
 !
-    call lc_polygon1(t_interp, lite, r_interp*au, n_ts, n_to, d_ts*au, d_to*au, &
+    call lc_polygon(t_interp, lite, r_interp*au, n_ts, n_to, d_ts*au, d_to*au, &
       lambda_eff(iband), band_eff(iband), calib(iband), mag(i,k), i2nd)
 
     mag(i,k) = mag(i,k) + zero(k)

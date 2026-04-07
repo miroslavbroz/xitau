@@ -1,4 +1,4 @@
-! lc_polygon1.f90
+! lc_polygon.f90
 ! Compute 1 lightcurve point for a general polygonal mesh.
 ! Miroslav Broz (miroslav.broz@email.cz), Nov 8th 2022
 
@@ -42,9 +42,11 @@
 ! polys3         .. sets of polygons, clipped (shadowing)
 ! polys4         .. sets of polygons, transformed to line-of-sight
 ! polys5         .. sets of polygons, clipped (visibility)
+! polys6         .. sets of polygons, Doppler-delay, Hz and mus
 ! normals        .. normals of polygons, 1
 ! centres        .. centres of polygons, m
 ! surf           .. surface of polygons, m^2
+! surf6          .. surface of polygons, Hz*mus
 ! vols           .. volumes of tetrahedra, m^3
 ! capR           .. radius, volume-equivalent, m
 ! capS           .. surface area, m^2
@@ -60,23 +62,27 @@
 ! phi1           .. z-rotation
 ! phi2           .. x-rotation
 ! phi3           .. z-rotation
-! dataset        .. nodes identification
-! dataset_       .. faces identification
+! bodyset        .. nodes identification
+! bodyset_       .. faces identification
 
-module lc_polygon1_module
+module lc_polygon_module
 
 use polytype_module
 
-type(polystype), dimension(:), pointer, save :: polys1, polys2, polys3, polys4, polys5, polystmp
+type(polystype), dimension(:), pointer, save :: polys1, polys2, polys3, polys4, polys5, polys6, polystmp
 double precision, dimension(:), pointer, save :: mu_i, mu_e, f, f_L, Phi_i, Phi_e
-double precision, dimension(:), pointer, save :: surf
+double precision, dimension(:), pointer, save :: surf, surf6
 double precision, dimension(:), pointer, save :: I_lambda
 double precision, dimension(:,:), pointer, save :: normals, centres
 double precision, dimension(3) :: photocentre
 
+integer, dimension(:), pointer, save :: bodyset, bodyset_
+integer, dimension(:,:), pointer, save :: faces
+double precision, dimension(:,:), pointer, save :: nodes, orignodes
+
 contains
 
-subroutine lc_polygon1(t_lite, lite, r, s, o, d1, d2, lambda_eff, Delta_eff, Phi_lambda_cal, V0, i2nd)
+subroutine lc_polygon(t_lite, lite, r, s, o, d1, d2, lambda_eff, Delta_eff, Phi_lambda_cal, V0, i2nd)
 
 use polytype_module
 use const_module
@@ -105,6 +111,7 @@ use rotate_of_p_module
 use normalize_module
 use revert_module
 
+implicit none
 include '../chi2/chi2.inc'
 include '../chi2/dependent.inc'
 
@@ -115,9 +122,6 @@ double precision, intent(in) :: d1, d2
 double precision, intent(in) :: lambda_eff, Delta_eff, Phi_lambda_cal
 double precision, intent(out) :: V0
 integer, intent(inout) :: i2nd
-
-integer, dimension(:,:), pointer, save :: faces
-double precision, dimension(:,:), pointer, save :: nodes, orignodes
 
 type(polystype), dimension(:), pointer, save :: polys1_, polys4_
 integer, dimension(:), pointer, save :: clips
@@ -131,9 +135,9 @@ double precision :: B_lambda, J_lambda, P_lambda, P_V, Phi_V
 double precision :: B_thermal, Phi_thermal
 double precision :: tot, tmp
 double precision :: t1, t2
+double precision :: reflectance
 character(len=80) :: str
 
-integer, dimension(:), pointer, save :: dataset, dataset_
 integer, dimension(:,:), pointer, save :: faces1, faces2
 double precision, dimension(:,:), pointer, save :: nodes1, nodes2
 double precision, dimension(:), pointer, save :: phi1, phi2, phi3
@@ -164,8 +168,8 @@ if (i1st.eq.0) then
 
   allocate(nodes(size(nodes1,1)+size(nodes2,1), size(nodes1,2))) 
   allocate(faces(size(faces1,1)+size(faces2,1), size(faces1,2))) 
-  allocate(dataset(size(nodes,1)))
-  allocate(dataset_(size(faces,1)))
+  allocate(bodyset(size(nodes,1)))
+  allocate(bodyset_(size(faces,1)))
 
   ! allocation
   allocate(orignodes(size(nodes,1), size(nodes,2)))
@@ -178,6 +182,7 @@ if (i1st.eq.0) then
   allocate(polys3(size(polys1,1)))
   allocate(polys4(size(polys1,1)))
   allocate(polys5(size(polys1,1)))
+  allocate(polys6(size(polys1,1)))
   allocate(polystmp(size(polys1,1)))
   allocate(polys1_(size(faces,1)))
   allocate(polys4_(size(polys1,1)))
@@ -186,6 +191,7 @@ if (i1st.eq.0) then
   allocate(mu_i(size(polys1,1)))
   allocate(mu_e(size(polys1,1)))
   allocate(surf(size(polys1,1)))
+  allocate(surf6(size(polys1,1)))
   allocate(f(size(polys1,1)))
   allocate(f_L(size(polys1,1)))
   allocate(Phi_i(size(polys1,1)))
@@ -211,21 +217,21 @@ if (i2nd.eq.0) then
   ! ...and merge them
   do j = 1, size(nodes1,1)
     nodes(j,:) = nodes1(j,:)
-    dataset(j) = 1
+    bodyset(j) = 1
   enddo
   do j = 1, size(nodes2,1)
     k = j+size(nodes1,1)
     nodes(k,:) = nodes2(j,:)
-    dataset(k) = 2
+    bodyset(k) = 2
   enddo
   do j = 1, size(faces1,1)
     faces(j,:) = faces1(j,:)
-    dataset_(j) = 1
+    bodyset_(j) = 1
   enddo
   do j = 1, size(faces2,1)
     k = j+size(faces1,1)
     faces(k,:) = faces2(j,:) + size(nodes1,1)
-    dataset_(k) = 2
+    bodyset_(k) = 2
   enddo
 
   orignodes = nodes
@@ -273,7 +279,7 @@ Phi_V = Phi_lambda*Delta_eff
 reflectance = 1.d0 + spectral_slope*(lambda_eff/1.d-6 - 0.55d0)
 
 do i = 1, size(f_L,1)
-  j = dataset_(i)
+  j = bodyset_(i)
   f_L(i) = reflectance*A_w(j)/(4.d0*pi)
 enddo
 
@@ -327,13 +333,13 @@ endif
 ! scaling
 nodes = orignodes
 do i = 1, size(nodes,1)
-  j = dataset(i)
+  j = bodyset(i)
   nodes(i,:) = R_body(j)*nodes(i,:)
 enddo
 
 ! axis rotation
 do i = 1, size(nodes,1)
-  j = dataset(i)
+  j = bodyset(i)
   phi1(i) = 2.d0*pi*(t_lite-Tmin(j))/P_rot_(j) + phi0_(j)
   phi2(i) = pi/2.d0-pole_b_(j)
   phi3(i) = pole_l_(j)
@@ -346,7 +352,8 @@ call rot_z_nodes(nodes, phi3)
 
 ! position
 do i = 1, size(nodes,1)
-  nodes(i,:) = nodes(i,:) + r(dataset(i),:)
+  j = bodyset(i)
+  nodes(i,:) = nodes(i,:) + r(j,:)
 enddo
 
 ! conversion
@@ -423,7 +430,7 @@ endif
 call centre(polys5, centres)
 photocentre = 0.d0
 do i = 1, size(surf,1)
-  if (dataset_(i).ne.1) exit
+  if (bodyset_(i).ne.1) exit
   if (polys5(i)%c.eq.0) cycle
   photocentre = photocentre + centres(i,:)*Phi_e(i)*surf(i)
 enddo
@@ -500,8 +507,8 @@ endif
 
 !stop  ! dbg
 return
-end subroutine lc_polygon1
+end subroutine lc_polygon
 
-end module lc_polygon1_module
+end module lc_polygon_module
 
 

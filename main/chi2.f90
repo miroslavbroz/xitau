@@ -91,6 +91,7 @@ write(*,*) '# chi2_AO2  = ', chi2_AO2
 write(*,*) '# chi2_SKY2 = ', chi2_SKY2
 write(*,*) '# chi2_SKY3 = ', chi2_SKY3
 write(*,*) '# chi2_OCC  = ', chi2_OCC
+write(*,*) '# chi2_RAD  = ', chi2_RAD
 write(*,*) '# chi2_SED2 = ', chi2_SED2
 write(*,*) '# chi2_MASS = ', chi2_MASS
 write(*,*) '# chi2 = ', chi2

@@ -6,23 +6,26 @@ module cliptrace_module
 
 contains
 
-subroutine cliptrace(polys, Phi_e, mu_e, normals, d_to, pixel_scale, c, w, h, pnm)
+subroutine cliptrace(polys, Phi_e, mu_e, normals, d_to, pixel_scale, c, w, h, pnm, pixel_scale2)
 
 ! Notation:
 !
-! polys   .. sets of polygons, clipped (visibility), m
-! Phi_e   .. monochromatic flux, outgoing
-! mu_e    .. directional cosine, outgoing, 1
-! normals .. normals of polygons, 1
-! d_to    .. target-observer distance, m
-! c       .. centre of image, rad
-! w       .. width, pxl
-! h       .. height, pxl
-! pnm     .. PNM image, adu
-! u       .. centre of pixel, m
-! v       .. centre of pixel, m
-! du      .. 1-pixel, m
-! dv      .. 1-pixel, m
+! polys       .. sets of polygons, clipped (visibility), m
+! Phi_e       .. monochromatic flux, outgoing
+! mu_e        .. directional cosine, outgoing, 1
+! normals     .. normals of polygons, 1
+! d_to        .. target-observer distance, m
+! pixel_scale .. pixel scale, rad/pxl
+! c           .. centre of image, rad
+! w           .. width, pxl
+! h           .. height, pxl
+! pnm         .. PNM image, adu
+! u           .. centre of pixel, m
+! v           .. centre of pixel, m
+! du          .. 1-pixel, m
+! dv          .. 1-pixel, m
+
+! Note: For radar, d_to = 1.0, since it's distance independent.
 
 use iso_c_binding
 use const_module
@@ -44,6 +47,7 @@ type(polystype), dimension(:), pointer, intent(in) :: polys
 double precision, dimension(:), pointer, intent(in) :: Phi_e, mu_e
 double precision, dimension(:,:), pointer, intent(in) :: normals
 double precision, intent(in) :: d_to, pixel_scale
+double precision, optional, intent(in) :: pixel_scale2
 double precision, dimension(2), intent(in) :: c
 integer, intent(in) :: w, h
 double precision, dimension(:,:), pointer, intent(out) :: pnm 
@@ -59,6 +63,13 @@ double precision, dimension(3) :: hatu, hatv, r
 double precision, dimension(:,:), pointer :: boxes
 double precision, dimension(6) :: pxl, box1, box2
 double precision :: S, tot
+double precision :: pixel_scale2_
+
+if (present(pixel_scale2)) then
+  pixel_scale2_ = pixel_scale2
+else
+  pixel_scale2_ = pixel_scale
+endif
 
 ! Note: Length-1 arrays a'd because some subroutines 'd arrays.
 
@@ -73,7 +84,7 @@ call boundingbox(polys, boxes)
 
 ! of-pnm
 du = pixel_scale*arcsec*d_to
-dv = du
+dv = pixel_scale2_*arcsec*d_to
 box2(1) = -0.5d0*(w+1)*du
 box2(2) = +0.5d0*(w+1)*du
 box2(3) = -0.5d0*(h+1)*dv

@@ -5,6 +5,8 @@ c Miroslav Broz (miroslav.broz@email.cz), Jul 24th 2015
       subroutine chi2_func_TTV(NOUT, NOUT2, m, tout, rh,
      :  nmin, tmin, duration, chi2, n)
 
+      use distance_AB_C_module
+
       implicit none
       include '../misc/const.inc'
       include 'chi2.inc'
@@ -37,7 +39,7 @@ c internal variables
       real*8 vx, vy
 
 c functions
-      real*8 interp, au_day, distance_AB_C
+      real*8 interp, au_day
 
       data i1st /0/
       data m_TTV /0/

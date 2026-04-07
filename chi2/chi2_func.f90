@@ -61,6 +61,7 @@ use chi2_func_AO_module
 use chi2_func_AO2_module
 use chi2_func_LC2_module
 use chi2_func_OCC_module
+use chi2_func_RAD_module
 use lite_module
 use hec88_module
 
@@ -604,8 +605,9 @@ lns = 0.d0  ! sum of ln sigma_i (for MCMC)
 !  13. differential astrometry
 !  14. angular velocity
 !  15. occultation timings
-!  16. light curve (u. lc_polygon algorithm)
-!  17. spectral-energy distribution for components
+!  16. Doppler-delay radar imaging 
+!  17. light curve (u. lc_polygon algorithm)
+!  18. spectral-energy distribution (relative for components)
 
 call chi2_func_SKY(nout, tout, rh, rp, rp3, chi2_SKY, n_SKY)
 
@@ -637,6 +639,8 @@ call chi2_func_SKY3(nout, tout, rh, vh, chi2_SKY3, n_SKY3)
 
 call chi2_func_OCC(nout, tout, rh, chi2_OCC, n_OCC)
 
+call chi2_func_RAD(nout, tout, rl, vl, chi2_RAD, n_RAD)
+
 call chi2_func_LC2(nout, tout, rh, vh, chi2_LC, n_LC)
 
 call chi2_func_SED2(chi2_SED2, n_SED2)
@@ -651,32 +655,33 @@ enddo
 ! sum everything
 
 n_fit = n_SKY + n_RV + n_TTV + n_ECL + n_VIS + n_CLO + n_T3 + n_LC &
-  + n_SYN + n_SED + n_AO + n_AO2 + n_SKY2 + n_SKY3 + n_OCC + n_SED2
+  + n_SYN + n_SED + n_AO + n_AO2 + n_SKY2 + n_SKY3 + n_OCC + n_RAD &
+  + n_SED2
 
 chi2 = w_SKY*chi2_SKY + w_RV*chi2_RV + w_TTV*chi2_TTV + w_ECL*chi2_ECL &
   + w_VIS*chi2_VIS + w_CLO*chi2_CLO + w_T3*chi2_T3 + w_LC*chi2_LC &
   + w_SYN*chi2_SYN + w_SED*chi2_SED + w_AO*chi2_AO + w_AO2*chi2_AO2 &
   + w_SKY2*chi2_SKY2 + w_SKY3*chi2_SKY3 + w_OCC*chi2_OCC &
-  + w_SED2*chi2_SED2 + chi2_MASS
+  + w_RAD*chi2_RAD + w_SED2*chi2_SED2 + chi2_MASS
 
 write(*,'(a,$)') "# n values: "
 write(*,*) n_SKY, n_RV, n_TTV, n_ECL, n_VIS, n_CLO, n_T3, n_LC, &
-  n_SYN, n_SED, n_AO, n_AO2, n_SKY2, n_SKY3, n_OCC, n_SED2, n_fit
+  n_SYN, n_SED, n_AO, n_AO2, n_SKY2, n_SKY3, n_OCC, n_RAD, n_SED2, n_fit
 
 write(*,'(a,$)') "# chi^2 values: "
 write(*,*) chi2_SKY, chi2_RV, chi2_TTV, chi2_ECL, chi2_VIS, chi2_CLO, &
   chi2_T3, chi2_LC, chi2_SYN, chi2_SED, chi2_AO, chi2_AO2, chi2_SKY2, &
-  chi2_SKY3, chi2_OCC, chi2_SED2, chi2_MASS, chi2
+  chi2_SKY3, chi2_OCC, chi2_RAD, chi2_SED2, chi2_MASS, chi2
 
 ! write hi-precision output
 
 open(unit=iu, file="chi2_func.tmp", access="append")
 write(iu,*) (x_param(j), j = 1,nparam), &
   n_SKY, n_RV, n_TTV, n_ECL, n_VIS, n_CLO, n_T3, n_LC, n_SYN, n_SED, &
-  n_AO, n_AO2, n_SKY2, n_SKY3, n_OCC, n_SED2, n_fit, &
+  n_AO, n_AO2, n_SKY2, n_SKY3, n_OCC, n_RAD, n_SED2, n_fit, &
   chi2_SKY, chi2_RV, chi2_TTV, chi2_ECL, chi2_VIS, chi2_CLO, chi2_T3, &
-  chi2_LC, chi2_SYN, chi2_SED, chi2_AO, chi2_AO2, chi2_SKY2, chi2_SKY3, &
-  chi2_OCC, chi2_SED2, chi2_MASS, chi2
+  chi2_LC, chi2_SYN, chi2_SED, chi2_AO, chi2_AO2, chi2_SKY2, &
+  chi2_SKY3, chi2_OCC, chi2_RAD, chi2_SED2, chi2_MASS, chi2
 close(iu)
 
 chi2_func = chi2

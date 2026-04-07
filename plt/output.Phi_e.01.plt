@@ -35,7 +35,7 @@ set cbl tc 'white'
 #set ztics tc 'white'
 set cbtics tc 'white'
 #set border lc 'white'
-set object rectangle from screen 0,0 to screen 1.01,1.01 behind fc 'black' fs solid noborder
+#set object rectangle from screen 0,0 to screen 1.01,1.01 behind fc 'black' fs solid noborder
 
 #set arrow from 0,0,0 to s1__,s2__,s3__ front lc 'orange'
 #set arrow from 0+0.01,0,0 to o1__+0.01,o2__,o3__ front lc 'blue'

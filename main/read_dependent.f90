@@ -106,6 +106,10 @@ write(*,*) "# file_OCC : "
 read(*,10,err=990,end=990) file_OCC
 write(*,*) "# file_OCC = ", trim(file_OCC)
 
+write(*,*) "# file_RAD : "
+read(*,10,err=990,end=990) file_RAD
+write(*,*) "# file_RAD = ", trim(file_RAD)
+
 write(*,*) "# file_SED2 : "
 read(*,10,err=990,end=990) file_SED2
 write(*,*) "# file_SED2 = ", trim(file_SED2)
@@ -255,9 +259,9 @@ write(*,*) "# use_stellar = ", use_stellar
 read(*,*,err=990,end=990) use_cliptrace
 write(*,*) "# use_cliptrace = ", use_cliptrace
 
-write(*,*) "# w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC w_SYN w_SED w_AO w_AO2, w_SKY2 w_SKY3 w_OCC w_SED2 : "
+write(*,*) "# w_SKY w_RV w_TTV w_ECL w_VIS w_CLO w_T3 w_LC w_SYN w_SED w_AO w_AO2, w_SKY2 w_SKY3 w_OCC w_RAD w_SED2 : "
 read(*,*,err=990,end=990) w_SKY, w_RV, w_TTV, w_ECL, w_VIS, w_CLO, w_T3, w_LC, w_SYN, w_SED, w_AO, w_AO2, w_SKY2, w_SKY3, w_OCC, &
-  w_SED2
+  w_RAD, w_SED2
 write(*,*) "# w_SKY = ", w_SKY
 write(*,*) "# w_RV = ", w_RV
 write(*,*) "# w_TTV = ", w_TTV
@@ -273,6 +277,7 @@ write(*,*) "# w_AO2 = ", w_AO2
 write(*,*) "# w_SKY2 = ", w_SKY2
 write(*,*) "# w_SKY3 = ", w_SKY3
 write(*,*) "# w_OCC = ", w_OCC
+write(*,*) "# w_RAD = ", w_RAD
 write(*,*) "# w_SED2 = ", w_SED2
 
 write(*,*) "# eps_BS : "

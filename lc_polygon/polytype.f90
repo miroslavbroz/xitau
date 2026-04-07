@@ -12,8 +12,8 @@
 !
 ! size(polys1)          .. count of sets
 ! polys1(1)%c           .. count of polygons
-! polys1(1)%s(1)%c      .. count of nodes
 ! polys1(1)%s(1)        .. 1st polygon in a set
+! polys1(1)%s(1)%c      .. count of nodes
 ! polys1(1)%s(1)%p(1,:) .. 1st node in a polygon
 ! polys1(1)%s(1)%p(1,1) .. 1st node, x-coordinate
 

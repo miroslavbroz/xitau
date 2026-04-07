@@ -19,6 +19,7 @@
      &  n_SKY3,                                                         &
      &  n_OCC,                                                          &
      &  n_AO2,                                                          &
+     &  n_RAD,                                                          &
      &  n_SED2,                                                         &
      &  n_fit
       real*8                                                            &
@@ -37,6 +38,7 @@
      &  chi2_SKY3,                                                      &
      &  chi2_OCC,                                                       &
      &  chi2_AO2,                                                       &
+     &  chi2_RAD,                                                       &
      &  chi2_SED2,                                                      &
      &  chi2_MASS
       real*8                                                            &
@@ -55,6 +57,7 @@
      &  w_SKY3,                                                         &
      &  w_OCC,                                                          &
      &  w_AO2,                                                          &
+     &  w_RAD,                                                          &
      &  w_SED2
 
       real*8 x_param(NDIMMAX)
@@ -104,6 +107,7 @@
      &  file_SKY3,                                                      &
      &  file_OCC,                                                       &
      &  file_AO2,                                                       &
+     &  file_RAD,                                                       &
      &  file_SED2,                                                      &
      &  tmpdir
 
@@ -149,6 +153,7 @@
      &  chi2_SKY3,                                                      &
      &  chi2_OCC,                                                       &
      &  chi2_AO2,                                                       &
+     &  chi2_RAD,                                                       &
      &  chi2_SED2,                                                      &
      &  chi2_MASS,                                                      &
      &  w_SKY,                                                          &
@@ -166,6 +171,7 @@
      &  w_SKY3,                                                         &
      &  w_OCC,                                                          &
      &  w_AO2,                                                          &
+     &  w_RAD,                                                          &
      &  w_SED2,                                                         &
      &  x_param, variable, lns,                                         &
      &  T0,                                                             &
@@ -205,6 +211,7 @@
      &  file_SKY3,                                                      &
      &  file_OCC,                                                       &
      &  file_AO2,                                                       &
+     &  file_RAD,                                                       &
      &  file_SED2,                                                      &
      &  tmpdir,                                                         &
      &  ndim, nparam,                                                   &
@@ -223,10 +230,11 @@
      &  n_SYN,                                                          &
      &  n_SED,                                                          &
      &  n_AO,                                                           &
+     &  n_AO2,                                                          &
      &  n_SKY2,                                                         &
      &  n_SKY3,                                                         &
      &  n_OCC,                                                          &
-     &  n_AO2,                                                          &
+     &  n_RAD,                                                          &
      &  n_SED2,                                                         &
      &  n_fit,                                                          &
      &  use_planck,                                                     &

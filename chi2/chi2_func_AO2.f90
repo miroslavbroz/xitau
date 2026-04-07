@@ -15,7 +15,7 @@ use read_ephemeris_module
 use write_pnm_module
 use center_pnm_module
 use rotate_module
-use lc_polygon1_module
+use lc_polygon_module
 use raytrace_module
 use cliptrace_module
 use psf_module
@@ -168,7 +168,7 @@ do i = 1, m_OBS
 
 ! Note: polys5, Phi_e, normals, photocentre ... lc_polygon module variables
 
-  call lc_polygon1(t_interp, lite, r_interp*au, n_ts, n_to, d_ts*au, d_to*au, &
+  call lc_polygon(t_interp, lite, r_interp*au, n_ts, n_to, d_ts*au, d_to*au, &
     lambda_eff(iband), band_eff(iband), calib(iband), mag, i2nd)
 
 ! centering
@@ -235,7 +235,7 @@ do i = 1, m_OBS
         m = m+1
 
         if (debug) then
-          write(iu,*) i, j, k, pnm(j,k), pnm_OBS(j,k), sqrt(sigma2), chi_
+          write(iu,*) i, j, k, pnm_psf(j,k), pnm_OBS(j,k), sqrt(sigma2), chi_
         endif
 
       else

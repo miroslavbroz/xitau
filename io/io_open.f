@@ -33,8 +33,8 @@ c...  Outputs:
 c----
 c...  Executable code 
 
-      if( (fopenstat(1:6).eq.'append') .or. 
-     &     (fopenstat(1:6).eq.'APPEND') ) then
+      if( (fopenstat(1:min(6,len(fopenstat))).eq.'append') .or. 
+     &     (fopenstat(1:min(6,len(fopenstat))).eq.'APPEND') ) then
          open(unit=iu, file=fname, status='old',access='append',
      &        form=format,iostat=ierr)
          if(ierr.ne.0) then

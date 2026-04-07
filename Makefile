@@ -8,6 +8,7 @@ f90 = gfortran
 
 opt = -O3 -Jmod
 opt = -O3 -Jmod -g
+#opt = -O0 -Jmod -g -fcheck=all -fbacktrace
 optc = -O3
 lib = -L. -lc++ -lstdc++
 
@@ -116,7 +117,6 @@ obj = \
   chi2/chi2_func_T3.o \
   chi2/chi2_func_TTV.o \
   chi2/chi2_func_VIS.o \
-  chi2/distance_AB_C.o \
   chi2/constraint.o \
   chi2/read_CLO.o \
   chi2/read_ECL.o \
@@ -338,6 +338,7 @@ obj90 = \
   lc_polygon/planck.o \
   lc_polygon/read_input.o \
   lc_polygon/surface.o \
+  lc_polygon/surface2.o \
   lc_polygon/to_poly.o \
   lc_polygon/to_three.o \
   lc_polygon/uvw.o \
@@ -348,12 +349,14 @@ obj90 = \
   lc_polygon/normal_of_p.o \
   lc_polygon/shadowing_of_p.o \
   lc_polygon/rotate_of_p.o \
-  lc_polygon/lc_polygon1.o \
+  lc_polygon/lc_polygon.o \
   adam/center_pnm.o \
+  adam/distance_AB_C.o \
   adam/intersect_AB_l.o \
   adam/inside_polygon.o \
   adam/raytrace.o \
   adam/cliptrace.o \
+  adam/doppler.o \
   psf/psf.o \
   psf/wrap.o \
   psf/fourrow.o \
@@ -366,10 +369,12 @@ obj90 = \
   chi2/read_AO.o \
   chi2/read_LC2.o \
   chi2/read_OCC.o \
+  chi2/read_RAD.o \
   chi2/write_poles.o \
   chi2/chi2_func_AO.o \
   chi2/chi2_func_AO2.o \
   chi2/chi2_func_OCC.o \
+  chi2/chi2_func_RAD.o \
   chi2/chi2_func_LC2.o \
   chi2/chi2_func.o \
 

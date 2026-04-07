@@ -7,9 +7,9 @@ mas = 1.e-3*arcsec
 
 load "output.gnu"
 
-set xl "x [m]"
-set yl "y [m]"
-set zl "z [m]"
+set xl "Delta f [Hz]"
+set yl "Delta t [10^{-6} s]"
+set zl "x [10^{-6} s]"
 set cbl "-"
 
 #set xr [-0.5*tmp:5*tmp]
@@ -17,9 +17,9 @@ set cbl "-"
 set cbr [0:]
 
 set view 0,0,1
-set view 0,0,2
-set view equal xyz
+#set view equal xyz
 set xyplane 0.0
+set zeroaxis
 set palette gray
 
 scl=1.5e5
@@ -29,8 +29,8 @@ set arrow from scl*(0+0.01),0,0 to scl*(o1__+0.01),scl*o2__,scl*o3__ front lc 'b
 scl=arcsec*2.13832494981512*au
 
 sp \
-  "<./poly.awk output.poly5.01"  u 4:5:6 w l not,\
-  "<./poly.awk output.poly5.01 | awk '($1==14) || (NF==0)'" u 4:5:6 w l lw 3 lc 'black',\
+  "<./poly.awk output.poly6.01"  u 4:5:6 w l not,\
+  "<./poly.awk output.poly6.01 | awk '($1==14) || (NF==0)'" u 4:5:6 w l lw 3 lc 'black',\
 
 pa -1
 

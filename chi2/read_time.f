@@ -34,7 +34,7 @@ c if n > 0, append data to the array
         if ((str(1:1).ne."#").and.(length(str).gt.0)) then
           i = i+1
           read(str,*,err=20,end=20) t(i)
-          if ((i.gt.1).and.(t(i).eq.t(i-1))) then
+          if ((i.gt.1).and.(t(i).eq.t(max(1,i-1)))) then
             i = i-1
           endif
          endif
