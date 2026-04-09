@@ -210,7 +210,8 @@ do i = 1, m_OBS
 
 ! raytracing
   if (use_cliptrace) then
-    call cliptrace(polys6, Phi_e, mu_e, normals, 1.0d0, pixel_scale1(i)/arcsec, -c + c_, w, h, pnm, pixel_scale2=pixel_scale2(i)/arcsec)
+    call cliptrace(polys6, Phi_e, mu_e, normals, 1.0d0, pixel_scale1(i)/arcsec, -c + c_, w, h, pnm, &
+      pixel_scale2=pixel_scale2(i)/arcsec)
   else
     call raytrace(polys6, Phi_e, mu_e, 1.0d0, pixel_scale1(i), -c + c_, w, h, pnm)
   endif

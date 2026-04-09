@@ -25,10 +25,14 @@ double precision :: T_eq = 300.d0  ! K
 character(len=16) :: law = 'Lambert'
 
 ! cf. hapke.f90
-double precision :: B0 = 0.0d0       ! opposition effect amplitude; 1
-double precision :: minh = 0.0d0     ! opposition effect width; 1
+double precision :: B0 = 0.0d0        ! opposition effect amplitude; 1
+double precision :: minh = 0.0d0      ! opposition effect width; 1
 double precision :: ming = 0.0d0      ! asymmetry of scattering; 1
 double precision :: bartheta = 0.0d0  ! average slope, macroscopic roughness; deg
+
+! cf. ostro.f90
+double precision :: p_O = 2.d0  ! exponent for mu_i
+double precision :: q_O = 2.d0  ! exponent for mu_e
 
 logical :: use_shadowing = .true.
 logical :: use_scattering = .false.
@@ -60,6 +64,8 @@ namelist /input/ &
   minh, &
   ming, &
   bartheta, &
+  p_O, &
+  q_O, &
   use_shadowing, &
   use_scattering, &
   use_thermal, &

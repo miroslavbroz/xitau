@@ -335,6 +335,7 @@ obj90 = \
   lc_polygon/lambert.o \
   lc_polygon/lommel.o \
   lc_polygon/geometric.o \
+  lc_polygon/ostro.o \
   lc_polygon/planck.o \
   lc_polygon/read_input.o \
   lc_polygon/surface.o \

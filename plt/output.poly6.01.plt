@@ -35,7 +35,7 @@ sp \
 pa -1
 
 set term png small size 2048,2048
-set out "output.poly5.01.png"
+set out "output.poly6.01.png"
 rep
 
 q

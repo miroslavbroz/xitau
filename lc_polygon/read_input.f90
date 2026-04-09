@@ -15,6 +15,7 @@ use lambert_module
 use lommel_module
 use hapke_module
 use geometric_module
+use ostro_module
 
 implicit none
 integer :: ierr
@@ -54,6 +55,8 @@ write(*,*) '# B0 = ', B0
 write(*,*) '# minh = ', minh
 write(*,*) '# ming = ', ming
 write(*,*) '# bartheta = ', bartheta/deg, ' deg'
+write(*,*) '# p_O = ', p_O
+write(*,*) '# q_O = ', q_O
 write(*,*) '# use_shadowing = ', use_shadowing
 write(*,*) '# use_scattering = ', use_scattering
 write(*,*) '# use_thermal = ', use_thermal
@@ -82,6 +85,9 @@ elseif (law(1:2).eq.'Ha') then
 elseif (law(1:2).eq.'ge') then
   f_ptr => f_geometric
   write(*,*) 'scattering is geometric'
+elseif (law(1:2).eq.'Os') then
+  f_ptr => f_ostro
+  write(*,*) 'scattering is Ostro'
 else
   write(*,*) 'Error: scattering is undefined!'
   stop
