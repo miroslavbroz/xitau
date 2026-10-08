@@ -21,13 +21,13 @@ print "dadt = ", dadt, " m s^-1 = ", dadt / (cm/yr), " cm y^-1"
 print "dpdt = ", dpdt, " s s^-1 = ", dpdt / (1./yr), " s y^-1"
 
 set xl "t [d]"
-set yl "P1 - 27.33 [d]"
+set yl "P1 - 27.33 d [10^{-9} d]"
 
 set zeroaxis
 set key left
 
-p "xv2el.out" u 1:($3-27.33) w lp lc 'blue',\
-  dpdt*x*day/day w l lc 'orange'
+p "xv2el.out" u 1:(($3-27.33)/1.e-9) w lp lc 'blue',\
+  dpdt*x*day/(1.e-9*day) w l lw 2 lc 'orange'
 
 pa -1
 
